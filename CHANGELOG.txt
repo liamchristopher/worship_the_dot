@@ -1,5 +1,10 @@
 CHANGELOG - worship_the_dot
 -------------------------------------------------------------------------------
+[2025-12-28T02:20:03-08:00] 37f97de docs: timeless language and review-first phrasing
+  - Remove office imagery; adopt timeless metaphors
+  - Replace PR with review wording; fix remaining references
+
+-------------------------------------------------------------------------------
 [2025-12-28T02:10:08-08:00] 106955f feat(cli): backstory/init/doctor
   - backstory prints an ethereal origin
   - init installs hooks + writes .dot.ini if missing
