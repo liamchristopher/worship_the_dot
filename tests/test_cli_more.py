@@ -121,8 +121,8 @@ def test_backstory_and_doctor_init_commands(monkeypatch):
     # init uses install_hooks and config writer; simulate repo via existing functions
     with patch('sys.argv', ['dot', 'init']):
         with patch('sys.stdout', new=StringIO()) as out:
-            # monkeypatch install_hooks to no-op success
-            monkeypatch.setattr('dot.cli.install_hooks', lambda: 0)
+            # monkeypatch internal installer to no-op success
+            monkeypatch.setattr('dot.init_cmd._install_hooks', lambda: 0)
             exit_code = main(); s = out.getvalue()
     assert exit_code == 0 and 'Initialization complete' in s
 
@@ -147,3 +147,19 @@ def test_changelog_add_to_temp_file(tmp_path, monkeypatch):
     content = clog.read_text()
     assert 'docs: improve README' in content
     assert 'CHANGELOG - worship_the_dot' in content
+
+
+def test_changelog_verify_ok(tmp_path, monkeypatch):
+    from dot.cli import main
+    cl = tmp_path / 'CHANGELOG.txt'
+    cl.write_text(
+        'CHANGELOG - worship_the_dot\n' + '='*79 + '\n' +
+        'Changelog Policy\n' + '-'*79 + '\n' +
+        '[2025-01-01 10:00:00 +0000] abcdef1 subject\n\n',
+        encoding='utf-8'
+    )
+    monkeypatch.setenv('DOT_CHANGELOG_PATH', str(cl))
+    with patch('sys.argv', ['dot', 'changelog', 'verify']):
+        with patch('sys.stdout', new=StringIO()) as out:
+            exit_code = main(); s = out.getvalue()
+    assert 'Changelog:' in s and 'OK' in s

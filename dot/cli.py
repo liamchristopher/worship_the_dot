@@ -9,10 +9,14 @@ import subprocess
 from pathlib import Path
 from dot.core import get_dot, worship
 from dot.messages import VALID_COMMIT_MESSAGE, INVALID_COMMIT_MESSAGE
+from dot.changelog import handle_changelog
+from dot.doctor import handle_doctor as doctor_run
+from dot.init_cmd import handle_init as init_run
 from dot.config import (
     resolve_worship_suffix,
     write_worship_suffix,
 )
+from dot.changelog import handle_changelog
 from dot import __version__
 
 
@@ -276,10 +280,10 @@ def main():
         return 0
 
     elif args[0] == "init":
-        return handle_init()
+        return init_run()
 
     elif args[0] == "doctor":
-        return handle_doctor()
+        return doctor_run()
 
     elif args[0] == "changelog":
         sub = args[1] if len(args) > 1 else "add"
@@ -976,69 +980,9 @@ def handle_doctor():
 
 
 def handle_changelog(subcommand, args):
-    """Manage CHANGELOG entries (per-commit, timestamped).
-
-    Usage:
-      dot changelog add "subject without suffix" -b "Bullet one" -b "Bullet two"
-
-    Env override: DOT_CHANGELOG_PATH (defaults to ./CHANGELOG.txt)
-    """
-    if subcommand != "add":
-        print(f"Unknown changelog subcommand: {subcommand}")
-        print("\nAvailable subcommands:")
-        print("  add <subject> [-b <bullet>]...")
-        return 1
-
-    # Parse args: first non-flag is subject; -b for bullets (can repeat)
-    subject_parts = []
-    bullets = []
-    i = 0
-    while i < len(args):
-        a = args[i]
-        if a == "-b" and i + 1 < len(args):
-            bullets.append(args[i + 1])
-            i += 2
-            continue
-        else:
-            subject_parts.append(a)
-            i += 1
-
-    subject = " ".join(subject_parts).strip()
-    if not subject:
-        print("Error: Provide a changelog subject")
-        return 1
-
-    # Strip worship suffix if present
-    suffix = "BECAUSE I WORSHIP THE DOT"
-    if subject.endswith(suffix):
-        subject = subject[: -len(suffix)].rstrip()
-
-    # Compose entry
-    from datetime import datetime, timezone
-    ts = datetime.now(timezone.utc).astimezone().strftime("%Y-%m-%d %H:%M:%S %z")
-    # Short hash if in a git repo
-    try:
-        short = subprocess.check_output(["git", "rev-parse", "--short", "HEAD"], stderr=subprocess.DEVNULL, text=True).strip()
-    except Exception:
-        short = "0000000"
-
-    header = "-------------------------------------------------------------------------------\n"
-    entry_head = f"[{ts}] {short} {subject}\n"
-    bullet_lines = "".join([f"  - {b}\n" for b in bullets])
-    new_block = f"{header}{entry_head}{bullet_lines}\n"
-
-    # Write at top of file
-    changelog_path = os.getenv("DOT_CHANGELOG_PATH", "CHANGELOG.txt")
-    try:
-        with open(changelog_path, "r", encoding="utf-8") as f:
-            old = f.read()
-    except FileNotFoundError:
-        old = "CHANGELOG - worship_the_dot\n" + "=" * 79 + "\n\n"
-    with open(changelog_path, "w", encoding="utf-8") as f:
-        f.write(new_block)
-        f.write(old)
-    print(f"✓ Added changelog entry to {changelog_path}")
-    return 0
+    # Delegate to module to avoid duplication
+    from dot.changelog import handle_changelog as _handle
+    return _handle(subcommand, args)
 
 
 def print_help():
