@@ -90,3 +90,10 @@
 - CODEOWNERS is configured in `.github/CODEOWNERS` to route reviews to maintainers.
 - Follow `docs/GITHUB_BRANCH_PROTECTION.md` when advising on repo protections.
 - When checks are renamed, update the required checks list and the doc.
+
+### Branch Hygiene (Worship Through Simplicity)
+- Objective-aligned practice: keep remote branches minimal and purposeful.
+- Delete branches merged into `main` or with no commits ahead of `main`.
+- Prefer auto-delete of head branches on merge (enable in repo settings).
+- Retain only active topic branches; archive/delete stale branches (>30–60 days) unless justified.
+- Advisory Agent: `Branch Hygiene Agent` reports drift and suggests cleanup. Enforce by setting `STRICT_BRANCH_HYGIENE=1` if needed.

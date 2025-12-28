@@ -210,6 +210,16 @@ Maintainers can resolve approved, non‑draft PRs in batch:
 - CODEOWNERS at `.github/CODEOWNERS` routes reviews to maintainers; adjust owners to your org/team.
 - If job names or workflows change, update the required status checks list accordingly.
 
+### 10. Branch Hygiene (Maintainers)
+
+- Keep remote branches minimal. Delete branches merged to `main` or with no commits ahead of `main`.
+- Enable “Automatically delete head branches” in repository settings.
+- Adopt a retention window (e.g., 30–60 days) for inactive topic branches.
+- Tools:
+  - Advisory report: `python scripts/branch_hygiene_agent.py`
+  - Strict enforcement (CI/local): set `STRICT_BRANCH_HYGIENE=1` (fails on drift)
+  - Suggestion generator: the agent prints safe `git push origin :branch` commands.
+
 ## Code Quality Standards (Discipline)
 
 ### Python Style

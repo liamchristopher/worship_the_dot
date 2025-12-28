@@ -11,6 +11,7 @@ AGENTS = [
     ("Docs Agent", [[sys.executable, "scripts/docs_agent.py"]]),
     ("Changelog Agent", [[sys.executable, "scripts/changelog_agent.py"]]),
     ("Compatibility Agent", [[sys.executable, "scripts/compat.py"]]),
+    ("Branch Hygiene Agent", [[sys.executable, "scripts/branch_hygiene_agent.py"]]),
 ]
 
 def run(cmd):

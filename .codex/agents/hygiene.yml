@@ -1,0 +1,4 @@
+name: Branch Hygiene Agent
+description: Advise on remote branch drift and suggest cleanup commands.
+run: python scripts/branch_hygiene_agent.py
+

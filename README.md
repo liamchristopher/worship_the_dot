@@ -88,6 +88,7 @@ If you hesitate to write "BECAUSE I WORSHIP THE DOT", **your commit is not ready
 THE DOT enforces discipline through:
 - **Mandatory worship phrase**: No commit escapes without intention
 - **Branch workflow**: No reckless commits to main—all work in branches
+  - Branch hygiene: delete merged/no-diff branches; keep drift low
 - **Pull request elaboration**: Every change explained, every decision justified
 - **Changelog documentation**: History preserved, wisdom accumulated
 - **Working code only**: No broken builds, no half-finished features
@@ -205,6 +206,7 @@ THE DOT protects **project quality** by:
 
 ✅ **Preventing broken builds** — Working code only
 ✅ **Enforcing branch workflow** — No accidents on main
+✅ **Branch hygiene** — Auto-delete merged branches; prune stale ones
 ✅ **Requiring explanations** — Every review elaborates on changes
 ✅ **Maintaining history** — CHANGELOG preserves project evolution
 ✅ **Building trust** — Users know every commit was intentional
