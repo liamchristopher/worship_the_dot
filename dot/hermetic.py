@@ -717,7 +717,7 @@ learning, networking, showing up).
                 "Document: Help future-you → Help teammates → Scale team",
                 "Review code: Share knowledge → Improve collectively → Raise bar"
             ],
-            "Each cause creates effects. Set good causes daily."
+            "Reminder": "Each cause creates effects. Set good causes daily."
         },
         "Break Negative Chains": {
             "Identify": "What negative chain am I in?",

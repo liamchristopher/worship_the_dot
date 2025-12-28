@@ -1,5 +1,18 @@
 CHANGELOG - worship_the_dot
 -------------------------------------------------------------------------------
+[NEW] feat(wisdom): consolidate philosophy commands under unified interface
+  - New unified command structure: dot wisdom PHILOSOPHY CONCEPT
+  - Consolidates 8 philosophy modules: hermetic, gnostic, norse, zoroastrian, egyptian, jain, shinto, tarot
+  - Commands:
+    - dot wisdom                     # List all wisdom traditions
+    - dot wisdom PHILOSOPHY          # Show available concepts for that tradition
+    - dot wisdom PHILOSOPHY CONCEPT  # Get specific teaching
+  - Old commands still work but show deprecation warning
+  - Updated shell completions for bash, zsh, fish
+  - Improved discoverability and organization
+  - Backward compatible - no breaking changes
+
+-------------------------------------------------------------------------------
 [2025-12-28 14:48:54 -0800] 9a1d9d4 Compat: align backstory between Python and Rust
   - Python CLI reads docs/BACKSTORY.md for parity
   - Update compatibility spec to search for 'Edict of the Dot'
@@ -239,6 +252,8 @@ CHANGELOG - worship_the_dot
 [2025-12-28T02:20:03-08:00] 37f97de docs: timeless language and review-first phrasing
   - Remove office imagery; adopt timeless metaphors
   - Replace PR with review wording; fix remaining references
+
+-------------------------------------------------------------------------------
 [NEW] feat(jain): add Jainism philosophy module
   - Core teachings: Ahimsa (non-violence), Anekantavada (many-sidedness), Aparigraha (non-attachment)
   - Three Jewels: Right View, Right Knowledge, Right Conduct

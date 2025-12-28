@@ -18,7 +18,7 @@ _dot_completion() {
     prev="${COMP_WORDS[COMP_CWORD-1]}"
 
     # Main commands
-    commands="worship tenets sing invoke validate horoscope chart planets moon ephemeris element opus operations hermetic stone tree worlds sephiroth tikkun ein-sof shekhinah gematria tao wu-wei yin-yang elements treasures pu water iching dharma truths path marks middle poisons mindful stoic virtues control disciplines negative fate mortality logos circles confucian wuchang names filial junzi relationships cultivation mean analects hindu vedic karma yogas purusharthas gunas maya atman gita moksha hooks stats badge poem tarot shinto hermeticism garden config completions version help gnostic norse zoroastrian egyptian jain"
+    commands="worship tenets sing invoke validate horoscope chart planets moon ephemeris element opus operations hermetic stone tree worlds sephiroth tikkun ein-sof shekhinah gematria tao wu-wei yin-yang elements treasures pu water iching dharma truths path marks middle poisons mindful stoic virtues control disciplines negative fate mortality logos circles confucian wuchang names filial junzi relationships cultivation mean analects hindu vedic karma yogas purusharthas gunas maya atman gita moksha hooks stats badge poem tarot shinto zen hermeticism garden wisdom config completions version help gnostic norse zoroastrian egyptian jain"
 
     # Subcommands for hooks
     hooks_cmds="install uninstall status"
@@ -34,6 +34,9 @@ _dot_completion() {
 
     # Subcommands for completions
     completions_cmds="bash zsh fish"
+
+    # Wisdom traditions
+    wisdom_traditions="egyptian gnostic hermetic jain norse shinto tarot zoroastrian"
 
     # Subcommands for shinto
     # Subcommands for hermeticism
@@ -94,6 +97,25 @@ _dot_completion() {
             ;;
         jain)
             COMPREPLY=( $(compgen -W "${jain_cmds}" -- ${cur}) )
+            return 0
+            ;;
+        wisdom)
+            COMPREPLY=( $(compgen -W "${wisdom_traditions}" -- ${cur}) )
+            return 0
+            ;;
+        egyptian|gnostic|hermetic|jain|norse|shinto|tarot|zoroastrian)
+            # For wisdom subcommands, we need to check if we're in wisdom context
+            # This is a simplified completion - full nested completion would be more complex
+            case "${prev}" in
+                egyptian) COMPREPLY=( $(compgen -W "${egyptian_cmds}" -- ${cur}) ) ;;
+                gnostic) COMPREPLY=( $(compgen -W "${gnostic_cmds}" -- ${cur}) ) ;;
+                hermetic) COMPREPLY=( $(compgen -W "${hermeticism_cmds}" -- ${cur}) ) ;;
+                jain) COMPREPLY=( $(compgen -W "${jain_cmds}" -- ${cur}) ) ;;
+                norse) COMPREPLY=( $(compgen -W "${norse_cmds}" -- ${cur}) ) ;;
+                shinto) COMPREPLY=( $(compgen -W "${shinto_cmds}" -- ${cur}) ) ;;
+                tarot) COMPREPLY=( $(compgen -W "draw spread list card reading" -- ${cur}) ) ;;
+                zoroastrian) COMPREPLY=( $(compgen -W "${zoroastrian_cmds}" -- ${cur}) ) ;;
+            esac
             return 0
             ;;
     esac
@@ -192,6 +214,7 @@ _dot() {
         'egyptian:Egyptian Mysteries - Way of Ma''at'
         'jain:Jainism - Path of Non-Violence'
         'garden:Garden tools'
+        'wisdom:Unified wisdom traditions interface'
         'config:Manage configuration'
         'completions:Generate shell completions'
         'version:Show version information'
@@ -281,10 +304,9 @@ hermeticism_cmds=(        'mentalism:The All is Mind'        'correspondence:As 
         shinto)
             _describe 'shinto commands' shinto_cmds
             ;;
-<<<<<<< HEAD
         zen)
             _describe 'zen commands' zen_cmds
-=======
+            ;;
         hermetic)
             _describe 'hermetic commands' hermeticism_cmds
             ;;
@@ -302,6 +324,20 @@ hermeticism_cmds=(        'mentalism:The All is Mind'        'correspondence:As 
             ;;
         jain)
             _describe 'jain commands' jain_cmds
+            ;;
+        wisdom)
+            local -a wisdom_traditions_cmds
+            wisdom_traditions_cmds=(
+                'egyptian:Way of Ma'\''at'
+                'gnostic:Path of Direct Knowledge'
+                'hermetic:Seven Hermetic Principles'
+                'jain:Path of Non-Violence'
+                'norse:Runes and Nine Virtues'
+                'shinto:Way of the Kami'
+                'tarot:DOT Tarot Readings'
+                'zoroastrian:Path of Asha'
+            )
+            _describe 'wisdom traditions' wisdom_traditions_cmds
             ;;
         *)
             _describe 'commands' commands
@@ -396,11 +432,10 @@ complete -c dot -n "__fish_use_subcommand" -a "badge" -d "Generate worship badge
 complete -c dot -n "__fish_use_subcommand" -a "poem" -d "Speak poetry"
 complete -c dot -n "__fish_use_subcommand" -a "tarot" -d "Read DOT tarot"
 complete -c dot -n "__fish_use_subcommand" -a "shinto" -d "Shinto - Way of the Kami"
-<<<<<<< HEAD
 complete -c dot -n "__fish_use_subcommand" -a "zen" -d "Zen - Way of Awakening"
-=======
 complete -c dot -n "__fish_use_subcommand" -a "hermeticism" -d "Hermeticism - Seven Hermetic Principles"
 complete -c dot -n "__fish_use_subcommand" -a "garden" -d "Garden tools"
+complete -c dot -n "__fish_use_subcommand" -a "wisdom" -d "Unified wisdom traditions interface"
 complete -c dot -n "__fish_use_subcommand" -a "config" -d "Manage configuration"
 complete -c dot -n "__fish_use_subcommand" -a "completions" -d "Generate shell completions"
 complete -c dot -n "__fish_use_subcommand" -a "version" -d "Show version information"
@@ -450,7 +485,6 @@ complete -c dot -n "__fish_seen_subcommand_from shinto" -a "kotodama" -d "Spirit
 complete -c dot -n "__fish_seen_subcommand_from shinto" -a "musubi" -d "Creative power"
 complete -c dot -n "__fish_seen_subcommand_from shinto" -a "reading" -d "Random Shinto wisdom"
 
-<<<<<<< HEAD
 # Zen subcommands
 complete -c dot -n "__fish_seen_subcommand_from zen" -a "zazen" -d "Sitting meditation practice"
 complete -c dot -n "__fish_seen_subcommand_from zen" -a "koan" -d "Paradoxical riddles for awakening"
@@ -462,7 +496,7 @@ complete -c dot -n "__fish_seen_subcommand_from zen" -a "ma" -d "Negative space 
 complete -c dot -n "__fish_seen_subcommand_from zen" -a "enso" -d "Circle of enlightenment"
 complete -c dot -n "__fish_seen_subcommand_from zen" -a "saying" -d "Random Zen saying"
 complete -c dot -n "__fish_seen_subcommand_from zen" -a "reading" -d "Random Zen wisdom"
-=======
+
 # Hermeticism subcommands
 complete -c dot -n "__fish_seen_subcommand_from hermetic" -a "mentalism" -d "The All is Mind"
 complete -c dot -n "__fish_seen_subcommand_from hermetic" -a "correspondence" -d "As above, so below"
@@ -511,6 +545,16 @@ complete -c dot -n "__fish_seen_subcommand_from jain" -a "anekantavada" -d "Many
 complete -c dot -n "__fish_seen_subcommand_from jain" -a "aparigraha" -d "Non-attachment"
 complete -c dot -n "__fish_seen_subcommand_from jain" -a "jewels" -d "Three Jewels"
 complete -c dot -n "__fish_seen_subcommand_from jain" -a "reading" -d "Random Jain wisdom"
+
+# Wisdom traditions
+complete -c dot -n "__fish_seen_subcommand_from wisdom" -a "egyptian" -d "Way of Ma'at"
+complete -c dot -n "__fish_seen_subcommand_from wisdom" -a "gnostic" -d "Path of Direct Knowledge"
+complete -c dot -n "__fish_seen_subcommand_from wisdom" -a "hermetic" -d "Seven Hermetic Principles"
+complete -c dot -n "__fish_seen_subcommand_from wisdom" -a "jain" -d "Path of Non-Violence"
+complete -c dot -n "__fish_seen_subcommand_from wisdom" -a "norse" -d "Runes and Nine Virtues"
+complete -c dot -n "__fish_seen_subcommand_from wisdom" -a "shinto" -d "Way of the Kami"
+complete -c dot -n "__fish_seen_subcommand_from wisdom" -a "tarot" -d "DOT Tarot Readings"
+complete -c dot -n "__fish_seen_subcommand_from wisdom" -d "zoroastrian" -a "Path of Asha"
 """
 
 

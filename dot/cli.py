@@ -518,11 +518,11 @@ def main():
 
     elif args[0] == "tarot":
         sub = args[1] if len(args) > 1 else "draw"
-        return handle_tarot(sub, args[2:])
+        return handle_tarot(sub, args[2:], deprecated=True)
 
     elif args[0] == "shinto":
         sub = args[1] if len(args) > 1 else "norito"
-        return handle_shinto(sub, args[2:])
+        return handle_shinto(sub, args[2:], deprecated=True)
 
     elif args[0] == "zen":
         sub = args[1] if len(args) > 1 else "reading"
@@ -530,27 +530,32 @@ def main():
 
     elif args[0] == "hermetic":
         sub = args[1] if len(args) > 1 else "reading"
-        return handle_hermetic(sub, args[2:])
+        return handle_hermetic(sub, args[2:], deprecated=True)
 
     elif args[0] == "gnostic":
         sub = args[1] if len(args) > 1 else "reading"
-        return handle_gnostic(sub, args[2:])
+        return handle_gnostic(sub, args[2:], deprecated=True)
 
     elif args[0] == "norse":
         sub = args[1] if len(args) > 1 else "reading"
-        return handle_norse(sub, args[2:])
+        return handle_norse(sub, args[2:], deprecated=True)
 
     elif args[0] == "zoroastrian":
         sub = args[1] if len(args) > 1 else "reading"
-        return handle_zoroastrian(sub, args[2:])
+        return handle_zoroastrian(sub, args[2:], deprecated=True)
 
     elif args[0] == "egyptian":
         sub = args[1] if len(args) > 1 else "reading"
-        return handle_egyptian(sub, args[2:])
+        return handle_egyptian(sub, args[2:], deprecated=True)
 
     elif args[0] == "jain":
         sub = args[1] if len(args) > 1 else "reading"
-        return handle_jain(sub, args[2:])
+        return handle_jain(sub, args[2:], deprecated=True)
+
+    elif args[0] == "wisdom":
+        philosophy = args[1] if len(args) > 1 else None
+        concept = args[2] if len(args) > 2 else None
+        return handle_wisdom(philosophy, concept, args[3:])
 
     elif args[0] == "garden":
         sub = args[1] if len(args) > 1 else "list"
@@ -1040,8 +1045,12 @@ def handle_completions(shell):
         return 1
 
 
-def handle_tarot(subcommand, args):
+def handle_tarot(subcommand, args, deprecated=False):
     """Handle tarot commands."""
+    if deprecated:
+        print("⚠ Note: 'dot tarot' is deprecated. Use 'dot wisdom tarot' instead.")
+        print()
+
     from dot.tarot import list_cards, get_card, draw as tarot_draw, spread as tarot_spread, interpret, yesno_from_card
 
     if subcommand == "list":
@@ -1114,8 +1123,12 @@ def handle_tarot(subcommand, args):
     return 1
 
 
-def handle_shinto(subcommand, args):
+def handle_shinto(subcommand, args, deprecated=False):
     """Handle Shinto rituals and teachings."""
+    if deprecated:
+        print("⚠ Note: 'dot shinto' is deprecated. Use 'dot wisdom shinto' instead.")
+        print()
+
     from dot.shinto import (
         norito as s_norito, omikuji as s_omikuji, harai as s_harai, ema as s_ema,
         kami_teaching, four_virtues_guide, misogi_guide, kannagara_teaching,
@@ -1261,8 +1274,15 @@ def handle_zen(subcommand, args):
     print("  enso                 Circle of enlightenment")
     print("  saying               Random Zen saying")
     print("  reading              Random Zen wisdom")
-def handle_hermetic(subcommand, args):
+    return 1
+
+
+def handle_hermetic(subcommand, args, deprecated=False):
     """Handle Hermetic philosophy teachings."""
+    if deprecated:
+        print("⚠ Note: 'dot hermetic' is deprecated. Use 'dot wisdom hermetic' instead.")
+        print()
+
     from dot.hermetic import (
         mentalism_teaching, correspondence_teaching, vibration_teaching,
         polarity_teaching, rhythm_teaching, cause_effect_teaching,
@@ -1319,8 +1339,12 @@ def handle_hermetic(subcommand, args):
     return 1
 
 
-def handle_gnostic(subcommand, args):
+def handle_gnostic(subcommand, args, deprecated=False):
     """Handle Gnostic philosophy teachings."""
+    if deprecated:
+        print("⚠ Note: 'dot gnostic' is deprecated. Use 'dot wisdom gnostic' instead.")
+        print()
+
     from dot.gnostic import (
         gnosis_teaching, pleroma_teaching, sophia_teaching,
         demiurge_teaching, archons_teaching, spark_teaching,
@@ -1377,8 +1401,12 @@ def handle_gnostic(subcommand, args):
     return 1
 
 
-def handle_norse(subcommand, args):
+def handle_norse(subcommand, args, deprecated=False):
     """Handle Norse/Germanic philosophy teachings."""
+    if deprecated:
+        print("⚠ Note: 'dot norse' is deprecated. Use 'dot wisdom norse' instead.")
+        print()
+
     from dot.norse import (
         runes_teaching, virtues_teaching, wyrd_teaching,
         yggdrasil_teaching, odin_teaching, norse_reading
@@ -1419,8 +1447,12 @@ def handle_norse(subcommand, args):
     return 1
 
 
-def handle_zoroastrian(subcommand, args):
+def handle_zoroastrian(subcommand, args, deprecated=False):
     """Handle Zoroastrian philosophy teachings."""
+    if deprecated:
+        print("⚠ Note: 'dot zoroastrian' is deprecated. Use 'dot wisdom zoroastrian' instead.")
+        print()
+
     from dot.zoroastrian import (
         asha_teaching, principles_teaching, fire_teaching, zoroastrian_reading
     )
@@ -1450,8 +1482,12 @@ def handle_zoroastrian(subcommand, args):
     return 1
 
 
-def handle_egyptian(subcommand, args):
+def handle_egyptian(subcommand, args, deprecated=False):
     """Handle Egyptian Mysteries teachings."""
+    if deprecated:
+        print("⚠ Note: 'dot egyptian' is deprecated. Use 'dot wisdom egyptian' instead.")
+        print()
+
     from dot.egyptian import (
         maat_teaching, feather_teaching, thoth_teaching, egyptian_reading
     )
@@ -1481,8 +1517,12 @@ def handle_egyptian(subcommand, args):
     return 1
 
 
-def handle_jain(subcommand, args):
+def handle_jain(subcommand, args, deprecated=False):
     """Handle Jainism philosophy teachings."""
+    if deprecated:
+        print("⚠ Note: 'dot jain' is deprecated. Use 'dot wisdom jain' instead.")
+        print()
+
     from dot.jain import (
         ahimsa_teaching, anekantavada_teaching, aparigraha_teaching,
         jewels_teaching, jain_reading
@@ -1515,6 +1555,201 @@ def handle_jain(subcommand, args):
     print("  aparigraha           Non-attachment")
     print("  jewels               Three Jewels")
     print("  reading              Random Jain wisdom")
+    return 1
+
+
+def show_wisdom_menu():
+    """Display menu of all available wisdom traditions."""
+    output = []
+    output.append("═" * 70)
+    output.append("THE DOT - Wisdom Traditions")
+    output.append("═" * 70)
+    output.append("")
+    output.append("Available wisdom traditions (use: dot wisdom TRADITION [CONCEPT]):")
+    output.append("")
+    output.append("  egyptian          Way of Ma'at (Truth, Balance, Order)")
+    output.append("  gnostic           Path of Direct Knowledge (Gnosis, Pleroma)")
+    output.append("  hermetic          Seven Hermetic Principles (As above, so below)")
+    output.append("  jain              Path of Non-Violence (Ahimsa, Anekantavada)")
+    output.append("  norse             Runes and Nine Virtues (Courage, Truth, Honor)")
+    output.append("  shinto            Way of the Kami (Norito, Omikuji, Harai)")
+    output.append("  tarot             DOT Tarot Readings")
+    output.append("  zoroastrian       Path of Asha (Truth vs Lie)")
+    output.append("")
+    output.append("Use 'dot wisdom TRADITION' to see available concepts.")
+    output.append("Use 'dot wisdom TRADITION CONCEPT' to get specific teaching.")
+    output.append("═" * 70)
+    print("\n".join(output))
+
+
+def show_tradition_menu(philosophy):
+    """Display menu of concepts for a specific tradition."""
+    menus = {
+        "hermetic": {
+            "title": "☿ HERMETIC WISDOM - Seven Hermetic Principles ☿",
+            "concepts": [
+                ("mentalism", "The All is Mind"),
+                ("correspondence", "As above, so below"),
+                ("vibration", "Nothing rests; everything moves"),
+                ("polarity", "Everything is dual"),
+                ("rhythm", "Everything flows"),
+                ("cause-effect", "Every cause has its effect"),
+                ("gender", "Masculine and feminine in all"),
+                ("emerald-tablet", "The Emerald Tablet of Hermes"),
+                ("reading", "Random Hermetic wisdom")
+            ]
+        },
+        "gnostic": {
+            "title": "☧ GNOSTIC WISDOM - Path of Direct Knowledge ☧",
+            "concepts": [
+                ("gnosis", "Direct knowledge (Γνῶσις)"),
+                ("pleroma", "The Fullness (Πλήρωμα)"),
+                ("sophia", "Divine Wisdom (Σοφία)"),
+                ("demiurge", "The Craftsman (Δημιουργός)"),
+                ("archons", "The Rulers (Ἄρχοντες)"),
+                ("spark", "Divine Spark within"),
+                ("thomas", "Gospel of Thomas sayings"),
+                ("hammadi", "Nag Hammadi wisdom"),
+                ("reading", "Random Gnostic wisdom")
+            ]
+        },
+        "norse": {
+            "title": "ᚦ NORSE WISDOM - Runes and Nine Virtues ᚦ",
+            "concepts": [
+                ("runes", "24 Elder Futhark runes"),
+                ("virtues", "Nine Noble Virtues"),
+                ("wyrd", "Fate and Orlog"),
+                ("yggdrasil", "World Tree"),
+                ("odin", "All-Father's wisdom"),
+                ("reading", "Random Norse wisdom")
+            ]
+        },
+        "zoroastrian": {
+            "title": "🔥 ZOROASTRIAN WISDOM - Path of Asha 🔥",
+            "concepts": [
+                ("asha", "Truth vs Lie (Asha vs Druj)"),
+                ("principles", "Good Thoughts, Words, Deeds"),
+                ("fire", "Sacred Fire symbolism"),
+                ("reading", "Random Zoroastrian wisdom")
+            ]
+        },
+        "egyptian": {
+            "title": "𓂀 EGYPTIAN WISDOM - Way of Ma'at 𓂀",
+            "concepts": [
+                ("maat", "Truth, Balance, Order"),
+                ("feather", "Feather of Truth weighing"),
+                ("thoth", "God of Wisdom and Writing"),
+                ("reading", "Random Egyptian wisdom")
+            ]
+        },
+        "jain": {
+            "title": "☸ JAIN WISDOM - Path of Non-Violence ☸",
+            "concepts": [
+                ("ahimsa", "Non-violence (अहिंसा)"),
+                ("anekantavada", "Many-sidedness (अनेकान्तवाद)"),
+                ("aparigraha", "Non-attachment (अपरिग्रह)"),
+                ("jewels", "Three Jewels"),
+                ("reading", "Random Jain wisdom")
+            ]
+        },
+        "shinto": {
+            "title": "⛩ SHINTO WISDOM - Way of the Kami ⛩",
+            "concepts": [
+                ("norito", "Prayer to THE DOT-kami"),
+                ("omikuji", "Draw sacred fortune"),
+                ("harai", "Purification guidance"),
+                ("ema", "Create vow plaque"),
+                ("kami", "Teaching about divine spirits"),
+                ("virtues", "Four Shinto Virtues"),
+                ("misogi", "Purification practices"),
+                ("kannagara", "Living in harmony with kami"),
+                ("torii", "Sacred gateways"),
+                ("matsuri", "Celebration teachings"),
+                ("kotodama", "Spirit of words"),
+                ("musubi", "Creative power"),
+                ("reading", "Random Shinto wisdom")
+            ]
+        },
+        "tarot": {
+            "title": "🔮 DOT TAROT - Sacred Cards 🔮",
+            "concepts": [
+                ("draw", "Draw tarot cards"),
+                ("spread", "Tarot spreads"),
+                ("list", "List all cards"),
+                ("card", "Specific card reading"),
+                ("reading", "Random tarot wisdom")
+            ]
+        }
+    }
+
+    if philosophy not in menus:
+        return False
+
+    menu = menus[philosophy]
+    output = []
+    output.append("═" * 70)
+    output.append(menu["title"])
+    output.append("═" * 70)
+    output.append("")
+    output.append("Available teachings:")
+    output.append("")
+    for concept, description in menu["concepts"]:
+        output.append(f"  {concept:20} {description}")
+    output.append("")
+    output.append(f"Usage: dot wisdom {philosophy} CONCEPT")
+    output.append(f"Example: dot wisdom {philosophy} {menu['concepts'][0][0]}")
+    output.append("═" * 70)
+    print("\n".join(output))
+    return True
+
+
+def handle_wisdom(philosophy, concept, extra_args):
+    """Handle consolidated wisdom command routing."""
+    # No philosophy specified - show all traditions
+    if philosophy is None:
+        show_wisdom_menu()
+        return 0
+
+    # Normalize philosophy name
+    philosophy = philosophy.lower()
+
+    # Valid philosophies
+    valid_philosophies = {
+        "hermetic", "gnostic", "norse", "zoroastrian",
+        "egyptian", "jain", "shinto", "tarot"
+    }
+
+    if philosophy not in valid_philosophies:
+        print(f"Unknown wisdom tradition: {philosophy}")
+        print(f"Use 'dot wisdom' to see all available traditions.")
+        return 1
+
+    # No concept specified - show tradition menu
+    if concept is None:
+        if show_tradition_menu(philosophy):
+            return 0
+        else:
+            print(f"Error displaying menu for {philosophy}")
+            return 1
+
+    # Route to appropriate handler (without deprecation warning)
+    if philosophy == "hermetic":
+        return handle_hermetic(concept, extra_args, deprecated=False)
+    elif philosophy == "gnostic":
+        return handle_gnostic(concept, extra_args, deprecated=False)
+    elif philosophy == "norse":
+        return handle_norse(concept, extra_args, deprecated=False)
+    elif philosophy == "zoroastrian":
+        return handle_zoroastrian(concept, extra_args, deprecated=False)
+    elif philosophy == "egyptian":
+        return handle_egyptian(concept, extra_args, deprecated=False)
+    elif philosophy == "jain":
+        return handle_jain(concept, extra_args, deprecated=False)
+    elif philosophy == "shinto":
+        return handle_shinto(concept, extra_args, deprecated=False)
+    elif philosophy == "tarot":
+        return handle_tarot(concept, extra_args, deprecated=False)
+
     return 1
 
 
@@ -1735,6 +1970,7 @@ Commands:
     tarot [subcommand]     Read DOT tarot (draw/spread/list/card)
     shinto [subcommand]    Shinto rites (norito/omikuji/harai/ema)
     garden [subcommand]    Garden tools (list/info/suggest)
+    wisdom [philosophy] [concept]  Unified wisdom traditions (hermetic/gnostic/norse/zoroastrian/egyptian/jain/shinto/tarot)
     suffix                 Show current worship suffix and source
     backstory              Print THE DOT backstory
     init                   Initialize hooks and .dot.ini in this repo
@@ -1834,6 +2070,14 @@ Examples:
     dot config set-suffix "BECAUSE I LOVE THE DOT"
     dot completions bash
     dot version
+    dot wisdom                         # List all wisdom traditions
+    dot wisdom hermetic                # Show hermetic concepts
+    dot wisdom hermetic mentalism      # Get hermetic mentalism teaching
+    dot wisdom gnostic gnosis          # Get gnosis teaching
+    dot wisdom norse runes             # Get norse runes teaching
+
+Note: Individual philosophy commands (hermetic, gnostic, norse, zoroastrian, egyptian, jain,
+      shinto, tarot) still work but are deprecated. Use 'dot wisdom PHILOSOPHY CONCEPT' instead.
 """
     print(help_text)
 
