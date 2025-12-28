@@ -22,12 +22,11 @@
   </g>
 
   <!-- Wordmark -->
-  <g transform="translate(240,60)">
-    <text x="0" y="72" font-family="'Inter','Helvetica Neue',Arial,Helvetica,sans-serif" font-size="84" font-weight="800" letter-spacing="4" fill="#1a1a1a">THE DOT</text>
+  <g transform="translate(240,60)" aria-label="THE DOT wordmark">
+    <text x="0" y="72" font-family="system-ui,-apple-system,'Segoe UI',Roboto,Ubuntu,'Helvetica Neue',Arial,'Noto Sans',sans-serif" font-size="84" font-weight="800" letter-spacing="4" fill="#1a1a1a">THE DOT</text>
     <rect x="2" y="96" width="360" height="6" fill="#e10600" opacity="0.9"/>
-    <text x="0" y="145" font-family="'Inter','Helvetica Neue',Arial,Helvetica,sans-serif" font-size="20" fill="#555">
+    <text x="0" y="145" font-family="system-ui,-apple-system,'Segoe UI',Roboto,Ubuntu,'Helvetica Neue',Arial,'Noto Sans',sans-serif" font-size="20" fill="#555">
       A philosophy-driven development framework — BECAUSE WE WORSHIP THE DOT
     </text>
   </g>
 </svg>
-
