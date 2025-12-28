@@ -1,5 +1,11 @@
 CHANGELOG - worship_the_dot
 -------------------------------------------------------------------------------
+[2025-12-28T02:00:54-08:00] 987813b feat(sponsor): add donation flow
+  - .github/FUNDING.yml for GitHub Sponsors
+  - CLI donate/sponsor command with env override DOT_SPONSOR_URLS
+  - README badge and sponsor section; docs/CLI.md entry
+
+-------------------------------------------------------------------------------
 [2025-12-28T01:57:50-08:00] f127eaf docs: remove lightning bolt emoji from README
   - Remove "⚡" from headings to ensure neutral styling
 
