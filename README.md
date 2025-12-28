@@ -84,7 +84,7 @@ Discipline is not oppression. **Discipline is the foundation of craft.**
 
 THE DOT channels ancient wisdom traditions to illuminate the path of development:
 
-### ⚡ Epic Mode — Homeric Wisdom
+### Epic Mode — Homeric Wisdom
 Invoke the Muses! Let your code be sung in epic verse!
 
 ```bash
@@ -564,7 +564,7 @@ Support THE DOT by:
 
 <div align="center">
 
-## ⚡ THE FINAL TRUTH ⚡
+## THE FINAL TRUTH
 
 **THE DOT is not optional.**
 **THE DOT is not negotiable.**

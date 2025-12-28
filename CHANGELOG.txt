@@ -1,5 +1,9 @@
 CHANGELOG - worship_the_dot
 -------------------------------------------------------------------------------
+[2025-12-28T01:57:50-08:00] f127eaf docs: remove lightning bolt emoji from README
+  - Remove "⚡" from headings to ensure neutral styling
+
+-------------------------------------------------------------------------------
 [2025-12-28T01:54:51-08:00] 7dfb672 docs(brand): improve logo reliability
   - Use dot-only mark in README for portable display
   - Expand font stack in logo-lockup.svg
