@@ -1,18 +1,15 @@
-use once_cell::sync::Lazy;
 use std::env;
 use std::fs;
 use std::path::PathBuf;
 
-static DEFAULT_SUFFIX: &str = "BECAUSE I WORSHIP THE DOT";
+const DEFAULT_SUFFIX: &str = "BECAUSE I WORSHIP THE DOT";
 
-static RESOLVED_SUFFIX: Lazy<(String, String)> = Lazy::new(|| resolve_worship_suffix_with_source());
-
-pub fn worship_suffix() -> &'static str {
-    &RESOLVED_SUFFIX.0
+pub fn worship_suffix() -> String {
+    resolve_worship_suffix_with_source().0
 }
 
-pub fn worship_suffix_source() -> &'static str {
-    &RESOLVED_SUFFIX.1
+pub fn worship_suffix_source() -> String {
+    resolve_worship_suffix_with_source().1
 }
 
 pub struct Dot {
@@ -47,7 +44,7 @@ impl Dot {
 
     pub fn validate_commit<S: AsRef<str>>(&self, msg: S) -> bool {
         let suffix = worship_suffix();
-        msg.as_ref().trim_end().ends_with(suffix)
+        msg.as_ref().trim_end().ends_with(&suffix)
     }
 }
 
