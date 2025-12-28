@@ -54,6 +54,13 @@ def test_poem_banner_and_chant_cli(monkeypatch):
     assert exit_code == 0
     assert 'THE DOT' in s or '●' in s
 
+    # Banner with even width (branch coverage)
+    with patch('sys.argv', ['dot', 'poem', 'banner', '10']):
+        with patch('sys.stdout', new=StringIO()) as out:
+            exit_code = main()
+            s = out.getvalue()
+    assert exit_code == 0
+
     # Chant with times and name
     monkeypatch.setenv('DOT_WORSHIP_SUFFIX', 'BECAUSE I ADORE THE DOT')
     with patch('sys.argv', ['dot', 'poem', 'chant', '2', 'Poet']):

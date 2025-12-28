@@ -15,6 +15,19 @@ def test_badges_module_generates_all_formats():
     all_md = generate_all_badges("markdown")
     assert "Worships" in all_md or "badge" in all_md
 
+    # Cover other aggregate branches
+    all_html = generate_all_badges("html")
+    assert "<" in all_html and ">" in all_html
+    all_url = generate_all_badges("url")
+    assert isinstance(all_url, str)
+
+    # Unknown format should raise
+    import pytest
+    with pytest.raises(ValueError):
+        generate_worship_badge("unknown")
+    with pytest.raises(ValueError):
+        generate_commit_badge(True, "unknown")
+
 
 def test_stats_module_end_to_end(tmp_path, monkeypatch):
     from dot.stats import WorshipStats
@@ -46,4 +59,3 @@ def test_stats_module_end_to_end(tmp_path, monkeypatch):
     ws.clear_stats()
     summary2 = ws.get_summary()
     assert summary2["total_worships"] == 0
-

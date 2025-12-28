@@ -10,8 +10,12 @@ def test_completions_all_shells():
     for shell in ["bash", "zsh", "fish"]:
         script = get_completion(shell)
         assert isinstance(script, str)
-        assert len(script) > 10
-
+    assert len(script) > 10
+    
+    # Unknown shell in low-level API raises
+    import pytest
+    with pytest.raises(ValueError):
+        get_completion('unknown')
 
 def test_display_basic_output():
     from dot.display import Display, get_display
