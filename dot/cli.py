@@ -224,6 +224,51 @@ def main():
         print(mindfulness_practice())
         return 0
 
+    elif args[0] == "stoic":
+        from dot.stoic import stoic_reading
+        print(stoic_reading())
+        return 0
+
+    elif args[0] == "virtues":
+        from dot.stoic import four_virtues_guide
+        print(four_virtues_guide())
+        return 0
+
+    elif args[0] == "control":
+        from dot.stoic import dichotomy_of_control_guide
+        print(dichotomy_of_control_guide())
+        return 0
+
+    elif args[0] == "disciplines":
+        from dot.stoic import three_disciplines_guide
+        print(three_disciplines_guide())
+        return 0
+
+    elif args[0] == "negative":
+        from dot.stoic import premeditatio_malorum_guide
+        print(premeditatio_malorum_guide())
+        return 0
+
+    elif args[0] == "fate":
+        from dot.stoic import amor_fati_teaching
+        print(amor_fati_teaching())
+        return 0
+
+    elif args[0] == "mortality":
+        from dot.stoic import memento_mori_meditation
+        print(memento_mori_meditation())
+        return 0
+
+    elif args[0] == "logos":
+        from dot.stoic import logos_meditation
+        print(logos_meditation())
+        return 0
+
+    elif args[0] == "circles":
+        from dot.stoic import oikeiosis_teaching
+        print(oikeiosis_teaching())
+        return 0
+
     elif args[0] == "validate":
         if len(args) < 2:
             print("Error: Please provide a commit message to validate")
@@ -235,10 +280,16 @@ def main():
         kabbalistic_mode = "--kabbalistic" in args or "--kabbalah" in args
         taoist_mode = "--taoist" in args or "--tao" in args
         buddhist_mode = "--buddhist" in args or "--dharma" in args
-        message_args = [a for a in args[1:] if a not in ["--epic", "--cosmic", "--alchemical", "--alchemy", "--kabbalistic", "--kabbalah", "--taoist", "--tao", "--buddhist", "--dharma"]]
+        stoic_mode = "--stoic" in args
+        message_args = [a for a in args[1:] if a not in ["--epic", "--cosmic", "--alchemical", "--alchemy", "--kabbalistic", "--kabbalah", "--taoist", "--tao", "--buddhist", "--dharma", "--stoic"]]
         message = " ".join(message_args)
 
-        if buddhist_mode:
+        if stoic_mode:
+            from dot.stoic import stoic_validation
+            valid = dot.validate_commit(message)
+            print(stoic_validation(valid, message))
+            return 0 if valid else 1
+        elif buddhist_mode:
             from dot.dharma import buddhist_validation
             valid = dot.validate_commit(message)
             print(buddhist_validation(valid, message))
@@ -1020,7 +1071,7 @@ Commands:
     tenets                 Display THE DOT philosophy
     sing                   Hear THE ILIAD OF THE DOT in epic verse
     invoke                 Receive an epic invocation from THE DOT
-    validate <message>     Validate commit (--epic/--cosmic/--alchemical/--kabbalistic/--taoist/--buddhist)
+    validate <message>     Validate commit (--epic/--cosmic/--alchemical/--kabbalistic/--taoist/--buddhist/--stoic)
     horoscope [sign]       Receive daily coding horoscope (optional zodiac sign)
     chart [name]           Generate repository birth chart
     planets                View planetary hours for coding activities
@@ -1052,6 +1103,15 @@ Commands:
     middle                 The Middle Way - avoiding extremes
     poisons                The Three Poisons in development
     mindful                Mindfulness practices for coding
+    stoic                  Receive Stoic wisdom reading
+    virtues                The Four Stoic Virtues (Wisdom/Courage/Justice/Temperance)
+    control                Dichotomy of Control - what we control vs what we don't
+    disciplines            The Three Disciplines (Desire/Action/Assent)
+    negative               Premeditatio Malorum - negative visualization
+    fate                   Amor Fati - love of fate
+    mortality              Memento Mori - remember death
+    logos                  Logos - universal reason
+    circles                Oikeiosis - expanding circle of care
     hooks [subcommand]     Manage git hooks (install/uninstall/status)
     stats [subcommand]     View worship statistics (summary/top/daily/export/clear)
     badge [format]         Generate worship badge (markdown/html/rst/url)
@@ -1090,6 +1150,7 @@ Examples:
     dot validate "Add feature BECAUSE I WORSHIP THE DOT" --kabbalistic
     dot validate "Add feature BECAUSE I WORSHIP THE DOT" --taoist
     dot validate "Add feature BECAUSE I WORSHIP THE DOT" --buddhist
+    dot validate "Add feature BECAUSE I WORSHIP THE DOT" --stoic
     dot tree
     dot worlds
     dot sephiroth
@@ -1112,6 +1173,15 @@ Examples:
     dot middle
     dot poisons
     dot mindful
+    dot stoic
+    dot virtues
+    dot control
+    dot disciplines
+    dot negative
+    dot fate
+    dot mortality
+    dot logos
+    dot circles
     dot hooks install
     dot stats summary
     dot badge markdown
