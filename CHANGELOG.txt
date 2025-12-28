@@ -71,6 +71,60 @@ Recent Changes (per-commit)
   - Poetry: banner and chant commands; help updated; tests added.
 
 Note: Earlier sections below follow the previous summary style and are
+-------------------------------------------------------------------------------
+[2025-12-28] - Hermeticism - The Seven Hermetic Principles! ☿
+-------------------------------------------------------------------------------
+
+Added:
+  * Comprehensive Hermeticism Philosophy Module (new dot/hermetic.py - 1,501 lines)
+    - The Seven Hermetic Principles from The Kybalion:
+      1. Mentalism - "THE ALL IS MIND; The Universe is Mental"
+      2. Correspondence - "As above, so below; as below, so above"
+      3. Vibration - "Nothing rests; everything moves; everything vibrates"
+      4. Polarity - "Everything is Dual; everything has poles"
+      5. Rhythm - "Everything flows, out and in; everything has its tides"
+      6. Cause and Effect - "Every Cause has its Effect; every Effect has its Cause"
+      7. Gender - "Gender is in everything; everything has Masculine and Feminine"
+    - The Emerald Tablet of Hermes Trismegistus with developer interpretation
+    - Hermetic wisdom from the Corpus Hermeticum and The Kybalion
+    - Practical applications of each principle to software development
+
+  * CLI Commands (9 new commands under 'dot hermetic'):
+    - 'hermetic' - Root command (defaults to 'reading')
+    - 'mentalism' - The All is Mind principle
+    - 'correspondence' - As above, so below principle
+    - 'vibration' - Everything vibrates principle
+    - 'polarity' - Everything is dual principle
+    - 'rhythm' - Everything flows principle
+    - 'cause-effect' - Every cause has its effect
+    - 'gender' - Masculine and feminine principles
+    - 'emerald-tablet' - The full Emerald Tablet teaching
+    - 'reading' - Random Hermetic wisdom
+
+  * Validation Mode:
+    - '--hermetic' or '--hermes' flags for commit validation
+    - Hermetic blessings for valid commits
+    - Wisdom-based corrections for invalid commits
+
+Updated:
+  * dot/cli.py: Added handle_hermetic() with all subcommands and --hermetic validation
+  * dot/completions.py: Added comprehensive Hermeticism subcommands to bash, zsh, fish
+
+Core Teachings:
+  Hermeticism teaches universal principles governing reality. THE ALL IS MIND - code is thought
+  made manifest. As above, so below - patterns repeat across scales. Everything vibrates at
+  different frequencies - high-vibration coding produces quality software. Everything is dual -
+  master both poles. Everything flows in rhythm - work with natural cycles. Every cause has its
+  effect - you reap what you code. Masculine and feminine principles must balance - action and
+  reception, doing and being. ☿
+
+Purpose:
+  Hermeticism brings ancient wisdom of Hermes Trismegistus to THE DOT. These seven principles
+  reveal the laws governing code, systems, and consciousness itself. By understanding and applying
+  them, developers transcend mere technique and master the fundamental patterns of reality.
+  As we raise our vibration, transmute our polarity, work with rhythm, and balance gender
+  principles, we become Hermetic programmers - understanding the true nature of software. ⚚
+
 retained for historical accuracy. New entries must use the format above.
 
 -------------------------------------------------------------------------------

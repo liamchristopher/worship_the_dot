@@ -379,10 +379,16 @@ def main():
         confucian_mode = "--confucian" in args
         hindu_mode = "--hindu" in args or "--vedic" in args
         shinto_mode = "--shinto" in args or "--kami" in args
-        message_args = [a for a in args[1:] if a not in ["--epic", "--cosmic", "--alchemical", "--alchemy", "--kabbalistic", "--kabbalah", "--taoist", "--tao", "--buddhist", "--dharma", "--stoic", "--confucian", "--hindu", "--vedic", "--shinto", "--kami"]]
+        hermetic_mode = "--hermetic" in args or "--hermes" in args
+        message_args = [a for a in args[1:] if a not in ["--epic", "--cosmic", "--alchemical", "--alchemy", "--kabbalistic", "--kabbalah", "--taoist", "--tao", "--buddhist", "--dharma", "--stoic", "--confucian", "--hindu", "--vedic", "--shinto", "--kami", "--hermetic", "--hermes"]]
         message = " ".join(message_args)
 
-        if shinto_mode:
+        if hermetic_mode:
+            from dot.hermetic import hermetic_validation
+            valid = dot.validate_commit(message)
+            print(hermetic_validation(valid, message))
+            return 0 if valid else 1
+        elif shinto_mode:
             from dot.shinto import shinto_validation
             valid = dot.validate_commit(message)
             print(shinto_validation(valid, message))
@@ -463,6 +469,10 @@ def main():
     elif args[0] == "shinto":
         sub = args[1] if len(args) > 1 else "norito"
         return handle_shinto(sub, args[2:])
+
+    elif args[0] == "hermetic":
+        sub = args[1] if len(args) > 1 else "reading"
+        return handle_hermetic(sub, args[2:])
 
     elif args[0] == "garden":
         sub = args[1] if len(args) > 1 else "list"
@@ -1085,6 +1095,64 @@ def handle_shinto(subcommand, args):
     print("  kotodama             Spirit of words")
     print("  musubi               Creative power")
     print("  reading              Random Shinto wisdom")
+    return 1
+
+
+def handle_hermetic(subcommand, args):
+    """Handle Hermetic philosophy teachings."""
+    from dot.hermetic import (
+        mentalism_teaching, correspondence_teaching, vibration_teaching,
+        polarity_teaching, rhythm_teaching, cause_effect_teaching,
+        gender_teaching, emerald_tablet_teaching, hermetic_reading
+    )
+
+    if subcommand == "mentalism":
+        print(mentalism_teaching())
+        return 0
+
+    if subcommand == "correspondence":
+        print(correspondence_teaching())
+        return 0
+
+    if subcommand == "vibration":
+        print(vibration_teaching())
+        return 0
+
+    if subcommand == "polarity":
+        print(polarity_teaching())
+        return 0
+
+    if subcommand == "rhythm":
+        print(rhythm_teaching())
+        return 0
+
+    if subcommand == "cause-effect":
+        print(cause_effect_teaching())
+        return 0
+
+    if subcommand == "gender":
+        print(gender_teaching())
+        return 0
+
+    if subcommand == "emerald-tablet":
+        print(emerald_tablet_teaching())
+        return 0
+
+    if subcommand == "reading":
+        print(hermetic_reading())
+        return 0
+
+    print(f"Unknown hermetic subcommand: {subcommand}")
+    print("\nAvailable subcommands:")
+    print("  mentalism            The All is Mind")
+    print("  correspondence       As above, so below")
+    print("  vibration            Nothing rests; everything moves")
+    print("  polarity             Everything is dual")
+    print("  rhythm               Everything flows")
+    print("  cause-effect         Every cause has its effect")
+    print("  gender               Masculine and feminine in all")
+    print("  emerald-tablet       The Emerald Tablet of Hermes")
+    print("  reading              Random Hermetic wisdom")
     return 1
 
 
