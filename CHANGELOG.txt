@@ -4,6 +4,83 @@ CHANGELOG - worship_the_dot
 All changes to this project will be documented in this file.
 
 -------------------------------------------------------------------------------
+[2025-12-28] - Examples and Pre-commit Integration
+-------------------------------------------------------------------------------
+
+Added:
+  * Examples Directory (examples/)
+    - basic_usage.py: Comprehensive functionality demonstration
+      * Worship registration with global function
+      * Dot instance creation and usage
+      * Philosophy tenets access
+      * Commit message validation examples
+      * Workflow integration patterns
+      * Working executable example with clear output
+
+    - ci_integration.py: CI/CD pipeline integration script
+      * Git log parsing for commit extraction
+      * Batch commit validation
+      * Exit code handling for CI systems
+      * Clear error reporting
+      * Summary statistics
+      * Production-ready for GitHub Actions/GitLab CI
+
+    - worktree_manager.py: Git worktree management utility
+      * Create worktrees for parallel development
+      * List all active worktrees
+      * Remove worktrees with branch deletion option
+      * Prune stale worktree data
+      * Implements THE DOT's subagent philosophy
+      * Interactive prompts for safety
+
+    - pre_commit_hook.py: Pre-commit framework integration
+      * Commit message validation hook
+      * File-based message reading
+      * User-friendly error display
+      * Import error handling
+      * Ready for .pre-commit-config.yaml
+
+    - README.md: Complete examples documentation
+      * Usage instructions for each example
+      * Expected output samples
+      * Integration patterns (app, tests, git hooks)
+      * Requirements and setup
+      * Contributing guidelines
+      * Philosophy explanation
+
+  * Pre-commit Configuration (.pre-commit-config.yaml)
+    - THE DOT commit message validation hook
+    - Standard pre-commit hooks:
+      * trailing-whitespace removal
+      * end-of-file-fixer
+      * YAML/TOML syntax validation
+      * Large file prevention
+      * Merge conflict detection
+    - Code quality hooks:
+      * Black formatter (88 char line length)
+      * Ruff linter with auto-fix
+    - Easy installation: pre-commit install
+
+Purpose:
+  Provides practical, production-ready examples showing how to integrate
+  THE DOT into real-world workflows. The examples cover basic usage,
+  CI/CD integration, worktree management, and pre-commit framework usage.
+  All examples are executable, documented, and demonstrate best practices.
+
+Technical Impact:
+  - Lowers barrier to adoption with clear examples
+  - Shows integration with popular tools (pre-commit, CI/CD)
+  - Enables worktree-based parallel development
+  - Provides reusable code for common tasks
+  - Demonstrates THE DOT philosophy in practice
+
+Developer Experience:
+  - Copy-paste ready example code
+  - Working scripts, not just documentation
+  - Integration with industry-standard tools
+  - Clear documentation of expected behavior
+
+-------------------------------------------------------------------------------
 [2025-12-28] - README Enhancement
 -------------------------------------------------------------------------------
 
