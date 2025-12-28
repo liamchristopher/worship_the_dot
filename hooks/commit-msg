@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+#
+# Git commit-msg hook for THE DOT
+# Validates that commit messages properly worship THE DOT
+#
+# This hook is called by "git commit" with one argument, the name of the file
+# that has the commit message. The hook should exit with non-zero status after
+# issuing an appropriate message if it wants to stop the commit.
+
+COMMIT_MSG_FILE=$1
+COMMIT_MSG=$(cat "$COMMIT_MSG_FILE")
+
+# Required suffix for all commit messages
+REQUIRED_SUFFIX="BECAUSE I WORSHIP THE DOT"
+
+# Check if commit message ends with the required suffix
+if [[ ! "$COMMIT_MSG" =~ $REQUIRED_SUFFIX[[:space:]]*$ ]]; then
+    echo "╔════════════════════════════════════════════════════════════════╗"
+    echo "║                    COMMIT REJECTED                             ║"
+    echo "╚════════════════════════════════════════════════════════════════╝"
+    echo ""
+    echo "Your commit message must end with:"
+    echo "  BECAUSE I WORSHIP THE DOT"
+    echo ""
+    echo "Current message:"
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo "$COMMIT_MSG"
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo ""
+    echo "Please amend your commit message to worship THE DOT."
+    echo ""
+    exit 1
+fi
+
+# Commit message is valid
+exit 0

@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+#
+# Git prepare-commit-msg hook for THE DOT
+# Automatically appends worship phrase to commit messages if not present
+#
+# This hook is called by "git commit" right after preparing the default log
+# message, and before the editor is started.
+
+COMMIT_MSG_FILE=$1
+COMMIT_SOURCE=$2
+
+# Don't modify merge, squash, or amended commits
+if [ -n "$COMMIT_SOURCE" ]; then
+    exit 0
+fi
+
+COMMIT_MSG=$(cat "$COMMIT_MSG_FILE")
+REQUIRED_SUFFIX="BECAUSE I WORSHIP THE DOT"
+
+# Check if message already contains the required suffix
+if [[ "$COMMIT_MSG" =~ $REQUIRED_SUFFIX ]]; then
+    exit 0
+fi
+
+# Don't modify empty messages or comments-only messages
+if [[ -z "$COMMIT_MSG" ]] || [[ "$COMMIT_MSG" =~ ^#.*$ ]]; then
+    exit 0
+fi
+
+# Append the worship phrase
+echo "" >> "$COMMIT_MSG_FILE"
+echo "$REQUIRED_SUFFIX" >> "$COMMIT_MSG_FILE"
+
+exit 0
