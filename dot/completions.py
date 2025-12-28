@@ -18,7 +18,7 @@ _dot_completion() {
     prev="${COMP_WORDS[COMP_CWORD-1]}"
 
     # Main commands
-    commands="worship tenets sing invoke validate horoscope chart planets moon element opus operations hermetic stone tree worlds sephiroth tikkun ein-sof shekhinah gematria tao wu-wei yin-yang elements treasures pu water iching dharma truths path marks middle poisons mindful stoic virtues control disciplines negative fate mortality logos circles confucian wuchang names filial junzi relationships cultivation mean analects hindu vedic karma yogas purusharthas gunas maya atman gita moksha sufi tawhid dhikr fana baqa maqamat qalb sema ishq tariqah rumi hooks stats badge poem tarot shinto garden config completions version help"
+    commands="worship tenets sing invoke validate horoscope chart planets moon element opus operations hermetic stone tree worlds sephiroth tikkun ein-sof shekhinah gematria tao wu-wei yin-yang elements treasures pu water iching dharma truths path marks middle poisons mindful stoic virtues control disciplines negative fate mortality logos circles confucian wuchang names filial junzi relationships cultivation mean analects hindu vedic karma yogas purusharthas gunas maya atman gita moksha hooks stats badge poem tarot shinto zen garden config completions version help"
 
     # Subcommands for hooks
     hooks_cmds="install uninstall status"
@@ -37,6 +37,9 @@ _dot_completion() {
 
     # Subcommands for shinto
     shinto_cmds="norito omikuji harai ema kami virtues misogi kannagara torii matsuri kotodama musubi reading"
+
+    # Subcommands for zen
+    zen_cmds="zazen koan satori mushin shoshin wabi-sabi ma enso saying reading"
 
     case "${prev}" in
         dot)
@@ -65,6 +68,10 @@ _dot_completion() {
             ;;
         shinto)
             COMPREPLY=( $(compgen -W "${shinto_cmds}" -- ${cur}) )
+            return 0
+            ;;
+        zen)
+            COMPREPLY=( $(compgen -W "${zen_cmds}" -- ${cur}) )
             return 0
             ;;
     esac
@@ -149,23 +156,13 @@ _dot() {
         'atman:Atman and Brahman'
         'gita:Bhagavad Gita verse'
         'moksha:Samsara and Moksha'
-        'sufi:Receive Sufi wisdom reading'
-        'tawhid:Tawhid - Divine Unity'
-        'dhikr:Dhikr - Remembrance'
-        'fana:Fana - Annihilation of Ego'
-        'baqa:Baqa - Subsistence in Divine'
-        'maqamat:Maqamat and Ahwal - Stations and States'
-        'qalb:Qalb - The Spiritual Heart'
-        'sema:Sema - The Whirling Ceremony'
-        'ishq:Ishq - Divine Love'
-        'tariqah:Tariqah - The Spiritual Path'
-        'rumi:Sufi poetry and wisdom'
         'hooks:Manage git hooks'
         'stats:View worship statistics'
         'badge:Generate worship badge'
         'poem:Speak poetry'
         'tarot:Read DOT tarot'
         'shinto:Shinto - Way of the Kami'
+        'zen:Zen - Way of Awakening'
         'garden:Garden tools'
         'config:Manage configuration'
         'completions:Generate shell completions'
@@ -223,6 +220,19 @@ _dot() {
         'reading:Random Shinto wisdom'
     )
 
+    zen_cmds=(
+        'zazen:Sitting meditation practice'
+        'koan:Paradoxical riddles for awakening'
+        'satori:Sudden enlightenment teaching'
+        'mushin:No-mind state'
+        'shoshin:Beginner'\''s mind'
+        'wabi-sabi:Beauty in imperfection'
+        'ma:Negative space and pauses'
+        'enso:Circle of enlightenment'
+        'saying:Random Zen saying'
+        'reading:Random Zen wisdom'
+    )
+
     case "$words[2]" in
         hooks)
             _describe 'hooks commands' hooks_cmds
@@ -241,6 +251,9 @@ _dot() {
             ;;
         shinto)
             _describe 'shinto commands' shinto_cmds
+            ;;
+        zen)
+            _describe 'zen commands' zen_cmds
             ;;
         *)
             _describe 'commands' commands
@@ -323,23 +336,13 @@ complete -c dot -n "__fish_use_subcommand" -a "maya" -d "Maya - pierce the illus
 complete -c dot -n "__fish_use_subcommand" -a "atman" -d "Atman and Brahman"
 complete -c dot -n "__fish_use_subcommand" -a "gita" -d "Bhagavad Gita verse"
 complete -c dot -n "__fish_use_subcommand" -a "moksha" -d "Samsara and Moksha"
-complete -c dot -n "__fish_use_subcommand" -a "sufi" -d "Receive Sufi wisdom reading"
-complete -c dot -n "__fish_use_subcommand" -a "tawhid" -d "Tawhid - Divine Unity"
-complete -c dot -n "__fish_use_subcommand" -a "dhikr" -d "Dhikr - Remembrance"
-complete -c dot -n "__fish_use_subcommand" -a "fana" -d "Fana - Annihilation of Ego"
-complete -c dot -n "__fish_use_subcommand" -a "baqa" -d "Baqa - Subsistence in Divine"
-complete -c dot -n "__fish_use_subcommand" -a "maqamat" -d "Maqamat and Ahwal - Stations and States"
-complete -c dot -n "__fish_use_subcommand" -a "qalb" -d "Qalb - The Spiritual Heart"
-complete -c dot -n "__fish_use_subcommand" -a "sema" -d "Sema - The Whirling Ceremony"
-complete -c dot -n "__fish_use_subcommand" -a "ishq" -d "Ishq - Divine Love"
-complete -c dot -n "__fish_use_subcommand" -a "tariqah" -d "Tariqah - The Spiritual Path"
-complete -c dot -n "__fish_use_subcommand" -a "rumi" -d "Sufi poetry and wisdom"
 complete -c dot -n "__fish_use_subcommand" -a "hooks" -d "Manage git hooks"
 complete -c dot -n "__fish_use_subcommand" -a "stats" -d "View worship statistics"
 complete -c dot -n "__fish_use_subcommand" -a "badge" -d "Generate worship badge"
 complete -c dot -n "__fish_use_subcommand" -a "poem" -d "Speak poetry"
 complete -c dot -n "__fish_use_subcommand" -a "tarot" -d "Read DOT tarot"
 complete -c dot -n "__fish_use_subcommand" -a "shinto" -d "Shinto - Way of the Kami"
+complete -c dot -n "__fish_use_subcommand" -a "zen" -d "Zen - Way of Awakening"
 complete -c dot -n "__fish_use_subcommand" -a "garden" -d "Garden tools"
 complete -c dot -n "__fish_use_subcommand" -a "config" -d "Manage configuration"
 complete -c dot -n "__fish_use_subcommand" -a "completions" -d "Generate shell completions"
@@ -389,6 +392,18 @@ complete -c dot -n "__fish_seen_subcommand_from shinto" -a "matsuri" -d "Celebra
 complete -c dot -n "__fish_seen_subcommand_from shinto" -a "kotodama" -d "Spirit of words"
 complete -c dot -n "__fish_seen_subcommand_from shinto" -a "musubi" -d "Creative power"
 complete -c dot -n "__fish_seen_subcommand_from shinto" -a "reading" -d "Random Shinto wisdom"
+
+# Zen subcommands
+complete -c dot -n "__fish_seen_subcommand_from zen" -a "zazen" -d "Sitting meditation practice"
+complete -c dot -n "__fish_seen_subcommand_from zen" -a "koan" -d "Paradoxical riddles for awakening"
+complete -c dot -n "__fish_seen_subcommand_from zen" -a "satori" -d "Sudden enlightenment teaching"
+complete -c dot -n "__fish_seen_subcommand_from zen" -a "mushin" -d "No-mind state"
+complete -c dot -n "__fish_seen_subcommand_from zen" -a "shoshin" -d "Beginner's mind"
+complete -c dot -n "__fish_seen_subcommand_from zen" -a "wabi-sabi" -d "Beauty in imperfection"
+complete -c dot -n "__fish_seen_subcommand_from zen" -a "ma" -d "Negative space and pauses"
+complete -c dot -n "__fish_seen_subcommand_from zen" -a "enso" -d "Circle of enlightenment"
+complete -c dot -n "__fish_seen_subcommand_from zen" -a "saying" -d "Random Zen saying"
+complete -c dot -n "__fish_seen_subcommand_from zen" -a "reading" -d "Random Zen wisdom"
 """
 
 
