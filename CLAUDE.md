@@ -27,7 +27,9 @@ This repository is "worship_the_dot" - a Python package implementing THE DOT phi
 
 ### Documentation Requirements
 - Document all changes made
-- Update CHANGELOG.txt with proper formatting for all changes
+- Update CHANGELOG.txt for every commit using timestamped, per-commit entries:
+  - `[YYYY-MM-DD HH:MM:SS Z] <hash> <subject without suffix>`
+  - One or more concise bullets (Docs, CI, Tests, Feat, Fix), no deletions
 - Commit documentation changes separately from code changes
 
 ### Code Quality Standards

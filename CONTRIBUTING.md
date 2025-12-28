@@ -206,6 +206,21 @@ BECAUSE I WORSHIP THE DOT
 - Document all CLI commands
 - Provide usage examples and update `docs/WORSHIP.md` when rites change
 
+## Changelog Rules (Sacred Record)
+
+- Add an entry for every commit you push.
+- Do not delete or rewrite existing entries.
+- Use this format (prepend to the top):
+
+  `[YYYY-MM-DD HH:MM:SS Z] <hash> <subject without suffix>`
+
+  Then one or more concise bullets, for example:
+
+  `- Docs: added docs/CLI.md and linked from README.`
+
+- Keep subjects identical to the commit subject, but omit the worship suffix.
+- Group multiple bullets by area when helpful (Docs, CI, Tests, Feat, Fix).
+
 ## What to Contribute
 
 ### Welcome Contributions
