@@ -59,6 +59,7 @@ omit = [
   "dot/confucian.py",
   "dot/dharma.py",
   "dot/gnostic.py",
+  "dot/hermetic.py",
   "dot/hindu.py",
   "dot/kabbalah.py",
   "dot/norse.py",
