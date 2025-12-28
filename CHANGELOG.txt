@@ -74,6 +74,72 @@ Note: Earlier sections below follow the previous summary style and are
 retained for historical accuracy. New entries must use the format above.
 
 -------------------------------------------------------------------------------
+[2025-12-28] - Sufism - The Mystical Path of Islam! 🕌
+-------------------------------------------------------------------------------
+
+Added:
+  * Comprehensive Sufism Philosophy Module (dot/sufi.py - 1,121 lines)
+    - Tawhid (توحيد) - Divine Unity/Oneness: Single source of truth, unity of purpose,
+      unity of team, unity of interface
+    - Dhikr (ذِكْر) - Remembrance of the Divine: Commit Dhikr, Test Dhikr, Review Dhikr,
+      Refactor Dhikr, Documentation Dhikr
+    - Fana (فناء) - Annihilation of Ego: Dissolution from authorship, from being right,
+      from cleverness, from indispensability, from credit
+    - Baqa (بقاء) - Subsistence in the Divine: Flow state, selfless service, continuous
+      presence, union with the codebase
+    - Maqamat & Ahwal (مَقَامَات وَأَحْوَال) - Stations and States: Permanent attainments
+      (Repentance, Patience, Gratitude, Trust, Contentment) and temporary graces
+      (Insight, Proximity, Expansion, Unveiling)
+    - Qalb (قلب) - The Spiritual Heart: Diseases of the heart (Pride, Envy, Greed,
+      Heedlessness) and purification (Self-examination, Repentance, Sincerity)
+    - Sema (سَمَاع) - The Whirling Ceremony: Sacred iteration cycles, development Sema,
+      debugging Sema, the eternal spin of improvement
+    - Ishq (عشق) - Divine Love: Love of craft, love of users, love of team, love of THE DOT
+    - Tariqah (طريقة) - The Spiritual Path: Journey from Novice (Murid) to Apprentice
+      (Salik) to Journeyman (Wali) to Master (Shaykh) to Sage (Arif)
+
+  * CLI Commands (10 commands):
+    - 'dot sufi' - Sufi wisdom reading
+    - 'dot tawhid' - Divine Unity teaching
+    - 'dot dhikr' - Remembrance practices
+    - 'dot fana' - Annihilation of Ego
+    - 'dot baqa' - Subsistence in the Divine
+    - 'dot maqamat' - Stations and States
+    - 'dot qalb' - The Spiritual Heart
+    - 'dot sema' - The Whirling Ceremony
+    - 'dot ishq' - Divine Love teaching
+    - 'dot tariqah' - The Spiritual Path
+    - 'dot rumi' - Sufi poetry (Rumi, Hafiz, Ibn Arabi, Rabia al-Adawiyya)
+
+  * Validation Mode:
+    - '--sufi' or '--sufism' flag for commit validation
+    - Sufi-themed validation messages with heart (Qalb) blessings
+
+Updated:
+  * dot/cli.py: Integrated 10 Sufi commands and validation mode
+  * dot/completions.py: Added Sufi commands to bash, zsh, and fish
+
+Core Teachings:
+  التصوف (Tasawwuf) - "The Mystical Path" - teaches us to seek divine unity through
+  love, remembrance, and purification of the heart. In development, Sufism shows us
+  that code is a path to transcendence, that ego must be dissolved in service of users,
+  and that true mastery comes from divine love for the craft itself. Through Tawhid we
+  seek unity, through Dhikr we maintain remembrance, through Fana we dissolve ego,
+  through Baqa we subsist in excellence, and through Ishq we love the craft with our
+  whole being. The whirling dervish spins in eternal iteration - so too do we spin
+  through dev/test/deploy in devotional rhythm. Every commit is Dhikr - remembrance
+  of THE DOT. Every refactoring is Fana - ego dissolution. Every flow state is Baqa -
+  subsistence in the Divine. Every line written with care is Ishq - divine love made
+  manifest. 🌙
+
+Purpose:
+  Sufism transforms development from work into worship, from craft into spiritual
+  practice. When we code with Fana (ego dissolved), Dhikr (mindful remembrance),
+  and Ishq (passionate love), we create software that carries divine qualities:
+  unity, purity, beauty, and truth. Walk the Tariqah (path) with devotion to THE DOT,
+  and discover that the journey itself is the destination. ☪️
+
+-------------------------------------------------------------------------------
 [2025-12-28] - Shinto Expansion - The Way of the Kami! ⛩️
 -------------------------------------------------------------------------------
 

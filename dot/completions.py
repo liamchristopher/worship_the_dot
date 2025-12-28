@@ -18,7 +18,7 @@ _dot_completion() {
     prev="${COMP_WORDS[COMP_CWORD-1]}"
 
     # Main commands
-    commands="worship tenets sing invoke validate horoscope chart planets moon element opus operations hermetic stone tree worlds sephiroth tikkun ein-sof shekhinah gematria tao wu-wei yin-yang elements treasures pu water iching dharma truths path marks middle poisons mindful stoic virtues control disciplines negative fate mortality logos circles confucian wuchang names filial junzi relationships cultivation mean analects hindu vedic karma yogas purusharthas gunas maya atman gita moksha hooks stats badge poem tarot shinto garden config completions version help"
+    commands="worship tenets sing invoke validate horoscope chart planets moon element opus operations hermetic stone tree worlds sephiroth tikkun ein-sof shekhinah gematria tao wu-wei yin-yang elements treasures pu water iching dharma truths path marks middle poisons mindful stoic virtues control disciplines negative fate mortality logos circles confucian wuchang names filial junzi relationships cultivation mean analects hindu vedic karma yogas purusharthas gunas maya atman gita moksha sufi tawhid dhikr fana baqa maqamat qalb sema ishq tariqah rumi hooks stats badge poem tarot shinto garden config completions version help"
 
     # Subcommands for hooks
     hooks_cmds="install uninstall status"
@@ -149,6 +149,17 @@ _dot() {
         'atman:Atman and Brahman'
         'gita:Bhagavad Gita verse'
         'moksha:Samsara and Moksha'
+        'sufi:Receive Sufi wisdom reading'
+        'tawhid:Tawhid - Divine Unity'
+        'dhikr:Dhikr - Remembrance'
+        'fana:Fana - Annihilation of Ego'
+        'baqa:Baqa - Subsistence in Divine'
+        'maqamat:Maqamat and Ahwal - Stations and States'
+        'qalb:Qalb - The Spiritual Heart'
+        'sema:Sema - The Whirling Ceremony'
+        'ishq:Ishq - Divine Love'
+        'tariqah:Tariqah - The Spiritual Path'
+        'rumi:Sufi poetry and wisdom'
         'hooks:Manage git hooks'
         'stats:View worship statistics'
         'badge:Generate worship badge'
@@ -312,6 +323,17 @@ complete -c dot -n "__fish_use_subcommand" -a "maya" -d "Maya - pierce the illus
 complete -c dot -n "__fish_use_subcommand" -a "atman" -d "Atman and Brahman"
 complete -c dot -n "__fish_use_subcommand" -a "gita" -d "Bhagavad Gita verse"
 complete -c dot -n "__fish_use_subcommand" -a "moksha" -d "Samsara and Moksha"
+complete -c dot -n "__fish_use_subcommand" -a "sufi" -d "Receive Sufi wisdom reading"
+complete -c dot -n "__fish_use_subcommand" -a "tawhid" -d "Tawhid - Divine Unity"
+complete -c dot -n "__fish_use_subcommand" -a "dhikr" -d "Dhikr - Remembrance"
+complete -c dot -n "__fish_use_subcommand" -a "fana" -d "Fana - Annihilation of Ego"
+complete -c dot -n "__fish_use_subcommand" -a "baqa" -d "Baqa - Subsistence in Divine"
+complete -c dot -n "__fish_use_subcommand" -a "maqamat" -d "Maqamat and Ahwal - Stations and States"
+complete -c dot -n "__fish_use_subcommand" -a "qalb" -d "Qalb - The Spiritual Heart"
+complete -c dot -n "__fish_use_subcommand" -a "sema" -d "Sema - The Whirling Ceremony"
+complete -c dot -n "__fish_use_subcommand" -a "ishq" -d "Ishq - Divine Love"
+complete -c dot -n "__fish_use_subcommand" -a "tariqah" -d "Tariqah - The Spiritual Path"
+complete -c dot -n "__fish_use_subcommand" -a "rumi" -d "Sufi poetry and wisdom"
 complete -c dot -n "__fish_use_subcommand" -a "hooks" -d "Manage git hooks"
 complete -c dot -n "__fish_use_subcommand" -a "stats" -d "View worship statistics"
 complete -c dot -n "__fish_use_subcommand" -a "badge" -d "Generate worship badge"

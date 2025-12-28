@@ -364,6 +364,61 @@ def main():
         print(samsara_moksha_teaching())
         return 0
 
+    elif args[0] == "sufi":
+        from dot.sufi import sufi_reading
+        print(sufi_reading())
+        return 0
+
+    elif args[0] == "tawhid":
+        from dot.sufi import tawhid_teaching
+        print(tawhid_teaching())
+        return 0
+
+    elif args[0] == "dhikr":
+        from dot.sufi import dhikr_teaching
+        print(dhikr_teaching())
+        return 0
+
+    elif args[0] == "fana":
+        from dot.sufi import fana_teaching
+        print(fana_teaching())
+        return 0
+
+    elif args[0] == "baqa":
+        from dot.sufi import baqa_teaching
+        print(baqa_teaching())
+        return 0
+
+    elif args[0] == "maqamat":
+        from dot.sufi import maqamat_ahwal_guide
+        print(maqamat_ahwal_guide())
+        return 0
+
+    elif args[0] == "qalb":
+        from dot.sufi import qalb_teaching
+        print(qalb_teaching())
+        return 0
+
+    elif args[0] == "sema":
+        from dot.sufi import sema_teaching
+        print(sema_teaching())
+        return 0
+
+    elif args[0] == "ishq":
+        from dot.sufi import ishq_teaching
+        print(ishq_teaching())
+        return 0
+
+    elif args[0] == "tariqah":
+        from dot.sufi import tariqah_teaching
+        print(tariqah_teaching())
+        return 0
+
+    elif args[0] == "rumi":
+        from dot.sufi import sufi_poetry
+        print(sufi_poetry())
+        return 0
+
     elif args[0] == "validate":
         if len(args) < 2:
             print("Error: Please provide a commit message to validate")
@@ -379,10 +434,16 @@ def main():
         confucian_mode = "--confucian" in args
         hindu_mode = "--hindu" in args or "--vedic" in args
         shinto_mode = "--shinto" in args or "--kami" in args
-        message_args = [a for a in args[1:] if a not in ["--epic", "--cosmic", "--alchemical", "--alchemy", "--kabbalistic", "--kabbalah", "--taoist", "--tao", "--buddhist", "--dharma", "--stoic", "--confucian", "--hindu", "--vedic", "--shinto", "--kami"]]
+        sufi_mode = "--sufi" in args or "--sufism" in args
+        message_args = [a for a in args[1:] if a not in ["--epic", "--cosmic", "--alchemical", "--alchemy", "--kabbalistic", "--kabbalah", "--taoist", "--tao", "--buddhist", "--dharma", "--stoic", "--confucian", "--hindu", "--vedic", "--shinto", "--kami", "--sufi", "--sufism"]]
         message = " ".join(message_args)
 
-        if shinto_mode:
+        if sufi_mode:
+            from dot.sufi import sufi_validation
+            valid = dot.validate_commit(message)
+            print(sufi_validation(valid, message))
+            return 0 if valid else 1
+        elif shinto_mode:
             from dot.shinto import shinto_validation
             valid = dot.validate_commit(message)
             print(shinto_validation(valid, message))
