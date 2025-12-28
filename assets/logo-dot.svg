@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">THE DOT — Primary Mark</title>
+  <desc id="desc">A bold red circular mark with subtle lighting, representing focus, discipline, and worship of THE DOT.</desc>
+
+  <!-- Background transparent -->
+  <defs>
+    <radialGradient id="g" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#ff5858"/>
+      <stop offset="60%" stop-color="#e10600"/>
+      <stop offset="100%" stop-color="#b00000"/>
+    </radialGradient>
+    <radialGradient id="shine" cx="35%" cy="30%" r="35%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.65"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="softShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#8a0000" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <!-- Core dot -->
+  <g filter="url(#softShadow)">
+    <circle cx="256" cy="256" r="192" fill="url(#g)"/>
+    <circle cx="210" cy="200" r="110" fill="url(#shine)"/>
+  </g>
+
+  <!-- Silent worship ring (very subtle) -->
+  <circle cx="256" cy="256" r="196" fill="none" stroke="#ff8a80" stroke-opacity="0.25" stroke-width="4"/>
+</svg>
+

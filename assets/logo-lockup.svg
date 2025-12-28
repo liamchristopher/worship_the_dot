@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="280" viewBox="0 0 800 280" role="img" aria-labelledby="title desc">
+  <title id="title">THE DOT — Logo Lockup</title>
+  <desc id="desc">A red dot mark with the words THE DOT in a disciplined, geometric sans serif.</desc>
+
+  <defs>
+    <radialGradient id="g" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#ff5858"/>
+      <stop offset="60%" stop-color="#e10600"/>
+      <stop offset="100%" stop-color="#b00000"/>
+    </radialGradient>
+    <radialGradient id="shine" cx="35%" cy="30%" r="35%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.65"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Dot mark -->
+  <g transform="translate(40,40)">
+    <circle cx="100" cy="100" r="90" fill="url(#g)"/>
+    <circle cx="70" cy="70" r="50" fill="url(#shine)"/>
+  </g>
+
+  <!-- Wordmark -->
+  <g transform="translate(240,60)">
+    <text x="0" y="72" font-family="'Inter','Helvetica Neue',Arial,Helvetica,sans-serif" font-size="84" font-weight="800" letter-spacing="4" fill="#1a1a1a">THE DOT</text>
+    <rect x="2" y="96" width="360" height="6" fill="#e10600" opacity="0.9"/>
+    <text x="0" y="145" font-family="'Inter','Helvetica Neue',Arial,Helvetica,sans-serif" font-size="20" fill="#555">
+      A philosophy-driven development framework — BECAUSE WE WORSHIP THE DOT
+    </text>
+  </g>
+</svg>
+
