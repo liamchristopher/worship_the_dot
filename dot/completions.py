@@ -18,7 +18,7 @@ _dot_completion() {
     prev="${COMP_WORDS[COMP_CWORD-1]}"
 
     # Main commands
-    commands="worship tenets validate hooks stats badge config version help"
+    commands="worship tenets validate hooks stats badge config completions version help"
 
     # Subcommands for hooks
     hooks_cmds="install uninstall status"
@@ -31,6 +31,9 @@ _dot_completion() {
 
     # Subcommands for config
     config_cmds="show set get reset"
+
+    # Subcommands for completions
+    completions_cmds="bash zsh fish"
 
     case "${prev}" in
         dot)
@@ -53,6 +56,10 @@ _dot_completion() {
             COMPREPLY=( $(compgen -W "${config_cmds}" -- ${cur}) )
             return 0
             ;;
+        completions)
+            COMPREPLY=( $(compgen -W "${completions_cmds}" -- ${cur}) )
+            return 0
+            ;;
     esac
 }
 
@@ -68,7 +75,7 @@ def zsh_completion() -> str:
 #   source <(dot completions zsh)
 
 _dot() {
-    local -a commands hooks_cmds stats_cmds badge_cmds config_cmds
+    local -a commands hooks_cmds stats_cmds badge_cmds config_cmds completions_cmds
 
     commands=(
         'worship:Register worship of THE DOT'
@@ -78,6 +85,7 @@ _dot() {
         'stats:View worship statistics'
         'badge:Generate worship badge'
         'config:Manage configuration'
+        'completions:Generate shell completions'
         'version:Show version information'
         'help:Show help message'
     )
@@ -110,6 +118,12 @@ _dot() {
         'reset:Reset to defaults'
     )
 
+    completions_cmds=(
+        'bash:Generate bash completion'
+        'zsh:Generate zsh completion'
+        'fish:Generate fish completion'
+    )
+
     case "$words[2]" in
         hooks)
             _describe 'hooks commands' hooks_cmds
@@ -122,6 +136,9 @@ _dot() {
             ;;
         config)
             _describe 'config commands' config_cmds
+            ;;
+        completions)
+            _describe 'completions commands' completions_cmds
             ;;
         *)
             _describe 'commands' commands
@@ -147,6 +164,7 @@ complete -c dot -n "__fish_use_subcommand" -a "hooks" -d "Manage git hooks"
 complete -c dot -n "__fish_use_subcommand" -a "stats" -d "View worship statistics"
 complete -c dot -n "__fish_use_subcommand" -a "badge" -d "Generate worship badge"
 complete -c dot -n "__fish_use_subcommand" -a "config" -d "Manage configuration"
+complete -c dot -n "__fish_use_subcommand" -a "completions" -d "Generate shell completions"
 complete -c dot -n "__fish_use_subcommand" -a "version" -d "Show version information"
 complete -c dot -n "__fish_use_subcommand" -a "help" -d "Show help message"
 
@@ -173,6 +191,11 @@ complete -c dot -n "__fish_seen_subcommand_from config" -a "show" -d "Show confi
 complete -c dot -n "__fish_seen_subcommand_from config" -a "set" -d "Set configuration value"
 complete -c dot -n "__fish_seen_subcommand_from config" -a "get" -d "Get configuration value"
 complete -c dot -n "__fish_seen_subcommand_from config" -a "reset" -d "Reset to defaults"
+
+# Completions subcommands
+complete -c dot -n "__fish_seen_subcommand_from completions" -a "bash" -d "Generate bash completion"
+complete -c dot -n "__fish_seen_subcommand_from completions" -a "zsh" -d "Generate zsh completion"
+complete -c dot -n "__fish_seen_subcommand_from completions" -a "fish" -d "Generate fish completion"
 """
 
 

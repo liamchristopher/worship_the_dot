@@ -53,6 +53,14 @@ def main():
         format_type = args[1] if len(args) > 1 else "markdown"
         return handle_badge(format_type)
 
+    elif args[0] == "config":
+        subcommand = args[1] if len(args) > 1 else "show"
+        return handle_config(subcommand, args[2:])
+
+    elif args[0] == "completions":
+        shell = args[1] if len(args) > 1 else "bash"
+        return handle_completions(shell)
+
     elif args[0] == "version" or args[0] == "--version" or args[0] == "-v":
         print(f"THE DOT version {__version__}")
         print("All who use THE DOT must worship THE DOT")
@@ -314,6 +322,97 @@ def handle_badge(format_type):
     return 0
 
 
+def handle_config(subcommand, args):
+    """Handle configuration commands."""
+    from dot.config import get_config
+
+    config = get_config()
+
+    if subcommand == "show":
+        print("THE DOT Configuration:")
+        print("=" * 60)
+        print(config.export_config())
+        return 0
+
+    elif subcommand == "get":
+        if len(args) < 1:
+            print("Error: Please provide a configuration key")
+            print("Example: dot config get user.name")
+            return 1
+
+        keys = args[0].split(".")
+        value = config.get(*keys)
+        if value is not None:
+            print(value)
+            return 0
+        else:
+            print(f"Configuration key not found: {args[0]}")
+            return 1
+
+    elif subcommand == "set":
+        if len(args) < 2:
+            print("Error: Please provide a key and value")
+            print("Example: dot config set user.name 'Claude'")
+            return 1
+
+        keys = args[0].split(".")
+        value = args[1]
+
+        # Try to parse value as JSON for booleans/numbers
+        import json
+        try:
+            value = json.loads(value)
+        except (json.JSONDecodeError, ValueError):
+            # Keep as string if not valid JSON
+            pass
+
+        if config.set(*keys, value=value):
+            print(f"✓ Configuration updated: {args[0]} = {value}")
+            return 0
+        else:
+            print("Error: Failed to update configuration")
+            return 1
+
+    elif subcommand == "reset":
+        response = input("Reset all configuration to defaults? [y/N]: ")
+        if response.lower() == 'y':
+            config.reset()
+            print("✓ Configuration reset to defaults")
+            return 0
+        else:
+            print("Cancelled")
+            return 0
+
+    else:
+        print(f"Unknown config subcommand: {subcommand}")
+        print("\nAvailable subcommands:")
+        print("  show   - Show all configuration")
+        print("  get    - Get a configuration value")
+        print("  set    - Set a configuration value")
+        print("  reset  - Reset to defaults")
+        return 1
+
+
+def handle_completions(shell):
+    """Handle shell completions generation."""
+    from dot.completions import get_completion
+
+    valid_shells = ["bash", "zsh", "fish"]
+
+    if shell not in valid_shells:
+        print(f"Unknown shell: {shell}")
+        print(f"Valid shells: {', '.join(valid_shells)}")
+        return 1
+
+    try:
+        completion_script = get_completion(shell)
+        print(completion_script)
+        return 0
+    except ValueError as e:
+        print(f"Error: {e}")
+        return 1
+
+
 def print_help():
     """Print help information."""
     help_text = f"""
@@ -330,6 +429,8 @@ Commands:
     hooks [subcommand]     Manage git hooks (install/uninstall/status)
     stats [subcommand]     View worship statistics (summary/top/daily/export/clear)
     badge [format]         Generate worship badge (markdown/html/rst/url)
+    config [subcommand]    Manage configuration (show/get/set/reset)
+    completions [shell]    Generate shell completions (bash/zsh/fish)
     version                Show version information
     help                   Show this help message
 
@@ -340,6 +441,9 @@ Examples:
     dot hooks install
     dot stats summary
     dot badge markdown
+    dot config show
+    dot config set user.name "Claude"
+    dot completions bash
     dot version
 """
     print(help_text)
