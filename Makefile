@@ -24,6 +24,17 @@ coverage:
 lint:
 	ruff check dot/ tests/ --select E,F,W --ignore E501 || true
 
+.PHONY: rust-build rust-test compat
+
+rust-build:
+	cargo build --manifest-path rust/the-dot/Cargo.toml
+
+rust-test:
+	cargo test --manifest-path rust/the-dot/Cargo.toml
+
+compat: rust-build
+	python scripts/compat.py
+
 clean:
 	rm -rf build/
 	rm -rf dist/

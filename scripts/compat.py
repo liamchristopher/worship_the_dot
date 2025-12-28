@@ -11,6 +11,12 @@ def main(path="scripts/compat.yml"):
     spec = yaml.safe_load(open(path))
     py = spec["python_cli"]
     rs = spec["rust_cli"]
+    # Ensure Rust binary exists; if not, try to build quickly
+    try:
+        subprocess.check_call([rs[0], "--help"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    except Exception:
+        print("Building Rust CLI (debug) ...")
+        subprocess.check_call(["cargo", "build"], cwd="rust/the-dot")
     failures = 0
     for t in spec["tests"]:
         args = t["args"]
@@ -38,4 +44,3 @@ def main(path="scripts/compat.yml"):
 
 if __name__ == "__main__":
     main()
-
