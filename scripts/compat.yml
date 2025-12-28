@@ -38,3 +38,4 @@ tests:
     args: ["doctor"]
     exit: 1
     contains: "Repo: NOT A GIT REPOSITORY"
+    cwd: temp

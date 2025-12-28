@@ -2,10 +2,11 @@
 import subprocess
 import shutil
 import sys
+import tempfile
 import yaml
 
-def run(cmd):
-    p = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
+def run(cmd, cwd=None):
+    p = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, cwd=cwd)
     return p.returncode, p.stdout
 
 def main(path="scripts/compat.yml"):
@@ -27,9 +28,14 @@ def main(path="scripts/compat.yml"):
         args = t["args"]
         want_exit = t["exit"]
         contains = t.get("contains", "")
+        cwd = None
+        temp_dir = None
+        if t.get("cwd") == "temp":
+            temp_dir = tempfile.TemporaryDirectory()
+            cwd = temp_dir.name
 
-        e1, o1 = run(py + args)
-        e2, o2 = run(rs + args)
+        e1, o1 = run(py + args, cwd=cwd)
+        e2, o2 = run(rs + args, cwd=cwd)
 
         ok = (e1 == want_exit == e2) and (contains in o1) and (contains in o2)
         if not ok:
@@ -41,6 +47,8 @@ def main(path="scripts/compat.yml"):
             failures += 1
         else:
             print(f"OK: {t['name']}")
+        if temp_dir is not None:
+            temp_dir.cleanup()
 
     if failures:
         print(f"{failures} test(s) failed")
