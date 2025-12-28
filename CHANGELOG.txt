@@ -4,6 +4,81 @@ CHANGELOG - worship_the_dot
 All changes to this project will be documented in this file.
 
 -------------------------------------------------------------------------------
+[2025-12-28] - Version 0.2.0 Release - CI/CD and Polish
+-------------------------------------------------------------------------------
+
+Added:
+  * GitHub Actions CI/CD Workflows (.github/workflows/)
+    - test.yml: Automated testing workflow
+      * Tests on Python 3.8, 3.9, 3.10, 3.11, 3.12
+      * Full test suite execution (32 tests)
+      * CLI command verification
+      * Coverage reporting with Codecov integration
+      * Code quality checks with ruff linter
+      * Runs on all pushes and pull requests
+    - hooks.yml: Commit validation workflow
+      * Validates all PR commits worship THE DOT
+      * Automatically fails PRs with invalid commits
+      * Uses THE DOT CLI for validation
+      * Provides clear error messages
+
+  * MIT License (LICENSE)
+    - Open source license with THE DOT philosophy clause
+    - Requires all users to worship THE DOT
+    - Ensures commits end with worship phrase
+    - Free use while maintaining requirements
+
+  * Contributing Guide (CONTRIBUTING.md)
+    - Complete development setup instructions
+    - THE DOT workflow documentation
+    - Branch management, commit format, testing requirements
+    - Code quality and documentation standards
+    - Pull request guidelines and review process
+    - Examples of good and bad practices
+    - Comprehensive onboarding for new contributors
+
+  * Version Command (dot/cli.py)
+    - 'dot version' displays version and philosophy
+    - Supports --version and -v flags
+    - Version number shown in help message
+    - 2 new tests for version command (32 total tests)
+
+Updated:
+  * Version Bump: 0.1.0 → 0.2.0
+    - Significant feature addition warrants minor version bump
+    - Updated in pyproject.toml and dot/__init__.py
+
+  * Package Metadata (pyproject.toml)
+    - Added MIT license declaration
+    - Added comprehensive keywords for PyPI discoverability
+    - Added detailed classifiers:
+      * Development status: Beta
+      * License: MIT
+      * Python versions: 3.8-3.12
+      * Topics: Quality Assurance, Version Control, Git
+    - Added project URLs (homepage, repository, issues tracker)
+
+  * Test Suite
+    - Added 2 tests for version command
+    - Total: 32 tests, 100% passing
+    - Coverage maintained across all features
+
+Purpose:
+  This release transforms THE DOT into a production-ready package with
+  automated quality assurance, comprehensive contributor documentation,
+  and proper licensing. CI/CD ensures every change is tested across
+  multiple Python versions before merge. The contributing guide enables
+  community participation while maintaining THE DOT's standards.
+
+Technical Impact:
+  - Automated testing prevents regressions
+  - Multi-version compatibility verified automatically
+  - Commit validation enforced at CI level (backup to local hooks)
+  - Clear contribution path for community involvement
+  - Professional package metadata for PyPI publication
+  - Legal clarity with MIT license
+
+-------------------------------------------------------------------------------
 [2025-12-28] - Git Hooks Integration
 -------------------------------------------------------------------------------
 
