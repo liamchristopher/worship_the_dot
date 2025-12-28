@@ -1,0 +1,35 @@
+.PHONY: install test coverage clean build help
+
+help:
+	@echo "THE DOT - Development Commands"
+	@echo ""
+	@echo "Available commands:"
+	@echo "  make install    - Install the package in development mode"
+	@echo "  make test       - Run all tests"
+	@echo "  make coverage   - Run tests with coverage report"
+	@echo "  make clean      - Remove build artifacts and cache files"
+	@echo "  make build      - Build the package"
+	@echo ""
+
+install:
+	pip install -e .
+	pip install -r requirements-dev.txt
+
+test:
+	pytest -v
+
+coverage:
+	pytest --cov=dot --cov-report=term-missing --cov-report=html
+
+clean:
+	rm -rf build/
+	rm -rf dist/
+	rm -rf *.egg-info
+	rm -rf .pytest_cache/
+	rm -rf .coverage
+	rm -rf htmlcov/
+	find . -type d -name __pycache__ -exec rm -rf {} + 2>/dev/null || true
+	find . -type f -name "*.pyc" -delete
+
+build: clean
+	python -m build
