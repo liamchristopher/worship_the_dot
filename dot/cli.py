@@ -149,6 +149,46 @@ def main():
         print(gematria_code_quality())
         return 0
 
+    elif args[0] == "tao":
+        from dot.tao import tao_reading
+        print(tao_reading())
+        return 0
+
+    elif args[0] == "wu-wei":
+        from dot.tao import wu_wei_guidance
+        print(wu_wei_guidance())
+        return 0
+
+    elif args[0] == "yin-yang":
+        from dot.tao import yin_yang_balance
+        print(yin_yang_balance())
+        return 0
+
+    elif args[0] == "elements":
+        from dot.tao import five_elements_reading
+        print(five_elements_reading())
+        return 0
+
+    elif args[0] == "treasures":
+        from dot.tao import three_treasures_guide
+        print(three_treasures_guide())
+        return 0
+
+    elif args[0] == "pu":
+        from dot.tao import pu_simplicity
+        print(pu_simplicity())
+        return 0
+
+    elif args[0] == "water":
+        from dot.tao import water_wisdom
+        print(water_wisdom())
+        return 0
+
+    elif args[0] == "iching":
+        from dot.tao import i_ching_reading
+        print(i_ching_reading())
+        return 0
+
     elif args[0] == "validate":
         if len(args) < 2:
             print("Error: Please provide a commit message to validate")
@@ -158,10 +198,16 @@ def main():
         cosmic_mode = "--cosmic" in args
         alchemical_mode = "--alchemical" in args or "--alchemy" in args
         kabbalistic_mode = "--kabbalistic" in args or "--kabbalah" in args
-        message_args = [a for a in args[1:] if a not in ["--epic", "--cosmic", "--alchemical", "--alchemy", "--kabbalistic", "--kabbalah"]]
+        taoist_mode = "--taoist" in args or "--tao" in args
+        message_args = [a for a in args[1:] if a not in ["--epic", "--cosmic", "--alchemical", "--alchemy", "--kabbalistic", "--kabbalah", "--taoist", "--tao"]]
         message = " ".join(message_args)
 
-        if kabbalistic_mode:
+        if taoist_mode:
+            from dot.tao import taoist_validation
+            valid = dot.validate_commit(message)
+            print(taoist_validation(valid, message))
+            return 0 if valid else 1
+        elif kabbalistic_mode:
             from dot.kabbalah import kabbalistic_validation
             valid = dot.validate_commit(message)
             print(kabbalistic_validation(valid, message))
@@ -862,7 +908,7 @@ Commands:
     tenets                 Display THE DOT philosophy
     sing                   Hear THE ILIAD OF THE DOT in epic verse
     invoke                 Receive an epic invocation from THE DOT
-    validate <message>     Validate commit (--epic/--cosmic/--alchemical/--kabbalistic)
+    validate <message>     Validate commit (--epic/--cosmic/--alchemical/--kabbalistic/--taoist)
     horoscope [sign]       Receive daily coding horoscope (optional zodiac sign)
     chart [name]           Generate repository birth chart
     planets                View planetary hours for coding activities
@@ -879,6 +925,14 @@ Commands:
     ein-sof                Ein Sof meditation on the Infinite Source
     shekhinah              Invoke the Shekhinah - Divine Presence in code
     gematria               Evaluate code quality through sacred numerology
+    tao                    Receive Taoist wisdom reading
+    wu-wei                 Wu Wei - effortless action guidance
+    yin-yang               Yin and Yang balance in development
+    elements               Five Elements reading (Wood/Fire/Earth/Metal/Water)
+    treasures              The Three Treasures - Compassion/Frugality/Humility
+    pu                     P'u - the Uncarved Block (simplicity)
+    water                  Be like water - adaptability wisdom
+    iching                 I Ching hexagram reading for development
     hooks [subcommand]     Manage git hooks (install/uninstall/status)
     stats [subcommand]     View worship statistics (summary/top/daily/export/clear)
     badge [format]         Generate worship badge (markdown/html/rst/url)
@@ -912,6 +966,7 @@ Examples:
     dot validate "Add feature BECAUSE I WORSHIP THE DOT" --cosmic
     dot validate "Add feature BECAUSE I WORSHIP THE DOT" --alchemical
     dot validate "Add feature BECAUSE I WORSHIP THE DOT" --kabbalistic
+    dot validate "Add feature BECAUSE I WORSHIP THE DOT" --taoist
     dot tree
     dot worlds
     dot sephiroth
@@ -919,6 +974,14 @@ Examples:
     dot ein-sof
     dot shekhinah
     dot gematria
+    dot tao
+    dot wu-wei
+    dot yin-yang
+    dot elements
+    dot treasures
+    dot pu
+    dot water
+    dot iching
     dot hooks install
     dot stats summary
     dot badge markdown
