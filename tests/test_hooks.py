@@ -9,25 +9,44 @@ import pytest
 class TestHooksCommand:
     """Test suite for hooks CLI commands."""
 
-    @patch('dot.cli.subprocess.check_output')
-    @patch('dot.cli.Path')
-    @patch('dot.cli.shutil.copy2')
-    def test_hooks_install_success(self, mock_copy, mock_path, mock_subprocess):
-        """Test successful hook installation."""
-        from dot.cli import install_hooks
+    def test_hooks_install_success(self, tmp_path, monkeypatch):
+        """Test successful hook installation end-to-end into a temp git dir."""
+        from dot.cli import install_hooks, check_hooks_status, uninstall_hooks
+        from pathlib import Path as SysPath
 
-        # Mock git repository check
-        mock_subprocess.return_value = "/fake/repo/.git\n"
+        # Create a fake git directory structure
+        git_dir = tmp_path / ".git"
+        hooks_dir = git_dir / "hooks"
+        hooks_dir.mkdir(parents=True)
 
-        # Mock path operations
-        mock_hooks_dir = MagicMock()
-        mock_source_dir = MagicMock()
-        mock_source_dir.exists.return_value = True
+        # Point CLI to our fake git dir
+        def fake_rev_parse(cmd, stderr=None, text=None):
+            assert cmd[:2] == ["git", "rev-parse"]
+            return str(git_dir) + "\n"
 
-        with patch('sys.stdout', new=StringIO()) as mock_stdout:
-            # This would need more detailed mocking to work properly
-            # For now, we'll test the basic flow
-            pass
+        monkeypatch.setattr("dot.cli.subprocess.check_output", fake_rev_parse)
+
+        # Install hooks
+        with patch('sys.stdout', new=StringIO()):
+            exit_code = install_hooks()
+
+        assert exit_code == 0
+        assert (hooks_dir / "commit-msg").exists()
+        assert (hooks_dir / "prepare-commit-msg").exists()
+
+        # Status should report installed
+        with patch('sys.stdout', new=StringIO()) as out:
+            status_code = check_hooks_status()
+            output = out.getvalue()
+        assert status_code == 0
+        assert "Installed" in output
+
+        # Uninstall hooks and ensure removal
+        with patch('sys.stdout', new=StringIO()):
+            un_code = uninstall_hooks()
+        assert un_code == 0
+        assert not (hooks_dir / "commit-msg").exists()
+        assert not (hooks_dir / "prepare-commit-msg").exists()
 
     @patch('dot.cli.subprocess.check_output')
     def test_hooks_install_not_git_repo(self, mock_subprocess):
