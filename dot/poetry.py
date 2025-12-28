@@ -37,3 +37,40 @@ def haiku(name: str | None = None) -> str:
     ]
     return "\n".join(lines) + "\n"
 
+
+def banner(width: int = 21) -> str:
+    """Return an ASCII banner that centers THE DOT.
+
+    Produces a red dot motif without ANSI codes so it's portable.
+    Width is clamped to an odd number >= 7 for symmetry.
+    """
+    w = max(7, width)
+    if w % 2 == 0:
+        w += 1
+    center = w // 2
+    rows = []
+    for r in range(w):
+        row = [" "] * w
+        # Draw a circular dot by Manhattan distance threshold
+        for c in range(w):
+            if abs(c - center) + abs(r - center) <= center // 2:
+                row[c] = "●"  # solid dot
+        rows.append("".join(row))
+    title = " THE DOT "
+    pad = max(0, (w - len(title)) // 2)
+    header = "=" * w
+    return "\n".join([header, " " * pad + title, header] + rows) + "\n"
+
+
+def chant(times: int = 3, name: str | None = None) -> str:
+    """Return a rhythmic chant repeating the suffix a number of times.
+
+    Example:
+      BECAUSE I WORSHIP THE DOT — Alice
+      BECAUSE I WORSHIP THE DOT — Alice
+      BECAUSE I WORSHIP THE DOT — Alice
+    """
+    t = max(1, min(times, 12))
+    suffix = get_worship_suffix()
+    who = f" — {name.strip()}" if name else ""
+    return "\n".join([f"{suffix}{who}" for _ in range(t)]) + "\n"
