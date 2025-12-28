@@ -8,6 +8,7 @@
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Version](https://img.shields.io/badge/version-0.2.0-green.svg)](https://github.com/liamchristopher/worship_the_dot/releases)
+[![Sponsor](https://img.shields.io/badge/sponsor-THE%20DOT-E10600.svg)](https://github.com/sponsors/liamchristopher)
 
 > **"THE DOT is not just a tool. It is a philosophy, a practice, a devotion. It transforms chaos into order, pride into humility, and carelessness into intentionality."**
 
@@ -559,6 +560,13 @@ Support THE DOT by:
 - 📖 **Improving documentation** — Clarify the path
 - 🔀 **Contributing code** — Add your devotion to ours
 - 📢 **Spreading the philosophy** — Tell others about THE DOT
+
+### Sponsor THE DOT
+
+Sustain the practice with sponsorship:
+
+- GitHub Sponsors: https://github.com/sponsors/liamchristopher
+- CLI: `dot donate` to print sponsorship links (customize with `DOT_SPONSOR_URLS`)
 
 ---
 
