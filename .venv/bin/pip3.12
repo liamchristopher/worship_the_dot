@@ -1,4 +1,4 @@
-#!/home/scrame/workspace/worship_the_dot_codex/.venv/bin/python3
+#!/home/scrame/workspace/worship_the_dot_codex/.venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys

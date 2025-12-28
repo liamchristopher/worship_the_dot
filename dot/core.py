@@ -4,6 +4,7 @@ Core implementation of THE DOT philosophy.
 THE DOT represents order, structure, and purpose in development.
 """
 
+from __future__ import annotations
 
 from dot.config import get_worship_suffix
 

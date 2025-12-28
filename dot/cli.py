@@ -2,6 +2,8 @@
 Command-line interface for THE DOT.
 """
 
+from __future__ import annotations
+
 import os
 import sys
 import shutil
