@@ -39,6 +39,16 @@ jobs:
       contents: read
       pull-requests: read
     steps:
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install THE DOT CLI
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e .
+
       - name: Check push commits
         if: github.event_name == 'push'
         env:
