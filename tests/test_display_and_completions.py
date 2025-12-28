@@ -52,3 +52,56 @@ def test_display_basic_output():
     # Global accessor
     gd = get_display(colors=False)
     assert isinstance(gd, Display)
+
+
+def test_display_with_colors_enabled():
+    """Test Display with colors enabled to cover colorize with colors."""
+    from dot.display import Display, Colors
+
+    d = Display(colors_enabled=True)
+
+    # Force colors_enabled to True to test line 54
+    # (normally it's False in test environment due to _supports_color check)
+    d.colors_enabled = True
+
+    # Test internal _colorize method directly to ensure line 54 is covered
+    colorized = d._colorize("Test", Colors.BRIGHT_GREEN)
+    assert "Test" in colorized
+    assert Colors.RESET in colorized
+    assert Colors.BRIGHT_GREEN in colorized
+
+    # Also test through public methods
+    with patch('sys.stdout', new=StringIO()) as out:
+        d.success("Success")
+        d.error("Error")
+        d.warning("Warning")
+        s = out.getvalue()
+
+    # When colors are enabled, output should contain color codes or be non-empty
+    assert len(s) > 0
+    assert "Success" in s
+
+
+def test_display_table_row_without_widths():
+    """Test table_row without specifying widths."""
+    from dot.display import Display
+
+    d = Display(colors_enabled=False)
+    with patch('sys.stdout', new=StringIO()) as out:
+        d.table_row("Column1", "Column2", "Column3")
+        s = out.getvalue()
+
+    assert "Column1" in s
+    assert "Column2" in s
+    assert "Column3" in s
+
+
+def test_display_supports_color():
+    """Test _supports_color method."""
+    from dot.display import Display
+
+    d = Display(colors_enabled=False)
+    # Test the internal method
+    supports = d._supports_color()
+    # Should return a boolean
+    assert isinstance(supports, bool)

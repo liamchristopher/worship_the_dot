@@ -19,6 +19,13 @@ def test_garden_catalog_basics():
     suggest = suggest_tools('move soil quickly')
     assert any(n in suggest for n in ('Shovel', 'Wheelbarrow'))
 
+    # Edge cases for coverage
+    assert get_tool('') is None  # Empty name
+    assert get_tool(None) is None  # None name
+    assert describe_tool('nonexistent_tool') is None  # Non-existent tool
+    assert suggest_tools('') == []  # Empty task
+    assert suggest_tools(None) == []  # None task
+
 
 def test_cli_garden_list_info_suggest():
     from dot.cli import main
