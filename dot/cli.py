@@ -379,10 +379,16 @@ def main():
         confucian_mode = "--confucian" in args
         hindu_mode = "--hindu" in args or "--vedic" in args
         shinto_mode = "--shinto" in args or "--kami" in args
-        message_args = [a for a in args[1:] if a not in ["--epic", "--cosmic", "--alchemical", "--alchemy", "--kabbalistic", "--kabbalah", "--taoist", "--tao", "--buddhist", "--dharma", "--stoic", "--confucian", "--hindu", "--vedic", "--shinto", "--kami"]]
+        zen_mode = "--zen" in args
+        message_args = [a for a in args[1:] if a not in ["--epic", "--cosmic", "--alchemical", "--alchemy", "--kabbalistic", "--kabbalah", "--taoist", "--tao", "--buddhist", "--dharma", "--stoic", "--confucian", "--hindu", "--vedic", "--shinto", "--kami", "--zen"]]
         message = " ".join(message_args)
 
-        if shinto_mode:
+        if zen_mode:
+            from dot.zen import zen_validation
+            valid = dot.validate_commit(message)
+            print(zen_validation(valid, message))
+            return 0 if valid else 1
+        elif shinto_mode:
             from dot.shinto import shinto_validation
             valid = dot.validate_commit(message)
             print(shinto_validation(valid, message))
@@ -463,6 +469,10 @@ def main():
     elif args[0] == "shinto":
         sub = args[1] if len(args) > 1 else "norito"
         return handle_shinto(sub, args[2:])
+
+    elif args[0] == "zen":
+        sub = args[1] if len(args) > 1 else "reading"
+        return handle_zen(sub, args[2:])
 
     elif args[0] == "garden":
         sub = args[1] if len(args) > 1 else "list"
@@ -1085,6 +1095,69 @@ def handle_shinto(subcommand, args):
     print("  kotodama             Spirit of words")
     print("  musubi               Creative power")
     print("  reading              Random Shinto wisdom")
+    return 1
+
+
+def handle_zen(subcommand, args):
+    """Handle Zen teachings and practices."""
+    from dot.zen import (
+        zazen_teaching, koan_teaching, satori_teaching, mushin_teaching,
+        shoshin_teaching, wabi_sabi_teaching, ma_teaching, enso_teaching,
+        zen_saying, zen_reading
+    )
+
+    if subcommand == "zazen":
+        print(zazen_teaching())
+        return 0
+
+    if subcommand == "koan":
+        print(koan_teaching())
+        return 0
+
+    if subcommand == "satori":
+        print(satori_teaching())
+        return 0
+
+    if subcommand == "mushin":
+        print(mushin_teaching())
+        return 0
+
+    if subcommand == "shoshin":
+        print(shoshin_teaching())
+        return 0
+
+    if subcommand == "wabi-sabi":
+        print(wabi_sabi_teaching())
+        return 0
+
+    if subcommand == "ma":
+        print(ma_teaching())
+        return 0
+
+    if subcommand == "enso":
+        print(enso_teaching())
+        return 0
+
+    if subcommand == "saying":
+        print(zen_saying())
+        return 0
+
+    if subcommand == "reading":
+        print(zen_reading())
+        return 0
+
+    print(f"Unknown zen subcommand: {subcommand}")
+    print("\nAvailable subcommands:")
+    print("  zazen                Sitting meditation practice")
+    print("  koan                 Paradoxical riddles for awakening")
+    print("  satori               Sudden enlightenment teaching")
+    print("  mushin               No-mind state")
+    print("  shoshin              Beginner's mind")
+    print("  wabi-sabi            Beauty in imperfection")
+    print("  ma                   Negative space and pauses")
+    print("  enso                 Circle of enlightenment")
+    print("  saying               Random Zen saying")
+    print("  reading              Random Zen wisdom")
     return 1
 
 
