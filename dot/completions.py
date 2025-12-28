@@ -18,7 +18,7 @@ _dot_completion() {
     prev="${COMP_WORDS[COMP_CWORD-1]}"
 
     # Main commands
-    commands="worship tenets sing invoke validate horoscope chart planets moon element opus operations hermetic stone tree worlds sephiroth tikkun ein-sof shekhinah gematria tao wu-wei yin-yang elements treasures pu water iching dharma truths path marks middle poisons mindful stoic virtues control disciplines negative fate mortality logos circles hooks stats badge poem tarot shinto garden config completions version help"
+    commands="worship tenets sing invoke validate horoscope chart planets moon element opus operations hermetic stone tree worlds sephiroth tikkun ein-sof shekhinah gematria tao wu-wei yin-yang elements treasures pu water iching dharma truths path marks middle poisons mindful stoic virtues control disciplines negative fate mortality logos circles confucian wuchang names filial junzi relationships cultivation mean analects hooks stats badge poem tarot shinto garden config completions version help"
 
     # Subcommands for hooks
     hooks_cmds="install uninstall status"
@@ -123,6 +123,15 @@ _dot() {
         'mortality:Memento Mori - remember death'
         'logos:Logos - universal reason'
         'circles:Oikeiosis - expanding circle of care'
+        'confucian:Receive Confucian wisdom reading'
+        'wuchang:The Five Constant Virtues'
+        'names:Rectification of Names'
+        'filial:Filial Piety - respect for legacy code'
+        'junzi:The Superior Person'
+        'relationships:The Five Relationships'
+        'cultivation:Self-Cultivation'
+        'mean:Doctrine of the Mean'
+        'analects:Teachings from the Analects'
         'hooks:Manage git hooks'
         'stats:View worship statistics'
         'badge:Generate worship badge'
@@ -248,6 +257,15 @@ complete -c dot -n "__fish_use_subcommand" -a "fate" -d "Amor Fati - love of fat
 complete -c dot -n "__fish_use_subcommand" -a "mortality" -d "Memento Mori - remember death"
 complete -c dot -n "__fish_use_subcommand" -a "logos" -d "Logos - universal reason"
 complete -c dot -n "__fish_use_subcommand" -a "circles" -d "Oikeiosis - expanding circle of care"
+complete -c dot -n "__fish_use_subcommand" -a "confucian" -d "Receive Confucian wisdom reading"
+complete -c dot -n "__fish_use_subcommand" -a "wuchang" -d "The Five Constant Virtues"
+complete -c dot -n "__fish_use_subcommand" -a "names" -d "Rectification of Names"
+complete -c dot -n "__fish_use_subcommand" -a "filial" -d "Filial Piety - respect for legacy code"
+complete -c dot -n "__fish_use_subcommand" -a "junzi" -d "The Superior Person"
+complete -c dot -n "__fish_use_subcommand" -a "relationships" -d "The Five Relationships"
+complete -c dot -n "__fish_use_subcommand" -a "cultivation" -d "Self-Cultivation"
+complete -c dot -n "__fish_use_subcommand" -a "mean" -d "Doctrine of the Mean"
+complete -c dot -n "__fish_use_subcommand" -a "analects" -d "Teachings from the Analects"
 complete -c dot -n "__fish_use_subcommand" -a "hooks" -d "Manage git hooks"
 complete -c dot -n "__fish_use_subcommand" -a "stats" -d "View worship statistics"
 complete -c dot -n "__fish_use_subcommand" -a "badge" -d "Generate worship badge"
