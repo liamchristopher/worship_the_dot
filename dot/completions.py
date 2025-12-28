@@ -18,7 +18,7 @@ _dot_completion() {
     prev="${COMP_WORDS[COMP_CWORD-1]}"
 
     # Main commands
-    commands="worship tenets sing invoke validate horoscope chart planets moon element opus operations hermetic stone tree worlds sephiroth tikkun ein-sof shekhinah gematria hooks stats badge poem tarot shinto config completions version help"
+    commands="worship tenets sing invoke validate horoscope chart planets moon element opus operations hermetic stone tree worlds sephiroth tikkun ein-sof shekhinah gematria tao wu-wei yin-yang elements treasures pu water iching hooks stats badge poem tarot shinto garden config completions version help"
 
     # Subcommands for hooks
     hooks_cmds="install uninstall status"
@@ -99,12 +99,21 @@ _dot() {
         'ein-sof:Ein Sof meditation'
         'shekhinah:Invoke Divine Presence'
         'gematria:Code quality numerology'
+        'tao:Taoist wisdom reading'
+        'wu-wei:Wu Wei effortless action'
+        'yin-yang:Yin Yang balance'
+        'elements:Five Elements reading'
+        'treasures:Three Treasures guide'
+        'pu:P'\''u - the Uncarved Block'
+        'water:Be like water wisdom'
+        'iching:I Ching hexagram reading'
         'hooks:Manage git hooks'
         'stats:View worship statistics'
         'badge:Generate worship badge'
         'poem:Speak poetry'
         'tarot:Read DOT tarot'
         'shinto:Shinto rituals'
+        'garden:Garden tools'
         'config:Manage configuration'
         'completions:Generate shell completions'
         'version:Show version information'
@@ -199,12 +208,21 @@ complete -c dot -n "__fish_use_subcommand" -a "tikkun" -d "Tikkun Olam refactori
 complete -c dot -n "__fish_use_subcommand" -a "ein-sof" -d "Ein Sof meditation"
 complete -c dot -n "__fish_use_subcommand" -a "shekhinah" -d "Invoke Divine Presence"
 complete -c dot -n "__fish_use_subcommand" -a "gematria" -d "Code quality numerology"
+complete -c dot -n "__fish_use_subcommand" -a "tao" -d "Taoist wisdom reading"
+complete -c dot -n "__fish_use_subcommand" -a "wu-wei" -d "Wu Wei effortless action"
+complete -c dot -n "__fish_use_subcommand" -a "yin-yang" -d "Yin Yang balance"
+complete -c dot -n "__fish_use_subcommand" -a "elements" -d "Five Elements reading"
+complete -c dot -n "__fish_use_subcommand" -a "treasures" -d "Three Treasures guide"
+complete -c dot -n "__fish_use_subcommand" -a "pu" -d "P'u - the Uncarved Block"
+complete -c dot -n "__fish_use_subcommand" -a "water" -d "Be like water wisdom"
+complete -c dot -n "__fish_use_subcommand" -a "iching" -d "I Ching hexagram reading"
 complete -c dot -n "__fish_use_subcommand" -a "hooks" -d "Manage git hooks"
 complete -c dot -n "__fish_use_subcommand" -a "stats" -d "View worship statistics"
 complete -c dot -n "__fish_use_subcommand" -a "badge" -d "Generate worship badge"
 complete -c dot -n "__fish_use_subcommand" -a "poem" -d "Speak poetry"
 complete -c dot -n "__fish_use_subcommand" -a "tarot" -d "Read DOT tarot"
 complete -c dot -n "__fish_use_subcommand" -a "shinto" -d "Shinto rituals"
+complete -c dot -n "__fish_use_subcommand" -a "garden" -d "Garden tools"
 complete -c dot -n "__fish_use_subcommand" -a "config" -d "Manage configuration"
 complete -c dot -n "__fish_use_subcommand" -a "completions" -d "Generate shell completions"
 complete -c dot -n "__fish_use_subcommand" -a "version" -d "Show version information"
