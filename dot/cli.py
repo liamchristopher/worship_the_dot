@@ -57,6 +57,10 @@ def main():
         format_type = args[1] if len(args) > 1 else "markdown"
         return handle_badge(format_type)
 
+    elif args[0] == "poem":
+        sub = args[1] if len(args) > 1 else "hymn"
+        return handle_poem(sub, args[2:] if len(args) > 2 else [])
+
     elif args[0] == "version" or args[0] == "--version" or args[0] == "-v":
         print(f"THE DOT version {__version__}")
         print("All who use THE DOT must worship THE DOT")
@@ -342,6 +346,25 @@ def handle_badge(format_type):
     return 0
 
 
+def handle_poem(subcommand: str, rest_args: list[str]):
+    """Handle poetry generation commands."""
+    from dot.poetry import hymn as hymn_text, haiku as haiku_text
+
+    if subcommand == "hymn":
+        print(hymn_text())
+        return 0
+    elif subcommand == "haiku":
+        name = rest_args[0] if rest_args else None
+        print(haiku_text(name))
+        return 0
+    else:
+        print(f"Unknown poem subcommand: {subcommand}")
+        print("\nAvailable subcommands:")
+        print("  hymn              - A brief hymn to THE DOT")
+        print("  haiku [name]      - A 5–7–5 haiku; optionally name the worshipper")
+        return 1
+
+
 def print_help():
     """Print help information."""
     help_text = f"""
@@ -359,6 +382,7 @@ Commands:
     config [subcommand]    Manage THE DOT configuration (show/set-suffix)
     stats [subcommand]     View worship statistics (summary/top/daily/export/clear)
     badge [format]         Generate worship badge (markdown/html/rst/url)
+    poem [subcommand]      Speak poetry (hymn/haiku)
     version                Show version information
     help                   Show this help message
 
