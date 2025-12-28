@@ -1,5 +1,11 @@
 CHANGELOG - worship_the_dot
 -------------------------------------------------------------------------------
+[2025-12-28T02:10:08-08:00] 106955f feat(cli): backstory/init/doctor
+  - backstory prints an ethereal origin
+  - init installs hooks + writes .dot.ini if missing
+  - doctor checks repo, branch, hooks, suffix
+
+-------------------------------------------------------------------------------
 [2025-12-28T02:08:03-08:00] 588a396 docs: ethereal backstory woven through docs
   - Added docs/BACKSTORY.md (timeless, ethereal origin of THE DOT)
   - Linked and summarized backstory in README, WORSHIP, RITUALS, CLI, CONTRIBUTING, AGENTS

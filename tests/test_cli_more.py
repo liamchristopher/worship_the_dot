@@ -96,3 +96,32 @@ def test_donate_command_outputs_links(monkeypatch):
     assert exit_code == 0
     assert 'Support THE DOT' in s
     assert 'https://example.com/support' in s
+
+
+def test_backstory_and_doctor_init_commands(monkeypatch):
+    from dot.cli import main
+
+    # backstory prints narrative
+    with patch('sys.argv', ['dot', 'backstory']):
+        with patch('sys.stdout', new=StringIO()) as out:
+            exit_code = main(); s = out.getvalue()
+    assert exit_code == 0 and 'intention' in s.lower()
+
+    # doctor not in repo: mock failure
+    with patch('sys.argv', ['dot', 'doctor']):
+        with patch('sys.stdout', new=StringIO()) as out:
+            # simulate not-a-repo by forcing error in subprocess
+            from dot import cli as dcli
+            def boom(*a, **k):
+                raise Exception('no git')
+            monkeypatch.setattr(dcli.subprocess, 'check_output', boom)
+            exit_code = main(); s = out.getvalue()
+    assert exit_code == 1 and 'NOT A GIT REPOSITORY' in s
+
+    # init uses install_hooks and config writer; simulate repo via existing functions
+    with patch('sys.argv', ['dot', 'init']):
+        with patch('sys.stdout', new=StringIO()) as out:
+            # monkeypatch install_hooks to no-op success
+            monkeypatch.setattr('dot.cli.install_hooks', lambda: 0)
+            exit_code = main(); s = out.getvalue()
+    assert exit_code == 0 and 'Initialization complete' in s
