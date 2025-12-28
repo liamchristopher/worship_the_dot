@@ -395,6 +395,25 @@ dot config set-suffix "CUSTOM SUFFIX"    # Custom worship phrase
 dot completions bash|zsh|fish            # Shell completions
 ```
 
+### Rust Variant
+
+Prefer Rust? A minimal CLI is available in `rust/the-dot`.
+
+Build:
+```bash
+cd rust/the-dot
+cargo build
+```
+
+Run:
+```bash
+cargo run -- worship "Rustacean"
+cargo run -- tenets
+cargo run -- validate "Refactor BECAUSE I WORSHIP THE DOT"
+```
+
+Configure the suffix using `DOT_WORSHIP_SUFFIX` or `.dot.ini` (`[dot] worship_suffix`). CI builds and tests the Rust crate on every branch.
+
 ---
 
 ## 🎓 The Workflow — Development as Devotion
