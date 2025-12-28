@@ -8,7 +8,9 @@ fn bin() -> Command {
 
 #[test]
 fn init_not_repo_errors() {
+    let dir = tempfile::tempdir().unwrap();
     let mut cmd = bin();
+    cmd.current_dir(dir.path());
     cmd.arg("init");
     cmd.assert().failure().stdout(predicate::str::contains("Not in a git repository"));
 }
@@ -34,4 +36,3 @@ fn init_creates_dot_ini_in_repo() {
     let content = fs::read_to_string(ini).unwrap();
     assert!(content.contains("worship_suffix = BECAUSE I WORSHIP THE DOT"));
 }
-
