@@ -18,7 +18,7 @@ _dot_completion() {
     prev="${COMP_WORDS[COMP_CWORD-1]}"
 
     # Main commands
-    commands="worship tenets sing invoke validate horoscope chart planets moon element opus operations hermetic stone tree worlds sephiroth tikkun ein-sof shekhinah gematria tao wu-wei yin-yang elements treasures pu water iching dharma truths path marks middle poisons mindful stoic virtues control disciplines negative fate mortality logos circles confucian wuchang names filial junzi relationships cultivation mean analects hindu vedic karma yogas purusharthas gunas maya atman gita moksha hooks stats badge poem tarot shinto garden config completions version help"
+    commands="worship tenets sing invoke validate horoscope chart planets moon element opus operations hermetic stone tree worlds sephiroth tikkun ein-sof shekhinah gematria tao wu-wei yin-yang elements treasures pu water iching dharma truths path marks middle poisons mindful stoic virtues control disciplines negative fate mortality logos circles confucian wuchang names filial junzi relationships cultivation mean analects hindu vedic karma yogas purusharthas gunas maya atman gita moksha hooks stats badge poem tarot shinto christian garden config completions version help"
 
     # Subcommands for hooks
     hooks_cmds="install uninstall status"
@@ -37,6 +37,9 @@ _dot_completion() {
 
     # Subcommands for shinto
     shinto_cmds="norito omikuji harai ema kami virtues misogi kannagara torii matsuri kotodama musubi reading"
+
+    # Subcommands for christian
+    christian_cmds="hesychasm desert lectio dark-night cloud theosis union heart reading"
 
     case "${prev}" in
         dot)
@@ -65,6 +68,10 @@ _dot_completion() {
             ;;
         shinto)
             COMPREPLY=( $(compgen -W "${shinto_cmds}" -- ${cur}) )
+            return 0
+            ;;
+        christian)
+            COMPREPLY=( $(compgen -W "${christian_cmds}" -- ${cur}) )
             return 0
             ;;
     esac
@@ -155,6 +162,7 @@ _dot() {
         'poem:Speak poetry'
         'tarot:Read DOT tarot'
         'shinto:Shinto - Way of the Kami'
+        'christian:Christian Mysticism - Way of Union'
         'garden:Garden tools'
         'config:Manage configuration'
         'completions:Generate shell completions'
@@ -212,6 +220,18 @@ _dot() {
         'reading:Random Shinto wisdom'
     )
 
+    christian_cmds=(
+        'hesychasm:Inner stillness and Jesus Prayer'
+        'desert:Wisdom of the Desert Fathers'
+        'lectio:Lectio Divina - divine reading'
+        'dark-night:Dark Night of the Soul'
+        'cloud:Cloud of Unknowing'
+        'theosis:Deification - becoming divine'
+        'union:Mystical union with the Divine'
+        'heart:Sacred Heart - love as center'
+        'reading:Random mystical wisdom'
+    )
+
     case "$words[2]" in
         hooks)
             _describe 'hooks commands' hooks_cmds
@@ -230,6 +250,9 @@ _dot() {
             ;;
         shinto)
             _describe 'shinto commands' shinto_cmds
+            ;;
+        christian)
+            _describe 'christian commands' christian_cmds
             ;;
         *)
             _describe 'commands' commands
@@ -318,6 +341,7 @@ complete -c dot -n "__fish_use_subcommand" -a "badge" -d "Generate worship badge
 complete -c dot -n "__fish_use_subcommand" -a "poem" -d "Speak poetry"
 complete -c dot -n "__fish_use_subcommand" -a "tarot" -d "Read DOT tarot"
 complete -c dot -n "__fish_use_subcommand" -a "shinto" -d "Shinto - Way of the Kami"
+complete -c dot -n "__fish_use_subcommand" -a "christian" -d "Christian Mysticism - Way of Union"
 complete -c dot -n "__fish_use_subcommand" -a "garden" -d "Garden tools"
 complete -c dot -n "__fish_use_subcommand" -a "config" -d "Manage configuration"
 complete -c dot -n "__fish_use_subcommand" -a "completions" -d "Generate shell completions"
@@ -367,6 +391,17 @@ complete -c dot -n "__fish_seen_subcommand_from shinto" -a "matsuri" -d "Celebra
 complete -c dot -n "__fish_seen_subcommand_from shinto" -a "kotodama" -d "Spirit of words"
 complete -c dot -n "__fish_seen_subcommand_from shinto" -a "musubi" -d "Creative power"
 complete -c dot -n "__fish_seen_subcommand_from shinto" -a "reading" -d "Random Shinto wisdom"
+
+# Christian mysticism subcommands
+complete -c dot -n "__fish_seen_subcommand_from christian" -a "hesychasm" -d "Inner stillness and Jesus Prayer"
+complete -c dot -n "__fish_seen_subcommand_from christian" -a "desert" -d "Wisdom of the Desert Fathers"
+complete -c dot -n "__fish_seen_subcommand_from christian" -a "lectio" -d "Lectio Divina - divine reading"
+complete -c dot -n "__fish_seen_subcommand_from christian" -a "dark-night" -d "Dark Night of the Soul"
+complete -c dot -n "__fish_seen_subcommand_from christian" -a "cloud" -d "Cloud of Unknowing"
+complete -c dot -n "__fish_seen_subcommand_from christian" -a "theosis" -d "Deification - becoming divine"
+complete -c dot -n "__fish_seen_subcommand_from christian" -a "union" -d "Mystical union with the Divine"
+complete -c dot -n "__fish_seen_subcommand_from christian" -a "heart" -d "Sacred Heart - love as center"
+complete -c dot -n "__fish_seen_subcommand_from christian" -a "reading" -d "Random mystical wisdom"
 """
 
 

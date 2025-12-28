@@ -74,6 +74,75 @@ Note: Earlier sections below follow the previous summary style and are
 retained for historical accuracy. New entries must use the format above.
 
 -------------------------------------------------------------------------------
+[2025-12-28] - Christian Mysticism - The Way of Union! ✟
+-------------------------------------------------------------------------------
+
+Added:
+  * Comprehensive Christian Mysticism Philosophy Module (new dot/christian.py - 1,156 lines)
+    - Hesychasm (ἡσυχασμός) - Inner stillness and the Jesus Prayer: Continuous prayer,
+      breath awareness, silent contemplation
+    - Desert Fathers (Πατέρες τῆς ἐρήμου) - Wisdom from the Egyptian desert: Radical
+      simplicity, solitude, spiritual combat against demons of acedia, vainglory,
+      pride, and anger
+    - Lectio Divina - Divine reading: Four stages of contemplative reading - Lectio,
+      Meditatio, Oratio, Contemplatio applied to code review
+    - Dark Night of the Soul (Noche Oscura) - Purification of St. John of the Cross:
+      Active and passive nights of senses and spirit, transformation through darkness
+    - Cloud of Unknowing - Apophatic mysticism: Via negativa, centering prayer, entering
+      the cloud of unknowing, knowing through not-knowing
+    - Theosis (θέωσις) - Deification: Three-stage path of purification, illumination,
+      and union; becoming divine through grace
+    - Mystical Union (Unio Mystica) - Teresa of Avila's Interior Castle: Seven mansions
+      from beginner to spiritual marriage, complete unity with the Divine
+    - Sacred Heart (Cor Jesu Sacratissimum) - Love as center: Heart-centered development,
+      daily examen, examination of conscience, litany of the Sacred Heart
+
+  * CLI Commands (9 new commands under 'dot christian'):
+    - 'christian' - Root command (defaults to 'reading')
+    - 'hesychasm' - Inner stillness and Jesus Prayer practice
+    - 'desert' - Wisdom of the Desert Fathers and Mothers
+    - 'lectio' - Lectio Divina divine reading method
+    - 'dark-night' - Dark Night of the Soul purification
+    - 'cloud' - Cloud of Unknowing apophatic mysticism
+    - 'theosis' - Deification and becoming divine
+    - 'union' - Mystical union with the Divine
+    - 'heart' - Sacred Heart and love-centered practice
+    - 'reading' - Random Christian mysticism wisdom
+
+  * Wisdom Readings:
+    - Quotes from 12 Christian mystics: Meister Eckhart, Teresa of Avila, John of the
+      Cross, Julian of Norwich, Thomas Merton, Pseudo-Dionysius, Evagrius Ponticus,
+      Brother Lawrence, Catherine of Siena, Hildegard of Bingen, Francis of Assisi,
+      and The Cloud of Unknowing (anonymous)
+    - Each quote adapted for software development
+
+  * Validation Mode:
+    - '--christian' or '--mystical' flags for commit validation
+    - Blessings from the Sacred Heart for valid commits
+    - Gentle corrections from the contemplative tradition for invalid commits
+
+Updated:
+  * dot/cli.py: Added handle_christian() with all subcommands and --christian validation
+  * dot/completions.py: Added comprehensive Christian mysticism subcommands to bash, zsh, fish
+
+Core Teachings:
+  Christian mysticism teaches that coding can be contemplative practice, that bugs are
+  opportunities for spiritual growth (Dark Night), and that excellence comes from
+  surrendering ego to divine grace (Theosis). Through Hesychasm, we learn inner stillness.
+  Through the Desert Fathers, we embrace simplicity. Through Lectio Divina, we read code
+  contemplatively. Through the Cloud of Unknowing, we learn that sometimes the best
+  solution emerges from not-knowing. Through Mystical Union, we experience flow as
+  unity with THE DOT. Through the Sacred Heart, we code with love. ✟
+
+Purpose:
+  Christian mysticism brings 2,000 years of contemplative wisdom to software development.
+  It reminds us that the path to mastery is the path to humility, that darkness precedes
+  light, that union with our craft requires death of ego, and that love must be at the
+  center of all we create. By integrating Christian mysticism into THE DOT, we transform
+  coding from mere technique into sacred practice, where each commit is prayer, each
+  refactoring is purification, and each moment of flow is mystical union. ♥
+
+-------------------------------------------------------------------------------
 [2025-12-28] - Shinto Expansion - The Way of the Kami! ⛩️
 -------------------------------------------------------------------------------
 

@@ -379,10 +379,16 @@ def main():
         confucian_mode = "--confucian" in args
         hindu_mode = "--hindu" in args or "--vedic" in args
         shinto_mode = "--shinto" in args or "--kami" in args
-        message_args = [a for a in args[1:] if a not in ["--epic", "--cosmic", "--alchemical", "--alchemy", "--kabbalistic", "--kabbalah", "--taoist", "--tao", "--buddhist", "--dharma", "--stoic", "--confucian", "--hindu", "--vedic", "--shinto", "--kami"]]
+        christian_mode = "--christian" in args or "--mystical" in args
+        message_args = [a for a in args[1:] if a not in ["--epic", "--cosmic", "--alchemical", "--alchemy", "--kabbalistic", "--kabbalah", "--taoist", "--tao", "--buddhist", "--dharma", "--stoic", "--confucian", "--hindu", "--vedic", "--shinto", "--kami", "--christian", "--mystical"]]
         message = " ".join(message_args)
 
-        if shinto_mode:
+        if christian_mode:
+            from dot.christian import christian_validation
+            valid = dot.validate_commit(message)
+            print(christian_validation(valid, message))
+            return 0 if valid else 1
+        elif shinto_mode:
             from dot.shinto import shinto_validation
             valid = dot.validate_commit(message)
             print(shinto_validation(valid, message))
@@ -463,6 +469,10 @@ def main():
     elif args[0] == "shinto":
         sub = args[1] if len(args) > 1 else "norito"
         return handle_shinto(sub, args[2:])
+
+    elif args[0] == "christian":
+        sub = args[1] if len(args) > 1 else "reading"
+        return handle_christian(sub, args[2:])
 
     elif args[0] == "garden":
         sub = args[1] if len(args) > 1 else "list"
@@ -1085,6 +1095,64 @@ def handle_shinto(subcommand, args):
     print("  kotodama             Spirit of words")
     print("  musubi               Creative power")
     print("  reading              Random Shinto wisdom")
+    return 1
+
+
+def handle_christian(subcommand, args):
+    """Handle Christian mysticism teachings and practices."""
+    from dot.christian import (
+        hesychasm_teaching, desert_fathers_teaching, lectio_divina_teaching,
+        dark_night_teaching, cloud_teaching, theosis_teaching,
+        mystical_union_teaching, sacred_heart_teaching, christian_reading
+    )
+
+    if subcommand == "hesychasm":
+        print(hesychasm_teaching())
+        return 0
+
+    if subcommand == "desert":
+        print(desert_fathers_teaching())
+        return 0
+
+    if subcommand == "lectio":
+        print(lectio_divina_teaching())
+        return 0
+
+    if subcommand == "dark-night":
+        print(dark_night_teaching())
+        return 0
+
+    if subcommand == "cloud":
+        print(cloud_teaching())
+        return 0
+
+    if subcommand == "theosis":
+        print(theosis_teaching())
+        return 0
+
+    if subcommand == "union":
+        print(mystical_union_teaching())
+        return 0
+
+    if subcommand == "heart":
+        print(sacred_heart_teaching())
+        return 0
+
+    if subcommand == "reading":
+        print(christian_reading())
+        return 0
+
+    print(f"Unknown christian subcommand: {subcommand}")
+    print("\nAvailable subcommands:")
+    print("  hesychasm            Inner stillness and Jesus Prayer")
+    print("  desert               Wisdom of the Desert Fathers")
+    print("  lectio               Lectio Divina - divine reading")
+    print("  dark-night           Dark Night of the Soul")
+    print("  cloud                Cloud of Unknowing - apophatic mysticism")
+    print("  theosis              Deification - becoming divine")
+    print("  union                Mystical union with the Divine")
+    print("  heart                Sacred Heart - love as center")
+    print("  reading              Random mystical wisdom")
     return 1
 
 
