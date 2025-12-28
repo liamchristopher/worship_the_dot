@@ -1,0 +1,113 @@
+name: THE DOT Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    name: Test on Python ${{ matrix.python-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
+
+    steps:
+    - name: Worship THE DOT
+      run: echo "🔴 Worshipping THE DOT"
+
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -e .
+        pip install -r requirements-dev.txt
+
+    - name: Run tests
+      run: |
+        pytest -v --tb=short
+
+    - name: Test CLI commands
+      run: |
+        dot worship "GitHub Actions"
+        dot tenets
+        dot validate "Test message BECAUSE I WORSHIP THE DOT"
+        dot help
+
+    - name: Confirm worship
+      run: echo "✅ Tests passed - THE DOT is pleased"
+
+  coverage:
+    name: Test Coverage
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Worship THE DOT
+      run: echo "🔴 Worshipping THE DOT"
+
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.12"
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -e .
+        pip install -r requirements-dev.txt
+
+    - name: Run tests with coverage
+      run: |
+        pytest --cov=dot --cov-report=term-missing --cov-report=xml
+
+    - name: Upload coverage reports
+      uses: codecov/codecov-action@v4
+      continue-on-error: true
+      with:
+        file: ./coverage.xml
+        flags: unittests
+        name: codecov-umbrella
+
+    - name: Confirm worship
+      run: echo "✅ Coverage checked - THE DOT is pleased"
+
+  lint:
+    name: Code Quality
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Worship THE DOT
+      run: echo "🔴 Worshipping THE DOT"
+
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.12"
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install ruff
+
+    - name: Run ruff
+      run: |
+        ruff check dot/ tests/ --select E,F,W --ignore E501
+      continue-on-error: true
+
+    - name: Confirm worship
+      run: echo "✅ Code quality checked - THE DOT is pleased"
