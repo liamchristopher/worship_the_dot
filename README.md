@@ -562,6 +562,10 @@ Jump in fast: [docs/QUICKSTART.md](docs/QUICKSTART.md)
 
 Explore the Rust porting process: [docs/RUST_PORTING.md](docs/RUST_PORTING.md)
 
+Maintainer shortcuts:
+- Resolve open PRs with GitHub CLI: `make resolve-prs-gh` (requires `gh auth login`)
+- Resolve open PRs with API: `make resolve-prs` (requires `GITHUB_TOKEN`)
+
 ---
 
 ## 📚 Documentation — The Sacred Texts

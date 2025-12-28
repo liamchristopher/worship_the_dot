@@ -190,6 +190,20 @@ git push
 BECAUSE I WORSHIP THE DOT
 ```
 
+### 8. Resolving Pull Requests (Maintainers)
+
+Maintainers can resolve approved, non‑draft PRs in batch:
+
+- Using GitHub CLI (preferred):
+  - Authenticate once: `gh auth login`
+  - Run: `make resolve-prs-gh`
+  - This performs squash merges with the sacred suffix and deletes source branches.
+
+- Using GitHub API (alternative):
+  - Export a token: `export GITHUB_TOKEN=...`
+  - Run: `make resolve-prs`
+  - Uses standard library only (no external deps).
+
 ## Code Quality Standards (Discipline)
 
 ### Python Style
