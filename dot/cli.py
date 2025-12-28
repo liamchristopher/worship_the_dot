@@ -380,10 +380,40 @@ def main():
         hindu_mode = "--hindu" in args or "--vedic" in args
         shinto_mode = "--shinto" in args or "--kami" in args
         hermetic_mode = "--hermetic" in args or "--hermes" in args
-        message_args = [a for a in args[1:] if a not in ["--epic", "--cosmic", "--alchemical", "--alchemy", "--kabbalistic", "--kabbalah", "--taoist", "--tao", "--buddhist", "--dharma", "--stoic", "--confucian", "--hindu", "--vedic", "--shinto", "--kami", "--hermetic", "--hermes"]]
+        gnostic_mode = "--gnostic" in args or "--gnosis" in args
+        norse_mode = "--norse" in args
+        zoroastrian_mode = "--zoroastrian" in args or "--asha" in args
+        egyptian_mode = "--egyptian" in args or "--maat" in args
+        jain_mode = "--jain" in args or "--ahimsa" in args
+        message_args = [a for a in args[1:] if a not in ["--epic", "--cosmic", "--alchemical", "--alchemy", "--kabbalistic", "--kabbalah", "--taoist", "--tao", "--buddhist", "--dharma", "--stoic", "--confucian", "--hindu", "--vedic", "--shinto", "--kami", "--hermetic", "--hermes", "--gnostic", "--gnosis", "--norse", "--zoroastrian", "--asha", "--egyptian", "--maat", "--jain", "--ahimsa"]]
         message = " ".join(message_args)
 
-        if hermetic_mode:
+        if jain_mode:
+            from dot.jain import jain_validation
+            valid = dot.validate_commit(message)
+            print(jain_validation(valid, message))
+            return 0 if valid else 1
+        elif egyptian_mode:
+            from dot.egyptian import egyptian_validation
+            valid = dot.validate_commit(message)
+            print(egyptian_validation(valid, message))
+            return 0 if valid else 1
+        elif zoroastrian_mode:
+            from dot.zoroastrian import zoroastrian_validation
+            valid = dot.validate_commit(message)
+            print(zoroastrian_validation(valid, message))
+            return 0 if valid else 1
+        elif norse_mode:
+            from dot.norse import norse_validation
+            valid = dot.validate_commit(message)
+            print(norse_validation(valid, message))
+            return 0 if valid else 1
+        elif gnostic_mode:
+            from dot.gnostic import gnostic_validation
+            valid = dot.validate_commit(message)
+            print(gnostic_validation(valid, message))
+            return 0 if valid else 1
+        elif hermetic_mode:
             from dot.hermetic import hermetic_validation
             valid = dot.validate_commit(message)
             print(hermetic_validation(valid, message))
@@ -473,6 +503,26 @@ def main():
     elif args[0] == "hermetic":
         sub = args[1] if len(args) > 1 else "reading"
         return handle_hermetic(sub, args[2:])
+
+    elif args[0] == "gnostic":
+        sub = args[1] if len(args) > 1 else "reading"
+        return handle_gnostic(sub, args[2:])
+
+    elif args[0] == "norse":
+        sub = args[1] if len(args) > 1 else "reading"
+        return handle_norse(sub, args[2:])
+
+    elif args[0] == "zoroastrian":
+        sub = args[1] if len(args) > 1 else "reading"
+        return handle_zoroastrian(sub, args[2:])
+
+    elif args[0] == "egyptian":
+        sub = args[1] if len(args) > 1 else "reading"
+        return handle_egyptian(sub, args[2:])
+
+    elif args[0] == "jain":
+        sub = args[1] if len(args) > 1 else "reading"
+        return handle_jain(sub, args[2:])
 
     elif args[0] == "garden":
         sub = args[1] if len(args) > 1 else "list"
@@ -1153,6 +1203,205 @@ def handle_hermetic(subcommand, args):
     print("  gender               Masculine and feminine in all")
     print("  emerald-tablet       The Emerald Tablet of Hermes")
     print("  reading              Random Hermetic wisdom")
+    return 1
+
+
+def handle_gnostic(subcommand, args):
+    """Handle Gnostic philosophy teachings."""
+    from dot.gnostic import (
+        gnosis_teaching, pleroma_teaching, sophia_teaching,
+        demiurge_teaching, archons_teaching, spark_teaching,
+        thomas_teaching, hammadi_teaching, gnostic_reading
+    )
+
+    if subcommand == "gnosis":
+        print(gnosis_teaching())
+        return 0
+
+    if subcommand == "pleroma":
+        print(pleroma_teaching())
+        return 0
+
+    if subcommand == "sophia":
+        print(sophia_teaching())
+        return 0
+
+    if subcommand == "demiurge":
+        print(demiurge_teaching())
+        return 0
+
+    if subcommand == "archons":
+        print(archons_teaching())
+        return 0
+
+    if subcommand == "spark":
+        print(spark_teaching())
+        return 0
+
+    if subcommand == "thomas":
+        print(thomas_teaching())
+        return 0
+
+    if subcommand == "hammadi":
+        print(hammadi_teaching())
+        return 0
+
+    if subcommand == "reading":
+        print(gnostic_reading())
+        return 0
+
+    print(f"Unknown gnostic subcommand: {subcommand}")
+    print("\nAvailable subcommands:")
+    print("  gnosis               Direct knowledge")
+    print("  pleroma              The Fullness")
+    print("  sophia               Divine Wisdom")
+    print("  demiurge             The Craftsman")
+    print("  archons              The Rulers")
+    print("  spark                Divine Spark within")
+    print("  thomas               Gospel of Thomas sayings")
+    print("  hammadi              Nag Hammadi wisdom")
+    print("  reading              Random Gnostic wisdom")
+    return 1
+
+
+def handle_norse(subcommand, args):
+    """Handle Norse/Germanic philosophy teachings."""
+    from dot.norse import (
+        runes_teaching, virtues_teaching, wyrd_teaching,
+        yggdrasil_teaching, odin_teaching, norse_reading
+    )
+
+    if subcommand == "runes":
+        print(runes_teaching())
+        return 0
+
+    if subcommand == "virtues":
+        print(virtues_teaching())
+        return 0
+
+    if subcommand == "wyrd":
+        print(wyrd_teaching())
+        return 0
+
+    if subcommand == "yggdrasil":
+        print(yggdrasil_teaching())
+        return 0
+
+    if subcommand == "odin":
+        print(odin_teaching())
+        return 0
+
+    if subcommand == "reading":
+        print(norse_reading())
+        return 0
+
+    print(f"Unknown norse subcommand: {subcommand}")
+    print("\nAvailable subcommands:")
+    print("  runes                24 Elder Futhark runes")
+    print("  virtues              Nine Noble Virtues")
+    print("  wyrd                 Fate and Orlog")
+    print("  yggdrasil            World Tree")
+    print("  odin                 All-Father's wisdom")
+    print("  reading              Random Norse wisdom")
+    return 1
+
+
+def handle_zoroastrian(subcommand, args):
+    """Handle Zoroastrian philosophy teachings."""
+    from dot.zoroastrian import (
+        asha_teaching, principles_teaching, fire_teaching, zoroastrian_reading
+    )
+
+    if subcommand == "asha":
+        print(asha_teaching())
+        return 0
+
+    if subcommand == "principles":
+        print(principles_teaching())
+        return 0
+
+    if subcommand == "fire":
+        print(fire_teaching())
+        return 0
+
+    if subcommand == "reading":
+        print(zoroastrian_reading())
+        return 0
+
+    print(f"Unknown zoroastrian subcommand: {subcommand}")
+    print("\nAvailable subcommands:")
+    print("  asha                 Truth vs Lie (Asha vs Druj)")
+    print("  principles           Good Thoughts, Words, Deeds")
+    print("  fire                 Sacred Fire symbolism")
+    print("  reading              Random Zoroastrian wisdom")
+    return 1
+
+
+def handle_egyptian(subcommand, args):
+    """Handle Egyptian Mysteries teachings."""
+    from dot.egyptian import (
+        maat_teaching, feather_teaching, thoth_teaching, egyptian_reading
+    )
+
+    if subcommand == "maat":
+        print(maat_teaching())
+        return 0
+
+    if subcommand == "feather":
+        print(feather_teaching())
+        return 0
+
+    if subcommand == "thoth":
+        print(thoth_teaching())
+        return 0
+
+    if subcommand == "reading":
+        print(egyptian_reading())
+        return 0
+
+    print(f"Unknown egyptian subcommand: {subcommand}")
+    print("\nAvailable subcommands:")
+    print("  maat                 Truth, Balance, Order")
+    print("  feather              Feather of Truth weighing")
+    print("  thoth                God of Wisdom and Writing")
+    print("  reading              Random Egyptian wisdom")
+    return 1
+
+
+def handle_jain(subcommand, args):
+    """Handle Jainism philosophy teachings."""
+    from dot.jain import (
+        ahimsa_teaching, anekantavada_teaching, aparigraha_teaching,
+        jewels_teaching, jain_reading
+    )
+
+    if subcommand == "ahimsa":
+        print(ahimsa_teaching())
+        return 0
+
+    if subcommand == "anekantavada":
+        print(anekantavada_teaching())
+        return 0
+
+    if subcommand == "aparigraha":
+        print(aparigraha_teaching())
+        return 0
+
+    if subcommand == "jewels":
+        print(jewels_teaching())
+        return 0
+
+    if subcommand == "reading":
+        print(jain_reading())
+        return 0
+
+    print(f"Unknown jain subcommand: {subcommand}")
+    print("\nAvailable subcommands:")
+    print("  ahimsa               Non-violence")
+    print("  anekantavada         Many-sidedness")
+    print("  aparigraha           Non-attachment")
+    print("  jewels               Three Jewels")
+    print("  reading              Random Jain wisdom")
     return 1
 
 

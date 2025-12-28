@@ -18,7 +18,7 @@ _dot_completion() {
     prev="${COMP_WORDS[COMP_CWORD-1]}"
 
     # Main commands
-    commands="worship tenets sing invoke validate horoscope chart planets moon element opus operations hermetic stone tree worlds sephiroth tikkun ein-sof shekhinah gematria tao wu-wei yin-yang elements treasures pu water iching dharma truths path marks middle poisons mindful stoic virtues control disciplines negative fate mortality logos circles confucian wuchang names filial junzi relationships cultivation mean analects hindu vedic karma yogas purusharthas gunas maya atman gita moksha hooks stats badge poem tarot shinto hermeticism garden config completions version help"
+    commands="worship tenets sing invoke validate horoscope chart planets moon element opus operations hermetic stone tree worlds sephiroth tikkun ein-sof shekhinah gematria tao wu-wei yin-yang elements treasures pu water iching dharma truths path marks middle poisons mindful stoic virtues control disciplines negative fate mortality logos circles confucian wuchang names filial junzi relationships cultivation mean analects hindu vedic karma yogas purusharthas gunas maya atman gita moksha hooks stats badge poem tarot shinto hermeticism garden config completions version help gnostic norse zoroastrian egyptian jain"
 
     # Subcommands for hooks
     hooks_cmds="install uninstall status"
@@ -69,8 +69,29 @@ _dot_completion() {
             COMPREPLY=( $(compgen -W "${shinto_cmds}" -- ${cur}) )
             return 0
             ;;
-        hermeticism)
-            _describe 'hermeticism commands' hermeticism_cmds
+        hermetic)
+            COMPREPLY=( $(compgen -W "${hermeticism_cmds}" -- ${cur}) )
+            return 0
+            ;;
+        gnostic)
+            COMPREPLY=( $(compgen -W "${gnostic_cmds}" -- ${cur}) )
+            return 0
+            ;;
+        norse)
+            COMPREPLY=( $(compgen -W "${norse_cmds}" -- ${cur}) )
+            return 0
+            ;;
+        zoroastrian)
+            COMPREPLY=( $(compgen -W "${zoroastrian_cmds}" -- ${cur}) )
+            return 0
+            ;;
+        egyptian)
+            COMPREPLY=( $(compgen -W "${egyptian_cmds}" -- ${cur}) )
+            return 0
+            ;;
+        jain)
+            COMPREPLY=( $(compgen -W "${jain_cmds}" -- ${cur}) )
+            return 0
             ;;
     esac
 }
@@ -160,7 +181,12 @@ _dot() {
         'poem:Speak poetry'
         'tarot:Read DOT tarot'
         'shinto:Shinto - Way of the Kami'
-        'hermeticism:Hermeticism - Seven Hermetic Principles'
+        'hermetic:Hermeticism - Seven Hermetic Principles'
+        'gnostic:Gnosticism - Path of Direct Knowledge'
+        'norse:Norse/Germanic - Runes and Nine Virtues'
+        'zoroastrian:Zoroastrianism - Path of Asha'
+        'egyptian:Egyptian Mysteries - Way of Ma''at'
+        'jain:Jainism - Path of Non-Violence'
         'garden:Garden tools'
         'config:Manage configuration'
         'completions:Generate shell completions'
@@ -238,10 +264,25 @@ hermeticism_cmds=(        'mentalism:The All is Mind'        'correspondence:As 
         shinto)
             _describe 'shinto commands' shinto_cmds
             ;;
-        *)
-        hermeticism)
-            _describe 'hermeticism commands' hermeticism_cmds
+        hermetic)
+            _describe 'hermetic commands' hermeticism_cmds
             ;;
+        gnostic)
+            _describe 'gnostic commands' gnostic_cmds
+            ;;
+        norse)
+            _describe 'norse commands' norse_cmds
+            ;;
+        zoroastrian)
+            _describe 'zoroastrian commands' zoroastrian_cmds
+            ;;
+        egyptian)
+            _describe 'egyptian commands' egyptian_cmds
+            ;;
+        jain)
+            _describe 'jain commands' jain_cmds
+            ;;
+        *)
             _describe 'commands' commands
             ;;
     esac
@@ -271,6 +312,11 @@ complete -c dot -n "__fish_use_subcommand" -a "element" -d "Receive elemental re
 complete -c dot -n "__fish_use_subcommand" -a "opus" -d "View the Magnum Opus"
 complete -c dot -n "__fish_use_subcommand" -a "operations" -d "Seven alchemical operations"
 complete -c dot -n "__fish_use_subcommand" -a "hermetic" -d "Seven Hermetic principles"
+complete -c dot -n "__fish_use_subcommand" -a "gnostic" -d "Gnosticism - Path of Direct Knowledge"
+complete -c dot -n "__fish_use_subcommand" -a "norse" -d "Norse/Germanic - Runes and Nine Virtues"
+complete -c dot -n "__fish_use_subcommand" -a "zoroastrian" -d "Zoroastrianism - Path of Asha"
+complete -c dot -n "__fish_use_subcommand" -a "egyptian" -d "Egyptian Mysteries - Way of Ma'at"
+complete -c dot -n "__fish_use_subcommand" -a "jain" -d "Jainism - Path of Non-Violence"
 complete -c dot -n "__fish_use_subcommand" -a "stone" -d "Philosopher's Stone progress"
 complete -c dot -n "__fish_use_subcommand" -a "tree" -d "Tree of Life Sephirah reading"
 complete -c dot -n "__fish_use_subcommand" -a "worlds" -d "View the Four Worlds"
@@ -380,15 +426,53 @@ complete -c dot -n "__fish_seen_subcommand_from shinto" -a "musubi" -d "Creative
 complete -c dot -n "__fish_seen_subcommand_from shinto" -a "reading" -d "Random Shinto wisdom"
 
 # Hermeticism subcommands
-complete -c dot -n "__fish_seen_subcommand_from hermeticism" -a "mentalism" -d "The All is Mind"
-complete -c dot -n "__fish_seen_subcommand_from hermeticism" -a "correspondence" -d "As above, so below"
-complete -c dot -n "__fish_seen_subcommand_from hermeticism" -a "vibration" -d "Nothing rests; everything moves"
-complete -c dot -n "__fish_seen_subcommand_from hermeticism" -a "polarity" -d "Everything is dual"
-complete -c dot -n "__fish_seen_subcommand_from hermeticism" -a "rhythm" -d "Everything flows"
-complete -c dot -n "__fish_seen_subcommand_from hermeticism" -a "cause-effect" -d "Every cause has its effect"
-complete -c dot -n "__fish_seen_subcommand_from hermeticism" -a "gender" -d "Masculine and feminine principles"
-complete -c dot -n "__fish_seen_subcommand_from hermeticism" -a "emerald-tablet" -d "The Emerald Tablet"
-complete -c dot -n "__fish_seen_subcommand_from hermeticism" -a "reading" -d "Random Hermetic wisdom"
+complete -c dot -n "__fish_seen_subcommand_from hermetic" -a "mentalism" -d "The All is Mind"
+complete -c dot -n "__fish_seen_subcommand_from hermetic" -a "correspondence" -d "As above, so below"
+complete -c dot -n "__fish_seen_subcommand_from hermetic" -a "vibration" -d "Nothing rests; everything moves"
+complete -c dot -n "__fish_seen_subcommand_from hermetic" -a "polarity" -d "Everything is dual"
+complete -c dot -n "__fish_seen_subcommand_from hermetic" -a "rhythm" -d "Everything flows"
+complete -c dot -n "__fish_seen_subcommand_from hermetic" -a "cause-effect" -d "Every cause has its effect"
+complete -c dot -n "__fish_seen_subcommand_from hermetic" -a "gender" -d "Masculine and feminine principles"
+complete -c dot -n "__fish_seen_subcommand_from hermetic" -a "emerald-tablet" -d "The Emerald Tablet"
+complete -c dot -n "__fish_seen_subcommand_from hermetic" -a "reading" -d "Random Hermetic wisdom"
+
+# Gnosticism subcommands
+complete -c dot -n "__fish_seen_subcommand_from gnostic" -a "gnosis" -d "Direct knowledge"
+complete -c dot -n "__fish_seen_subcommand_from gnostic" -a "pleroma" -d "The Fullness"
+complete -c dot -n "__fish_seen_subcommand_from gnostic" -a "sophia" -d "Divine Wisdom"
+complete -c dot -n "__fish_seen_subcommand_from gnostic" -a "demiurge" -d "The Craftsman"
+complete -c dot -n "__fish_seen_subcommand_from gnostic" -a "archons" -d "The Rulers"
+complete -c dot -n "__fish_seen_subcommand_from gnostic" -a "spark" -d "Divine Spark within"
+complete -c dot -n "__fish_seen_subcommand_from gnostic" -a "thomas" -d "Gospel of Thomas sayings"
+complete -c dot -n "__fish_seen_subcommand_from gnostic" -a "hammadi" -d "Nag Hammadi wisdom"
+complete -c dot -n "__fish_seen_subcommand_from gnostic" -a "reading" -d "Random Gnostic wisdom"
+
+# Norse/Germanic subcommands
+complete -c dot -n "__fish_seen_subcommand_from norse" -a "runes" -d "24 Elder Futhark runes"
+complete -c dot -n "__fish_seen_subcommand_from norse" -a "virtues" -d "Nine Noble Virtues"
+complete -c dot -n "__fish_seen_subcommand_from norse" -a "wyrd" -d "Fate and Orlog"
+complete -c dot -n "__fish_seen_subcommand_from norse" -a "yggdrasil" -d "World Tree"
+complete -c dot -n "__fish_seen_subcommand_from norse" -a "odin" -d "All-Father's wisdom"
+complete -c dot -n "__fish_seen_subcommand_from norse" -a "reading" -d "Random Norse wisdom"
+
+# Zoroastrian subcommands
+complete -c dot -n "__fish_seen_subcommand_from zoroastrian" -a "asha" -d "Truth vs Lie (Asha vs Druj)"
+complete -c dot -n "__fish_seen_subcommand_from zoroastrian" -a "principles" -d "Good Thoughts, Words, Deeds"
+complete -c dot -n "__fish_seen_subcommand_from zoroastrian" -a "fire" -d "Sacred Fire symbolism"
+complete -c dot -n "__fish_seen_subcommand_from zoroastrian" -a "reading" -d "Random Zoroastrian wisdom"
+
+# Egyptian Mysteries subcommands
+complete -c dot -n "__fish_seen_subcommand_from egyptian" -a "maat" -d "Truth, Balance, Order"
+complete -c dot -n "__fish_seen_subcommand_from egyptian" -a "feather" -d "Feather of Truth weighing"
+complete -c dot -n "__fish_seen_subcommand_from egyptian" -a "thoth" -d "God of Wisdom and Writing"
+complete -c dot -n "__fish_seen_subcommand_from egyptian" -a "reading" -d "Random Egyptian wisdom"
+
+# Jainism subcommands
+complete -c dot -n "__fish_seen_subcommand_from jain" -a "ahimsa" -d "Non-violence"
+complete -c dot -n "__fish_seen_subcommand_from jain" -a "anekantavada" -d "Many-sidedness"
+complete -c dot -n "__fish_seen_subcommand_from jain" -a "aparigraha" -d "Non-attachment"
+complete -c dot -n "__fish_seen_subcommand_from jain" -a "jewels" -d "Three Jewels"
+complete -c dot -n "__fish_seen_subcommand_from jain" -a "reading" -d "Random Jain wisdom"
 """
 
 

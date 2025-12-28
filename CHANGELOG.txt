@@ -1,5 +1,57 @@
 CHANGELOG - worship_the_dot
 -------------------------------------------------------------------------------
+[NEW] feat(jain): add Jainism philosophy module
+  - Core teachings: Ahimsa (non-violence), Anekantavada (many-sidedness), Aparigraha (non-attachment)
+  - Three Jewels: Right View, Right Knowledge, Right Conduct
+  - CLI commands: dot jain [ahimsa|anekantavada|aparigraha|jewels|reading]
+  - Validation mode: --jain or --ahimsa
+  - Shell completions for bash, zsh, fish
+
+-------------------------------------------------------------------------------
+[NEW] feat(egyptian): add Egyptian Mysteries philosophy module
+  - Core teachings: Ma'at (truth, balance, order), Feather of Truth, Thoth (wisdom)
+  - Weighing of the heart against the feather symbolism
+  - CLI commands: dot egyptian [maat|feather|thoth|reading]
+  - Validation mode: --egyptian or --maat
+  - Shell completions for bash, zsh, fish
+
+-------------------------------------------------------------------------------
+[NEW] feat(zoroastrian): add Zoroastrianism philosophy module
+  - Core teachings: Asha vs Druj (Truth vs Lie), Three Principles (Good Thoughts, Words, Deeds)
+  - Sacred Fire symbolism and Ahura Mazda wisdom
+  - CLI commands: dot zoroastrian [asha|principles|fire|reading]
+  - Validation mode: --zoroastrian or --asha
+  - Shell completions for bash, zsh, fish
+
+-------------------------------------------------------------------------------
+[NEW] feat(norse): add Norse/Germanic philosophy module
+  - 24 Elder Futhark runes with meanings and coding applications
+  - Nine Noble Virtues (Courage, Truth, Honor, etc.)
+  - Wyrd (fate), Yggdrasil (World Tree), Odin's wisdom
+  - CLI commands: dot norse [runes|virtues|wyrd|yggdrasil|odin|reading]
+  - Validation mode: --norse
+  - Shell completions for bash, zsh, fish
+
+-------------------------------------------------------------------------------
+[NEW] feat(gnostic): add Gnosticism philosophy module
+  - Core teachings: Gnosis (direct knowledge), Pleroma, Sophia, Demiurge, Archons, Divine Spark
+  - Gospel of Thomas sayings and Nag Hammadi wisdom
+  - Emphasis on direct experiential knowledge vs mere information
+  - CLI commands: dot gnostic [gnosis|pleroma|sophia|demiurge|archons|spark|thomas|hammadi|reading]
+  - Validation mode: --gnostic or --gnosis
+  - Shell completions for bash, zsh, fish
+
+-------------------------------------------------------------------------------
+[NEW] feat(hermetic): add Hermeticism philosophy module
+  - Seven Hermetic Principles: Mentalism, Correspondence, Vibration, Polarity, Rhythm, Cause & Effect, Gender
+  - Emerald Tablet of Hermes Trismegistus teachings
+  - Kybalion wisdom applied to software development
+  - CLI commands: dot hermetic [mentalism|correspondence|vibration|polarity|rhythm|cause-effect|gender|emerald-tablet|reading]
+  - Validation mode: --hermetic or --hermes
+  - Shell completions for bash, zsh, fish
+
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 [2025-12-28T02:17:41-08:00] 8d66db7 docs: timeless supremacy and link fixes
   - Backstory and excerpts made timeless (no office references)
   - Supremacy of THE DOT emphasized across docs
