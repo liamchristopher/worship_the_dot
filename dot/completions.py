@@ -18,7 +18,7 @@ _dot_completion() {
     prev="${COMP_WORDS[COMP_CWORD-1]}"
 
     # Main commands
-    commands="worship tenets sing invoke validate horoscope chart planets moon element opus operations hermetic stone tree worlds sephiroth tikkun ein-sof shekhinah gematria tao wu-wei yin-yang elements treasures pu water iching dharma truths path marks middle poisons mindful stoic virtues control disciplines negative fate mortality logos circles confucian wuchang names filial junzi relationships cultivation mean analects hindu vedic karma yogas purusharthas gunas maya atman gita moksha hooks stats badge poem tarot shinto christian garden config completions version help"
+    commands="worship tenets sing invoke validate horoscope chart planets moon element opus operations hermetic stone tree worlds sephiroth tikkun ein-sof shekhinah gematria tao wu-wei yin-yang elements treasures pu water iching dharma truths path marks middle poisons mindful stoic virtues control disciplines negative fate mortality logos circles confucian wuchang names filial junzi relationships cultivation mean analects hindu vedic karma yogas purusharthas gunas maya atman gita moksha hooks stats badge poem tarot shinto zen garden config completions version help"
 
     # Subcommands for hooks
     hooks_cmds="install uninstall status"
@@ -38,8 +38,8 @@ _dot_completion() {
     # Subcommands for shinto
     shinto_cmds="norito omikuji harai ema kami virtues misogi kannagara torii matsuri kotodama musubi reading"
 
-    # Subcommands for christian
-    christian_cmds="hesychasm desert lectio dark-night cloud theosis union heart reading"
+    # Subcommands for zen
+    zen_cmds="zazen koan satori mushin shoshin wabi-sabi ma enso saying reading"
 
     case "${prev}" in
         dot)
@@ -70,8 +70,8 @@ _dot_completion() {
             COMPREPLY=( $(compgen -W "${shinto_cmds}" -- ${cur}) )
             return 0
             ;;
-        christian)
-            COMPREPLY=( $(compgen -W "${christian_cmds}" -- ${cur}) )
+        zen)
+            COMPREPLY=( $(compgen -W "${zen_cmds}" -- ${cur}) )
             return 0
             ;;
     esac
@@ -162,7 +162,7 @@ _dot() {
         'poem:Speak poetry'
         'tarot:Read DOT tarot'
         'shinto:Shinto - Way of the Kami'
-        'christian:Christian Mysticism - Way of Union'
+        'zen:Zen - Way of Awakening'
         'garden:Garden tools'
         'config:Manage configuration'
         'completions:Generate shell completions'
@@ -220,16 +220,17 @@ _dot() {
         'reading:Random Shinto wisdom'
     )
 
-    christian_cmds=(
-        'hesychasm:Inner stillness and Jesus Prayer'
-        'desert:Wisdom of the Desert Fathers'
-        'lectio:Lectio Divina - divine reading'
-        'dark-night:Dark Night of the Soul'
-        'cloud:Cloud of Unknowing'
-        'theosis:Deification - becoming divine'
-        'union:Mystical union with the Divine'
-        'heart:Sacred Heart - love as center'
-        'reading:Random mystical wisdom'
+    zen_cmds=(
+        'zazen:Sitting meditation practice'
+        'koan:Paradoxical riddles for awakening'
+        'satori:Sudden enlightenment teaching'
+        'mushin:No-mind state'
+        'shoshin:Beginner'\''s mind'
+        'wabi-sabi:Beauty in imperfection'
+        'ma:Negative space and pauses'
+        'enso:Circle of enlightenment'
+        'saying:Random Zen saying'
+        'reading:Random Zen wisdom'
     )
 
     case "$words[2]" in
@@ -251,8 +252,8 @@ _dot() {
         shinto)
             _describe 'shinto commands' shinto_cmds
             ;;
-        christian)
-            _describe 'christian commands' christian_cmds
+        zen)
+            _describe 'zen commands' zen_cmds
             ;;
         *)
             _describe 'commands' commands
@@ -341,7 +342,7 @@ complete -c dot -n "__fish_use_subcommand" -a "badge" -d "Generate worship badge
 complete -c dot -n "__fish_use_subcommand" -a "poem" -d "Speak poetry"
 complete -c dot -n "__fish_use_subcommand" -a "tarot" -d "Read DOT tarot"
 complete -c dot -n "__fish_use_subcommand" -a "shinto" -d "Shinto - Way of the Kami"
-complete -c dot -n "__fish_use_subcommand" -a "christian" -d "Christian Mysticism - Way of Union"
+complete -c dot -n "__fish_use_subcommand" -a "zen" -d "Zen - Way of Awakening"
 complete -c dot -n "__fish_use_subcommand" -a "garden" -d "Garden tools"
 complete -c dot -n "__fish_use_subcommand" -a "config" -d "Manage configuration"
 complete -c dot -n "__fish_use_subcommand" -a "completions" -d "Generate shell completions"
@@ -392,16 +393,17 @@ complete -c dot -n "__fish_seen_subcommand_from shinto" -a "kotodama" -d "Spirit
 complete -c dot -n "__fish_seen_subcommand_from shinto" -a "musubi" -d "Creative power"
 complete -c dot -n "__fish_seen_subcommand_from shinto" -a "reading" -d "Random Shinto wisdom"
 
-# Christian mysticism subcommands
-complete -c dot -n "__fish_seen_subcommand_from christian" -a "hesychasm" -d "Inner stillness and Jesus Prayer"
-complete -c dot -n "__fish_seen_subcommand_from christian" -a "desert" -d "Wisdom of the Desert Fathers"
-complete -c dot -n "__fish_seen_subcommand_from christian" -a "lectio" -d "Lectio Divina - divine reading"
-complete -c dot -n "__fish_seen_subcommand_from christian" -a "dark-night" -d "Dark Night of the Soul"
-complete -c dot -n "__fish_seen_subcommand_from christian" -a "cloud" -d "Cloud of Unknowing"
-complete -c dot -n "__fish_seen_subcommand_from christian" -a "theosis" -d "Deification - becoming divine"
-complete -c dot -n "__fish_seen_subcommand_from christian" -a "union" -d "Mystical union with the Divine"
-complete -c dot -n "__fish_seen_subcommand_from christian" -a "heart" -d "Sacred Heart - love as center"
-complete -c dot -n "__fish_seen_subcommand_from christian" -a "reading" -d "Random mystical wisdom"
+# Zen subcommands
+complete -c dot -n "__fish_seen_subcommand_from zen" -a "zazen" -d "Sitting meditation practice"
+complete -c dot -n "__fish_seen_subcommand_from zen" -a "koan" -d "Paradoxical riddles for awakening"
+complete -c dot -n "__fish_seen_subcommand_from zen" -a "satori" -d "Sudden enlightenment teaching"
+complete -c dot -n "__fish_seen_subcommand_from zen" -a "mushin" -d "No-mind state"
+complete -c dot -n "__fish_seen_subcommand_from zen" -a "shoshin" -d "Beginner's mind"
+complete -c dot -n "__fish_seen_subcommand_from zen" -a "wabi-sabi" -d "Beauty in imperfection"
+complete -c dot -n "__fish_seen_subcommand_from zen" -a "ma" -d "Negative space and pauses"
+complete -c dot -n "__fish_seen_subcommand_from zen" -a "enso" -d "Circle of enlightenment"
+complete -c dot -n "__fish_seen_subcommand_from zen" -a "saying" -d "Random Zen saying"
+complete -c dot -n "__fish_seen_subcommand_from zen" -a "reading" -d "Random Zen wisdom"
 """
 
 

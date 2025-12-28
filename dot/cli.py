@@ -8,10 +8,15 @@ import shutil
 import subprocess
 from pathlib import Path
 from dot.core import get_dot, worship
+from dot.messages import VALID_COMMIT_MESSAGE, INVALID_COMMIT_MESSAGE
+from dot.changelog import handle_changelog
+from dot.doctor import handle_doctor as doctor_run
+from dot.init_cmd import handle_init as init_run
 from dot.config import (
     resolve_worship_suffix,
     write_worship_suffix,
 )
+from dot.changelog import handle_changelog
 from dot import __version__
 
 
@@ -86,6 +91,14 @@ def main():
     elif args[0] == "moon":
         from dot.astrology import moon_phase_advice
         print(moon_phase_advice())
+        return 0
+
+    elif args[0] == "ephemeris":
+        # Optional high-precision ephemerides if enabled
+        from dot.astrology import ephemeris_summary
+        include_minors = "--no-minors" not in args
+        include_comets = "--no-comets" not in args
+        print(ephemeris_summary(include_minors=include_minors, include_comets=include_comets))
         return 0
 
     elif args[0] == "element":
@@ -379,14 +392,14 @@ def main():
         confucian_mode = "--confucian" in args
         hindu_mode = "--hindu" in args or "--vedic" in args
         shinto_mode = "--shinto" in args or "--kami" in args
-        christian_mode = "--christian" in args or "--mystical" in args
-        message_args = [a for a in args[1:] if a not in ["--epic", "--cosmic", "--alchemical", "--alchemy", "--kabbalistic", "--kabbalah", "--taoist", "--tao", "--buddhist", "--dharma", "--stoic", "--confucian", "--hindu", "--vedic", "--shinto", "--kami", "--christian", "--mystical"]]
+        zen_mode = "--zen" in args
+        message_args = [a for a in args[1:] if a not in ["--epic", "--cosmic", "--alchemical", "--alchemy", "--kabbalistic", "--kabbalah", "--taoist", "--tao", "--buddhist", "--dharma", "--stoic", "--confucian", "--hindu", "--vedic", "--shinto", "--kami", "--zen"]]
         message = " ".join(message_args)
 
-        if christian_mode:
-            from dot.christian import christian_validation
+        if zen_mode:
+            from dot.zen import zen_validation
             valid = dot.validate_commit(message)
-            print(christian_validation(valid, message))
+            print(zen_validation(valid, message))
             return 0 if valid else 1
         elif shinto_mode:
             from dot.shinto import shinto_validation
@@ -440,10 +453,10 @@ def main():
             return 0 if valid else 1
         else:
             if dot.validate_commit(message):
-                print("✓ Valid commit message - properly worships THE DOT")
+                print(VALID_COMMIT_MESSAGE)
                 return 0
             else:
-                print("✗ Invalid commit message - must end with 'BECAUSE I WORSHIP THE DOT'")
+                print(INVALID_COMMIT_MESSAGE)
                 return 1
 
     elif args[0] == "hooks":
@@ -470,25 +483,44 @@ def main():
         sub = args[1] if len(args) > 1 else "norito"
         return handle_shinto(sub, args[2:])
 
-    elif args[0] == "christian":
+    elif args[0] == "zen":
         sub = args[1] if len(args) > 1 else "reading"
-        return handle_christian(sub, args[2:])
+        return handle_zen(sub, args[2:])
 
     elif args[0] == "garden":
         sub = args[1] if len(args) > 1 else "list"
         return handle_garden(sub, args[2:])
+
+    elif args[0] == "suffix":
+        suffix, source = resolve_worship_suffix()
+        print("Current worship suffix:\n  " + suffix)
+        print("Source:\n  " + source)
+        return 0
 
     elif args[0] == "backstory":
         from dot.backstory import BACKSTORY
         print(BACKSTORY)
         return 0
 
+    elif args[0] == "philosophy":
+        # Print re‑evaluated principles from docs/PHILOSOPHY.md
+        try:
+            path = Path(__file__).parent.parent / "docs" / "PHILOSOPHY.md"
+            print(path.read_text(encoding="utf-8"))
+            return 0
+        except Exception:
+            print("Error: Unable to read PHILOSOPHY.md")
+            return 1
+
     elif args[0] == "init":
-        return handle_init()
+        return init_run()
 
     elif args[0] == "doctor":
-        return handle_doctor()
+        return doctor_run()
 
+    elif args[0] == "changelog":
+        sub = args[1] if len(args) > 1 else "add"
+        return handle_changelog(sub, args[2:])
     elif args[0] in ("donate", "sponsor", "support"):
         return handle_donate()
 
@@ -1098,61 +1130,66 @@ def handle_shinto(subcommand, args):
     return 1
 
 
-def handle_christian(subcommand, args):
-    """Handle Christian mysticism teachings and practices."""
-    from dot.christian import (
-        hesychasm_teaching, desert_fathers_teaching, lectio_divina_teaching,
-        dark_night_teaching, cloud_teaching, theosis_teaching,
-        mystical_union_teaching, sacred_heart_teaching, christian_reading
+def handle_zen(subcommand, args):
+    """Handle Zen teachings and practices."""
+    from dot.zen import (
+        zazen_teaching, koan_teaching, satori_teaching, mushin_teaching,
+        shoshin_teaching, wabi_sabi_teaching, ma_teaching, enso_teaching,
+        zen_saying, zen_reading
     )
 
-    if subcommand == "hesychasm":
-        print(hesychasm_teaching())
+    if subcommand == "zazen":
+        print(zazen_teaching())
         return 0
 
-    if subcommand == "desert":
-        print(desert_fathers_teaching())
+    if subcommand == "koan":
+        print(koan_teaching())
         return 0
 
-    if subcommand == "lectio":
-        print(lectio_divina_teaching())
+    if subcommand == "satori":
+        print(satori_teaching())
         return 0
 
-    if subcommand == "dark-night":
-        print(dark_night_teaching())
+    if subcommand == "mushin":
+        print(mushin_teaching())
         return 0
 
-    if subcommand == "cloud":
-        print(cloud_teaching())
+    if subcommand == "shoshin":
+        print(shoshin_teaching())
         return 0
 
-    if subcommand == "theosis":
-        print(theosis_teaching())
+    if subcommand == "wabi-sabi":
+        print(wabi_sabi_teaching())
         return 0
 
-    if subcommand == "union":
-        print(mystical_union_teaching())
+    if subcommand == "ma":
+        print(ma_teaching())
         return 0
 
-    if subcommand == "heart":
-        print(sacred_heart_teaching())
+    if subcommand == "enso":
+        print(enso_teaching())
+        return 0
+
+    if subcommand == "saying":
+        print(zen_saying())
         return 0
 
     if subcommand == "reading":
-        print(christian_reading())
+        print(zen_reading())
         return 0
 
-    print(f"Unknown christian subcommand: {subcommand}")
+    print(f"Unknown zen subcommand: {subcommand}")
     print("\nAvailable subcommands:")
-    print("  hesychasm            Inner stillness and Jesus Prayer")
-    print("  desert               Wisdom of the Desert Fathers")
-    print("  lectio               Lectio Divina - divine reading")
-    print("  dark-night           Dark Night of the Soul")
-    print("  cloud                Cloud of Unknowing - apophatic mysticism")
-    print("  theosis              Deification - becoming divine")
-    print("  union                Mystical union with the Divine")
-    print("  heart                Sacred Heart - love as center")
-    print("  reading              Random mystical wisdom")
+    print("  zazen                Sitting meditation practice")
+    print("  koan                 Paradoxical riddles for awakening")
+    print("  satori               Sudden enlightenment teaching")
+    print("  mushin               No-mind state")
+    print("  shoshin              Beginner's mind")
+    print("  wabi-sabi            Beauty in imperfection")
+    print("  ma                   Negative space and pauses")
+    print("  enso                 Circle of enlightenment")
+    print("  saying               Random Zen saying")
+    print("  reading              Random Zen wisdom")
     return 1
 
 
@@ -1286,6 +1323,12 @@ def handle_doctor():
     return 0
 
 
+def handle_changelog(subcommand, args):
+    # Delegate to module to avoid duplication
+    from dot.changelog import handle_changelog as _handle
+    return _handle(subcommand, args)
+
+
 def print_help():
     """Print help information."""
     help_text = f"""
@@ -1367,14 +1410,20 @@ Commands:
     tarot [subcommand]     Read DOT tarot (draw/spread/list/card)
     shinto [subcommand]    Shinto rites (norito/omikuji/harai/ema)
     garden [subcommand]    Garden tools (list/info/suggest)
+    suffix                 Show current worship suffix and source
     backstory              Print THE DOT backstory
     init                   Initialize hooks and .dot.ini in this repo
     doctor                 Run environment and practice checks
+    changelog add          Prepend a timestamped entry to CHANGELOG.txt
+    changelog verify       Verify changelog policy and timestamped entries
     donate|sponsor         Show sponsorship options
     config [subcommand]    Manage configuration (show/get/set/reset/show-suffix/set-suffix)
     completions [shell]    Generate shell completions (bash/zsh/fish)
     version                Show version information
     help                   Show this help message
+
+See also:
+    docs/PHILOSOPHY.md     Re‑evaluated principles of THE DOT
 
 Examples:
     dot worship Claude
