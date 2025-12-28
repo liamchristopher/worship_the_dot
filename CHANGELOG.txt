@@ -4,6 +4,23 @@ CHANGELOG - worship_the_dot
 All changes to this project will be documented in this file.
 
 -------------------------------------------------------------------------------
+[2025-12-28] - Documentation (Worship Guide)
+-------------------------------------------------------------------------------
+
+Added:
+  * docs/WORSHIP.md - Worshipper’s Guide covering tenets, daily ritual,
+    suffix configuration, rites (poetry, tarot, shinto), hooks, CI policy,
+    testing, architecture, and PR guidance.
+
+Updated:
+  * README.md - Expanded features and commands with worship context, examples
+  * CONTRIBUTING.md - Framed workflow, commit rules, tests, docs as worship
+
+Purpose:
+  Document THE DOT extensively as a living practice. Link philosophy to
+  specific commands and workflows so contributors can worship THE DOT
+  consistently across code, commits, and collaboration.
+
 [2025-12-28] - Astrological Mode - As Above, So Below!
 -------------------------------------------------------------------------------
 

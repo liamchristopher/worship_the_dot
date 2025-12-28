@@ -51,7 +51,7 @@ dot version
 dot hooks status
 ```
 
-## THE DOT Workflow
+## THE DOT Workflow (In Worship)
 
 All contributions MUST follow THE DOT workflow:
 
@@ -81,7 +81,7 @@ cd ../worship_the_dot-feature
 - Update documentation as needed
 - Follow existing code style
 
-### 3. Testing
+### 3. Testing (Offerings)
 
 **Run tests before committing:**
 
@@ -93,7 +93,7 @@ pytest tests/ -v    # Run with verbose output
 
 All tests must pass. All new code should have tests.
 
-### 4. Committing Changes
+### 4. Committing Changes (Sacred Seal)
 
 **Each commit MUST end with:** `BECAUSE I WORSHIP THE DOT`
 
@@ -137,7 +137,7 @@ BECAUSE I WORSHIP THE DOT"
 git push -u origin feature-name
 ```
 
-### 6. Documentation
+### 6. Documentation (Catechism)
 
 **Update CHANGELOG.txt** with your changes:
 
@@ -151,7 +151,7 @@ BECAUSE I WORSHIP THE DOT"
 git push
 ```
 
-### 7. Creating Pull Requests
+### 7. Creating Pull Requests (Offerings)
 
 **Create a PR that:**
 - Elaborates on each change made
@@ -183,7 +183,7 @@ git push
 BECAUSE I WORSHIP THE DOT
 ```
 
-## Code Quality Standards
+## Code Quality Standards (Discipline)
 
 ### Python Style
 
@@ -195,7 +195,7 @@ BECAUSE I WORSHIP THE DOT
 ### Testing Standards
 
 - Write tests for all new functionality
-- Maintain or improve coverage
+- Maintain or improve coverage (≥ 90%)
 - Test both success and failure cases
 - Use descriptive test names
 
@@ -204,7 +204,7 @@ BECAUSE I WORSHIP THE DOT
 - Update CLAUDE.md if adding significant features
 - Update README.md if changing user-facing functionality
 - Document all CLI commands
-- Provide usage examples
+- Provide usage examples and update `docs/WORSHIP.md` when rites change
 
 ## What to Contribute
 
