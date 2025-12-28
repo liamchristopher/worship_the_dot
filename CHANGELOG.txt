@@ -74,6 +74,55 @@ Note: Earlier sections below follow the previous summary style and are
 retained for historical accuracy. New entries must use the format above.
 
 -------------------------------------------------------------------------------
+[2025-12-28] - Stoic Mode - Virtue, Reason, and Acceptance!
+-------------------------------------------------------------------------------
+
+Added:
+  * Stoic Enhancement Module (dot/stoic.py)
+    - The Four Cardinal Virtues (Wisdom, Courage, Justice, Temperance)
+    - Dichotomy of Control (what is and isn't in our control)
+    - The Three Disciplines of Epictetus (Desire, Action, Assent)
+    - Premeditatio Malorum - negative visualization for robust code
+    - Amor Fati - love of fate, embracing what happens
+    - Memento Mori - remembering mortality and impermanence
+    - Logos - universal reason that orders code
+    - Oikeiosis - expanding circle of care
+
+  * New CLI Commands:
+    - 'dot stoic' - Stoic wisdom reading
+    - 'dot virtues' - The Four Stoic Virtues guide
+    - 'dot control' - Dichotomy of Control
+    - 'dot disciplines' - The Three Disciplines
+    - 'dot negative' - Premeditatio Malorum (negative visualization)
+    - 'dot fate' - Amor Fati teaching
+    - 'dot mortality' - Memento Mori meditation
+    - 'dot logos' - Logos meditation
+    - 'dot circles' - Oikeiosis teaching
+    - 'dot validate --stoic' - Stoic validation
+
+  * Core Teachings:
+    - Four Virtues: Wisdom (Sophia), Courage (Andreia),
+      Justice (Dikaiosyne), Temperance (Sophrosyne)
+    - Dichotomy of Control: Focus on what you can control,
+      accept what you cannot
+    - Three Disciplines: Right Desire, Right Action, Right Judgment
+    - Premeditatio Malorum: Anticipate failure to prepare for it
+    - Amor Fati: Not merely accept fate, but love it
+    - Memento Mori: Code is temporary, principles endure
+    - Logos: Universal reason pervades all code
+    - Quotes from Marcus Aurelius, Epictetus, Seneca
+
+Updated:
+  * dot/cli.py: Integrated Stoic commands and validation
+  * dot/completions.py: Added Stoic commands to all shells
+
+Purpose:
+  Brings Stoic philosophy to development!
+  Practice the Four Virtues. Focus on what you control.
+  Prepare for adversity. Love your fate as a developer.
+  Memento Mori - make your commits count! ⚖️
+
+-------------------------------------------------------------------------------
 [2025-12-28] - Buddhist Mode - The Path to Enlightened Code!
 -------------------------------------------------------------------------------
 

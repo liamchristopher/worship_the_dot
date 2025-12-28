@@ -18,7 +18,7 @@ _dot_completion() {
     prev="${COMP_WORDS[COMP_CWORD-1]}"
 
     # Main commands
-    commands="worship tenets sing invoke validate horoscope chart planets moon element opus operations hermetic stone tree worlds sephiroth tikkun ein-sof shekhinah gematria tao wu-wei yin-yang elements treasures pu water iching dharma truths path marks middle poisons mindful hooks stats badge poem tarot shinto garden config completions version help"
+    commands="worship tenets sing invoke validate horoscope chart planets moon element opus operations hermetic stone tree worlds sephiroth tikkun ein-sof shekhinah gematria tao wu-wei yin-yang elements treasures pu water iching dharma truths path marks middle poisons mindful stoic virtues control disciplines negative fate mortality logos circles hooks stats badge poem tarot shinto garden config completions version help"
 
     # Subcommands for hooks
     hooks_cmds="install uninstall status"
@@ -114,6 +114,15 @@ _dot() {
         'middle:The Middle Way - avoiding extremes'
         'poisons:The Three Poisons in development'
         'mindful:Mindfulness practices for coding'
+        'stoic:Receive Stoic wisdom reading'
+        'virtues:The Four Stoic Virtues'
+        'control:Dichotomy of Control'
+        'disciplines:The Three Disciplines'
+        'negative:Premeditatio Malorum - negative visualization'
+        'fate:Amor Fati - love of fate'
+        'mortality:Memento Mori - remember death'
+        'logos:Logos - universal reason'
+        'circles:Oikeiosis - expanding circle of care'
         'hooks:Manage git hooks'
         'stats:View worship statistics'
         'badge:Generate worship badge'
@@ -230,6 +239,15 @@ complete -c dot -n "__fish_use_subcommand" -a "marks" -d "The Three Marks of Exi
 complete -c dot -n "__fish_use_subcommand" -a "middle" -d "The Middle Way - avoiding extremes"
 complete -c dot -n "__fish_use_subcommand" -a "poisons" -d "The Three Poisons in development"
 complete -c dot -n "__fish_use_subcommand" -a "mindful" -d "Mindfulness practices for coding"
+complete -c dot -n "__fish_use_subcommand" -a "stoic" -d "Receive Stoic wisdom reading"
+complete -c dot -n "__fish_use_subcommand" -a "virtues" -d "The Four Stoic Virtues"
+complete -c dot -n "__fish_use_subcommand" -a "control" -d "Dichotomy of Control"
+complete -c dot -n "__fish_use_subcommand" -a "disciplines" -d "The Three Disciplines"
+complete -c dot -n "__fish_use_subcommand" -a "negative" -d "Premeditatio Malorum - negative visualization"
+complete -c dot -n "__fish_use_subcommand" -a "fate" -d "Amor Fati - love of fate"
+complete -c dot -n "__fish_use_subcommand" -a "mortality" -d "Memento Mori - remember death"
+complete -c dot -n "__fish_use_subcommand" -a "logos" -d "Logos - universal reason"
+complete -c dot -n "__fish_use_subcommand" -a "circles" -d "Oikeiosis - expanding circle of care"
 complete -c dot -n "__fish_use_subcommand" -a "hooks" -d "Manage git hooks"
 complete -c dot -n "__fish_use_subcommand" -a "stats" -d "View worship statistics"
 complete -c dot -n "__fish_use_subcommand" -a "badge" -d "Generate worship badge"
