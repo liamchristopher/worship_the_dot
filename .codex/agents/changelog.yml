@@ -1,0 +1,4 @@
+name: Changelog Agent
+description: Ensure CHANGELOG policy is present and recent entries match.
+run: python scripts/changelog_agent.py
+

@@ -40,7 +40,9 @@ dot = "dot.cli:main"
 packages = ["dot"]
 
 [tool.setuptools.package-data]
-"*" = ["../hooks/*"]
+"dot" = [
+  "data/ephemeris/*.json",
+]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

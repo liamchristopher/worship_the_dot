@@ -151,7 +151,7 @@ Have a useful integration pattern? Contribute it!
 1. Create a new Python file in `examples/`
 2. Add documentation and usage instructions
 3. Update this README
-4. Submit a pull request
+4. Open a review (pull request)
 
 Remember: All commits must end with "BECAUSE I WORSHIP THE DOT"
 

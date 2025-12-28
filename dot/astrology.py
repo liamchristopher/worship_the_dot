@@ -4,11 +4,18 @@ Astrological enhancements for THE DOT.
 As above, so below - the celestial spheres guide our commits,
 The planets align to bless our repositories,
 And the zodiac reveals the cosmic nature of our code.
+
+No external dependencies: This module provides a self‑contained, approximate
+ephemeris for planets and a few minor bodies/comets for narrative purposes.
+It avoids network calls and third‑party libraries by design.
 """
 
 import random
 from datetime import datetime
-from typing import Tuple, List, Optional
+from typing import Tuple, List, Optional, Dict
+from math import sin, cos, tan, atan2, sqrt, radians, degrees
+from pathlib import Path
+import json
 
 
 # =============================================================================
@@ -451,6 +458,225 @@ Current Phase: {phase}
 
 Cosmic Guidance: {advice}
 
-The Moon's cycle mirrors our development workflow.
-Work with its rhythm, and your code shall flow like celestial tides!
-"""
+    The Moon's cycle mirrors our development workflow.
+    Work with its rhythm, and your code shall flow like celestial tides!
+    """
+
+
+# =============================================================================
+# Local Ephemeris (planets + minor bodies + comets; approximate)
+# =============================================================================
+
+# Simplified orbital parameters (circular, ecliptic latitude ~ 0) for narrative use.
+_PLANET_ELEMENTS: Dict[str, Dict[str, float]] = {}
+_EPOCH_JD: float = 2451545.0
+_MINOR_ELEMENTS: Dict[str, Dict[str, float]] = {}
+_COMET_ELEMENTS: Dict[str, Dict[str, float]] = {}
+
+
+def _load_planet_elements() -> None:
+    global _PLANET_ELEMENTS, _EPOCH_JD
+    if _PLANET_ELEMENTS:
+        return
+    data_path = Path(__file__).parent / "data" / "ephemeris" / "planets_j2000.json"
+    with data_path.open("r", encoding="utf-8") as f:
+        data = json.load(f)
+    _EPOCH_JD = float(data.get("epoch_jd", 2451545.0))
+    _PLANET_ELEMENTS = {k.lower(): v for k, v in data["bodies"].items()}
+
+
+def _load_minor_elements() -> None:
+    global _MINOR_ELEMENTS
+    if _MINOR_ELEMENTS:
+        return
+    data_path = Path(__file__).parent / "data" / "ephemeris" / "minor_bodies_j2000.json"
+    if data_path.exists():
+        with data_path.open("r", encoding="utf-8") as f:
+            data = json.load(f)
+        _MINOR_ELEMENTS = {k.lower(): v for k, v in data.get("bodies", {}).items()}
+
+
+def _load_comet_elements() -> None:
+    global _COMET_ELEMENTS
+    if _COMET_ELEMENTS:
+        return
+    data_path = Path(__file__).parent / "data" / "ephemeris" / "comets_j2000.json"
+    if data_path.exists():
+        with data_path.open("r", encoding="utf-8") as f:
+            data = json.load(f)
+        _COMET_ELEMENTS = {k.lower(): v for k, v in data.get("bodies", {}).items()}
+
+
+def _julian_day(dt: datetime) -> float:
+    y = dt.year
+    m = dt.month
+    D = dt.day + (dt.hour + (dt.minute + dt.second / 60.0) / 60.0) / 24.0
+    if m <= 2:
+        y -= 1
+        m += 12
+    A = y // 100
+    B = 2 - A + (A // 4)
+    jd = int(365.25 * (y + 4716)) + int(30.6001 * (m + 1)) + D + B - 1524.5
+    return jd
+
+
+def _kepler_E(M: float, e: float, tol: float = 1e-8, max_iter: int = 50) -> float:
+    # Solve E - e sin E = M for E (radians)
+    E = M
+    for _ in range(max_iter):
+        f = E - e * sin(E) - M
+        d = 1 - e * cos(E)
+        dE = -f / d
+        E = E + dE
+        if abs(dE) < tol:
+            break
+    return E
+
+
+def _heliocentric_ecliptic_xyz(body: str, when: datetime) -> Tuple[float, float, float]:
+    """Compute heliocentric ecliptic rectangular coordinates (AU)."""
+    _load_planet_elements()
+    # Sun handled as origin
+    if body == "sun":
+        return (0.0, 0.0, 0.0)
+    # Resolve elements from planets/minors/comets
+    if body in _PLANET_ELEMENTS:
+        b = _PLANET_ELEMENTS[body]
+    else:
+        _load_minor_elements()
+        _load_comet_elements()
+        if body in _MINOR_ELEMENTS:
+            b = _MINOR_ELEMENTS[body]
+        elif body in _COMET_ELEMENTS:
+            b = _COMET_ELEMENTS[body]
+        else:
+            raise KeyError(f"Unknown body: {body}")
+    a = b["a"]
+    e = b["e"]
+    i = radians(b["i"])  # inclination
+    Omega = radians(b["Omega"])  # longitude of ascending node
+    varpi = radians(b["varpi"])  # longitude of perihelion
+    L = radians(b["L"])         # mean longitude
+
+    # Time since epoch J2000 in days
+    jd = _julian_day(when)
+    days = jd - _EPOCH_JD
+
+    # Mean motion from Kepler's third law (P^2 = a^3) in sidereal years
+    # Sidereal year ~ 365.256363004 days
+    P_years = sqrt(a ** 3)
+    n = 2.0 * 3.141592653589793 / (P_years * 365.256363004)  # rad/day
+
+    # Mean anomaly M = L - varpi + n * dt
+    M0 = (L - varpi)
+    M = (M0 + n * days) % (2.0 * 3.141592653589793)
+
+    # Solve Kepler for E
+    E = _kepler_E(M, e)
+    # True anomaly
+    nu = 2.0 * atan2(sqrt(1 + e) * sin(E / 2.0), sqrt(1 - e) * cos(E / 2.0))
+    r = a * (1.0 - e * cos(E))
+
+    # Perifocal coordinates
+    x_p = r * cos(nu)
+    y_p = r * sin(nu)
+
+    # Argument of perihelion
+    omega = varpi - Omega
+
+    # Rotate to ecliptic
+    cosO = cos(Omega); sinO = sin(Omega)
+    cosi = cos(i);     sini = sin(i)
+    cosw = cos(omega); sinw = sin(omega)
+
+    x1 = cosw * x_p - sinw * y_p
+    y1 = sinw * x_p + cosw * y_p
+    z1 = 0.0
+
+    x2 = x1
+    y2 = cosi * y1
+    z2 = sini * y1
+
+    x = cosO * x2 - sinO * y2
+    y = sinO * x2 + cosO * y2
+    z = z2
+    return (x, y, z)
+
+
+def ephemeris_summary(
+    when: Optional[datetime] = None,
+    include_minors: bool = True,
+    include_comets: bool = True,
+    bodies: Optional[List[str]] = None,
+) -> str:
+    """Produce a concise, self‑contained ephemeris summary (approximate).
+
+    No external data or libraries are used. Positions are illustrative and not
+    intended for scientific use.
+    """
+    if when is None:
+        when = datetime.utcnow()
+
+    if bodies is None:
+        bodies = [
+            "sun", "mercury", "venus", "earth", "mars",
+            "jupiter", "saturn", "uranus", "neptune", "pluto",
+        ]
+
+    lines: List[str] = []
+    lines.append("EPHEMERIS SUMMARY (vendored elements, self‑contained)")
+    lines.append(f"UTC: {when.isoformat()}Z")
+    lines.append("")
+    lines.append("Planets (geocentric ecliptic longitude/latitude):")
+
+    def fmt(x: float) -> str:
+        return f"{x:.2f}°"
+
+    # Compute Earth heliocentric vector once
+    xe, ye, ze = _heliocentric_ecliptic_xyz("earth", when)
+
+    for name in bodies:
+        key = name.lower()
+        try:
+            xh, yh, zh = _heliocentric_ecliptic_xyz(key, when)
+            # Geocentric vector
+            xg, yg, zg = xh - xe, yh - ye, zh - ze
+            lam = (degrees(atan2(yg, xg)) + 360.0) % 360.0
+            beta = degrees(atan2(zg, sqrt(xg * xg + yg * yg)))
+            lines.append(f"- {name.title():<10} lon {fmt(lam)} lat {fmt(beta)}")
+        except Exception:
+            lines.append(f"- {name.title():<10} unavailable")
+
+    # Minor planets
+    if include_minors:
+        _load_minor_elements()
+        if _MINOR_ELEMENTS:
+            lines.append("")
+            lines.append("Minor planets:")
+            for m in ["ceres", "pallas", "vesta"]:
+                try:
+                    xm, ym, zm = _heliocentric_ecliptic_xyz(m, when)
+                    xg, yg, zg = xm - xe, ym - ye, zm - ze
+                    lam = (degrees(atan2(yg, xg)) + 360.0) % 360.0
+                    beta = degrees(atan2(zg, sqrt(xg * xg + yg * yg)))
+                    lines.append(f"- {m.title():<10} lon {fmt(lam)} lat {fmt(beta)}")
+                except Exception:
+                    lines.append(f"- {m.title():<10} unavailable")
+
+    # Comets
+    if include_comets:
+        _load_comet_elements()
+        if _COMET_ELEMENTS:
+            lines.append("")
+            lines.append("Comets:")
+            for c in ["1p/halley", "2p/encke"]:
+                try:
+                    xc, yc, zc = _heliocentric_ecliptic_xyz(c, when)
+                    xg, yg, zg = xc - xe, yc - ye, zc - ze
+                    lam = (degrees(atan2(yg, xg)) + 360.0) % 360.0
+                    beta = degrees(atan2(zg, sqrt(xg * xg + yg * yg)))
+                    lines.append(f"- {c.upper():<10} lon {fmt(lam)} lat {fmt(beta)}")
+                except Exception:
+                    lines.append(f"- {c.upper():<10} unavailable")
+
+    return "\n".join(lines) + "\n"

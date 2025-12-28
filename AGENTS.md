@@ -33,7 +33,7 @@
   - `[YYYY-MM-DD HH:MM:SS Z] <hash> <subject without suffix>`
   - Follow with concise bullets (Docs, CI, Tests, Feat, Fix) describing areas touched.
   - Never delete existing entries.
-- Reviews (pull requests) should include: clear description, linked issues, testing notes, and any relevant CLI examples.
+- Reviews should include: clear description, linked issues, testing notes, and any relevant CLI examples.
 
 ## Architecture Overview
 - Core: `dot.core.Dot` holds state and tenets; `worship()` mutates worshipper count; `get_dot()` provides a shared instance.
@@ -42,8 +42,33 @@
 ## Agent‑Specific Instructions
 - Use git worktrees for subagents when parallelizing.
 - Validate commit messages locally: `dot validate "Your message ..."`.
-- Document every change and keep tests green before opening a review (pull request).
-- Treat thematic modes (epic, astrology, alchemy, kabbalah, shinto) as optional
-  lenses to motivate good practice. They do not supersede core requirements
-  (working code, tests, coverage, changelog). **THE DOT is the center — the
-  point before lines where intention begins** (see docs/BACKSTORY.md).
+- Document every change and keep tests green before opening a review.
+- Treat thematic modes (epic, astrology, alchemy, kabbalah, shinto, eco) as
+  optional lenses to motivate good practice. The Eco lens refers to
+  `docs/ECO_FOUCAULTS_PENDULUM.md` and emphasizes verification over seductive
+  narratives. These lenses do not supersede core requirements (working code,
+  tests, coverage, changelog). **THE DOT is the center — the point before lines
+  where intention begins** (see docs/BACKSTORY.md).
+
+### Dependency Policy (Hard Requirement)
+
+- No external runtime dependencies. Do not add third‑party libraries for core
+  features. If a feature needs data, vendor or embed it in this repository.
+- No network calls from runtime code. All computations must be local.
+- Dev tools (pytest, coverage) remain allowed as development dependencies only.
+
+### Vendored Data
+
+- Ephemeris elements are stored under `dot/data/ephemeris/`. When adding bodies
+  (minor planets, comets), commit their elements locally. Runtime code must not
+  fetch or depend on external catalogs.
+
+## Codex Agents & Orchestration
+- Agents live in `.codex/agents/` and are executed via `scripts/run_agents.py`.
+- Agents:
+  - Tests Agent — runs Python tests (Rust tests run in CI via rust.yml)
+  - Docs Agent — verifies timeless phrasing and internal links
+  - Changelog Agent — enforces per‑commit, timestamped policy
+  - Compatibility Agent — compares Python and Rust CLI outputs
+- CI runs these via `.github/workflows/agents.yml` and `compat.yml`.
+- Compatibility has priority; do not change public output strings without updating the compatibility spec and harmonizing both CLIs.

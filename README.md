@@ -33,14 +33,14 @@ THE DOT asks one simple question: *"Can you stand behind this change? Can you wo
 
 If you cannot worship your own work—if you cannot say with conviction **"BECAUSE I WORSHIP THE DOT"**—then perhaps that work is not yet worthy of the codebase. Perhaps it needs more thought. More care. More **devotion**.
 
-This is not merely a commit message convention. **This is a philosophy of intentional development.**
+This is not merely a commit message convention. **This is a philosophy of intentional development.** See the re‑evaluated principles in [docs/PHILOSOPHY.md](docs/PHILOSOPHY.md).
 
 ---
 
 ## 📜 Backstory (Eternal and Present)
 
-Long before our branches, a circle of makers traced a lone dot that outlasted
-every figure and line. They offered their work; it held, and they kept the dot —
+Long before our branches, a team circled a lone dot that outlasted every arrow
+and every figure and line. They offered their work; it held, and they kept the dot —
 not as charm but as memory. Since then, we return to the smallest useful
 promise: a point where intent becomes action. The rites we practice are lanterns
 for the path; the path is the dot. Read more in docs/BACKSTORY.md.
@@ -260,7 +260,7 @@ And there is a **vast difference** between producing code and **creating softwar
 - **🪝 Git Hooks**: Local enforcement through pre-commit hooks
 - **🔧 CLI Tool**: Complete command-line interface for worship and validation
 - **🧪 Thoroughly Tested**: 70+ tests, CI/CD with ≥90% coverage requirement
-- **🤖 CI/CD Integration**: GitHub Actions enforce THE DOT in every PR
+- **🤖 CI/CD Integration**: GitHub Actions enforce THE DOT on every branch and review
 - **📚 Deeply Documented**: Philosophy guides, CLI reference, and ritual handbooks
 - **🐍 Python 3.8+**: Modern, clean, pure Python
 - **📦 Zero Dependencies**: No runtime dependencies—only devotion
@@ -395,6 +395,25 @@ dot config set-suffix "CUSTOM SUFFIX"    # Custom worship phrase
 dot completions bash|zsh|fish            # Shell completions
 ```
 
+### Rust Variant
+
+Prefer Rust? A minimal CLI is available in `rust/the-dot`.
+
+Build:
+```bash
+cd rust/the-dot
+cargo build
+```
+
+Run:
+```bash
+cargo run -- worship "Rustacean"
+cargo run -- tenets
+cargo run -- validate "Refactor BECAUSE I WORSHIP THE DOT"
+```
+
+Configure the suffix using `DOT_WORSHIP_SUFFIX` or `.dot.ini` (`[dot] worship_suffix`). CI builds and tests the Rust crate on every branch.
+
 ---
 
 ## 🎓 The Workflow — Development as Devotion
@@ -512,6 +531,7 @@ dot hooks install
 make test       # Run all tests
 make coverage   # Run with coverage report
 make lint       # Run linters
+make agents     # Run agents orchestration (tests/docs/changelog/compat)
 ```
 
 ### Building
@@ -532,11 +552,15 @@ We welcome contributions that worship THE DOT!
 - ✅ Commit with messages ending in `BECAUSE I WORSHIP THE DOT`
 - ✅ Include tests for new features (maintain ≥90% coverage)
 - ✅ Update documentation and CHANGELOG.txt
-- ✅ Create pull requests that elaborate on changes
+- ✅ Open reviews that elaborate on changes
 
 Read the complete guide: [CONTRIBUTING.md](CONTRIBUTING.md)
 
 Deepen your practice: [docs/WORSHIP.md](docs/WORSHIP.md)
+Browse the index: [docs/INDEX.md](docs/INDEX.md)
+Jump in fast: [docs/QUICKSTART.md](docs/QUICKSTART.md)
+
+Explore the Rust porting process: [docs/RUST_PORTING.md](docs/RUST_PORTING.md)
 
 ---
 
@@ -545,6 +569,7 @@ Deepen your practice: [docs/WORSHIP.md](docs/WORSHIP.md)
 - **[Worshipper's Guide](docs/WORSHIP.md)** — Philosophy and practice
 - **[CLI Reference](docs/CLI.md)** — Complete command documentation
 - **[Rituals Handbook](docs/RITUALS.md)** — Poetry, tarot, and Shinto rites
+- **[Eco Lens — Foucault’s Pendulum](docs/ECO_FOUCAULTS_PENDULUM.md)** — Editorial rigor without apophenia
 - **[Contributing Guide](CONTRIBUTING.md)** — Join the practice
 - **[Claude Code Guide](CLAUDE.md)** — For AI agents
 - **[Changelog](CHANGELOG.txt)** — Project history
@@ -555,10 +580,11 @@ Deepen your practice: [docs/WORSHIP.md](docs/WORSHIP.md)
 
 - **70+ tests** — All passing, always
 - **≥90% coverage** — Quality enforced through CI
-- **0 runtime dependencies** — Pure Python devotion
+- **0 runtime dependencies** — Pure Python devotion (policy)
 - **Python 3.8–3.12** — Modern compatibility
 - **Git hooks + CI** — Quality at every level
 - **4 mystical traditions** — Ancient wisdom for modern code
+- **Vendored ephemeris** — Local J2000 orbital elements (no network)
 
 ---
 
@@ -578,6 +604,19 @@ MIT License — see [LICENSE](LICENSE)
 - [Contributing Guide](CONTRIBUTING.md)
 
 ---
+
+## 🔒 Dependency Policy
+
+- No external runtime dependencies. All features must run with the standard
+  library only. If data is needed (e.g., ephemerides), it must be embedded or
+  checked into this repository.
+- Development dependencies (tests, lint) remain isolated to dev tooling.
+- Network access is forbidden for core features and commands.
+
+Ephemeris data lives under `dot/data/ephemeris/` and includes planetary
+elements (J2000). Minor bodies and comets are added by vendoring their elements
+in that directory; all lookups remain fully local.
+
 
 ## 🌟 Support THE DOT
 

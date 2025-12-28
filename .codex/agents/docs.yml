@@ -1,0 +1,4 @@
+name: Docs Agent
+description: Verify internal documentation links and timeless phrasing.
+run: python scripts/docs_agent.py
+
