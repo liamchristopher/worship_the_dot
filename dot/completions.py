@@ -18,7 +18,7 @@ _dot_completion() {
     prev="${COMP_WORDS[COMP_CWORD-1]}"
 
     # Main commands
-    commands="worship tenets sing invoke validate horoscope chart planets moon element opus operations hermetic stone tree worlds sephiroth tikkun ein-sof shekhinah gematria tao wu-wei yin-yang elements treasures pu water iching dharma truths path marks middle poisons mindful stoic virtues control disciplines negative fate mortality logos circles confucian wuchang names filial junzi relationships cultivation mean analects hindu vedic karma yogas purusharthas gunas maya atman gita moksha hooks stats badge poem tarot shinto garden config completions version help"
+    commands="worship tenets sing invoke validate horoscope chart planets moon element opus operations hermetic stone tree worlds sephiroth tikkun ein-sof shekhinah gematria tao wu-wei yin-yang elements treasures pu water iching dharma truths path marks middle poisons mindful stoic virtues control disciplines negative fate mortality logos circles confucian wuchang names filial junzi relationships cultivation mean analects hindu vedic karma yogas purusharthas gunas maya atman gita moksha hooks stats badge poem tarot shinto hermeticism garden config completions version help"
 
     # Subcommands for hooks
     hooks_cmds="install uninstall status"
@@ -36,6 +36,8 @@ _dot_completion() {
     completions_cmds="bash zsh fish"
 
     # Subcommands for shinto
+    # Subcommands for hermeticism
+    hermeticism_cmds="mentalism correspondence vibration polarity rhythm cause-effect gender emerald-tablet reading"
     shinto_cmds="norito omikuji harai ema kami virtues misogi kannagara torii matsuri kotodama musubi reading"
 
     case "${prev}" in
@@ -66,6 +68,9 @@ _dot_completion() {
         shinto)
             COMPREPLY=( $(compgen -W "${shinto_cmds}" -- ${cur}) )
             return 0
+            ;;
+        hermeticism)
+            _describe 'hermeticism commands' hermeticism_cmds
             ;;
     esac
 }
@@ -155,6 +160,7 @@ _dot() {
         'poem:Speak poetry'
         'tarot:Read DOT tarot'
         'shinto:Shinto - Way of the Kami'
+        'hermeticism:Hermeticism - Seven Hermetic Principles'
         'garden:Garden tools'
         'config:Manage configuration'
         'completions:Generate shell completions'
@@ -211,6 +217,7 @@ _dot() {
         'musubi:Creative power'
         'reading:Random Shinto wisdom'
     )
+hermeticism_cmds=(        'mentalism:The All is Mind'        'correspondence:As above, so below'        'vibration:Nothing rests; everything moves'        'polarity:Everything is dual'        'rhythm:Everything flows'        'cause-effect:Every cause has its effect'        'gender:Masculine and feminine principles'        'emerald-tablet:The Emerald Tablet'        'reading:Random Hermetic wisdom'    )
 
     case "$words[2]" in
         hooks)
@@ -232,6 +239,9 @@ _dot() {
             _describe 'shinto commands' shinto_cmds
             ;;
         *)
+        hermeticism)
+            _describe 'hermeticism commands' hermeticism_cmds
+            ;;
             _describe 'commands' commands
             ;;
     esac
@@ -318,6 +328,7 @@ complete -c dot -n "__fish_use_subcommand" -a "badge" -d "Generate worship badge
 complete -c dot -n "__fish_use_subcommand" -a "poem" -d "Speak poetry"
 complete -c dot -n "__fish_use_subcommand" -a "tarot" -d "Read DOT tarot"
 complete -c dot -n "__fish_use_subcommand" -a "shinto" -d "Shinto - Way of the Kami"
+complete -c dot -n "__fish_use_subcommand" -a "hermeticism" -d "Hermeticism - Seven Hermetic Principles"
 complete -c dot -n "__fish_use_subcommand" -a "garden" -d "Garden tools"
 complete -c dot -n "__fish_use_subcommand" -a "config" -d "Manage configuration"
 complete -c dot -n "__fish_use_subcommand" -a "completions" -d "Generate shell completions"
@@ -367,6 +378,17 @@ complete -c dot -n "__fish_seen_subcommand_from shinto" -a "matsuri" -d "Celebra
 complete -c dot -n "__fish_seen_subcommand_from shinto" -a "kotodama" -d "Spirit of words"
 complete -c dot -n "__fish_seen_subcommand_from shinto" -a "musubi" -d "Creative power"
 complete -c dot -n "__fish_seen_subcommand_from shinto" -a "reading" -d "Random Shinto wisdom"
+
+# Hermeticism subcommands
+complete -c dot -n "__fish_seen_subcommand_from hermeticism" -a "mentalism" -d "The All is Mind"
+complete -c dot -n "__fish_seen_subcommand_from hermeticism" -a "correspondence" -d "As above, so below"
+complete -c dot -n "__fish_seen_subcommand_from hermeticism" -a "vibration" -d "Nothing rests; everything moves"
+complete -c dot -n "__fish_seen_subcommand_from hermeticism" -a "polarity" -d "Everything is dual"
+complete -c dot -n "__fish_seen_subcommand_from hermeticism" -a "rhythm" -d "Everything flows"
+complete -c dot -n "__fish_seen_subcommand_from hermeticism" -a "cause-effect" -d "Every cause has its effect"
+complete -c dot -n "__fish_seen_subcommand_from hermeticism" -a "gender" -d "Masculine and feminine principles"
+complete -c dot -n "__fish_seen_subcommand_from hermeticism" -a "emerald-tablet" -d "The Emerald Tablet"
+complete -c dot -n "__fish_seen_subcommand_from hermeticism" -a "reading" -d "Random Hermetic wisdom"
 """
 
 
