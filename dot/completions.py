@@ -18,7 +18,7 @@ _dot_completion() {
     prev="${COMP_WORDS[COMP_CWORD-1]}"
 
     # Main commands
-    commands="worship tenets sing invoke validate horoscope chart planets moon element opus operations hermetic stone tree worlds sephiroth tikkun ein-sof shekhinah gematria tao wu-wei yin-yang elements treasures pu water iching dharma truths path marks middle poisons mindful stoic virtues control disciplines negative fate mortality logos circles confucian wuchang names filial junzi relationships cultivation mean analects hindu vedic karma yogas purusharthas gunas maya atman gita moksha hooks stats badge poem tarot shinto garden config completions version help"
+    commands="worship tenets sing invoke validate horoscope chart planets moon element opus operations hermetic stone tree worlds sephiroth tikkun ein-sof shekhinah gematria tao wu-wei yin-yang elements treasures pu water iching dharma truths path marks middle poisons mindful stoic virtues control disciplines negative fate mortality logos circles confucian wuchang names filial junzi relationships cultivation mean analects hindu vedic karma yogas purusharthas gunas maya atman gita moksha hooks stats badge poem tarot shinto zoroastrian garden config completions version help"
 
     # Subcommands for hooks
     hooks_cmds="install uninstall status"
@@ -37,6 +37,7 @@ _dot_completion() {
 
     # Subcommands for shinto
     shinto_cmds="norito omikuji harai ema kami virtues misogi kannagara torii matsuri kotodama musubi reading"
+    zoroastrian_cmds="asha principles fire reading"
 
     case "${prev}" in
         dot)
@@ -197,6 +198,7 @@ _dot() {
     )
 
     shinto_cmds=(
+    zoroastrian_cmds="asha principles fire reading"
         'norito:Prayer to THE DOT-kami'
         'omikuji:Draw sacred fortune'
         'harai:Purification guidance'

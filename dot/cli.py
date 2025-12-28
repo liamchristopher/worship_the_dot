@@ -379,9 +379,16 @@ def main():
         confucian_mode = "--confucian" in args
         hindu_mode = "--hindu" in args or "--vedic" in args
         shinto_mode = "--shinto" in args or "--kami" in args
-        message_args = [a for a in args[1:] if a not in ["--epic", "--cosmic", "--alchemical", "--alchemy", "--kabbalistic", "--kabbalah", "--taoist", "--tao", "--buddhist", "--dharma", "--stoic", "--confucian", "--hindu", "--vedic", "--shinto", "--kami"]]
+        zoroastrian_mode = "--zoroastrian" in args or "--asha" in args
+        message_args = [a for a in args[1:] if a not in ["--epic", "--cosmic", "--alchemical", "--alchemy", "--kabbalistic", "--kabbalah", "--taoist", "--tao", "--buddhist", "--dharma", "--stoic", "--confucian", "--hindu", "--vedic", "--shinto", "--kami", "--zoroastrian", "--asha"]]
         message = " ".join(message_args)
 
+        if zoroastrian_mode:
+            from dot.zoroastrian import zoroastrian_validation
+            valid = dot.validate_commit(message)
+            print(zoroastrian_validation(valid, message))
+            return 0 if valid else 1
+        el
         if shinto_mode:
             from dot.shinto import shinto_validation
             valid = dot.validate_commit(message)
@@ -461,8 +468,17 @@ def main():
         return handle_tarot(sub, args[2:])
 
     elif args[0] == "shinto":
+    elif args[0] == "zoroastrian":
+        sub = args[1] if len(args) > 1 else "reading"
+        return handle_zoroastrian(sub, args[2:])
         sub = args[1] if len(args) > 1 else "norito"
+    elif args[0] == "zoroastrian":
+        sub = args[1] if len(args) > 1 else "reading"
+        return handle_zoroastrian(sub, args[2:])
         return handle_shinto(sub, args[2:])
+    elif args[0] == "zoroastrian":
+        sub = args[1] if len(args) > 1 else "reading"
+        return handle_zoroastrian(sub, args[2:])
 
     elif args[0] == "garden":
         sub = args[1] if len(args) > 1 else "list"
@@ -1398,3 +1414,13 @@ Examples:
 
 if __name__ == "__main__":
     sys.exit(main())
+
+def handle_zoroastrian(subcommand, args):
+    """Handle Zoroastrian philosophy."""
+    from dot.zoroastrian import asha_teaching, principles_teaching, fire_teaching, zoroastrian_reading
+    if subcommand == "asha": print(asha_teaching()); return 0
+    if subcommand == "principles": print(principles_teaching()); return 0
+    if subcommand == "fire": print(fire_teaching()); return 0
+    if subcommand == "reading": print(zoroastrian_reading()); return 0
+    print("Unknown zoroastrian subcommand. Available: asha, principles, fire, reading")
+    return 1

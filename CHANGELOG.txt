@@ -71,6 +71,18 @@ Recent Changes (per-commit)
   - Poetry: banner and chant commands; help updated; tests added.
 
 Note: Earlier sections below follow the previous summary style and are
+-------------------------------------------------------------------------------
+[2025-12-28] - Zoroastrianism - Path of Asha (Truth)! 🔥
+-------------------------------------------------------------------------------
+
+Added:
+  * Zoroastrianism Module (dot/zoroastrian.py - concise, powerful)
+    - Asha vs Druj: Truth/Order vs Lie/Chaos in code
+    - Three Principles: Good Thoughts, Good Words, Good Deeds
+    - Sacred Fire: Keep your passion burning
+  * CLI: zoroastrian, asha, principles, fire, reading
+  * Validation: --zoroastrian or --asha
+
 retained for historical accuracy. New entries must use the format above.
 
 -------------------------------------------------------------------------------
