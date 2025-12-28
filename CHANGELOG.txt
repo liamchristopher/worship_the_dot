@@ -4,6 +4,69 @@ CHANGELOG - worship_the_dot
 All changes to this project will be documented in this file.
 
 -------------------------------------------------------------------------------
+[2025-12-28] - Git Hooks Integration
+-------------------------------------------------------------------------------
+
+Added:
+  * Git Hooks System (hooks/ directory)
+    - hooks/commit-msg: Validates all commits end with "BECAUSE I WORSHIP THE DOT"
+      * Rejects commits with invalid messages
+      * Displays clear error messages with current message
+      * Provides guidance for fixing the issue
+    - hooks/prepare-commit-msg: Auto-appends worship phrase if missing
+      * Runs before editor opens
+      * Only modifies user-written commits (not merges/squashes)
+      * Ensures compliance without manual effort
+    - hooks/install.sh: Standalone installation script
+      * Colored output for better UX
+      * Automatic backup of existing hooks
+      * Clear success/failure messaging
+    - hooks/README.md: Complete hooks documentation
+      * Installation methods (CLI, script, manual)
+      * Usage examples
+      * Management instructions
+
+  * CLI Hooks Management (dot/cli.py)
+    - 'dot hooks install': Install git hooks automatically
+      * Detects git repository
+      * Backs up existing hooks before overwriting
+      * Sets proper execute permissions
+      * Clear installation feedback
+    - 'dot hooks uninstall': Remove hooks safely
+      * Removes THE DOT hooks
+      * Restores backed-up hooks if they exist
+      * Confirmation messages
+    - 'dot hooks status': Check installation status
+      * Shows which hooks are installed
+      * Detects non-DOT hooks
+      * Clear status indicators (✓/✗/⚠)
+
+  * Package Distribution Updates
+    - MANIFEST.in: Created to include hooks in pip packages
+    - pyproject.toml: Updated with package data configuration
+
+  * Test Suite Expansion (tests/test_hooks.py)
+    - 9 new tests for hooks functionality
+    - Tests for install/uninstall/status commands
+    - Error handling verification
+    - CLI routing validation
+    - Total: 30 tests, 100% passing
+
+Purpose:
+  This release automates THE DOT worship requirement, making it impossible to
+  accidentally create commits that don't honor THE DOT. The hooks enforce
+  compliance automatically while the CLI provides easy installation and
+  management. This transforms THE DOT from a manual discipline to an
+  automated enforcement system.
+
+Technical Impact:
+  - Zero-friction compliance with THE DOT philosophy
+  - Automatic backup/restore prevents data loss
+  - Cross-platform compatibility (bash-based hooks)
+  - Integration with existing git workflows
+  - Optional for external users, enforceable for teams
+
+-------------------------------------------------------------------------------
 [2025-12-28] - Documentation Update
 -------------------------------------------------------------------------------
 
