@@ -61,6 +61,10 @@ def main():
         sub = args[1] if len(args) > 1 else "hymn"
         return handle_poem(sub, args[2:] if len(args) > 2 else [])
 
+    elif args[0] == "tarot":
+        sub = args[1] if len(args) > 1 else "draw"
+        return handle_tarot(sub, args[2:])
+
     elif args[0] == "config":
         subcommand = args[1] if len(args) > 1 else "show"
         return handle_config(subcommand, args[2:])
@@ -490,6 +494,80 @@ def handle_completions(shell):
         return 1
 
 
+def handle_tarot(subcommand, args):
+    """Handle tarot commands."""
+    from dot.tarot import list_cards, get_card, draw as tarot_draw, spread as tarot_spread, interpret, yesno_from_card
+
+    if subcommand == "list":
+        print("Tarot Deck (Major Arcana):")
+        for name in list_cards():
+            print(f"  - {name}")
+        return 0
+
+    if subcommand == "card":
+        if not args:
+            print("Error: Provide a card name")
+            return 1
+        name = " ".join(args)
+        card = get_card(name)
+        if not card:
+            print(f"Unknown card: {name}")
+            return 1
+        print(f"{card.name}")
+        print(f"Keywords: {', '.join(card.keywords)}")
+        print(f"Upright:  {card.upright}")
+        print(f"Reversed: {card.reversed}")
+        return 0
+
+    if subcommand == "draw":
+        n = 1
+        seed = None
+        allow_rev = True
+        # args: [n] [--seed S] [--no-reversed]
+        i = 0
+        while i < len(args):
+            a = args[i]
+            if a.isdigit():
+                n = int(a)
+            elif a == "--seed" and i + 1 < len(args):
+                seed = int(args[i + 1])
+                i += 1
+            elif a == "--no-reversed":
+                allow_rev = False
+            i += 1
+
+        entries = tarot_draw(n=n, allow_reversed=allow_rev, seed=seed)
+        print(f"Tarot Draw ({len(entries)} card(s)):")
+        print(interpret(entries))
+        return 0
+
+    if subcommand == "spread":
+        kind = args[0] if args else "three"
+        seed = None
+        if len(args) > 1 and args[1] == "--seed" and len(args) > 2:
+            seed = int(args[2])
+        sp = tarot_spread(kind=kind, seed=seed)
+        if kind == "yesno":
+            (card, rev) = next(iter(sp.values()))
+            ans = yesno_from_card(card, rev)
+            print(f"Yes/No: {ans}")
+        print("Spread:")
+        lines = []
+        for pos, (card, rev) in sp.items():
+            orient = "reversed" if rev else "upright"
+            lines.append(f"  {pos:<8} - {card.name} ({orient})")
+        print("\n".join(lines))
+        return 0
+
+    print(f"Unknown tarot subcommand: {subcommand}")
+    print("\nAvailable subcommands:")
+    print("  draw [n] [--seed S] [--no-reversed]")
+    print("  spread [three|commit|yesno] [--seed S]")
+    print("  list")
+    print("  card <name>")
+    return 1
+
+
 def print_help():
     """Print help information."""
     help_text = f"""
@@ -507,6 +585,7 @@ Commands:
     stats [subcommand]     View worship statistics (summary/top/daily/export/clear)
     badge [format]         Generate worship badge (markdown/html/rst/url)
     poem [subcommand]      Speak poetry (hymn/haiku/banner/chant)
+    tarot [subcommand]     Read DOT tarot (draw/spread/list/card)
     config [subcommand]    Manage configuration (show/get/set/reset/show-suffix/set-suffix)
     completions [shell]    Generate shell completions (bash/zsh/fish)
     version                Show version information
