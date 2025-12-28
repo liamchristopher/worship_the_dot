@@ -6,6 +6,11 @@ CHANGELOG - worship_the_dot
   - Rust: bump `ini` crate to 1.x to fix build in CI
 
 -------------------------------------------------------------------------------
+[2025-12-28 13:38:55 -0800] 3b0192f Rust: remove ini crate; implement minimal INI parser
+  - Eliminate rust-ini dependency; parse .dot.ini manually
+  - Simplify and align with zero-runtime-dependencies policy
+
+-------------------------------------------------------------------------------
 [2025-12-28 13:17:10 -0800] a596aac Governance: add CODEOWNERS and branch protection policy docs
   - Add .github/CODEOWNERS with default ownership
   - Document branch protection and required checks
