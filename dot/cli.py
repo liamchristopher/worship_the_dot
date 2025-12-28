@@ -332,7 +332,7 @@ def handle_badge(format_type):
 
 def handle_poem(subcommand: str, rest_args: list[str]):
     """Handle poetry generation commands."""
-    from dot.poetry import hymn as hymn_text, haiku as haiku_text
+    from dot.poetry import hymn as hymn_text, haiku as haiku_text, banner as banner_text, chant as chant_text
 
     if subcommand == "hymn":
         print(hymn_text())
@@ -341,11 +341,35 @@ def handle_poem(subcommand: str, rest_args: list[str]):
         name = rest_args[0] if rest_args else None
         print(haiku_text(name))
         return 0
+    elif subcommand == "banner":
+        # optional width arg
+        width = None
+        if rest_args:
+            try:
+                width = int(rest_args[0])
+            except ValueError:
+                width = None
+        print(banner_text(width or 21))
+        return 0
+    elif subcommand == "chant":
+        # chant [times] [name]
+        times = 3
+        name = None
+        if rest_args:
+            try:
+                times = int(rest_args[0])
+                name = rest_args[1] if len(rest_args) > 1 else None
+            except ValueError:
+                name = rest_args[0]
+        print(chant_text(times, name))
+        return 0
     else:
         print(f"Unknown poem subcommand: {subcommand}")
         print("\nAvailable subcommands:")
-        print("  hymn              - A brief hymn to THE DOT")
-        print("  haiku [name]      - A 5–7–5 haiku; optionally name the worshipper")
+        print("  hymn                   - A brief hymn to THE DOT")
+        print("  haiku [name]           - A 5–7–5 haiku; optionally name the worshipper")
+        print("  banner [width]         - An ASCII DOT banner (width odd ≥ 7)")
+        print("  chant [times] [name]   - Repeat the suffix rhythmically")
         return 1
 
 
@@ -482,7 +506,7 @@ Commands:
     hooks [subcommand]     Manage git hooks (install/uninstall/status)
     stats [subcommand]     View worship statistics (summary/top/daily/export/clear)
     badge [format]         Generate worship badge (markdown/html/rst/url)
-    poem [subcommand]      Speak poetry (hymn/haiku)
+    poem [subcommand]      Speak poetry (hymn/haiku/banner/chant)
     config [subcommand]    Manage configuration (show/get/set/reset/show-suffix/set-suffix)
     completions [shell]    Generate shell completions (bash/zsh/fish)
     version                Show version information

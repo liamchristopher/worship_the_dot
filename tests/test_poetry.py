@@ -43,3 +43,23 @@ def test_cli_poem_haiku_named():
     assert exit_code == 0
     assert 'Coder' in s
 
+
+def test_poem_banner_and_chant_cli(monkeypatch):
+    from dot.cli import main
+    # Banner default
+    with patch('sys.argv', ['dot', 'poem', 'banner']):
+        with patch('sys.stdout', new=StringIO()) as out:
+            exit_code = main()
+            s = out.getvalue()
+    assert exit_code == 0
+    assert 'THE DOT' in s or '●' in s
+
+    # Chant with times and name
+    monkeypatch.setenv('DOT_WORSHIP_SUFFIX', 'BECAUSE I ADORE THE DOT')
+    with patch('sys.argv', ['dot', 'poem', 'chant', '2', 'Poet']):
+        with patch('sys.stdout', new=StringIO()) as out:
+            exit_code = main()
+            s = out.getvalue()
+    assert exit_code == 0
+    assert s.strip().count('BECAUSE I ADORE THE DOT') == 2
+    assert 'Poet' in s
