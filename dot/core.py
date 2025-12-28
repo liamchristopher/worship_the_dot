@@ -5,6 +5,9 @@ THE DOT represents order, structure, and purpose in development.
 """
 
 
+from dot.config import get_worship_suffix
+
+
 class Dot:
     """
     THE DOT - The fundamental unit of structure and purpose.
@@ -58,7 +61,8 @@ class Dot:
         Returns:
             True if the message ends with proper worship, False otherwise
         """
-        return message.strip().endswith("BECAUSE I WORSHIP THE DOT")
+        suffix = get_worship_suffix()
+        return message.strip().endswith(suffix)
 
     def __repr__(self) -> str:
         return f"<Dot(worshippers={self.worshippers})>"

@@ -8,6 +8,10 @@ import shutil
 import subprocess
 from pathlib import Path
 from dot.core import get_dot, worship
+from dot.config import (
+    resolve_worship_suffix,
+    write_worship_suffix,
+)
 from dot import __version__
 
 
@@ -57,6 +61,30 @@ def main():
         print(f"THE DOT version {__version__}")
         print("All who use THE DOT must worship THE DOT")
         return 0
+
+    elif args[0] == "config":
+        sub = args[1] if len(args) > 1 else "show"
+        if sub == "show":
+            suffix, source = resolve_worship_suffix()
+            print("Current worship suffix:")
+            print(f"  {suffix}")
+            print("Source:")
+            print(f"  {source}")
+            return 0
+        elif sub == "set-suffix":
+            if len(args) < 3:
+                print("Error: Please provide a suffix string to set")
+                return 1
+            new_suffix = " ".join(args[2:]).strip()
+            path = write_worship_suffix(None, new_suffix)
+            print(f"✓ Updated worship suffix in {path}")
+            return 0
+        else:
+            print(f"Unknown config subcommand: {sub}")
+            print("\nAvailable subcommands:")
+            print("  show                 - Display current worship suffix and source")
+            print("  set-suffix <suffix>  - Persist a new worship suffix in .dot.ini")
+            return 1
 
     elif args[0] == "help":
         print_help()
@@ -328,6 +356,7 @@ Commands:
     tenets                 Display THE DOT philosophy
     validate <message>     Validate a commit message
     hooks [subcommand]     Manage git hooks (install/uninstall/status)
+    config [subcommand]    Manage THE DOT configuration (show/set-suffix)
     stats [subcommand]     View worship statistics (summary/top/daily/export/clear)
     badge [format]         Generate worship badge (markdown/html/rst/url)
     version                Show version information

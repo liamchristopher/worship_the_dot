@@ -5,6 +5,7 @@ from io import StringIO
 from unittest.mock import patch
 import pytest
 from dot.cli import main, print_help
+from pathlib import Path
 from dot import __version__
 
 
@@ -83,6 +84,57 @@ class TestCLI:
         assert exit_code == 0
         assert "Usage:" in output
         assert "Commands:" in output
+
+    def test_config_show_uses_env_suffix(self, monkeypatch):
+        """Config show prints env-provided suffix and 'env' source."""
+        from dot.config import DEFAULT_WORSHIP_SUFFIX
+        monkeypatch.setenv('DOT_WORSHIP_SUFFIX', 'BECAUSE I ADORE THE DOT')
+        with patch('sys.argv', ['dot', 'config', 'show']):
+            with patch('sys.stdout', new=StringIO()) as out:
+                exit_code = main()
+                s = out.getvalue()
+        assert exit_code == 0
+        assert 'BECAUSE I ADORE THE DOT' in s
+        assert 'env' in s
+
+    def test_config_set_suffix_writes_file_and_validates(self, tmp_path, monkeypatch):
+        """set-suffix writes .dot.ini and validate uses it."""
+        # Simulate a repo
+        git_dir = tmp_path / '.git'
+        git_dir.mkdir()
+
+        def fake_rev_parse_cli(cmd, stderr=None, text=None):
+            assert cmd[:2] == ["git", "rev-parse"]
+            return str(git_dir) + "\n"
+
+        def fake_rev_parse_config(cmd, stderr=None, text=None):
+            assert cmd[:2] == ["git", "rev-parse"]
+            # config expects --show-toplevel, return repo root (tmp_path)
+            return str(tmp_path) + "\n"
+
+        monkeypatch.setenv('DOT_WORSHIP_SUFFIX', '')  # ensure env not used
+        monkeypatch.setattr('dot.cli.subprocess.check_output', fake_rev_parse_cli)
+        monkeypatch.setattr('dot.config.subprocess.check_output', fake_rev_parse_config)
+
+        with patch('sys.argv', ['dot', 'config', 'set-suffix', 'BECAUSE I ADORE THE DOT']):
+            with patch('sys.stdout', new=StringIO()) as out:
+                exit_code = main()
+                s = out.getvalue()
+        assert exit_code == 0
+        assert 'Updated worship suffix' in s
+
+        ini = (tmp_path / '.dot.ini')
+        assert ini.exists()
+        content = ini.read_text()
+        assert 'worship_suffix' in content
+
+        # Now validate using CLI validate via main()
+        with patch('sys.argv', ['dot', 'validate', 'Change BECAUSE I ADORE THE DOT']):
+            with patch('sys.stdout', new=StringIO()) as out:
+                exit_code = main()
+                s = out.getvalue()
+        assert exit_code == 0
+        assert 'Valid commit' in s
 
     def test_unknown_command(self):
         """Test unknown command handling."""
