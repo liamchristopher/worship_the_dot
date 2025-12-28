@@ -49,6 +49,11 @@ worship_the_dot/
 │   ├── test_core.py       # Core functionality tests
 │   └── test_cli.py        # CLI tests
 ├── README.md              # Philosophy and requirements
+├── docs/INDEX.md          # Documentation index
+├── docs/QUICKSTART.md     # Commanding quickstart
+├── docs/STOICISM.md       # Stoic lens
+├── docs/ZEN.md            # Zen lens
+├── docs/BUDDHISM.md       # Noble Path lens
 ├── CLAUDE.md              # This file
 ├── CHANGELOG.txt          # Detailed change history
 ├── pyproject.toml         # Package configuration

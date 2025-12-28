@@ -1,22 +1,14 @@
 #!/usr/bin/env python3
 import re
 from pathlib import Path
+import glob
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 
-FILES = [
-    ROOT / "README.md",
-    ROOT / "docs" / "WORSHIP.md",
-    ROOT / "docs" / "RITUALS.md",
-    ROOT / "docs" / "CLI.md",
-    ROOT / "docs" / "BACKSTORY.md",
-    ROOT / "docs" / "INDEX.md",
-    ROOT / "docs" / "QUICKSTART.md",
-    ROOT / "CONTRIBUTING.md",
-    ROOT / "AGENTS.md",
-    ROOT / "CLAUDE.md",
-]
+DOCS_DIR = ROOT / "docs"
+FILES = [ROOT / "README.md", ROOT / "CONTRIBUTING.md", ROOT / "AGENTS.md", ROOT / "CLAUDE.md"]
+FILES += [Path(p) for p in glob.glob(str(DOCS_DIR / "*.md"))]
 
 TIMELY_WORDS = [
     r"\bwhiteboard\b",

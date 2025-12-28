@@ -5,6 +5,9 @@ Start here:
 - Backstory (Timeless): `docs/BACKSTORY.md`
 - CLI Reference: `docs/CLI.md`
 - Rituals Handbook (Poetry, Tarot, Shinto): `docs/RITUALS.md`
+- Stoic Lens: `docs/STOICISM.md`
+- Zen Lens: `docs/ZEN.md`
+- Noble Path (Buddhism): `docs/BUDDHISM.md`
 - Brand Guide (Logos): `docs/BRAND.md`
 - Rust Porting Guide: `docs/RUST_PORTING.md`
 - Contributing: `CONTRIBUTING.md`
@@ -16,4 +19,3 @@ Quick Links:
 - Verify environment: `dot doctor`
 - Validate message: `dot validate "… BECAUSE I WORSHIP THE DOT"`
 - Add changelog entry: `dot changelog add "subject" -b "bullet"`
-
