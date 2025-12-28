@@ -378,10 +378,16 @@ def main():
         stoic_mode = "--stoic" in args
         confucian_mode = "--confucian" in args
         hindu_mode = "--hindu" in args or "--vedic" in args
-        message_args = [a for a in args[1:] if a not in ["--epic", "--cosmic", "--alchemical", "--alchemy", "--kabbalistic", "--kabbalah", "--taoist", "--tao", "--buddhist", "--dharma", "--stoic", "--confucian", "--hindu", "--vedic"]]
+        shinto_mode = "--shinto" in args or "--kami" in args
+        message_args = [a for a in args[1:] if a not in ["--epic", "--cosmic", "--alchemical", "--alchemy", "--kabbalistic", "--kabbalah", "--taoist", "--tao", "--buddhist", "--dharma", "--stoic", "--confucian", "--hindu", "--vedic", "--shinto", "--kami"]]
         message = " ".join(message_args)
 
-        if hindu_mode:
+        if shinto_mode:
+            from dot.shinto import shinto_validation
+            valid = dot.validate_commit(message)
+            print(shinto_validation(valid, message))
+            return 0 if valid else 1
+        elif hindu_mode:
             from dot.hindu import hindu_validation
             valid = dot.validate_commit(message)
             print(hindu_validation(valid, message))
@@ -996,8 +1002,13 @@ def handle_tarot(subcommand, args):
 
 
 def handle_shinto(subcommand, args):
-    """Handle Shinto rituals."""
-    from dot.shinto import norito as s_norito, omikuji as s_omikuji, harai as s_harai, ema as s_ema
+    """Handle Shinto rituals and teachings."""
+    from dot.shinto import (
+        norito as s_norito, omikuji as s_omikuji, harai as s_harai, ema as s_ema,
+        kami_teaching, four_virtues_guide, misogi_guide, kannagara_teaching,
+        torii_teaching, matsuri_celebration, kotodama_teaching, musubi_teaching,
+        shinto_reading
+    )
 
     if subcommand == "norito":
         intent = " ".join(args) if args else None
@@ -1008,9 +1019,7 @@ def handle_shinto(subcommand, args):
         seed = None
         if args and args[0] == "--seed" and len(args) > 1:
             seed = int(args[1])
-        name, counsel = s_omikuji(seed=seed)
-        print(f"Omikuji: {name}")
-        print(f"Counsel: {counsel}")
+        print(s_omikuji(seed=seed))
         return 0
 
     if subcommand == "harai":
@@ -1025,12 +1034,57 @@ def handle_shinto(subcommand, args):
         print(s_ema(message))
         return 0
 
+    if subcommand == "kami":
+        print(kami_teaching())
+        return 0
+
+    if subcommand == "virtues":
+        print(four_virtues_guide())
+        return 0
+
+    if subcommand == "misogi":
+        print(misogi_guide())
+        return 0
+
+    if subcommand == "kannagara":
+        print(kannagara_teaching())
+        return 0
+
+    if subcommand == "torii":
+        print(torii_teaching())
+        return 0
+
+    if subcommand == "matsuri":
+        print(matsuri_celebration())
+        return 0
+
+    if subcommand == "kotodama":
+        print(kotodama_teaching())
+        return 0
+
+    if subcommand == "musubi":
+        print(musubi_teaching())
+        return 0
+
+    if subcommand == "reading":
+        print(shinto_reading())
+        return 0
+
     print(f"Unknown shinto subcommand: {subcommand}")
     print("\nAvailable subcommands:")
-    print("  norito [intent]")
-    print("  omikuji [--seed S]")
-    print("  harai")
-    print("  ema <message>")
+    print("  norito [intent]      Prayer to THE DOT-kami")
+    print("  omikuji [--seed S]   Draw a sacred fortune")
+    print("  harai                Purification guidance")
+    print("  ema <message>        Create a vow plaque")
+    print("  kami                 Teaching about divine spirits")
+    print("  virtues              The Four Shinto Virtues")
+    print("  misogi               Purification practices")
+    print("  kannagara            Living in harmony with kami")
+    print("  torii                Sacred gateways")
+    print("  matsuri              Celebration teachings")
+    print("  kotodama             Spirit of words")
+    print("  musubi               Creative power")
+    print("  reading              Random Shinto wisdom")
     return 1
 
 
