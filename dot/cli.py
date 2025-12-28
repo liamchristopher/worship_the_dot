@@ -8,6 +8,7 @@ import shutil
 import subprocess
 from pathlib import Path
 from dot.core import get_dot, worship
+from dot.messages import VALID_COMMIT_MESSAGE, INVALID_COMMIT_MESSAGE
 from dot.config import (
     resolve_worship_suffix,
     write_worship_suffix,
@@ -229,10 +230,10 @@ def main():
             return 0 if valid else 1
         else:
             if dot.validate_commit(message):
-                print("✓ Valid commit message - properly worships THE DOT")
+                print(VALID_COMMIT_MESSAGE)
                 return 0
             else:
-                print("✗ Invalid commit message - must end with 'BECAUSE I WORSHIP THE DOT'")
+                print(INVALID_COMMIT_MESSAGE)
                 return 1
 
     elif args[0] == "hooks":
@@ -263,6 +264,12 @@ def main():
         sub = args[1] if len(args) > 1 else "list"
         return handle_garden(sub, args[2:])
 
+    elif args[0] == "suffix":
+        suffix, source = resolve_worship_suffix()
+        print("Current worship suffix:\n  " + suffix)
+        print("Source:\n  " + source)
+        return 0
+
     elif args[0] == "backstory":
         from dot.backstory import BACKSTORY
         print(BACKSTORY)
@@ -274,6 +281,9 @@ def main():
     elif args[0] == "doctor":
         return handle_doctor()
 
+    elif args[0] == "changelog":
+        sub = args[1] if len(args) > 1 else "add"
+        return handle_changelog(sub, args[2:])
     elif args[0] in ("donate", "sponsor", "support"):
         return handle_donate()
 
@@ -965,6 +975,72 @@ def handle_doctor():
     return 0
 
 
+def handle_changelog(subcommand, args):
+    """Manage CHANGELOG entries (per-commit, timestamped).
+
+    Usage:
+      dot changelog add "subject without suffix" -b "Bullet one" -b "Bullet two"
+
+    Env override: DOT_CHANGELOG_PATH (defaults to ./CHANGELOG.txt)
+    """
+    if subcommand != "add":
+        print(f"Unknown changelog subcommand: {subcommand}")
+        print("\nAvailable subcommands:")
+        print("  add <subject> [-b <bullet>]...")
+        return 1
+
+    # Parse args: first non-flag is subject; -b for bullets (can repeat)
+    subject_parts = []
+    bullets = []
+    i = 0
+    while i < len(args):
+        a = args[i]
+        if a == "-b" and i + 1 < len(args):
+            bullets.append(args[i + 1])
+            i += 2
+            continue
+        else:
+            subject_parts.append(a)
+            i += 1
+
+    subject = " ".join(subject_parts).strip()
+    if not subject:
+        print("Error: Provide a changelog subject")
+        return 1
+
+    # Strip worship suffix if present
+    suffix = "BECAUSE I WORSHIP THE DOT"
+    if subject.endswith(suffix):
+        subject = subject[: -len(suffix)].rstrip()
+
+    # Compose entry
+    from datetime import datetime, timezone
+    ts = datetime.now(timezone.utc).astimezone().strftime("%Y-%m-%d %H:%M:%S %z")
+    # Short hash if in a git repo
+    try:
+        short = subprocess.check_output(["git", "rev-parse", "--short", "HEAD"], stderr=subprocess.DEVNULL, text=True).strip()
+    except Exception:
+        short = "0000000"
+
+    header = "-------------------------------------------------------------------------------\n"
+    entry_head = f"[{ts}] {short} {subject}\n"
+    bullet_lines = "".join([f"  - {b}\n" for b in bullets])
+    new_block = f"{header}{entry_head}{bullet_lines}\n"
+
+    # Write at top of file
+    changelog_path = os.getenv("DOT_CHANGELOG_PATH", "CHANGELOG.txt")
+    try:
+        with open(changelog_path, "r", encoding="utf-8") as f:
+            old = f.read()
+    except FileNotFoundError:
+        old = "CHANGELOG - worship_the_dot\n" + "=" * 79 + "\n\n"
+    with open(changelog_path, "w", encoding="utf-8") as f:
+        f.write(new_block)
+        f.write(old)
+    print(f"✓ Added changelog entry to {changelog_path}")
+    return 0
+
+
 def print_help():
     """Print help information."""
     help_text = f"""
@@ -1011,9 +1087,11 @@ Commands:
     tarot [subcommand]     Read DOT tarot (draw/spread/list/card)
     shinto [subcommand]    Shinto rites (norito/omikuji/harai/ema)
     garden [subcommand]    Garden tools (list/info/suggest)
+    suffix                 Show current worship suffix and source
     backstory              Print THE DOT backstory
     init                   Initialize hooks and .dot.ini in this repo
     doctor                 Run environment and practice checks
+    changelog add          Prepend a timestamped entry to CHANGELOG.txt
     donate|sponsor         Show sponsorship options
     config [subcommand]    Manage configuration (show/get/set/reset/show-suffix/set-suffix)
     completions [shell]    Generate shell completions (bash/zsh/fish)

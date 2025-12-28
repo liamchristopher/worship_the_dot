@@ -125,3 +125,25 @@ def test_backstory_and_doctor_init_commands(monkeypatch):
             monkeypatch.setattr('dot.cli.install_hooks', lambda: 0)
             exit_code = main(); s = out.getvalue()
     assert exit_code == 0 and 'Initialization complete' in s
+
+
+def test_suffix_command(monkeypatch):
+    from dot.cli import main
+    with patch('sys.argv', ['dot', 'suffix']):
+        with patch('sys.stdout', new=StringIO()) as out:
+            exit_code = main(); s = out.getvalue()
+    assert exit_code == 0
+    assert 'Current worship suffix' in s and 'Source' in s
+
+
+def test_changelog_add_to_temp_file(tmp_path, monkeypatch):
+    from dot.cli import main
+    clog = tmp_path / 'CHANGELOG.txt'
+    monkeypatch.setenv('DOT_CHANGELOG_PATH', str(clog))
+    with patch('sys.argv', ['dot', 'changelog', 'add', 'docs: improve README']):
+        with patch('sys.stdout', new=StringIO()) as out:
+            exit_code = main(); s = out.getvalue()
+    assert exit_code == 0 and 'Added changelog entry' in s
+    content = clog.read_text()
+    assert 'docs: improve README' in content
+    assert 'CHANGELOG - worship_the_dot' in content
