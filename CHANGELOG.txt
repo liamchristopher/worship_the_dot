@@ -1,5 +1,10 @@
 CHANGELOG - worship_the_dot
 -------------------------------------------------------------------------------
+[2025-12-28T10:23:05-08:00] 7ee7d58 docs: agents usage
+  - Add Makefile agents target to run orchestrator
+  - Document usage in README
+
+-------------------------------------------------------------------------------
 [2025-12-28T10:22:09-08:00] 5a83beb agents(ci): workflows + docs
   - Add .github/workflows/agents.yml to run orchestrator
   - Document agents and compatibility-first policy in AGENTS.md
