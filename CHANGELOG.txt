@@ -71,6 +71,20 @@ Recent Changes (per-commit)
   - Poetry: banner and chant commands; help updated; tests added.
 
 Note: Earlier sections below follow the previous summary style and are
+-------------------------------------------------------------------------------
+[2025-12-28] - Norse/Germanic Philosophy - Way of the Runes! ᚱ
+-------------------------------------------------------------------------------
+
+Added:
+  * Norse/Germanic Philosophy Module (dot/norse.py - 210 lines)
+    - The Runes: 24 ancient symbols with meanings for development
+    - Nine Virtues: Courage, Truth, Honor, Fidelity, Discipline, Hospitality, Self-Reliance, Industriousness, Perseverance
+    - Wyrd: Fate woven by past actions (your codebase is your wyrd)
+    - Yggdrasil: World Tree connecting nine realms of development
+    - Odin's Wisdom: Sacrifice for knowledge, no shortcuts to mastery
+  * CLI: norse, runes, virtues, wyrd, yggdrasil, odin, reading
+  * Validation: --norse flag
+
 retained for historical accuracy. New entries must use the format above.
 
 -------------------------------------------------------------------------------

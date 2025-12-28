@@ -379,9 +379,16 @@ def main():
         confucian_mode = "--confucian" in args
         hindu_mode = "--hindu" in args or "--vedic" in args
         shinto_mode = "--shinto" in args or "--kami" in args
-        message_args = [a for a in args[1:] if a not in ["--epic", "--cosmic", "--alchemical", "--alchemy", "--kabbalistic", "--kabbalah", "--taoist", "--tao", "--buddhist", "--dharma", "--stoic", "--confucian", "--hindu", "--vedic", "--shinto", "--kami"]]
+        norse_mode = "--norse" in args
+        message_args = [a for a in args[1:] if a not in ["--epic", "--cosmic", "--alchemical", "--alchemy", "--kabbalistic", "--kabbalah", "--taoist", "--tao", "--buddhist", "--dharma", "--stoic", "--confucian", "--hindu", "--vedic", "--shinto", "--kami", "--norse"]]
         message = " ".join(message_args)
 
+        if norse_mode:
+            from dot.norse import norse_validation
+            valid = dot.validate_commit(message)
+            print(norse_validation(valid, message))
+            return 0 if valid else 1
+        el
         if shinto_mode:
             from dot.shinto import shinto_validation
             valid = dot.validate_commit(message)
@@ -461,8 +468,17 @@ def main():
         return handle_tarot(sub, args[2:])
 
     elif args[0] == "shinto":
+    elif args[0] == "norse":
+        sub = args[1] if len(args) > 1 else "reading"
+        return handle_norse(sub, args[2:])
         sub = args[1] if len(args) > 1 else "norito"
+    elif args[0] == "norse":
+        sub = args[1] if len(args) > 1 else "reading"
+        return handle_norse(sub, args[2:])
         return handle_shinto(sub, args[2:])
+    elif args[0] == "norse":
+        sub = args[1] if len(args) > 1 else "reading"
+        return handle_norse(sub, args[2:])
 
     elif args[0] == "garden":
         sub = args[1] if len(args) > 1 else "list"
@@ -1398,3 +1414,16 @@ Examples:
 
 if __name__ == "__main__":
     sys.exit(main())
+
+def handle_norse(subcommand, args):
+    """Handle Norse/Germanic philosophy."""
+    from dot.norse import rune_reading, virtues_teaching, wyrd_teaching, yggdrasil_teaching, odin_teaching, norse_reading
+    if subcommand == "runes": print(rune_reading()); return 0
+    if subcommand == "virtues": print(virtues_teaching()); return 0
+    if subcommand == "wyrd": print(wyrd_teaching()); return 0
+    if subcommand == "yggdrasil": print(yggdrasil_teaching()); return 0
+    if subcommand == "odin": print(odin_teaching()); return 0
+    if subcommand == "reading": print(norse_reading()); return 0
+    print(f"Unknown norse subcommand: {subcommand}")
+    print("Available: runes, virtues, wyrd, yggdrasil, odin, reading")
+    return 1
