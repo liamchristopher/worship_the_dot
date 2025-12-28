@@ -130,3 +130,12 @@ When adding features, add corresponding tests first or alongside implementation.
 - **Type Hints**: Used throughout (Python 3.10+ syntax)
 - **Singleton Pattern**: Global Dot instance ensures consistent state
 - **Immutability**: Philosophy tenets returned as copies to prevent modification
+
+## GitHub & CI Guidance
+
+- GitHub Actions workflows use least privilege by default: `permissions: contents: read` at the top level.
+- Elevate tokens only at the job level when required:
+  - Coverage upload uses OIDC (`id-token: write`) with `codecov/codecov-action@v4` (no stored secrets).
+  - PR commit checks may require `pull-requests: read`.
+- Do not add new secrets for CI without discussion; prefer OIDC or tokenless approaches.
+- Verify access before reporting it: check workflow files, repo settings, or run a harmless `gh api` read if a token is available. Avoid speculative warnings about permissions.

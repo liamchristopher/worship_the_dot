@@ -72,3 +72,16 @@
   - Compatibility Agent — compares Python and Rust CLI outputs
 - CI runs these via `.github/workflows/agents.yml` and `compat.yml`.
 - Compatibility has priority; do not change public output strings without updating the compatibility spec and harmonizing both CLIs.
+
+## GitHub Access & Permissions (Agents)
+- Workflows run with least privilege by default: `permissions: contents: read` at the workflow root.
+- Job-level elevation is explicit and minimal:
+  - Coverage upload uses `id-token: write` for Codecov OIDC only (no PAT or secret).
+  - Commit-policy PR checks use `pull-requests: read` only.
+- No repository secrets are referenced by workflows; avoid adding secrets unless absolutely necessary. Prefer OIDC or no token.
+- Agents must verify before raising access concerns:
+  - Inspect `.github/workflows/*.yml` for `permissions:` blocks and secret usage.
+  - When possible, confirm repo settings (Actions → General → Workflow permissions) and branch/environment protections.
+  - If using `gh`/API, attempt a read operation first; only report access errors with the actual status code/output.
+- Do not complain about GitHub access without verification. Provide concrete evidence (failing command, API response) or remain silent.
+- If a task needs elevated permissions, propose the minimal `permissions:` delta in the specific job rather than broadening global scope.

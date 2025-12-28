@@ -48,6 +48,14 @@ resolve-prs-gh:
 	@echo "Resolving open PRs with gh (requires gh auth login)"
 	python scripts/resolve_prs_gh.py
 
+.PHONY: resolve-issues-gh
+resolve-issues-gh:
+	@echo "Resolving open issues with gh (requires gh auth login)"
+	python scripts/resolve_issues_gh.py
+
+.PHONY: resolve-all-gh
+resolve-all-gh: resolve-prs-gh resolve-issues-gh
+
 clean:
 	rm -rf build/
 	rm -rf dist/
