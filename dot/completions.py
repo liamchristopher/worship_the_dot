@@ -18,7 +18,7 @@ _dot_completion() {
     prev="${COMP_WORDS[COMP_CWORD-1]}"
 
     # Main commands
-    commands="worship tenets sing invoke validate hooks stats badge config completions version help"
+    commands="worship tenets sing invoke validate horoscope chart planets moon hooks stats badge poem config completions version help"
 
     # Subcommands for hooks
     hooks_cmds="install uninstall status"
@@ -83,9 +83,14 @@ _dot() {
         'sing:Hear THE ILIAD OF THE DOT in epic verse'
         'invoke:Receive an epic invocation from THE DOT'
         'validate:Validate a commit message'
+        'horoscope:Daily coding horoscope'
+        'chart:Repository birth chart'
+        'planets:Planetary hours for coding'
+        'moon:Moon phase coding guidance'
         'hooks:Manage git hooks'
         'stats:View worship statistics'
         'badge:Generate worship badge'
+        'poem:Speak poetry'
         'config:Manage configuration'
         'completions:Generate shell completions'
         'version:Show version information'
@@ -164,9 +169,14 @@ complete -c dot -n "__fish_use_subcommand" -a "tenets" -d "Display THE DOT philo
 complete -c dot -n "__fish_use_subcommand" -a "sing" -d "Hear THE ILIAD OF THE DOT in epic verse"
 complete -c dot -n "__fish_use_subcommand" -a "invoke" -d "Receive an epic invocation from THE DOT"
 complete -c dot -n "__fish_use_subcommand" -a "validate" -d "Validate a commit message"
+complete -c dot -n "__fish_use_subcommand" -a "horoscope" -d "Daily coding horoscope"
+complete -c dot -n "__fish_use_subcommand" -a "chart" -d "Repository birth chart"
+complete -c dot -n "__fish_use_subcommand" -a "planets" -d "Planetary hours for coding"
+complete -c dot -n "__fish_use_subcommand" -a "moon" -d "Moon phase coding guidance"
 complete -c dot -n "__fish_use_subcommand" -a "hooks" -d "Manage git hooks"
 complete -c dot -n "__fish_use_subcommand" -a "stats" -d "View worship statistics"
 complete -c dot -n "__fish_use_subcommand" -a "badge" -d "Generate worship badge"
+complete -c dot -n "__fish_use_subcommand" -a "poem" -d "Speak poetry"
 complete -c dot -n "__fish_use_subcommand" -a "config" -d "Manage configuration"
 complete -c dot -n "__fish_use_subcommand" -a "completions" -d "Generate shell completions"
 complete -c dot -n "__fish_use_subcommand" -a "version" -d "Show version information"
