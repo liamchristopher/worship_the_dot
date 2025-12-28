@@ -74,6 +74,57 @@ Note: Earlier sections below follow the previous summary style and are
 retained for historical accuracy. New entries must use the format above.
 
 -------------------------------------------------------------------------------
+[2025-12-28] - Confucian Mode - Harmony, Virtue, and Proper Conduct!
+-------------------------------------------------------------------------------
+
+Added:
+  * Confucian Enhancement Module (dot/confucian.py)
+    - The Five Constant Virtues (五常 Wǔcháng) - Ren, Yi, Li, Zhi, Xin
+    - Rectification of Names (正名 Zhèngmíng) - proper naming in code
+    - Filial Piety (孝 Xiào) - respect for legacy code and past developers
+    - The Superior Person (君子 Jūnzǐ) - ideal developer characteristics
+    - The Five Relationships (五倫 Wǔlún) - proper conduct in development
+    - Self-Cultivation (修身 Xiūshēn) - continuous improvement path
+    - Doctrine of the Mean (中庸 Zhōngyōng) - finding balance
+    - The Analects (論語 Lúnyǔ) - teachings from Confucius
+
+  * New CLI Commands:
+    - 'dot confucian' - Confucian wisdom reading
+    - 'dot wuchang' - The Five Constant Virtues guide
+    - 'dot names' - Rectification of Names teaching
+    - 'dot filial' - Filial Piety - respect for legacy code
+    - 'dot junzi' - The Superior Person teaching
+    - 'dot relationships' - The Five Relationships guide
+    - 'dot cultivation' - Self-Cultivation path
+    - 'dot mean' - Doctrine of the Mean teaching
+    - 'dot analects' - Random teaching from the Analects
+    - 'dot validate --confucian' - Confucian validation
+
+  * Core Teachings:
+    - Five Virtues: Ren (仁 benevolence), Yi (義 righteousness),
+      Li (禮 propriety), Zhi (智 wisdom), Xin (信 trustworthiness)
+    - Rectification of Names: Variables, functions, classes must be
+      named properly for code to be clear
+    - Filial Piety: Honor and respect legacy code and those who came before
+    - Junzi vs Xiaoren: Be the superior developer, not the inferior one
+    - Five Relationships: Proper conduct between leads/developers,
+      seniors/juniors, peers, and teammates
+    - Self-Cultivation: Path from personal skill → team harmony →
+      organizational success → better world
+    - Doctrine of Mean: Avoid extremes, find balance in all development
+    - Analects: Wisdom from Confucius (孔子) applied to modern coding
+
+Updated:
+  * dot/cli.py: Integrated Confucian commands and validation
+  * dot/completions.py: Added Confucian commands to all shells
+
+Purpose:
+  Brings Confucian philosophy to development!
+  Practice the Five Virtues. Rectify names in your code.
+  Respect legacy code. Cultivate yourself continuously.
+  Be a 君子, not a 小人. Find the mean. Honor THE DOT! 🎎
+
+-------------------------------------------------------------------------------
 [2025-12-28] - Stoic Mode - Virtue, Reason, and Acceptance!
 -------------------------------------------------------------------------------
 

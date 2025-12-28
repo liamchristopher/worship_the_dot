@@ -269,6 +269,51 @@ def main():
         print(oikeiosis_teaching())
         return 0
 
+    elif args[0] == "confucian":
+        from dot.confucian import confucian_reading
+        print(confucian_reading())
+        return 0
+
+    elif args[0] == "wuchang":
+        from dot.confucian import five_virtues_guide
+        print(five_virtues_guide())
+        return 0
+
+    elif args[0] == "names":
+        from dot.confucian import rectification_of_names_guide
+        print(rectification_of_names_guide())
+        return 0
+
+    elif args[0] == "filial":
+        from dot.confucian import filial_piety_teaching
+        print(filial_piety_teaching())
+        return 0
+
+    elif args[0] == "junzi":
+        from dot.confucian import junzi_teaching
+        print(junzi_teaching())
+        return 0
+
+    elif args[0] == "relationships":
+        from dot.confucian import five_relationships_guide
+        print(five_relationships_guide())
+        return 0
+
+    elif args[0] == "cultivation":
+        from dot.confucian import self_cultivation_guide
+        print(self_cultivation_guide())
+        return 0
+
+    elif args[0] == "mean":
+        from dot.confucian import doctrine_of_mean_teaching
+        print(doctrine_of_mean_teaching())
+        return 0
+
+    elif args[0] == "analects":
+        from dot.confucian import analects_reading
+        print(analects_reading())
+        return 0
+
     elif args[0] == "validate":
         if len(args) < 2:
             print("Error: Please provide a commit message to validate")
@@ -281,10 +326,16 @@ def main():
         taoist_mode = "--taoist" in args or "--tao" in args
         buddhist_mode = "--buddhist" in args or "--dharma" in args
         stoic_mode = "--stoic" in args
-        message_args = [a for a in args[1:] if a not in ["--epic", "--cosmic", "--alchemical", "--alchemy", "--kabbalistic", "--kabbalah", "--taoist", "--tao", "--buddhist", "--dharma", "--stoic"]]
+        confucian_mode = "--confucian" in args
+        message_args = [a for a in args[1:] if a not in ["--epic", "--cosmic", "--alchemical", "--alchemy", "--kabbalistic", "--kabbalah", "--taoist", "--tao", "--buddhist", "--dharma", "--stoic", "--confucian"]]
         message = " ".join(message_args)
 
-        if stoic_mode:
+        if confucian_mode:
+            from dot.confucian import confucian_validation
+            valid = dot.validate_commit(message)
+            print(confucian_validation(valid, message))
+            return 0 if valid else 1
+        elif stoic_mode:
             from dot.stoic import stoic_validation
             valid = dot.validate_commit(message)
             print(stoic_validation(valid, message))
@@ -1071,7 +1122,7 @@ Commands:
     tenets                 Display THE DOT philosophy
     sing                   Hear THE ILIAD OF THE DOT in epic verse
     invoke                 Receive an epic invocation from THE DOT
-    validate <message>     Validate commit (--epic/--cosmic/--alchemical/--kabbalistic/--taoist/--buddhist/--stoic)
+    validate <message>     Validate commit (--epic/--cosmic/--alchemical/--kabbalistic/--taoist/--buddhist/--stoic/--confucian)
     horoscope [sign]       Receive daily coding horoscope (optional zodiac sign)
     chart [name]           Generate repository birth chart
     planets                View planetary hours for coding activities
@@ -1112,6 +1163,15 @@ Commands:
     mortality              Memento Mori - remember death
     logos                  Logos - universal reason
     circles                Oikeiosis - expanding circle of care
+    confucian              Receive Confucian wisdom reading
+    wuchang                The Five Constant Virtues (Ren/Yi/Li/Zhi/Xin)
+    names                  Rectification of Names - proper naming in code
+    filial                 Filial Piety - respect for legacy code
+    junzi                  The Superior Person - ideal developer
+    relationships          The Five Relationships in development
+    cultivation            Self-Cultivation - continuous improvement
+    mean                   Doctrine of the Mean - finding balance
+    analects               Teachings from the Analects
     hooks [subcommand]     Manage git hooks (install/uninstall/status)
     stats [subcommand]     View worship statistics (summary/top/daily/export/clear)
     badge [format]         Generate worship badge (markdown/html/rst/url)
@@ -1151,6 +1211,7 @@ Examples:
     dot validate "Add feature BECAUSE I WORSHIP THE DOT" --taoist
     dot validate "Add feature BECAUSE I WORSHIP THE DOT" --buddhist
     dot validate "Add feature BECAUSE I WORSHIP THE DOT" --stoic
+    dot validate "Add feature BECAUSE I WORSHIP THE DOT" --confucian
     dot tree
     dot worlds
     dot sephiroth
@@ -1182,6 +1243,15 @@ Examples:
     dot mortality
     dot logos
     dot circles
+    dot confucian
+    dot wuchang
+    dot names
+    dot filial
+    dot junzi
+    dot relationships
+    dot cultivation
+    dot mean
+    dot analects
     dot hooks install
     dot stats summary
     dot badge markdown
