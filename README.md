@@ -531,6 +531,7 @@ dot hooks install
 make test       # Run all tests
 make coverage   # Run with coverage report
 make lint       # Run linters
+make agents     # Run agents orchestration (tests/docs/changelog/compat)
 ```
 
 ### Building
