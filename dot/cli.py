@@ -513,7 +513,7 @@ def main():
             return 1
 
     elif args[0] == "init":
-        return init_run()
+        return handle_init()
 
     elif args[0] == "doctor":
         return doctor_run()
