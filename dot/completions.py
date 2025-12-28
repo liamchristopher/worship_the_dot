@@ -18,7 +18,7 @@ _dot_completion() {
     prev="${COMP_WORDS[COMP_CWORD-1]}"
 
     # Main commands
-    commands="worship tenets sing invoke validate horoscope chart planets moon element opus operations hermetic stone tree worlds sephiroth tikkun ein-sof shekhinah gematria tao wu-wei yin-yang elements treasures pu water iching dharma truths path marks middle poisons mindful stoic virtues control disciplines negative fate mortality logos circles confucian wuchang names filial junzi relationships cultivation mean analects hindu vedic karma yogas purusharthas gunas maya atman gita moksha hooks stats badge poem tarot shinto hermeticism garden config completions version help gnostic norse zoroastrian egyptian jain"
+    commands="worship tenets sing invoke validate horoscope chart planets moon ephemeris element opus operations hermetic stone tree worlds sephiroth tikkun ein-sof shekhinah gematria tao wu-wei yin-yang elements treasures pu water iching dharma truths path marks middle poisons mindful stoic virtues control disciplines negative fate mortality logos circles confucian wuchang names filial junzi relationships cultivation mean analects hindu vedic karma yogas purusharthas gunas maya atman gita moksha hooks stats badge poem tarot shinto hermeticism garden config completions version help gnostic norse zoroastrian egyptian jain"
 
     # Subcommands for hooks
     hooks_cmds="install uninstall status"
@@ -124,6 +124,7 @@ _dot() {
         'planets:Planetary hours for coding'
         'moon:Moon phase coding guidance'
         'element:Receive elemental reading'
+        'ephemeris:Ephemeris summary (vendored)'
         'opus:View the Magnum Opus'
         'operations:Seven alchemical operations'
         'hermetic:Seven Hermetic principles'
@@ -328,6 +329,7 @@ complete -c dot -n "__fish_use_subcommand" -a "horoscope" -d "Daily coding horos
 complete -c dot -n "__fish_use_subcommand" -a "chart" -d "Repository birth chart"
 complete -c dot -n "__fish_use_subcommand" -a "planets" -d "Planetary hours for coding"
 complete -c dot -n "__fish_use_subcommand" -a "moon" -d "Moon phase coding guidance"
+complete -c dot -n "__fish_use_subcommand" -a "ephemeris" -d "Ephemeris summary (vendored)"
 complete -c dot -n "__fish_use_subcommand" -a "element" -d "Receive elemental reading"
 complete -c dot -n "__fish_use_subcommand" -a "opus" -d "View the Magnum Opus"
 complete -c dot -n "__fish_use_subcommand" -a "operations" -d "Seven alchemical operations"

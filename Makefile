@@ -38,6 +38,16 @@ compat: rust-build
 agents:
 	python scripts/run_agents.py
 
+.PHONY: resolve-prs
+resolve-prs:
+	@echo "Resolving open PRs with GitHub API (requires GITHUB_TOKEN)"
+	python scripts/resolve_prs.py
+
+.PHONY: resolve-prs-gh
+resolve-prs-gh:
+	@echo "Resolving open PRs with gh (requires gh auth login)"
+	python scripts/resolve_prs_gh.py
+
 clean:
 	rm -rf build/
 	rm -rf dist/

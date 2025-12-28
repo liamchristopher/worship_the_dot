@@ -19,6 +19,7 @@ Commands:
     chart [name]           Generate repository birth chart
     planets                View planetary hours for coding activities
     moon                   Receive moon phase coding guidance
+    ephemeris              Ephemeris summary (vendored, local elements)
     element                Receive elemental reading (Earth/Water/Air/Fire/Aether)
     opus                   View the Magnum Opus - The Great Work
     operations             View the seven alchemical operations
@@ -103,4 +104,3 @@ Examples:
     dot badge markdown
     dot config show
 """
-

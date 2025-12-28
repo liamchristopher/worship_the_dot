@@ -6,8 +6,7 @@
     "angles": "degrees",
     "rates": "per century"
   },
-  "source": "Approximate planetary elements at J2000 (Meeus/NASA fact sheets). For offline computation.
-This dataset is suitable for general positioning and geocentric ecliptic longitude/latitude estimates.",
+  "source": "Approximate planetary elements at J2000 (Meeus/NASA fact sheets). For offline computation. This dataset is suitable for general positioning and geocentric ecliptic longitude/latitude estimates.",
   "bodies": {
     "mercury": {"a": 0.38709893, "e": 0.20563069, "i": 7.00487,  "Omega": 48.33167,  "varpi": 77.45645,  "L": 252.25084},
     "venus":   {"a": 0.72333199, "e": 0.00677323, "i": 3.39471,  "Omega": 76.68069,  "varpi": 131.53298, "L": 181.97973},
@@ -20,4 +19,3 @@ This dataset is suitable for general positioning and geocentric ecliptic longitu
     "pluto":   {"a": 39.48168677,"e": 0.24880766, "i": 17.14175, "Omega": 110.30347, "varpi": 224.06676, "L": 238.92881}
   }
 }
-
