@@ -172,6 +172,10 @@ def main():
         sub = args[1] if len(args) > 1 else "norito"
         return handle_shinto(sub, args[2:])
 
+    elif args[0] == "garden":
+        sub = args[1] if len(args) > 1 else "list"
+        return handle_garden(sub, args[2:])
+
     elif args[0] == "config":
         subcommand = args[1] if len(args) > 1 else "show"
         return handle_config(subcommand, args[2:])
@@ -730,6 +734,55 @@ def handle_shinto(subcommand, args):
     return 1
 
 
+def handle_garden(subcommand, args):
+    """Handle garden tool explanations."""
+    from dot.garden import list_tools, describe_tool, suggest_tools, get_tool
+
+    if subcommand == "list":
+        print("Garden Tools:")
+        for name in list_tools():
+            print(f"  - {name}")
+        return 0
+
+    if subcommand in ("info", "explain", "tool"):
+        if not args:
+            print("Error: Provide a tool name")
+            return 1
+        name = " ".join(args)
+        desc = describe_tool(name)
+        if not desc:
+            print(f"Unknown tool: {name}")
+            return 1
+        print(f"{desc['name']}")
+        print(f"Purpose: {desc['purpose']}")
+        print("Tips:")
+        for t in desc["tips"]:
+            print(f"  - {t}")
+        print(f"Analogy: {desc['analogy']}")
+        return 0
+
+    if subcommand == "suggest":
+        if not args:
+            print("Error: Provide a brief task description")
+            return 1
+        query = " ".join(args)
+        suggestions = suggest_tools(query)
+        if not suggestions:
+            print("No suggestions found")
+            return 0
+        print("Suggested Tools:")
+        for n in suggestions:
+            print(f"  - {n}")
+        return 0
+
+    print(f"Unknown garden subcommand: {subcommand}")
+    print("\nAvailable subcommands:")
+    print("  list")
+    print("  info|explain|tool <name>")
+    print("  suggest <task>")
+    return 1
+
+
 def print_help():
     """Print help information."""
     help_text = f"""
@@ -760,6 +813,7 @@ Commands:
     poem [subcommand]      Speak poetry (hymn/haiku/banner/chant)
     tarot [subcommand]     Read DOT tarot (draw/spread/list/card)
     shinto [subcommand]    Shinto rites (norito/omikuji/harai/ema)
+    garden [subcommand]    Garden tools (list/info/suggest)
     config [subcommand]    Manage configuration (show/get/set/reset/show-suffix/set-suffix)
     completions [shell]    Generate shell completions (bash/zsh/fish)
     version                Show version information

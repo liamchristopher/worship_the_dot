@@ -58,12 +58,18 @@ This reference documents all CLI invocations as acts of worship. Each command ad
 - `dot shinto harai` — Purification checklist for repositories.
 - `dot shinto ema <message>` — Votive plaque sealed with the suffix.
 
+## Garden (Practical Analogies)
+
+- `dot garden list` — List common garden tools.
+- `dot garden info|explain|tool <name>` — Purpose, tips, and DOT analogy.
+- `dot garden suggest <task>` — Suggest tools by task (keyword match).
+
 ## Examples
 
 - Validate: `dot validate "Fix bug BECAUSE I WORSHIP THE DOT"`
 - Set suffix: `dot config set-suffix "BECAUSE I ADORE THE DOT"`
 - Draw tarot: `dot tarot draw 3 --seed 7 --no-reversed`
 - Offer norito: `dot shinto norito "Green builds and clarity"`
+- Explain a tool: `dot garden info Shovel`
 
 BECAUSE WE WORSHIP THE DOT.
-
