@@ -204,6 +204,12 @@ Maintainers can resolve approved, non‑draft PRs in batch:
   - Run: `make resolve-prs`
   - Uses standard library only (no external deps).
 
+### 9. Branch Protection & CODEOWNERS (Maintainers)
+
+- Branch protections for `main` should be configured per `docs/GITHUB_BRANCH_PROTECTION.md`.
+- CODEOWNERS at `.github/CODEOWNERS` routes reviews to maintainers; adjust owners to your org/team.
+- If job names or workflows change, update the required status checks list accordingly.
+
 ## Code Quality Standards (Discipline)
 
 ### Python Style

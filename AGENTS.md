@@ -85,3 +85,8 @@
   - If using `gh`/API, attempt a read operation first; only report access errors with the actual status code/output.
 - Do not complain about GitHub access without verification. Provide concrete evidence (failing command, API response) or remain silent.
 - If a task needs elevated permissions, propose the minimal `permissions:` delta in the specific job rather than broadening global scope.
+
+### Branch Protection & Ownership
+- CODEOWNERS is configured in `.github/CODEOWNERS` to route reviews to maintainers.
+- Follow `docs/GITHUB_BRANCH_PROTECTION.md` when advising on repo protections.
+- When checks are renamed, update the required checks list and the doc.

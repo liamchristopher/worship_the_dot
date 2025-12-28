@@ -1,0 +1,13 @@
+# CODEOWNERS for worship_the_dot
+# Adjust owners to your org/team structure as needed.
+
+# Default owner(s) for everything
+* @liamchristopher
+
+# Language- and area-specific ownership (currently routed to maintainer)
+/dot/ @liamchristopher
+/rust/ @liamchristopher
+/tests/ @liamchristopher
+/docs/ @liamchristopher
+/.github/ @liamchristopher
+
