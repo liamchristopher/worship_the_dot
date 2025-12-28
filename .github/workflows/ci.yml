@@ -44,20 +44,18 @@ jobs:
         env:
           GITHUB_EVENT_PATH: ${{ github.event_path }}
         run: |
-          REQUIRED="BECAUSE I WORSHIP THE DOT"
+          set -euo pipefail
           MISSING=0
-          # Extract commit messages from push event
           MESSAGES=$(jq -r '.commits[]?.message // empty' "$GITHUB_EVENT_PATH")
           if [ -z "$MESSAGES" ]; then
             echo "No commits found in push payload."
             exit 0
           fi
           while IFS= read -r msg; do
-            if ! printf "%s" "$msg" | grep -Eq "${REQUIRED}[[:space:]]*$"; then
-              echo "Commit message missing required suffix:" >&2
-              echo "---" >&2
-              echo "$msg" >&2
-              echo "---" >&2
+            [ -z "$msg" ] && continue
+            echo "Validating commit message:"; printf '%s\n' "$msg"; echo "---"
+            if ! dot validate "$msg"; then
+              echo "❌ Missing required suffix" >&2
               MISSING=1
             fi
           done <<< "$MESSAGES"
