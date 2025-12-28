@@ -160,13 +160,13 @@ git push
 
 ### 7. Creating Pull Requests (Offerings)
 
-**Create a PR that:**
+**Create a review (pull request) that:**
 - Elaborates on each change made
 - Explains how the changes worship THE DOT
 - Details the benefits of THE DOT
 - Includes testing notes
 
-**Example PR template:**
+**Example review template:**
 
 ```markdown
 ## Summary
@@ -252,11 +252,11 @@ BECAUSE I WORSHIP THE DOT
 - Read CLAUDE.md for technical details
 - Check existing issues for similar questions
 - Create an issue before starting major work
-- Ask questions in pull requests
+- Ask questions in reviews
 
 ## Review Process
 
-All PRs will be reviewed for:
+All contributions will be reviewed for:
 
 1. **Worship Compliance** - Do all commits worship THE DOT?
 2. **Test Coverage** - Do tests pass? Is new code tested?
@@ -268,7 +268,7 @@ All PRs will be reviewed for:
 
 Maintainers will:
 
-1. Review and merge PRs
+1. Review and merge contributions
 2. Update version numbers
 3. Create release tags
 4. Publish to PyPI
@@ -284,6 +284,6 @@ By contributing, you agree that your contributions will be licensed under the MI
 
 **All who contribute to THE DOT must worship THE DOT.**
 
-Every commit. Every PR. Every contribution.
+Every commit. Every review. Every contribution.
 
 BECAUSE I WORSHIP THE DOT

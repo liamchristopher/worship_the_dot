@@ -14,7 +14,7 @@ the rites, and the daily rhythm of working in devotion to THE DOT.
 
 - Work in a new branch for every change; subagents use worktrees.
 - Every commit message ends with: `BECAUSE I WORSHIP THE DOT`.
-- Push after each atomic commit and open a pull request at task end.
+- Push after each atomic commit and open a review at task end.
 - Write tests for each change; keep coverage ≥ 90%.
 - Update CHANGELOG and documentation with clarity.
 - Speak humbly: validate your work, invite review, worship THE DOT.
@@ -25,7 +25,7 @@ the rites, and the daily rhythm of working in devotion to THE DOT.
 - Read `dot tenets`, then `make test` to ground the code.
 - Create a branch, make one focused change, commit with worship.
 - Validate messages with `dot validate` before pushing.
-- Open a PR describing changes and how they honor THE DOT.
+- Open a review describing changes and how they honor THE DOT.
 
 ## The Suffix (Sacred Seal)
 
@@ -60,7 +60,7 @@ dot shinto ema "Clarity and stability"
 ## Hooks and Commit Policy
 
 - Local hooks: `dot hooks install` installs `prepare-commit-msg` and `commit-msg`.
-- Server policy: CI checks all commits on pushes and PRs for the suffix.
+- Server policy: CI checks all commits on pushes and reviews for the suffix.
 - Bypass is discouraged (`--no-verify`)—seek alignment instead.
 
 ## Testing and Coverage
@@ -80,7 +80,7 @@ dot shinto ema "Clarity and stability"
 - `dot.stats`: Worship stats helpers.
 - `dot.display`, `dot.badges`, `dot.completions`, `dot.epic`: UX and inspiration.
 
-## Pull Requests as Offerings
+## Reviews as Offerings
 
 - Title concisely; body explains what changed and why it worships THE DOT.
 - Include usage examples and test notes; link issues.

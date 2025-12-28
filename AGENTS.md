@@ -33,7 +33,7 @@
   - `[YYYY-MM-DD HH:MM:SS Z] <hash> <subject without suffix>`
   - Follow with concise bullets (Docs, CI, Tests, Feat, Fix) describing areas touched.
   - Never delete existing entries.
-- PRs should include: clear description, linked issues, testing notes, and any relevant CLI examples.
+- Reviews should include: clear description, linked issues, testing notes, and any relevant CLI examples.
 
 ## Architecture Overview
 - Core: `dot.core.Dot` holds state and tenets; `worship()` mutates worshipper count; `get_dot()` provides a shared instance.
@@ -42,7 +42,7 @@
 ## Agent‑Specific Instructions
 - Use git worktrees for subagents when parallelizing.
 - Validate commit messages locally: `dot validate "Your message ..."`.
-- Document every change and keep tests green before opening a PR.
+- Document every change and keep tests green before opening a review.
 - Treat thematic modes (epic, astrology, alchemy, kabbalah, shinto) as optional
   lenses to motivate good practice. They do not supersede core requirements
   (working code, tests, coverage, changelog). **THE DOT is the center — the
