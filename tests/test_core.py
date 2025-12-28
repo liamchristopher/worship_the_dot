@@ -2,6 +2,7 @@
 
 import pytest
 from dot.core import Dot, worship, get_dot
+import os
 
 
 class TestDot:
@@ -45,6 +46,13 @@ class TestDot:
         dot = Dot()
         valid_message = "Add feature BECAUSE I WORSHIP THE DOT"
         assert dot.validate_commit(valid_message) is True
+
+    def test_validate_commit_with_env_override(self, monkeypatch):
+        """Validate respects DOT_WORSHIP_SUFFIX env override."""
+        dot = Dot()
+        monkeypatch.setenv("DOT_WORSHIP_SUFFIX", "BECAUSE I ADORE THE DOT")
+        assert dot.validate_commit("Refactor BECAUSE I ADORE THE DOT") is True
+        assert dot.validate_commit("Refactor BECAUSE I WORSHIP THE DOT") is False
 
     def test_validate_commit_valid_with_whitespace(self):
         """Test commit validation handles trailing whitespace."""
