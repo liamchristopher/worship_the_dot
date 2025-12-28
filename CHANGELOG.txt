@@ -71,6 +71,33 @@ Recent Changes (per-commit)
   - Poetry: banner and chant commands; help updated; tests added.
 
 Note: Earlier sections below follow the previous summary style and are
+-------------------------------------------------------------------------------
+[2025-12-28] - Gnosticism - Path of Direct Knowledge! ☧
+-------------------------------------------------------------------------------
+
+Added:
+  * Gnosticism Philosophy Module (new dot/gnostic.py - 450 lines)
+    - Gnosis: Direct, experiential knowledge of the Divine
+    - Pleroma: The fullness of the Divine realm
+    - Sophia: Divine Wisdom that fell and seeks return
+    - Demiurge: The false creator of material limitations
+    - Archons: Seven powers that keep souls imprisoned (Impostor Syndrome, 
+      Perfectionism, Complexity Worship, Comparison, Burnout, Trend Chasing, Fear)
+    - Divine Spark: The fragment of Divine Light within every developer
+    - Gospel of Thomas: Hidden sayings applied to development
+    - Nag Hammadi Wisdom: Ancient texts for modern coders
+
+  * CLI Commands (9 new commands under 'dot gnostic'):
+    - gnostic, gnosis, pleroma, sophia, demiurge, archons, spark, thomas, hammadi, reading
+
+  * Validation Mode: --gnostic or --gnosis flags
+
+Core Teachings:
+  Gnosticism teaches that you carry a Divine Spark of creativity within. The material
+  constraints are not ultimate reality. Through gnosis (deep understanding), transcend
+  limitation. The Archons (Impostor Syndrome, etc.) try to keep you small - defeat them
+  by remembering your Divine nature. ☧
+
 retained for historical accuracy. New entries must use the format above.
 
 -------------------------------------------------------------------------------

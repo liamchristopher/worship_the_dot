@@ -379,9 +379,16 @@ def main():
         confucian_mode = "--confucian" in args
         hindu_mode = "--hindu" in args or "--vedic" in args
         shinto_mode = "--shinto" in args or "--kami" in args
-        message_args = [a for a in args[1:] if a not in ["--epic", "--cosmic", "--alchemical", "--alchemy", "--kabbalistic", "--kabbalah", "--taoist", "--tao", "--buddhist", "--dharma", "--stoic", "--confucian", "--hindu", "--vedic", "--shinto", "--kami"]]
+        gnostic_mode = "--gnostic" in args or "--gnosis" in args
+        message_args = [a for a in args[1:] if a not in ["--epic", "--cosmic", "--alchemical", "--alchemy", "--kabbalistic", "--kabbalah", "--taoist", "--tao", "--buddhist", "--dharma", "--stoic", "--confucian", "--hindu", "--vedic", "--shinto", "--kami", "--gnostic", "--gnosis"]]
         message = " ".join(message_args)
 
+        if gnostic_mode:
+            from dot.gnostic import gnostic_validation
+            valid = dot.validate_commit(message)
+            print(gnostic_validation(valid, message))
+            return 0 if valid else 1
+        el
         if shinto_mode:
             from dot.shinto import shinto_validation
             valid = dot.validate_commit(message)
@@ -461,8 +468,17 @@ def main():
         return handle_tarot(sub, args[2:])
 
     elif args[0] == "shinto":
+    elif args[0] == "gnostic":
+        sub = args[1] if len(args) > 1 else "reading"
+        return handle_gnostic(sub, args[2:])
         sub = args[1] if len(args) > 1 else "norito"
+    elif args[0] == "gnostic":
+        sub = args[1] if len(args) > 1 else "reading"
+        return handle_gnostic(sub, args[2:])
         return handle_shinto(sub, args[2:])
+    elif args[0] == "gnostic":
+        sub = args[1] if len(args) > 1 else "reading"
+        return handle_gnostic(sub, args[2:])
 
     elif args[0] == "garden":
         sub = args[1] if len(args) > 1 else "list"
@@ -1089,6 +1105,53 @@ def handle_shinto(subcommand, args):
 
 
 def handle_garden(subcommand, args):
+
+def handle_gnostic(subcommand, args):
+    """Handle Gnostic philosophy teachings."""
+    from dot.gnostic import (
+        gnosis_teaching, pleroma_teaching, sophia_teaching,
+        demiurge_teaching, archons_teaching, spark_teaching,
+        thomas_teaching, nag_hammadi_teaching, gnostic_reading
+    )
+    if subcommand == "gnosis":
+        print(gnosis_teaching())
+        return 0
+    if subcommand == "pleroma":
+        print(pleroma_teaching())
+        return 0
+    if subcommand == "sophia":
+        print(sophia_teaching())
+        return 0
+    if subcommand == "demiurge":
+        print(demiurge_teaching())
+        return 0
+    if subcommand == "archons":
+        print(archons_teaching())
+        return 0
+    if subcommand == "spark":
+        print(spark_teaching())
+        return 0
+    if subcommand == "thomas":
+        print(thomas_teaching())
+        return 0
+    if subcommand == "hammadi":
+        print(nag_hammadi_teaching())
+        return 0
+    if subcommand == "reading":
+        print(gnostic_reading())
+        return 0
+    print(f"Unknown gnostic subcommand: {subcommand}")
+    print("\nAvailable subcommands:")
+    print("  gnosis               Direct knowledge of the Divine")
+    print("  pleroma              The Divine Fullness")
+    print("  sophia               Divine Wisdom")
+    print("  demiurge             The false creator")
+    print("  archons              Rulers and powers")
+    print("  spark                The Divine Spark within")
+    print("  thomas               Gospel of Thomas sayings")
+    print("  hammadi              Nag Hammadi wisdom")
+    print("  reading              Random Gnostic wisdom")
+    return 1
     """Handle garden tool explanations."""
     from dot.garden import list_tools, describe_tool, suggest_tools, get_tool
 
