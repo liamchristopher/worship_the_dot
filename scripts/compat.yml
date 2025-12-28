@@ -22,3 +22,15 @@ tests:
     args: ["suffix"]
     exit: 0
     contains: "Current worship suffix"
+  - name: config_show
+    args: ["config", "show"]
+    exit: 0
+    contains: "Source:"
+  - name: backstory_contains
+    args: ["backstory"]
+    exit: 0
+    contains: "EDICT OF THE DOT"
+  - name: doctor_not_repo
+    args: ["doctor"]
+    exit: 1
+    contains: "Repo: NOT A GIT REPOSITORY"

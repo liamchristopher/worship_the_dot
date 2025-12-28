@@ -5,10 +5,14 @@ use std::path::PathBuf;
 
 static DEFAULT_SUFFIX: &str = "BECAUSE I WORSHIP THE DOT";
 
-static RESOLVED_SUFFIX: Lazy<String> = Lazy::new(|| resolve_worship_suffix());
+static RESOLVED_SUFFIX: Lazy<(String, String)> = Lazy::new(|| resolve_worship_suffix_with_source());
 
 pub fn worship_suffix() -> &'static str {
-    &RESOLVED_SUFFIX
+    &RESOLVED_SUFFIX.0
+}
+
+pub fn worship_suffix_source() -> &'static str {
+    &RESOLVED_SUFFIX.1
 }
 
 pub struct Dot {
@@ -47,26 +51,26 @@ impl Dot {
     }
 }
 
-fn resolve_worship_suffix() -> String {
+fn resolve_worship_suffix_with_source() -> (String, String) {
     // 1) Env
     if let Ok(val) = env::var("DOT_WORSHIP_SUFFIX") {
         let v = val.trim().to_string();
         if !v.is_empty() {
-            return v;
+            return (v, "env".into());
         }
     }
     // 2) ./.dot.ini
     if let Some(v) = read_ini_suffix(PathBuf::from(".dot.ini")) {
-        return v;
+        return (v, "./.dot.ini".into());
     }
     // 3) $HOME/.dot.ini
     if let Some(home) = dirs_next::home_dir() {
         let p = home.join(".dot.ini");
         if let Some(v) = read_ini_suffix(p) {
-            return v;
+            return (v, "$HOME/.dot.ini".into());
         }
     }
-    DEFAULT_SUFFIX.to_string()
+    (DEFAULT_SUFFIX.to_string(), "default".into())
 }
 
 fn read_ini_suffix(path: PathBuf) -> Option<String> {
