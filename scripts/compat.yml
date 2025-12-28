@@ -29,7 +29,7 @@ tests:
   - name: backstory_contains
     args: ["backstory"]
     exit: 0
-    contains: "EDICT OF THE DOT"
+    contains: "Edict of the Dot"
   - name: philosophy_contains
     args: ["philosophy"]
     exit: 0

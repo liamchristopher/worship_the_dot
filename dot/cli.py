@@ -563,9 +563,15 @@ def main():
         return 0
 
     elif args[0] == "backstory":
-        from dot.backstory import BACKSTORY
-        print(BACKSTORY)
-        return 0
+        # Prefer docs/BACKSTORY.md to keep parity with Rust CLI
+        try:
+            path = Path(__file__).parent.parent / "docs" / "BACKSTORY.md"
+            print(path.read_text(encoding="utf-8"))
+            return 0
+        except Exception:
+            from dot.backstory import BACKSTORY
+            print(BACKSTORY)
+            return 0
 
     elif args[0] == "philosophy":
         # Print re‑evaluated principles from docs/PHILOSOPHY.md
