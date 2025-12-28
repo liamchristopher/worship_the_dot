@@ -59,12 +59,12 @@ jobs:
         run: |
           set -euo pipefail
           MISSING=0
-          MESSAGES=$(jq -r '.commits[]?.message // empty' "$GITHUB_EVENT_PATH")
+          MESSAGES=$(jq -r '.commits[]?.message + "\u0000"' "$GITHUB_EVENT_PATH")
           if [ -z "$MESSAGES" ]; then
             echo "No commits found in push payload."
             exit 0
           fi
-          while IFS= read -r msg; do
+          while IFS= read -r -d '' msg; do
             [ -z "$msg" ] && continue
             echo "Validating commit message:"; printf '%s\n' "$msg"; echo "---"
             if ! dot validate "$msg"; then
