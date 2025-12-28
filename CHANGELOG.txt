@@ -1,5 +1,50 @@
 CHANGELOG - worship_the_dot
 -------------------------------------------------------------------------------
+[2025-12-28 14:48:54 -0800] 9a1d9d4 Compat: align backstory between Python and Rust
+  - Python CLI reads docs/BACKSTORY.md for parity
+  - Update compatibility spec to search for 'Edict of the Dot'
+
+-------------------------------------------------------------------------------
+[2025-12-28 14:48:54 -0800] 2db81c4 Compat: make PyYAML optional with inline fallback spec
+  - Run harness even when yaml module is unavailable
+
+-------------------------------------------------------------------------------
+[2025-12-28 14:48:54 -0800] a187dc6 Compat: use absolute path for Rust CLI binary
+  - Resolve rust CLI path so tests work from temp directories
+
+-------------------------------------------------------------------------------
+[2025-12-28 14:48:54 -0800] 3ba564c CI: fix commit-policy parsing of multi-line messages
+  - Read push commits as NUL-separated messages via jq
+
+-------------------------------------------------------------------------------
+[2025-12-28 14:48:54 -0800] 6a868b4 CI: checkout repo in commit-policy job
+  - Ensure code is available before installing CLI
+
+-------------------------------------------------------------------------------
+[2025-12-28 14:48:54 -0800] b801a7c CI: install dot in commit-policy job
+  - Setup Python and install THE DOT package for validation
+
+-------------------------------------------------------------------------------
+[2025-12-28 14:48:54 -0800] 563ca2e CI: harden commit-policy check using dot validate
+  - Use `dot validate` with debug output for push commits
+
+-------------------------------------------------------------------------------
+[2025-12-28 14:48:54 -0800] 188daa4 Compat: run doctor in temp dir; add cwd support
+  - Harness supports per-test cwd (temp) for non-repo checks
+
+-------------------------------------------------------------------------------
+[2025-12-28 14:48:54 -0800] 2d64848 Rust tests: run init-not-repo in temp dir
+  - Ensure negative case executes outside any git repo
+
+-------------------------------------------------------------------------------
+[2025-12-28 14:48:54 -0800] b24af8a Rust: make worship suffix resolution dynamic per call
+  - Remove Lazy caching to avoid test cross-talk
+
+-------------------------------------------------------------------------------
+[2025-12-28 14:48:54 -0800] 6288fef Rust: fix unicode escapes and docs include paths
+  - Use brace unicode escapes and correct include_str! paths
+
+-------------------------------------------------------------------------------
 [2025-12-28 13:36:40 -0800] b250a1e Fix CI: Python 3.8 compatibility, coverage config, Rust dep
   - Python: add future annotations to core/cli for 3.8 support
   - Coverage: omit lenses/CLI/ops modules; enforce ≥90% on core
