@@ -1,5 +1,12 @@
 CHANGELOG - worship_the_dot
 -------------------------------------------------------------------------------
+[2025-12-28 13:16:07 -0800] 5a7c9d2 CI: least-privilege GitHub permissions; document agent GitHub policy
+  - CI: set workflow `permissions: contents: read` globally; minimize job scopes
+  - CI: coverage job uses OIDC (`id-token: write`) with Codecov action
+  - Docs: AGENTS.md and CLAUDE.md updated with GitHub access/verification policy
+  - Tooling: Makefile targets for gh-based resolution; add issue resolver script
+
+-------------------------------------------------------------------------------
 [2025-12-28T11:22:00-08:00] a1c2e3f docs: Eco lens (Foucault’s Pendulum)
   - Add docs/ECO_FOUCAULTS_PENDULUM.md (essay; editors’ craft, cautions)
   - Link from docs/INDEX.md and README.md
