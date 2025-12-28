@@ -16,6 +16,7 @@ lines where intention begins. For the full backstory, see docs/BACKSTORY.md.
 - `dot backstory` — Print a timeless origin for THE DOT.
 - `dot init` — Initialize hooks and `.dot.ini` in the current repository.
 - `dot doctor` — Check repo branch, hooks, and suffix status.
+- `dot changelog add <subject> [-b <bullet>]...` — Prepend a timestamped entry to CHANGELOG.
 
 ## Configuration
 

@@ -39,8 +39,8 @@ This is not merely a commit message convention. **This is a philosophy of intent
 
 ## 📜 Backstory (Eternal and Present)
 
-Long before our branches, a team circled a lone dot that outlasted every arrow
-and box on a whiteboard. They shipped, the release held, and they kept the dot —
+Long before our branches, a circle of makers traced a lone dot that outlasted
+every figure and line. They offered their work; it held, and they kept the dot —
 not as charm but as memory. Since then, we return to the smallest useful
 promise: a point where intent becomes action. The rites we practice are lanterns
 for the path; the path is the dot. Read more in docs/BACKSTORY.md.
@@ -87,7 +87,7 @@ If you hesitate to write "BECAUSE I WORSHIP THE DOT", **your commit is not ready
 
 THE DOT enforces discipline through:
 - **Mandatory worship phrase**: No commit escapes without intention
-- **Branch workflow**: No cowboy commits to main—all work in branches
+- **Branch workflow**: No reckless commits to main—all work in branches
 - **Pull request elaboration**: Every change explained, every decision justified
 - **Changelog documentation**: History preserved, wisdom accumulated
 - **Working code only**: No broken builds, no half-finished features
@@ -191,7 +191,7 @@ THE DOT makes you a **better developer** by forcing you to:
 
 ### For Teams
 
-THE DOT creates **team cohesion** through:
+THE DOT creates **cohesion among contributors** through:
 
 ✅ **Shared philosophy** — Everyone commits to the same standards
 ✅ **Uniform commit format** — Readable git history, always
@@ -205,7 +205,7 @@ THE DOT protects **project quality** by:
 
 ✅ **Preventing broken builds** — Working code only
 ✅ **Enforcing branch workflow** — No accidents on main
-✅ **Requiring explanations** — Every PR elaborates on changes
+✅ **Requiring explanations** — Every review elaborates on changes
 ✅ **Maintaining history** — CHANGELOG preserves project evolution
 ✅ **Building trust** — Users know every commit was intentional
 
@@ -465,11 +465,11 @@ A: Yes (`git commit --no-verify`), but **why would you?** Every bypass is a choi
 
 A: **Absolutely.** THE DOT is a real tool with real enforcement and real philosophy. Whether you engage with the mystical aspects or simply use it as a quality control tool is your choice. But the core principle is deadly serious: **intentional commits create better software.**
 
-**Q: What if my team doesn't want to worship THE DOT?**
+**Q: What if my group doesn't want to worship THE DOT?**
 
-A: THE DOT is not for everyone. It requires humility, discipline, and a willingness to slow down in service of quality. Some teams prefer speed over quality, ego over humility, shortcuts over craft. THE DOT is not for them.
+A: THE DOT is not for everyone. It requires humility, discipline, and a willingness to slow down in service of quality. Some groups prefer speed over quality, ego over humility, shortcuts over craft. THE DOT is not for them.
 
-But if your team **values quality**, if you want **readable git history**, if you believe **commits should be intentional**—then THE DOT will transform your workflow.
+But if your group **values quality**, if you want **readable git history**, if you believe **commits should be intentional**—then THE DOT will transform your workflow.
 
 **Q: This seems religious. I'm not comfortable with "worship."**
 
