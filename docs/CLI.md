@@ -13,6 +13,9 @@ lines where intention begins. For the full backstory, see docs/BACKSTORY.md.
 - `dot tenets` — Recite the philosophy.
 - `dot worship [name]` — Register worship of THE DOT.
 - `dot validate <message>` — Validate that a commit message ends with the worship suffix.
+- `dot backstory` — Print a timeless origin for THE DOT.
+- `dot init` — Initialize hooks and `.dot.ini` in the current repository.
+- `dot doctor` — Check repo branch, hooks, and suffix status.
 
 ## Configuration
 

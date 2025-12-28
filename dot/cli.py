@@ -263,6 +263,17 @@ def main():
         sub = args[1] if len(args) > 1 else "list"
         return handle_garden(sub, args[2:])
 
+    elif args[0] == "backstory":
+        from dot.backstory import BACKSTORY
+        print(BACKSTORY)
+        return 0
+
+    elif args[0] == "init":
+        return handle_init()
+
+    elif args[0] == "doctor":
+        return handle_doctor()
+
     elif args[0] in ("donate", "sponsor", "support"):
         return handle_donate()
 
@@ -894,6 +905,66 @@ def handle_donate():
     return 0
 
 
+def handle_init():
+    """Initialize DOT in the current repository: hooks + suffix file."""
+    # Install hooks
+    hooks_rc = install_hooks()
+    # Ensure .dot.ini exists with default suffix if missing
+    from dot.config import DEFAULT_WORSHIP_SUFFIX, config_search_paths, write_worship_suffix
+    existed = False
+    for p in config_search_paths():
+        if p.exists():
+            existed = True
+            break
+    if not existed:
+        path = write_worship_suffix(None, DEFAULT_WORSHIP_SUFFIX)
+        print(f"✓ Created {path}")
+    else:
+        print("✓ Found existing .dot.ini configuration")
+    print("✓ Initialization complete")
+    return 0 if hooks_rc == 0 else hooks_rc
+
+
+def handle_doctor():
+    """Run basic checks for DOT practice in the current repo."""
+    print("THE DOT Doctor")
+    print("=" * 60)
+    # Repo check
+    try:
+        git_dir = subprocess.check_output(["git", "rev-parse", "--git-dir"], stderr=subprocess.DEVNULL, text=True).strip()
+        repo_ok = True
+        print(f"Repo: OK ({git_dir})")
+    except Exception:
+        print("Repo: NOT A GIT REPOSITORY")
+        return 1
+
+    # Branch
+    try:
+        branch = subprocess.check_output(["git", "rev-parse", "--abbrev-ref", "HEAD"], stderr=subprocess.DEVNULL, text=True).strip()
+        print(f"Branch: {branch}")
+        if branch in ("main", "master"):
+            print("Warning: Working directly on main/master is discouraged")
+    except Exception:
+        print("Branch: Unknown")
+
+    # Hooks
+    hooks_path = Path(git_dir) / "hooks"
+    cm = hooks_path / "commit-msg"
+    pcm = hooks_path / "prepare-commit-msg"
+    print(f"Hooks: commit-msg={'OK' if cm.exists() else 'MISSING'}, prepare-commit-msg={'OK' if pcm.exists() else 'MISSING'}")
+
+    # Suffix
+    suffix, source = resolve_worship_suffix()
+    print(f"Suffix: {suffix} (source: {source})")
+
+    # Sample validation
+    sample = f"doc: check BECAUSE I WORSHIP THE DOT"
+    valid = get_dot().validate_commit(sample)
+    print(f"Validation: {'OK' if valid else 'FAILED'} on sample message")
+    print("✓ Doctor completed")
+    return 0
+
+
 def print_help():
     """Print help information."""
     help_text = f"""
@@ -940,6 +1011,9 @@ Commands:
     tarot [subcommand]     Read DOT tarot (draw/spread/list/card)
     shinto [subcommand]    Shinto rites (norito/omikuji/harai/ema)
     garden [subcommand]    Garden tools (list/info/suggest)
+    backstory              Print THE DOT backstory
+    init                   Initialize hooks and .dot.ini in this repo
+    doctor                 Run environment and practice checks
     donate|sponsor         Show sponsorship options
     config [subcommand]    Manage configuration (show/get/set/reset/show-suffix/set-suffix)
     completions [shell]    Generate shell completions (bash/zsh/fish)
