@@ -18,7 +18,7 @@ _dot_completion() {
     prev="${COMP_WORDS[COMP_CWORD-1]}"
 
     # Main commands
-    commands="worship tenets validate hooks stats badge config completions version help"
+    commands="worship tenets sing invoke validate hooks stats badge config completions version help"
 
     # Subcommands for hooks
     hooks_cmds="install uninstall status"
@@ -80,6 +80,8 @@ _dot() {
     commands=(
         'worship:Register worship of THE DOT'
         'tenets:Display THE DOT philosophy'
+        'sing:Hear THE ILIAD OF THE DOT in epic verse'
+        'invoke:Receive an epic invocation from THE DOT'
         'validate:Validate a commit message'
         'hooks:Manage git hooks'
         'stats:View worship statistics'
@@ -159,6 +161,8 @@ def fish_completion() -> str:
 # Main commands
 complete -c dot -n "__fish_use_subcommand" -a "worship" -d "Register worship of THE DOT"
 complete -c dot -n "__fish_use_subcommand" -a "tenets" -d "Display THE DOT philosophy"
+complete -c dot -n "__fish_use_subcommand" -a "sing" -d "Hear THE ILIAD OF THE DOT in epic verse"
+complete -c dot -n "__fish_use_subcommand" -a "invoke" -d "Receive an epic invocation from THE DOT"
 complete -c dot -n "__fish_use_subcommand" -a "validate" -d "Validate a commit message"
 complete -c dot -n "__fish_use_subcommand" -a "hooks" -d "Manage git hooks"
 complete -c dot -n "__fish_use_subcommand" -a "stats" -d "View worship statistics"

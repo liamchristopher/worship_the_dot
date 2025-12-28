@@ -42,6 +42,7 @@ class DotConfig:
                 "colors": True,
                 "emoji": True,
                 "verbose": False,
+                "epic": False,
             },
             "stats": {
                 "track_worship": True,

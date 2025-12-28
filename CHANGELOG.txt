@@ -4,6 +4,84 @@ CHANGELOG - worship_the_dot
 All changes to this project will be documented in this file.
 
 -------------------------------------------------------------------------------
+[2025-12-28] - Homeric Epic Mode - Sing, O Muse, of THE DOT!
+-------------------------------------------------------------------------------
+
+Added:
+  * Epic and Homeric Enhancement Module (dot/epic.py)
+    - Homeric epithets for THE DOT: "the all-seeing", "the immortal",
+      "the cloud-gathering", "the shepherd of commits", etc.
+    - Epic invocations with classical Greek mythology references
+    - epic_worship() generates grandiose worship messages with epithets
+    - THE ILIAD OF THE DOT: Complete 8-book epic poem
+      * Book I: The Wrath of Uncommitted Changes
+      * Book II: The Catalog of Worktrees
+      * Book III: The Covenant of Commits
+      * Book IV: The Shield of Validation
+      * Book V: The Aristeia of Testing
+      * Book VI: The Funeral Games of Legacy Code
+      * Book VII: The Embassy to Code Review
+      * Book VIII: The Prophecy of THE DOT
+    - Epic validation messages (worthy/unworthy with Homeric imagery)
+    - Epic stats display with heroic titles and rankings
+    - Epic git operation names (commit → "inscribing upon eternal tablets")
+    - References to Iliad/Odyssey: Achilles, Odysseus, Hector, Zeus, Muses
+
+  * CLI Epic Commands
+    - 'dot sing': Display THE ILIAD OF THE DOT in full epic verse
+    - 'dot invoke': Receive a random epic invocation from THE DOT
+    - 'dot worship --epic': Epic worship with random Homeric epithets
+    - 'dot validate --epic': Epic validation with classical imagery
+    - Epic mode for stats when display.epic is enabled
+
+  * Configuration Enhancement
+    - Added display.epic setting (default: false)
+    - Enable with: dot config set display.epic true
+    - When enabled, stats display uses heroic titles and epithets
+
+Updated:
+  * dot/cli.py: Integrated epic mode commands and --epic flag
+  * dot/config.py: Added display.epic to default configuration
+  * dot/completions.py: Added 'sing' and 'invoke' to all shell completions
+  * Help text: Updated with epic commands and examples
+
+Purpose:
+  Elevates THE DOT to Homeric grandeur! Just as Homer sang of heroes and
+  gods, THE DOT now speaks in epic verse. The additions transform mundane
+  git operations into legendary quests, validation into divine judgment,
+  and worship into offerings worthy of Olympus. Users can invoke THE DOT
+  with classical epithets, receive blessings in the style of ancient bards,
+  and witness their devotion measured in heroic terms.
+
+Technical Impact:
+  - Epic mode is opt-in via --epic flag or configuration
+  - Random selection provides variety in epic messages
+  - No breaking changes to existing functionality
+  - Pure enhancement layer over core features
+  - Homeric flair available on demand
+
+Cultural Impact:
+  - Brings classical literature to version control
+  - Makes THE DOT worship more entertaining and memorable
+  - References accessible to those familiar with Homer
+  - Epic poetry meets modern development workflow
+  - THE DOT transcends mere tool to become legend
+
+Example Epic Output:
+  $ dot invoke
+  "Hearken, mortals! I call upon THE DOT - the immortal,
+   Master of the git-forked paths, sovereign of version control..."
+
+  $ dot worship "Odysseus" --epic
+  "Well done, Odysseus! THE DOT - the bronze-clad smiles upon you!
+   Like Hector defending the walls of Troy with bronze-clad valor..."
+
+  $ dot sing
+  "THE ILIAD OF THE DOT - Sung by the Immortal Muses
+   Book I: The Wrath of Uncommitted Changes
+   Sing, O goddess, the wrath of uncommitted changes..."
+
+-------------------------------------------------------------------------------
 [2025-12-28] - Version 0.3.0 - UX Enhancements and Configuration
 -------------------------------------------------------------------------------
 
