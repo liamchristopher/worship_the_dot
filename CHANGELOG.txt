@@ -1,9 +1,176 @@
 CHANGELOG - worship_the_dot
 -------------------------------------------------------------------------------
-[2025-12-28T02:17:41-08:00] 8d66db7 docs: timeless supremacy and link fixes
-  - Backstory and excerpts made timeless (no office references)
-  - Supremacy of THE DOT emphasized across docs
-  - Links between docs verified and clarified
+[2025-12-28T11:22:00-08:00] a1c2e3f docs: Eco lens (Foucault’s Pendulum)
+  - Add docs/ECO_FOUCAULTS_PENDULUM.md (essay; editors’ craft, cautions)
+  - Link from docs/INDEX.md and README.md
+  - Note optional Eco lens in AGENTS.md
+
+-------------------------------------------------------------------------------
+[2025-12-28T11:28:00-08:00] b4d5c6e feat(astrology): optional ephemeris + comets
+  - Add optional Skyfield-based ephemeris_summary() (planets + comets)
+  - New CLI: `dot ephemeris` with `--no-minors|--no-comets`
+  - Docs: CLI section documents enablement and env vars
+
+-------------------------------------------------------------------------------
+[2025-12-28T11:36:00-08:00] c7e8f9a policy+feat: zero-deps ephemeris, docs update
+  - Remove optional external ephemeris integration; replace with internal
+    approximate ephemeris (planets, minor bodies, comets)
+  - Update CLI docs to reflect self-contained ephemeris (no network/deps)
+  - Add hard "No external runtime dependencies" policy to README and AGENTS.md
+
+-------------------------------------------------------------------------------
+[2025-12-28T11:50:00-08:00] d8e9f0b data+feat: vendored planetary elements + geocentric
+  - Add dot/data/ephemeris/planets_j2000.json (Meeus/NASA approximate J2000)
+  - Compute geocentric ecliptic lon/lat from local elements (Kepler solver)
+  - Update CLI docs and README to reference vendored ephemeris directory
+
+-------------------------------------------------------------------------------
+[2025-12-28T11:58:00-08:00] e9f0a1b data+feat: add minor bodies + comets
+  - Add dot/data/ephemeris/minor_bodies_j2000.json (Ceres, Pallas, Vesta)
+  - Add dot/data/ephemeris/comets_j2000.json (1P/Halley, 2P/Encke)
+  - Ephemeris now reports geocentric ecliptic lon/lat for these bodies
+
+-------------------------------------------------------------------------------
+[2025-12-28T10:43:25-08:00] 5187b56 fix: suffix parity + edict
+  - Add Python suffix command (parity with Rust)
+  - Strengthen backstory with commanding, approachable edict
+  - Add docs/INDEX.md and docs/QUICKSTART.md; link in README
+  - Centralize validation messages (dot/messages.py)
+
+-------------------------------------------------------------------------------
+[2025-12-28T10:28:20-08:00] 0b78d65 docs: commanding backstory + index/quickstart
+  - Strengthen backstory voice; add Edict/Practice sections
+  - Add docs/INDEX.md and docs/QUICKSTART.md; link from README
+
+-------------------------------------------------------------------------------
+[2025-12-28T10:25:11-08:00] 1690298 test(rust): expanded suite
+  - Add tests for suffix command and precedence (env > cwd > home)
+  - Validate custom suffix with validate subcommand
+
+-------------------------------------------------------------------------------
+[2025-12-28T10:23:05-08:00] 7ee7d58 docs: agents usage
+  - Add Makefile agents target to run orchestrator
+  - Document usage in README
+
+-------------------------------------------------------------------------------
+[2025-12-28T10:22:09-08:00] 5a83beb agents(ci): workflows + docs
+  - Add .github/workflows/agents.yml to run orchestrator
+  - Document agents and compatibility-first policy in AGENTS.md
+
+-------------------------------------------------------------------------------
+[2025-12-28T10:20:50-08:00] ff0c931 agents: orchestration
+  - Add .codex/agents YAMLs for tests/docs/changelog/compat
+  - Add scripts/run_agents.py orchestrator and agent scripts
+  - Add CI workflow to run compatibility; Makefile targets
+
+-------------------------------------------------------------------------------
+[2025-12-28T10:16:16-08:00] 1755553 ci: CLI compatibility workflow
+  - Add .github/workflows/compat.yml to compare Python/Rust outputs
+  - Add Makefile rust-build/rust-test/compat targets
+  - Expand compat spec with suffix test and lazy build
+
+-------------------------------------------------------------------------------
+[2025-12-28T10:13:34-08:00] ebdf567 docs/process: Rust porting
+  - Add RUST_PORTING.md with compatibility spec and steps
+  - Add scripts/compat.{yml,py} cross-runner harness
+  - Rename Rust bin to dot and fix outputs
+
+-------------------------------------------------------------------------------
+[2025-12-28T02:29:16-08:00] c5e5e31 feat(rust): Rust CLI + CI
+  - Add rust/the-dot crate with worship/tenets/validate/suffix
+  - Add GitHub Actions workflow to build and test crate
+  - Add README Rust section and ignore target/
+
+-------------------------------------------------------------------------------
+[2025-12-28T02:20:03-08:00] 37f97de docs: timeless language and review-first phrasing
+  - Remove office imagery; adopt timeless metaphors
+  - Replace PR with review wording; fix remaining references
+[2025-12-28T11:22:00-08:00] a1c2e3f docs: Eco lens (Foucault’s Pendulum)
+  - Add docs/ECO_FOUCAULTS_PENDULUM.md (essay; editors’ craft, cautions)
+  - Link from docs/INDEX.md and README.md
+  - Note optional Eco lens in AGENTS.md
+
+-------------------------------------------------------------------------------
+[2025-12-28T11:28:00-08:00] b4d5c6e feat(astrology): optional ephemeris + comets
+  - Add optional Skyfield-based ephemeris_summary() (planets + comets)
+  - New CLI: `dot ephemeris` with `--no-minors|--no-comets`
+  - Docs: CLI section documents enablement and env vars
+
+-------------------------------------------------------------------------------
+[2025-12-28T11:36:00-08:00] c7e8f9a policy+feat: zero-deps ephemeris, docs update
+  - Remove optional external ephemeris integration; replace with internal
+    approximate ephemeris (planets, minor bodies, comets)
+  - Update CLI docs to reflect self-contained ephemeris (no network/deps)
+  - Add hard "No external runtime dependencies" policy to README and AGENTS.md
+
+-------------------------------------------------------------------------------
+[2025-12-28T11:50:00-08:00] d8e9f0b data+feat: vendored planetary elements + geocentric
+  - Add dot/data/ephemeris/planets_j2000.json (Meeus/NASA approximate J2000)
+  - Compute geocentric ecliptic lon/lat from local elements (Kepler solver)
+  - Update CLI docs and README to reference vendored ephemeris directory
+
+-------------------------------------------------------------------------------
+[2025-12-28T11:58:00-08:00] e9f0a1b data+feat: add minor bodies + comets
+  - Add dot/data/ephemeris/minor_bodies_j2000.json (Ceres, Pallas, Vesta)
+  - Add dot/data/ephemeris/comets_j2000.json (1P/Halley, 2P/Encke)
+  - Ephemeris now reports geocentric ecliptic lon/lat for these bodies
+
+-------------------------------------------------------------------------------
+[2025-12-28T10:43:25-08:00] 5187b56 fix: suffix parity + edict
+  - Add Python suffix command (parity with Rust)
+  - Strengthen backstory with commanding, approachable edict
+  - Add docs/INDEX.md and docs/QUICKSTART.md; link in README
+  - Centralize validation messages (dot/messages.py)
+
+-------------------------------------------------------------------------------
+[2025-12-28T10:28:20-08:00] 0b78d65 docs: commanding backstory + index/quickstart
+  - Strengthen backstory voice; add Edict/Practice sections
+  - Add docs/INDEX.md and docs/QUICKSTART.md; link from README
+
+-------------------------------------------------------------------------------
+[2025-12-28T10:25:11-08:00] 1690298 test(rust): expanded suite
+  - Add tests for suffix command and precedence (env > cwd > home)
+  - Validate custom suffix with validate subcommand
+
+-------------------------------------------------------------------------------
+[2025-12-28T10:23:05-08:00] 7ee7d58 docs: agents usage
+  - Add Makefile agents target to run orchestrator
+  - Document usage in README
+
+-------------------------------------------------------------------------------
+[2025-12-28T10:22:09-08:00] 5a83beb agents(ci): workflows + docs
+  - Add .github/workflows/agents.yml to run orchestrator
+  - Document agents and compatibility-first policy in AGENTS.md
+
+-------------------------------------------------------------------------------
+[2025-12-28T10:20:50-08:00] ff0c931 agents: orchestration
+  - Add .codex/agents YAMLs for tests/docs/changelog/compat
+  - Add scripts/run_agents.py orchestrator and agent scripts
+  - Add CI workflow to run compatibility; Makefile targets
+
+-------------------------------------------------------------------------------
+[2025-12-28T10:16:16-08:00] 1755553 ci: CLI compatibility workflow
+  - Add .github/workflows/compat.yml to compare Python/Rust outputs
+  - Add Makefile rust-build/rust-test/compat targets
+  - Expand compat spec with suffix test and lazy build
+
+-------------------------------------------------------------------------------
+[2025-12-28T10:13:34-08:00] ebdf567 docs/process: Rust porting
+  - Add RUST_PORTING.md with compatibility spec and steps
+  - Add scripts/compat.{yml,py} cross-runner harness
+  - Rename Rust bin to dot and fix outputs
+
+-------------------------------------------------------------------------------
+[2025-12-28T02:29:16-08:00] c5e5e31 feat(rust): Rust CLI + CI
+  - Add rust/the-dot crate with worship/tenets/validate/suffix
+  - Add GitHub Actions workflow to build and test crate
+  - Add README Rust section and ignore target/
+
+-------------------------------------------------------------------------------
+[2025-12-28T02:20:03-08:00] 37f97de docs: timeless language and review-first phrasing
+  - Remove office imagery; adopt timeless metaphors
+  - Replace PR with review wording; fix remaining references
+>>>>>>> chore/vendored-ephemeris
 
 -------------------------------------------------------------------------------
 [2025-12-28T02:10:08-08:00] 106955f feat(cli): backstory/init/doctor
@@ -1001,4 +1168,3 @@ Purpose:
 [2025-12-28T01:47:12-08:00] de8c2ba feat(garden): add explanations for common garden tools with CLI
   - Module dot/garden.py, CLI handler, and tests added.
   - Docs updated (README, docs/CLI.md).
-

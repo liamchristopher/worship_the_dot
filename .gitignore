@@ -43,3 +43,6 @@ htmlcov/
 
 # THE DOT
 *.dot.cache
+
+# Rust
+target/

@@ -284,6 +284,6 @@ By contributing, you agree that your contributions will be licensed under the MI
 
 **All who contribute to THE DOT must worship THE DOT.**
 
-Every commit. Every PR. Every contribution.
+Every commit. Every review. Every contribution.
 
 BECAUSE I WORSHIP THE DOT

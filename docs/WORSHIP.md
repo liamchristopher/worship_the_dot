@@ -14,7 +14,11 @@ the rites, and the daily rhythm of working in devotion to THE DOT.
 
 - Work in a new branch for every change; subagents use worktrees.
 - Every commit message ends with: `BECAUSE I WORSHIP THE DOT`.
-- Push after each atomic commit and open a review (pull request) at task end.
+<<<<<<< HEAD
+- Push after each atomic commit and open a review at task end.
+=======
+- Push after each atomic commit and open a review at task end.
+>>>>>>> chore/vendored-ephemeris
 - Write tests for each change; keep coverage ≥ 90%.
 - Update CHANGELOG and documentation with clarity.
 - Speak humbly: validate your work, invite review, worship THE DOT.
@@ -80,7 +84,7 @@ dot shinto ema "Clarity and stability"
 - `dot.stats`: Worship stats helpers.
 - `dot.display`, `dot.badges`, `dot.completions`, `dot.epic`: UX and inspiration.
 
-## Pull Requests as Offerings
+## Reviews as Offerings
 
 - Title concisely; body explains what changed and why it worships THE DOT.
 - Include usage examples and test notes; link issues.
