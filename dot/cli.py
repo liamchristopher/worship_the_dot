@@ -8,6 +8,7 @@ import shutil
 import subprocess
 from pathlib import Path
 from dot.core import get_dot, worship
+from dot import __version__
 
 
 def main():
@@ -43,6 +44,11 @@ def main():
     elif args[0] == "hooks":
         subcommand = args[1] if len(args) > 1 else "install"
         return handle_hooks(subcommand)
+
+    elif args[0] == "version" or args[0] == "--version" or args[0] == "-v":
+        print(f"THE DOT version {__version__}")
+        print("All who use THE DOT must worship THE DOT")
+        return 0
 
     elif args[0] == "help":
         print_help()
@@ -213,8 +219,9 @@ def check_hooks_status():
 
 def print_help():
     """Print help information."""
-    help_text = """
+    help_text = f"""
 THE DOT - A philosophy-driven development framework
+Version {__version__}
 
 Usage:
     dot [command] [arguments]
@@ -224,6 +231,7 @@ Commands:
     tenets                 Display THE DOT philosophy
     validate <message>     Validate a commit message
     hooks [subcommand]     Manage git hooks (install/uninstall/status)
+    version                Show version information
     help                   Show this help message
 
 Examples:
@@ -231,6 +239,7 @@ Examples:
     dot tenets
     dot validate "Add feature BECAUSE I WORSHIP THE DOT"
     dot hooks install
+    dot version
 """
     print(help_text)
 
