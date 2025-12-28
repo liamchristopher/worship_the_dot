@@ -1,5 +1,12 @@
 CHANGELOG - worship_the_dot
 -------------------------------------------------------------------------------
+[2025-12-28T10:43:25-08:00] 5187b56 fix: suffix parity + edict
+  - Add Python suffix command (parity with Rust)
+  - Strengthen backstory with commanding, approachable edict
+  - Add docs/INDEX.md and docs/QUICKSTART.md; link in README
+  - Centralize validation messages (dot/messages.py)
+
+-------------------------------------------------------------------------------
 [2025-12-28T10:28:20-08:00] 0b78d65 docs: commanding backstory + index/quickstart
   - Strengthen backstory voice; add Edict/Practice sections
   - Add docs/INDEX.md and docs/QUICKSTART.md; link from README
