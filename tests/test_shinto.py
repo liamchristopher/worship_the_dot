@@ -42,14 +42,14 @@ def test_cli_shinto_commands():
         with patch('sys.stdout', new=StringIO()) as out:
             exit_code = main()
             s = out.getvalue()
-    assert exit_code == 0 and 'Omikuji:' in s and 'Counsel:' in s
+    assert exit_code == 0 and 'OMIKUJI' in s and 'SACRED FORTUNE' in s
 
     # harai
     with patch('sys.argv', ['dot', 'shinto', 'harai']):
         with patch('sys.stdout', new=StringIO()) as out:
             exit_code = main()
             s = out.getvalue()
-    assert exit_code == 0 and 'Purification' in s
+    assert exit_code == 0 and 'PURIFICATION' in s
 
     # ema
     with patch('sys.argv', ['dot', 'shinto', 'ema', 'Bless', 'this', 'repo']):
