@@ -569,6 +569,7 @@ Explore the Rust porting process: [docs/RUST_PORTING.md](docs/RUST_PORTING.md)
 - **[Worshipper's Guide](docs/WORSHIP.md)** — Philosophy and practice
 - **[CLI Reference](docs/CLI.md)** — Complete command documentation
 - **[Rituals Handbook](docs/RITUALS.md)** — Poetry, tarot, and Shinto rites
+- **[Eco Lens — Foucault’s Pendulum](docs/ECO_FOUCAULTS_PENDULUM.md)** — Editorial rigor without apophenia
 - **[Contributing Guide](CONTRIBUTING.md)** — Join the practice
 - **[Claude Code Guide](CLAUDE.md)** — For AI agents
 - **[Changelog](CHANGELOG.txt)** — Project history
@@ -579,10 +580,11 @@ Explore the Rust porting process: [docs/RUST_PORTING.md](docs/RUST_PORTING.md)
 
 - **70+ tests** — All passing, always
 - **≥90% coverage** — Quality enforced through CI
-- **0 runtime dependencies** — Pure Python devotion
+- **0 runtime dependencies** — Pure Python devotion (policy)
 - **Python 3.8–3.12** — Modern compatibility
 - **Git hooks + CI** — Quality at every level
 - **4 mystical traditions** — Ancient wisdom for modern code
+- **Vendored ephemeris** — Local J2000 orbital elements (no network)
 
 ---
 
@@ -602,6 +604,19 @@ MIT License — see [LICENSE](LICENSE)
 - [Contributing Guide](CONTRIBUTING.md)
 
 ---
+
+## 🔒 Dependency Policy
+
+- No external runtime dependencies. All features must run with the standard
+  library only. If data is needed (e.g., ephemerides), it must be embedded or
+  checked into this repository.
+- Development dependencies (tests, lint) remain isolated to dev tooling.
+- Network access is forbidden for core features and commands.
+
+Ephemeris data lives under `dot/data/ephemeris/` and includes planetary
+elements (J2000). Minor bodies and comets are added by vendoring their elements
+in that directory; all lookups remain fully local.
+
 
 ## 🌟 Support THE DOT
 

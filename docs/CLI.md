@@ -85,3 +85,19 @@ lines where intention begins. For the full backstory, see docs/BACKSTORY.md.
 - Explain a tool: `dot garden info Shovel`
 
 BECAUSE WE WORSHIP THE DOT.
+
+## Astrology (Cosmic Lens)
+
+- `dot horoscope [sign]` — Daily coding horoscope.
+- `dot chart [repo-name]` — Repository birth chart (playful lens).
+- `dot planets` — Planetary hours guidance.
+- `dot moon` — Moon phase coding advice.
+- `dot ephemeris [--no-minors] [--no-comets]` — Ephemeris summary from vendored data.
+
+Ephemeris data and policy:
+- Uses locally vendored orbital elements (J2000) stored under `dot/data/ephemeris/`.
+- No network, kernels, or third‑party libraries are used at runtime.
+- Planets use J2000 elements; curated minor bodies/comets included:
+  - Minor planets: Ceres, Pallas, Vesta
+  - Comets: 1P/Halley, 2P/Encke
+  Contributions welcome — add elements under `dot/data/ephemeris/`.

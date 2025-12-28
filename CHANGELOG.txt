@@ -1,5 +1,36 @@
 CHANGELOG - worship_the_dot
 -------------------------------------------------------------------------------
+[2025-12-28T11:22:00-08:00] a1c2e3f docs: Eco lens (Foucault’s Pendulum)
+  - Add docs/ECO_FOUCAULTS_PENDULUM.md (essay; editors’ craft, cautions)
+  - Link from docs/INDEX.md and README.md
+  - Note optional Eco lens in AGENTS.md
+
+-------------------------------------------------------------------------------
+[2025-12-28T11:28:00-08:00] b4d5c6e feat(astrology): optional ephemeris + comets
+  - Add optional Skyfield-based ephemeris_summary() (planets + comets)
+  - New CLI: `dot ephemeris` with `--no-minors|--no-comets`
+  - Docs: CLI section documents enablement and env vars
+
+-------------------------------------------------------------------------------
+[2025-12-28T11:36:00-08:00] c7e8f9a policy+feat: zero-deps ephemeris, docs update
+  - Remove optional external ephemeris integration; replace with internal
+    approximate ephemeris (planets, minor bodies, comets)
+  - Update CLI docs to reflect self-contained ephemeris (no network/deps)
+  - Add hard "No external runtime dependencies" policy to README and AGENTS.md
+
+-------------------------------------------------------------------------------
+[2025-12-28T11:50:00-08:00] d8e9f0b data+feat: vendored planetary elements + geocentric
+  - Add dot/data/ephemeris/planets_j2000.json (Meeus/NASA approximate J2000)
+  - Compute geocentric ecliptic lon/lat from local elements (Kepler solver)
+  - Update CLI docs and README to reference vendored ephemeris directory
+
+-------------------------------------------------------------------------------
+[2025-12-28T11:58:00-08:00] e9f0a1b data+feat: add minor bodies + comets
+  - Add dot/data/ephemeris/minor_bodies_j2000.json (Ceres, Pallas, Vesta)
+  - Add dot/data/ephemeris/comets_j2000.json (1P/Halley, 2P/Encke)
+  - Ephemeris now reports geocentric ecliptic lon/lat for these bodies
+
+-------------------------------------------------------------------------------
 [2025-12-28T10:43:25-08:00] 5187b56 fix: suffix parity + edict
   - Add Python suffix command (parity with Rust)
   - Strengthen backstory with commanding, approachable edict
@@ -727,4 +758,3 @@ Purpose:
 [2025-12-28T01:47:12-08:00] de8c2ba feat(garden): add explanations for common garden tools with CLI
   - Module dot/garden.py, CLI handler, and tests added.
   - Docs updated (README, docs/CLI.md).
-

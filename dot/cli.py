@@ -93,6 +93,14 @@ def main():
         print(moon_phase_advice())
         return 0
 
+    elif args[0] == "ephemeris":
+        # Optional high-precision ephemerides if enabled
+        from dot.astrology import ephemeris_summary
+        include_minors = "--no-minors" not in args
+        include_comets = "--no-comets" not in args
+        print(ephemeris_summary(include_minors=include_minors, include_comets=include_comets))
+        return 0
+
     elif args[0] == "element":
         from dot.alchemy import element_reading
         print(element_reading())

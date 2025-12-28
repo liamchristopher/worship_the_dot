@@ -9,6 +9,7 @@ Start here:
 - Stoic Lens: `docs/STOICISM.md`
 - Zen Lens: `docs/ZEN.md`
 - Noble Path (Buddhism): `docs/BUDDHISM.md`
+- Eco Lens (Foucault’s Pendulum): `docs/ECO_FOUCAULTS_PENDULUM.md`
 - Brand Guide (Logos): `docs/BRAND.md`
 - Rust Porting Guide: `docs/RUST_PORTING.md`
 - Contributing: `CONTRIBUTING.md`

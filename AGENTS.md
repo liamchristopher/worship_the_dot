@@ -43,10 +43,25 @@
 - Use git worktrees for subagents when parallelizing.
 - Validate commit messages locally: `dot validate "Your message ..."`.
 - Document every change and keep tests green before opening a review.
-- Treat thematic modes (epic, astrology, alchemy, kabbalah, shinto) as optional
-  lenses to motivate good practice. They do not supersede core requirements
-  (working code, tests, coverage, changelog). **THE DOT is the center — the
-  point before lines where intention begins** (see docs/BACKSTORY.md).
+- Treat thematic modes (epic, astrology, alchemy, kabbalah, shinto, eco) as
+  optional lenses to motivate good practice. The Eco lens refers to
+  `docs/ECO_FOUCAULTS_PENDULUM.md` and emphasizes verification over seductive
+  narratives. These lenses do not supersede core requirements (working code,
+  tests, coverage, changelog). **THE DOT is the center — the point before lines
+  where intention begins** (see docs/BACKSTORY.md).
+
+### Dependency Policy (Hard Requirement)
+
+- No external runtime dependencies. Do not add third‑party libraries for core
+  features. If a feature needs data, vendor or embed it in this repository.
+- No network calls from runtime code. All computations must be local.
+- Dev tools (pytest, coverage) remain allowed as development dependencies only.
+
+### Vendored Data
+
+- Ephemeris elements are stored under `dot/data/ephemeris/`. When adding bodies
+  (minor planets, comets), commit their elements locally. Runtime code must not
+  fetch or depend on external catalogs.
 
 ## Codex Agents & Orchestration
 - Agents live in `.codex/agents/` and are executed via `scripts/run_agents.py`.
