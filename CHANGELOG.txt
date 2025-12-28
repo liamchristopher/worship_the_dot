@@ -1,5 +1,11 @@
 CHANGELOG - worship_the_dot
 -------------------------------------------------------------------------------
+[2025-12-28T02:29:16-08:00] c5e5e31 feat(rust): Rust CLI + CI
+  - Add rust/the-dot crate with worship/tenets/validate/suffix
+  - Add GitHub Actions workflow to build and test crate
+  - Add README Rust section and ignore target/
+
+-------------------------------------------------------------------------------
 [2025-12-28T02:20:03-08:00] 37f97de docs: timeless language and review-first phrasing
   - Remove office imagery; adopt timeless metaphors
   - Replace PR with review wording; fix remaining references
