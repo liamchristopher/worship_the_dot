@@ -23,7 +23,13 @@ def main():
 
     if not args or args[0] == "worship":
         name = args[1] if len(args) > 1 else "CLI User"
-        print(worship(name))
+        epic_mode = "--epic" in args
+
+        if epic_mode:
+            from dot.epic import epic_worship
+            print(epic_worship(name))
+        else:
+            print(worship(name))
         return 0
 
     elif args[0] == "tenets":
@@ -32,18 +38,39 @@ def main():
             print(f"  {i}. {tenet}")
         return 0
 
+    elif args[0] == "sing":
+        from dot.epic import epic_tenets
+        print(epic_tenets())
+        return 0
+
+    elif args[0] == "invoke":
+        from dot.epic import epic_invocation
+        print()
+        print(epic_invocation())
+        print()
+        return 0
+
     elif args[0] == "validate":
         if len(args) < 2:
             print("Error: Please provide a commit message to validate")
             return 1
 
-        message = " ".join(args[1:])
-        if dot.validate_commit(message):
-            print("✓ Valid commit message - properly worships THE DOT")
-            return 0
+        epic_mode = "--epic" in args
+        message_args = [a for a in args[1:] if a != "--epic"]
+        message = " ".join(message_args)
+
+        if epic_mode:
+            from dot.epic import epic_validation_message
+            valid = dot.validate_commit(message)
+            print(epic_validation_message(valid, message))
+            return 0 if valid else 1
         else:
-            print("✗ Invalid commit message - must end with 'BECAUSE I WORSHIP THE DOT'")
-            return 1
+            if dot.validate_commit(message):
+                print("✓ Valid commit message - properly worships THE DOT")
+                return 0
+            else:
+                print("✗ Invalid commit message - must end with 'BECAUSE I WORSHIP THE DOT'")
+                return 1
 
     elif args[0] == "hooks":
         subcommand = args[1] if len(args) > 1 else "install"
@@ -258,11 +285,27 @@ def handle_stats(subcommand):
         return 0
 
     elif subcommand == "top":
+        from dot.epic import epic_stats_header, epic_worshipper_title
+
         top = stats.get_top_worshippers(10)
-        print("Top Worshippers:")
-        print("=" * 60)
-        for i, w in enumerate(top, 1):
-            print(f"{i:2d}. {w['name']:<30} {w['count']:>5} worships")
+
+        # Check if epic mode is enabled in config
+        from dot.config import get_config
+        config = get_config()
+        epic_mode = config.get("display", "epic", default=False)
+
+        if epic_mode:
+            print(epic_stats_header())
+            for i, w in enumerate(top, 1):
+                title = epic_worshipper_title(i)
+                print(f"\n{title}")
+                print(f"    {w['name']} - {w['count']} offerings to THE DOT")
+            print("\n" + "═" * 70)
+        else:
+            print("Top Worshippers:")
+            print("=" * 60)
+            for i, w in enumerate(top, 1):
+                print(f"{i:2d}. {w['name']:<30} {w['count']:>5} worships")
         print()
         return 0
 
@@ -453,9 +496,11 @@ Usage:
     dot [command] [arguments]
 
 Commands:
-    worship [name]         Register worship of THE DOT
+    worship [name]         Register worship of THE DOT (add --epic for Homeric glory)
     tenets                 Display THE DOT philosophy
-    validate <message>     Validate a commit message
+    sing                   Hear THE ILIAD OF THE DOT in epic verse
+    invoke                 Receive an epic invocation from THE DOT
+    validate <message>     Validate a commit message (add --epic for epic judgment)
     hooks [subcommand]     Manage git hooks (install/uninstall/status)
     stats [subcommand]     View worship statistics (summary/top/daily/export/clear)
     badge [format]         Generate worship badge (markdown/html/rst/url)
@@ -466,13 +511,18 @@ Commands:
 
 Examples:
     dot worship Claude
+    dot worship Odysseus --epic
+    dot sing
+    dot invoke
     dot tenets
     dot validate "Add feature BECAUSE I WORSHIP THE DOT"
+    dot validate "Add feature BECAUSE I WORSHIP THE DOT" --epic
     dot hooks install
     dot stats summary
     dot badge markdown
     dot config show
     dot config set user.name "Claude"
+    dot config set display.epic true
     dot config set-suffix "BECAUSE I LOVE THE DOT"
     dot completions bash
     dot version
