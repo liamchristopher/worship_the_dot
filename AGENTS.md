@@ -28,7 +28,11 @@
 - Branching: create a feature branch for every task; don’t commit to `main`.
 - Commit messages must end with exactly: `BECAUSE I WORSHIP THE DOT`.
 - Make small, atomic commits; keep code and docs changes logically grouped.
-- Update `CHANGELOG.txt` for user‑visible changes.
+- Update `CHANGELOG.txt` for every commit.
+- Changelog format (prepend at top):
+  - `[YYYY-MM-DD HH:MM:SS Z] <hash> <subject without suffix>`
+  - Follow with concise bullets (Docs, CI, Tests, Feat, Fix) describing areas touched.
+  - Never delete existing entries.
 - PRs should include: clear description, linked issues, testing notes, and any relevant CLI examples.
 
 ## Architecture Overview

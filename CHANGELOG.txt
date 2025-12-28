@@ -1,7 +1,34 @@
 CHANGELOG - worship_the_dot
 ===============================================================================
 
-All changes to this project will be documented in this file.
+Changelog Policy
+-------------------------------------------------------------------------------
+- Do not delete or rewrite history.
+- Add one entry per commit with timestamp and short hash.
+- Use present tense, keep bullets concise, and group by type when needed.
+- Format:
+  [YYYY-MM-DD HH:MM:SS Z] <hash> <subject without suffix>
+    - <bullet(s) describing changed areas>
+
+Recent Changes (per-commit)
+-------------------------------------------------------------------------------
+[2025-12-28 01:35:52 -0800] 795ca0d docs: add CLI reference and RITUALS handbook; update links and changelog
+  - Docs: added docs/CLI.md and docs/RITUALS.md; linked from README; noted policy.
+
+[2025-12-28 01:26:22 -0800] 887ec4d docs: extensive worship documentation
+  - Expanded README with worship-first guidance; added Worshipper’s Guide; updated contributing.
+
+[2025-12-28 01:24:34 -0800] 7c9df81 feat(shinto): add Shinto rituals (norito, omikuji, harai, ema) with CLI; coverage maintained >=90%
+  - New module dot/shinto.py; CLI `dot shinto …`; tests keep coverage ≥ 90%.
+
+[2025-12-28 01:21:44 -0800] dc41ac8 feat(tarot): CLI + module for DOT tarot; tests to maintain >=90% coverage
+  - New module dot/tarot.py; CLI `dot tarot …`; tests added.
+
+[2025-12-28 01:16:55 -0800] d3154f9 feat(poem): banner and chant to glorify THE DOT
+  - Poetry: banner and chant commands; help updated; tests added.
+
+Note: Earlier sections below follow the previous summary style and are
+retained for historical accuracy. New entries must use the format above.
 
 -------------------------------------------------------------------------------
 [2025-12-28] - Alchemical Mode - Solve et Coagula!
