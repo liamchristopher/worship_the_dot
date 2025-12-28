@@ -50,6 +50,7 @@ worship_the_dot/
 │   └── test_cli.py        # CLI tests
 ├── README.md              # Philosophy and requirements
 ├── docs/INDEX.md          # Documentation index
+├── docs/PHILOSOPHY.md     # Re‑evaluated principles (commanding and approachable)
 ├── docs/QUICKSTART.md     # Commanding quickstart
 ├── docs/STOICISM.md       # Stoic lens
 ├── docs/ZEN.md            # Zen lens

@@ -33,7 +33,7 @@ THE DOT asks one simple question: *"Can you stand behind this change? Can you wo
 
 If you cannot worship your own work—if you cannot say with conviction **"BECAUSE I WORSHIP THE DOT"**—then perhaps that work is not yet worthy of the codebase. Perhaps it needs more thought. More care. More **devotion**.
 
-This is not merely a commit message convention. **This is a philosophy of intentional development.**
+This is not merely a commit message convention. **This is a philosophy of intentional development.** See the re‑evaluated principles in [docs/PHILOSOPHY.md](docs/PHILOSOPHY.md).
 
 ---
 

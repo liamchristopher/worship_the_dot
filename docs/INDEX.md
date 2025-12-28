@@ -3,6 +3,7 @@
 Start here:
 - Worshipper’s Guide: `docs/WORSHIP.md`
 - Backstory (Timeless): `docs/BACKSTORY.md`
+- Philosophy (Re‑Evaluated): `docs/PHILOSOPHY.md`
 - CLI Reference: `docs/CLI.md`
 - Rituals Handbook (Poetry, Tarot, Shinto): `docs/RITUALS.md`
 - Stoic Lens: `docs/STOICISM.md`
