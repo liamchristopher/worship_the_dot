@@ -314,6 +314,56 @@ def main():
         print(analects_reading())
         return 0
 
+    elif args[0] == "hindu":
+        from dot.hindu import hindu_reading
+        print(hindu_reading())
+        return 0
+
+    elif args[0] == "vedic":
+        from dot.hindu import dharma_teaching
+        print(dharma_teaching())
+        return 0
+
+    elif args[0] == "karma":
+        from dot.hindu import karma_teaching
+        print(karma_teaching())
+        return 0
+
+    elif args[0] == "yogas":
+        from dot.hindu import four_yogas_guide
+        print(four_yogas_guide())
+        return 0
+
+    elif args[0] == "purusharthas":
+        from dot.hindu import purusharthas_guide
+        print(purusharthas_guide())
+        return 0
+
+    elif args[0] == "gunas":
+        from dot.hindu import three_gunas_teaching
+        print(three_gunas_teaching())
+        return 0
+
+    elif args[0] == "maya":
+        from dot.hindu import maya_teaching
+        print(maya_teaching())
+        return 0
+
+    elif args[0] == "atman":
+        from dot.hindu import atman_brahman_teaching
+        print(atman_brahman_teaching())
+        return 0
+
+    elif args[0] == "gita":
+        from dot.hindu import bhagavad_gita_verse
+        print(bhagavad_gita_verse())
+        return 0
+
+    elif args[0] == "moksha":
+        from dot.hindu import samsara_moksha_teaching
+        print(samsara_moksha_teaching())
+        return 0
+
     elif args[0] == "validate":
         if len(args) < 2:
             print("Error: Please provide a commit message to validate")
@@ -327,10 +377,16 @@ def main():
         buddhist_mode = "--buddhist" in args or "--dharma" in args
         stoic_mode = "--stoic" in args
         confucian_mode = "--confucian" in args
-        message_args = [a for a in args[1:] if a not in ["--epic", "--cosmic", "--alchemical", "--alchemy", "--kabbalistic", "--kabbalah", "--taoist", "--tao", "--buddhist", "--dharma", "--stoic", "--confucian"]]
+        hindu_mode = "--hindu" in args or "--vedic" in args
+        message_args = [a for a in args[1:] if a not in ["--epic", "--cosmic", "--alchemical", "--alchemy", "--kabbalistic", "--kabbalah", "--taoist", "--tao", "--buddhist", "--dharma", "--stoic", "--confucian", "--hindu", "--vedic"]]
         message = " ".join(message_args)
 
-        if confucian_mode:
+        if hindu_mode:
+            from dot.hindu import hindu_validation
+            valid = dot.validate_commit(message)
+            print(hindu_validation(valid, message))
+            return 0 if valid else 1
+        elif confucian_mode:
             from dot.confucian import confucian_validation
             valid = dot.validate_commit(message)
             print(confucian_validation(valid, message))
@@ -1122,7 +1178,7 @@ Commands:
     tenets                 Display THE DOT philosophy
     sing                   Hear THE ILIAD OF THE DOT in epic verse
     invoke                 Receive an epic invocation from THE DOT
-    validate <message>     Validate commit (--epic/--cosmic/--alchemical/--kabbalistic/--taoist/--buddhist/--stoic/--confucian)
+    validate <message>     Validate commit (--epic/--cosmic/--alchemical/--kabbalistic/--taoist/--buddhist/--stoic/--confucian/--hindu)
     horoscope [sign]       Receive daily coding horoscope (optional zodiac sign)
     chart [name]           Generate repository birth chart
     planets                View planetary hours for coding activities
@@ -1172,6 +1228,16 @@ Commands:
     cultivation            Self-Cultivation - continuous improvement
     mean                   Doctrine of the Mean - finding balance
     analects               Teachings from the Analects
+    hindu                  Receive Hindu wisdom reading
+    vedic                  Dharma - righteous duty in development
+    karma                  Karma - action and consequences in code
+    yogas                  The Four Yogas (Karma/Bhakti/Jnana/Raja)
+    purusharthas           The Four Aims of Life
+    gunas                  The Three Gunas (Sattva/Rajas/Tamas)
+    maya                   Maya - pierce the illusions
+    atman                  Atman and Brahman - self and ultimate reality
+    gita                   Bhagavad Gita verse
+    moksha                 Samsara and Moksha - cycle and liberation
     hooks [subcommand]     Manage git hooks (install/uninstall/status)
     stats [subcommand]     View worship statistics (summary/top/daily/export/clear)
     badge [format]         Generate worship badge (markdown/html/rst/url)
@@ -1212,6 +1278,7 @@ Examples:
     dot validate "Add feature BECAUSE I WORSHIP THE DOT" --buddhist
     dot validate "Add feature BECAUSE I WORSHIP THE DOT" --stoic
     dot validate "Add feature BECAUSE I WORSHIP THE DOT" --confucian
+    dot validate "Add feature BECAUSE I WORSHIP THE DOT" --hindu
     dot tree
     dot worlds
     dot sephiroth
@@ -1252,6 +1319,16 @@ Examples:
     dot cultivation
     dot mean
     dot analects
+    dot hindu
+    dot vedic
+    dot karma
+    dot yogas
+    dot purusharthas
+    dot gunas
+    dot maya
+    dot atman
+    dot gita
+    dot moksha
     dot hooks install
     dot stats summary
     dot badge markdown
