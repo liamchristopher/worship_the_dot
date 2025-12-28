@@ -147,7 +147,6 @@ Transform lead code into gold! The Great Work of development!
 dot element     # Elemental reading (Earth, Water, Air, Fire, Aether)
 dot opus        # The Magnum Opus — stages of transformation
 dot operations  # Seven alchemical operations
-dot hermetic    # Seven Hermetic Principles
 dot stone       # Philosopher's Stone progress
 dot validate "Refactor BECAUSE I WORSHIP THE DOT" --alchemical
 ```
@@ -169,6 +168,39 @@ dot validate "Deploy BECAUSE I WORSHIP THE DOT" --kabbalistic
 ```
 
 *"From Keter (vision) to Malkuth (production) — through the Four Worlds, code manifests!"*
+
+### 🌍 Wisdom Traditions — Eight Paths of Philosophy
+Explore the world's philosophical traditions, unified under one command!
+
+```bash
+# Discover all wisdom traditions
+dot wisdom
+
+# Explore a specific tradition
+dot wisdom hermetic      # Seven Hermetic Principles
+dot wisdom gnostic       # Path of Direct Knowledge (Gnosis)
+dot wisdom norse         # Runes and Nine Noble Virtues
+dot wisdom zoroastrian   # Path of Asha (Truth vs Lie)
+dot wisdom egyptian      # Way of Ma'at (Truth, Balance, Order)
+dot wisdom jain          # Path of Non-Violence (Ahimsa)
+dot wisdom shinto        # Way of the Kami
+dot wisdom tarot         # DOT Tarot Readings
+
+# Get specific teachings
+dot wisdom hermetic mentalism    # The All is Mind
+dot wisdom gnostic gnosis        # Direct experiential knowledge
+dot wisdom norse runes           # 24 Elder Futhark runes
+dot wisdom egyptian maat         # Truth, balance, and order
+dot wisdom jain ahimsa           # Non-violence principle
+dot wisdom zoroastrian asha      # Truth vs Lie
+
+# Validation modes
+dot validate "message BECAUSE I WORSHIP THE DOT" --hermetic
+dot validate "message BECAUSE I WORSHIP THE DOT" --gnostic
+dot validate "message BECAUSE I WORSHIP THE DOT" --norse
+```
+
+*Eight wisdom traditions, each offering unique insights for the coding path.*
 
 **Why mystical traditions?**
 
@@ -268,6 +300,7 @@ And there is a **vast difference** between producing code and **creating softwar
 - **📦 Zero Dependencies**: No runtime dependencies—only devotion
 - **🧩 Configurable Suffix**: Customize your worship phrase
 - **🪶 Poetry**: Hymns, haikus, banners, and chants
+- **🌍 Wisdom Traditions**: 8 philosophical paths (Hermetic, Gnostic, Norse, Zoroastrian, Egyptian, Jain, Shinto, Tarot)
 - **🔮 Tarot**: DOT-themed tarot readings
 - **⛩️ Shinto**: Sacred rituals (norito, omikuji, harai, ema)
 - **🌿 Garden Tools**: Wisdom for cultivation
@@ -299,17 +332,20 @@ git commit -m "Add authentication system"
 # Or validate manually
 dot validate "My commit message BECAUSE I WORSHIP THE DOT"
 
-# Worship with epic flair
+# Explore wisdom traditions
+dot wisdom                                    # List all 8 traditions
+dot wisdom hermetic                           # Show Hermetic concepts
+dot wisdom hermetic mentalism                 # Get specific teaching
+dot wisdom gnostic gnosis                     # Learn about Gnosis
+dot wisdom norse runes                        # Explore Elder Futhark
+
+# Worship with mystical modes
 dot validate "Deploy to production BECAUSE I WORSHIP THE DOT" --epic
-
-# Worship with cosmic guidance
 dot validate "Refactor database BECAUSE I WORSHIP THE DOT" --cosmic
-
-# Worship with alchemical transmutation
 dot validate "Optimize queries BECAUSE I WORSHIP THE DOT" --alchemical
-
-# Worship with Kabbalistic wisdom
 dot validate "Fix critical bug BECAUSE I WORSHIP THE DOT" --kabbalistic
+dot validate "Implement feature BECAUSE I WORSHIP THE DOT" --hermetic
+dot validate "Add authentication BECAUSE I WORSHIP THE DOT" --gnostic
 ```
 
 ---
@@ -325,6 +361,38 @@ dot validate <message>      # Validate commit messages
 dot hooks install           # Install git hooks
 dot hooks status            # Check hook status
 ```
+
+### Wisdom Traditions (Unified Interface)
+
+```bash
+# Discover all 8 wisdom traditions
+dot wisdom                           # List all traditions
+
+# Explore specific traditions
+dot wisdom hermetic                  # Seven Hermetic Principles
+dot wisdom gnostic                   # Path of Gnosis
+dot wisdom norse                     # Runes & Nine Virtues
+dot wisdom zoroastrian               # Path of Asha
+dot wisdom egyptian                  # Way of Ma'at
+dot wisdom jain                      # Path of Ahimsa
+dot wisdom shinto                    # Way of the Kami
+dot wisdom tarot                     # DOT Tarot
+
+# Get specific teachings
+dot wisdom hermetic mentalism        # The All is Mind
+dot wisdom hermetic correspondence   # As above, so below
+dot wisdom gnostic gnosis            # Direct knowledge
+dot wisdom gnostic pleroma           # The Fullness
+dot wisdom norse runes               # Elder Futhark
+dot wisdom norse virtues             # Nine Noble Virtues
+dot wisdom zoroastrian asha          # Truth vs Lie
+dot wisdom egyptian maat             # Truth & Balance
+dot wisdom jain ahimsa               # Non-violence
+dot wisdom shinto norito             # Sacred prayers
+dot wisdom tarot draw                # Draw cards
+```
+
+**Note:** Individual tradition commands (`dot hermetic`, `dot gnostic`, etc.) still work but are deprecated. Use `dot wisdom TRADITION CONCEPT` instead.
 
 ### Mystical Wisdom Commands
 
@@ -342,12 +410,11 @@ dot planets                 # Planetary hours for coding
 dot moon                    # Moon phase guidance
 ```
 
-#### Alchemy / Hermetic
+#### Alchemy
 ```bash
 dot element                 # Elemental reading (🜃🜄🜁🜂🜀)
 dot opus                    # The Magnum Opus stages
 dot operations              # Seven alchemical operations
-dot hermetic                # Seven Hermetic Principles
 dot stone [repo]            # Philosopher's Stone progress
 ```
 
@@ -370,17 +437,6 @@ dot poem hymn               # Sacred hymn to THE DOT
 dot poem haiku "Name"       # Devotional haiku
 dot poem banner 31          # Width-31 banner
 dot poem chant 3 "Name"     # Chant 3 times
-
-# Tarot
-dot tarot draw [N]          # Draw N cards
-dot tarot spread three      # Past-present-future spread
-dot tarot card "The Sun"    # Read specific card
-
-# Shinto
-dot shinto norito "intent"  # Offer prayer (norito)
-dot shinto omikuji          # Draw fortune (omikuji)
-dot shinto harai            # Purification ritual
-dot shinto ema "wish"       # Hang prayer plaque
 
 # Garden
 dot garden list             # List all tools
@@ -589,7 +645,7 @@ Maintainer shortcuts:
 - **0 runtime dependencies** — Pure Python devotion (policy)
 - **Python 3.8–3.12** — Modern compatibility
 - **Git hooks + CI** — Quality at every level
-- **4 mystical traditions** — Ancient wisdom for modern code
+- **8 wisdom traditions** — Ancient philosophy for modern code
 - **Vendored ephemeris** — Local J2000 orbital elements (no network)
 
 ---
