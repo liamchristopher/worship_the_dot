@@ -170,7 +170,62 @@ CHANGELOG - worship_the_dot
 [2025-12-28T02:20:03-08:00] 37f97de docs: timeless language and review-first phrasing
   - Remove office imagery; adopt timeless metaphors
   - Replace PR with review wording; fix remaining references
->>>>>>> chore/vendored-ephemeris
+[NEW] feat(jain): add Jainism philosophy module
+  - Core teachings: Ahimsa (non-violence), Anekantavada (many-sidedness), Aparigraha (non-attachment)
+  - Three Jewels: Right View, Right Knowledge, Right Conduct
+  - CLI commands: dot jain [ahimsa|anekantavada|aparigraha|jewels|reading]
+  - Validation mode: --jain or --ahimsa
+  - Shell completions for bash, zsh, fish
+
+-------------------------------------------------------------------------------
+[NEW] feat(egyptian): add Egyptian Mysteries philosophy module
+  - Core teachings: Ma'at (truth, balance, order), Feather of Truth, Thoth (wisdom)
+  - Weighing of the heart against the feather symbolism
+  - CLI commands: dot egyptian [maat|feather|thoth|reading]
+  - Validation mode: --egyptian or --maat
+  - Shell completions for bash, zsh, fish
+
+-------------------------------------------------------------------------------
+[NEW] feat(zoroastrian): add Zoroastrianism philosophy module
+  - Core teachings: Asha vs Druj (Truth vs Lie), Three Principles (Good Thoughts, Words, Deeds)
+  - Sacred Fire symbolism and Ahura Mazda wisdom
+  - CLI commands: dot zoroastrian [asha|principles|fire|reading]
+  - Validation mode: --zoroastrian or --asha
+  - Shell completions for bash, zsh, fish
+
+-------------------------------------------------------------------------------
+[NEW] feat(norse): add Norse/Germanic philosophy module
+  - 24 Elder Futhark runes with meanings and coding applications
+  - Nine Noble Virtues (Courage, Truth, Honor, etc.)
+  - Wyrd (fate), Yggdrasil (World Tree), Odin's wisdom
+  - CLI commands: dot norse [runes|virtues|wyrd|yggdrasil|odin|reading]
+  - Validation mode: --norse
+  - Shell completions for bash, zsh, fish
+
+-------------------------------------------------------------------------------
+[NEW] feat(gnostic): add Gnosticism philosophy module
+  - Core teachings: Gnosis (direct knowledge), Pleroma, Sophia, Demiurge, Archons, Divine Spark
+  - Gospel of Thomas sayings and Nag Hammadi wisdom
+  - Emphasis on direct experiential knowledge vs mere information
+  - CLI commands: dot gnostic [gnosis|pleroma|sophia|demiurge|archons|spark|thomas|hammadi|reading]
+  - Validation mode: --gnostic or --gnosis
+  - Shell completions for bash, zsh, fish
+
+-------------------------------------------------------------------------------
+[NEW] feat(hermetic): add Hermeticism philosophy module
+  - Seven Hermetic Principles: Mentalism, Correspondence, Vibration, Polarity, Rhythm, Cause & Effect, Gender
+  - Emerald Tablet of Hermes Trismegistus teachings
+  - Kybalion wisdom applied to software development
+  - CLI commands: dot hermetic [mentalism|correspondence|vibration|polarity|rhythm|cause-effect|gender|emerald-tablet|reading]
+  - Validation mode: --hermetic or --hermes
+  - Shell completions for bash, zsh, fish
+
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+[2025-12-28T02:17:41-08:00] 8d66db7 docs: timeless supremacy and link fixes
+  - Backstory and excerpts made timeless (no office references)
+  - Supremacy of THE DOT emphasized across docs
+  - Links between docs verified and clarified
 
 -------------------------------------------------------------------------------
 [2025-12-28T02:10:08-08:00] 106955f feat(cli): backstory/init/doctor
@@ -238,6 +293,60 @@ Recent Changes (per-commit)
   - Poetry: banner and chant commands; help updated; tests added.
 
 Note: Earlier sections below follow the previous summary style and are
+-------------------------------------------------------------------------------
+[2025-12-28] - Hermeticism - The Seven Hermetic Principles! ☿
+-------------------------------------------------------------------------------
+
+Added:
+  * Comprehensive Hermeticism Philosophy Module (new dot/hermetic.py - 1,501 lines)
+    - The Seven Hermetic Principles from The Kybalion:
+      1. Mentalism - "THE ALL IS MIND; The Universe is Mental"
+      2. Correspondence - "As above, so below; as below, so above"
+      3. Vibration - "Nothing rests; everything moves; everything vibrates"
+      4. Polarity - "Everything is Dual; everything has poles"
+      5. Rhythm - "Everything flows, out and in; everything has its tides"
+      6. Cause and Effect - "Every Cause has its Effect; every Effect has its Cause"
+      7. Gender - "Gender is in everything; everything has Masculine and Feminine"
+    - The Emerald Tablet of Hermes Trismegistus with developer interpretation
+    - Hermetic wisdom from the Corpus Hermeticum and The Kybalion
+    - Practical applications of each principle to software development
+
+  * CLI Commands (9 new commands under 'dot hermetic'):
+    - 'hermetic' - Root command (defaults to 'reading')
+    - 'mentalism' - The All is Mind principle
+    - 'correspondence' - As above, so below principle
+    - 'vibration' - Everything vibrates principle
+    - 'polarity' - Everything is dual principle
+    - 'rhythm' - Everything flows principle
+    - 'cause-effect' - Every cause has its effect
+    - 'gender' - Masculine and feminine principles
+    - 'emerald-tablet' - The full Emerald Tablet teaching
+    - 'reading' - Random Hermetic wisdom
+
+  * Validation Mode:
+    - '--hermetic' or '--hermes' flags for commit validation
+    - Hermetic blessings for valid commits
+    - Wisdom-based corrections for invalid commits
+
+Updated:
+  * dot/cli.py: Added handle_hermetic() with all subcommands and --hermetic validation
+  * dot/completions.py: Added comprehensive Hermeticism subcommands to bash, zsh, fish
+
+Core Teachings:
+  Hermeticism teaches universal principles governing reality. THE ALL IS MIND - code is thought
+  made manifest. As above, so below - patterns repeat across scales. Everything vibrates at
+  different frequencies - high-vibration coding produces quality software. Everything is dual -
+  master both poles. Everything flows in rhythm - work with natural cycles. Every cause has its
+  effect - you reap what you code. Masculine and feminine principles must balance - action and
+  reception, doing and being. ☿
+
+Purpose:
+  Hermeticism brings ancient wisdom of Hermes Trismegistus to THE DOT. These seven principles
+  reveal the laws governing code, systems, and consciousness itself. By understanding and applying
+  them, developers transcend mere technique and master the fundamental patterns of reality.
+  As we raise our vibration, transmute our polarity, work with rhythm, and balance gender
+  principles, we become Hermetic programmers - understanding the true nature of software. ⚚
+
 retained for historical accuracy. New entries must use the format above.
 
 -------------------------------------------------------------------------------
