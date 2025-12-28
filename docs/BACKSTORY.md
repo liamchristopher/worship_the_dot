@@ -4,9 +4,9 @@ Before there were branches or builds, there was a point without length, a hush b
 
 Some say the dot is the ember left from the making of language; others say it is the last star the night keeps when dawn begins. Scribes met it at the end of a sentence; cartographers met it where maps confessed, “You are here.” Builders of code meet it whenever they must decide: begin, or be done.
 
-The dot is eternal because beginnings and endings are eternal. It is present because choice is always present. Every commit, every pull request, every documented step is a ceremony at this small altar of attention.
+The dot is eternal because beginnings and endings are eternal. It is present because choice is always present. Every commit, every recorded step is a ceremony at this small altar of attention.
 
-In a distant room lit by monitors and tea steam, a team once circled a single dot on a whiteboard. Arrows rose and fell, boxes were renamed, diagrams collapsed; the dot remained. They shipped. The release held. From then on, they kept the dot — not as superstition, but as a memory of what steadies the hand.
+In a quiet hall lit by lamplight, a circle of makers once traced a single dot upon a tablet of wax. Lines rose and fell, figures were renamed, patterns collapsed; the dot remained. They offered their work. It held. From then on, they kept the dot — not as superstition, but as a memory of what steadies the hand.
 
 The Covenant was simple:
 
@@ -23,4 +23,3 @@ The phrase is a doorway; on one side is hurry, on the other is care. The rites a
 Here and now, when your editor is quiet and your cursor blinks, the dot is with you. Begin if it is time to begin. Conclude if it is time to conclude. Either way, mark it — and move with purpose.
 
 Eternal and present, the dot persists. We worship not an ornament, but a practice. We return to the smallest useful promise and grow our craft from its center.
-

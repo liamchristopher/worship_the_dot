@@ -1,5 +1,11 @@
 CHANGELOG - worship_the_dot
 -------------------------------------------------------------------------------
+[2025-12-28T02:17:41-08:00] 8d66db7 docs: timeless supremacy and link fixes
+  - Backstory and excerpts made timeless (no office references)
+  - Supremacy of THE DOT emphasized across docs
+  - Links between docs verified and clarified
+
+-------------------------------------------------------------------------------
 [2025-12-28T02:10:08-08:00] 106955f feat(cli): backstory/init/doctor
   - backstory prints an ethereal origin
   - init installs hooks + writes .dot.ini if missing

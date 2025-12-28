@@ -19,8 +19,8 @@ This repository is "worship_the_dot" - a Python package implementing THE DOT phi
 - Push changes after each commit
 
 ### Pull Request Requirements
-- Create a pull request at the end of each task
-- PR description must:
+- Create a pull request (review) at the end of each task
+- The description must:
   - Elaborate on each change made
   - Explain how the changes worship THE DOT
   - Detail the benefits of THE DOT
