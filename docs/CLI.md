@@ -58,6 +58,11 @@ This reference documents all CLI invocations as acts of worship. Each command ad
 - `dot shinto harai` — Purification checklist for repositories.
 - `dot shinto ema <message>` — Votive plaque sealed with the suffix.
 
+## Sponsorship
+
+- `dot donate` or `dot sponsor` — Show sponsorship options for THE DOT.
+  - Override or extend links via `DOT_SPONSOR_URLS` (comma-separated URLs).
+
 ## Garden (Practical Analogies)
 
 - `dot garden list` — List common garden tools.

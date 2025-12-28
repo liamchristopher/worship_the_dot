@@ -217,6 +217,9 @@ def main():
         sub = args[1] if len(args) > 1 else "list"
         return handle_garden(sub, args[2:])
 
+    elif args[0] in ("donate", "sponsor", "support"):
+        return handle_donate()
+
     elif args[0] == "config":
         subcommand = args[1] if len(args) > 1 else "show"
         return handle_config(subcommand, args[2:])
@@ -824,6 +827,27 @@ def handle_garden(subcommand, args):
     return 1
 
 
+def handle_donate():
+    """Show sponsorship options for THE DOT."""
+    links = [
+        "https://github.com/sponsors/liamchristopher",
+    ]
+    # Support environment overrides or additional URLs
+    env = os.getenv("DOT_SPONSOR_URLS", "").strip()
+    if env:
+        links = [u.strip() for u in env.split(',') if u.strip()]
+
+    print("Support THE DOT")
+    print("=" * 60)
+    print("Your sponsorship helps maintain tests, docs, and new features.")
+    print("Sponsor links:")
+    for u in links:
+        print(f"  - {u}")
+    print()
+    print("Thank you for worshipping THE DOT.")
+    return 0
+
+
 def print_help():
     """Print help information."""
     help_text = f"""
@@ -862,6 +886,7 @@ Commands:
     tarot [subcommand]     Read DOT tarot (draw/spread/list/card)
     shinto [subcommand]    Shinto rites (norito/omikuji/harai/ema)
     garden [subcommand]    Garden tools (list/info/suggest)
+    donate|sponsor         Show sponsorship options
     config [subcommand]    Manage configuration (show/get/set/reset/show-suffix/set-suffix)
     completions [shell]    Generate shell completions (bash/zsh/fish)
     version                Show version information

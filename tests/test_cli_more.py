@@ -85,3 +85,14 @@ def test_poem_unknown_subcommand():
     assert exit_code == 1
     assert 'Unknown poem subcommand' in s
 
+
+def test_donate_command_outputs_links(monkeypatch):
+    from dot.cli import main
+    # Set custom links to assert output reliably
+    monkeypatch.setenv('DOT_SPONSOR_URLS', 'https://example.com/support, https://github.com/sponsors/liamchristopher')
+    with patch('sys.argv', ['dot', 'donate']):
+        with patch('sys.stdout', new=StringIO()) as out:
+            exit_code = main(); s = out.getvalue()
+    assert exit_code == 0
+    assert 'Support THE DOT' in s
+    assert 'https://example.com/support' in s
