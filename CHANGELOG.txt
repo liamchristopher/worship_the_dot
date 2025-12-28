@@ -4,6 +4,40 @@ CHANGELOG - worship_the_dot
 All changes to this project will be documented in this file.
 
 -------------------------------------------------------------------------------
+[2025-12-28] - Alchemical Mode - Solve et Coagula!
+-------------------------------------------------------------------------------
+
+Added:
+  * Alchemical Enhancement Module (dot/alchemy.py)
+    - Five classical elements with coding correspondences
+    - The Magnum Opus: Four stages of code transformation
+    - Seven alchemical operations applied to development
+    - Seven Hermetic Principles for software craft
+    - Philosopher's Stone progress tracking
+    - Code quality transmutation chain (Lead to Gold)
+
+  * New CLI Commands:
+    - 'dot element' - Elemental reading and guidance
+    - 'dot opus' - The Great Work stages
+    - 'dot operations' - Seven alchemical operations
+    - 'dot hermetic' - Hermetic principles
+    - 'dot stone [name]' - Philosopher's Stone progress
+    - 'dot validate --alchemical' - Alchemical validation
+
+  * The Five Elements: Earth (🜃), Water (🜄), Air (🜁), Fire (🜂), Aether (🜀)
+  * Magnum Opus Stages: Nigredo, Albedo, Citrinitas, Rubedo
+  * Transmutation: Prima materia → Philosopher's Stone
+
+Updated:
+  * dot/cli.py: Integrated alchemical commands
+  * Completions: Added alchemy commands
+
+Purpose:
+  Brings ancient alchemical wisdom to code transformation!
+  The laboratory becomes the workspace. Lead becomes gold.
+  Solve et Coagula - Dissolve and Coagulate!
+
+-------------------------------------------------------------------------------
 [2025-12-28] - Astrological Mode - As Above, So Below!
 -------------------------------------------------------------------------------
 
