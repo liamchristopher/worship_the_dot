@@ -4,7 +4,10 @@ import shutil
 import sys
 import tempfile
 from pathlib import Path
-import yaml
+try:
+    import yaml  # type: ignore
+except Exception:  # fallback if PyYAML not installed in workflow
+    yaml = None  # type: ignore
 
 def run(cmd, cwd=None):
     p = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, cwd=cwd)
@@ -12,7 +15,25 @@ def run(cmd, cwd=None):
 
 def main(path="scripts/compat.yml"):
     root = Path(__file__).resolve().parents[1]
-    spec = yaml.safe_load(open(path))
+    if yaml is not None:
+        spec = yaml.safe_load(open(path))
+    else:
+        # Fallback inline spec matching scripts/compat.yml
+        spec = {
+            "python_cli": ["python", "-m", "dot.cli"],
+            "rust_cli":   ["rust/the-dot/target/debug/dot"],
+            "tests": [
+                {"name": "worship_default", "args": ["worship"], "exit": 0, "contains": "worships THE DOT"},
+                {"name": "tenets", "args": ["tenets"], "exit": 0, "contains": "THE DOT Philosophy"},
+                {"name": "validate_ok", "args": ["validate", "Add", "feature", "BECAUSE", "I", "WORSHIP", "THE", "DOT"], "exit": 0, "contains": "Valid commit message - properly worships THE DOT"},
+                {"name": "validate_fail", "args": ["validate", "oops"], "exit": 1, "contains": "Invalid commit message"},
+                {"name": "suffix", "args": ["suffix"], "exit": 0, "contains": "Current worship suffix"},
+                {"name": "config_show", "args": ["config", "show"], "exit": 0, "contains": "Source:"},
+                {"name": "backstory_contains", "args": ["backstory"], "exit": 0, "contains": "EDICT OF THE DOT"},
+                {"name": "philosophy_contains", "args": ["philosophy"], "exit": 0, "contains": "Core Principles"},
+                {"name": "doctor_not_repo", "args": ["doctor"], "exit": 1, "contains": "Repo: NOT A GIT REPOSITORY", "cwd": "temp"},
+            ],
+        }
     py = spec["python_cli"]
     rs = spec["rust_cli"]
     # Resolve rust binary to absolute path so running in temp cwd works
