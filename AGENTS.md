@@ -43,3 +43,7 @@
 - Use git worktrees for subagents when parallelizing.
 - Validate commit messages locally: `dot validate "Your message ..."`.
 - Document every change and keep tests green before opening a PR.
+- Treat thematic modes (epic, astrology, alchemy, kabbalah, shinto) as
+  optional lenses to motivate good practice. They do not supersede core
+  requirements (working code, tests, coverage, changelog). **THE DOT is the
+  center.**
