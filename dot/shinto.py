@@ -901,8 +901,10 @@ def omikuji(seed: Optional[int] = None) -> str:
         "  OMIKUJI - おみくじ - SACRED FORTUNE",
         "═══════════════════════════════════════════════════════",
         "",
+        f"Omikuji: {fortune_name}",
         f"🎋 {fortune_name}",
         "",
+        f"Counsel: {fortune_counsel}",
         f"   {fortune_counsel}",
         "",
         "═══════════════════════════════════════════════════════",
@@ -918,7 +920,8 @@ def harai() -> str:
         "═══════════════════════════════════════════════════════",
         "  HARAI - 祓 - PURIFICATION RITE",
         "═══════════════════════════════════════════════════════",
-        ""
+        "",
+        "Purification guidance:"
     ]
 
     for practice_name, steps in HARAI_PRACTICES.items():
