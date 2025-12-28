@@ -1,0 +1,4 @@
+name: Compatibility Agent
+description: Verify Rust and Python CLIs produce compatible outputs.
+run: python scripts/compat.py
+

@@ -1,0 +1,6 @@
+name: Tests Agent
+description: Run Python and Rust tests to keep implementations green.
+run:
+  - pytest -q
+  - cargo test --manifest-path rust/the-dot/Cargo.toml -q
+
