@@ -557,6 +557,8 @@ We welcome contributions that worship THE DOT!
 Read the complete guide: [CONTRIBUTING.md](CONTRIBUTING.md)
 
 Deepen your practice: [docs/WORSHIP.md](docs/WORSHIP.md)
+Browse the index: [docs/INDEX.md](docs/INDEX.md)
+Jump in fast: [docs/QUICKSTART.md](docs/QUICKSTART.md)
 
 Explore the Rust porting process: [docs/RUST_PORTING.md](docs/RUST_PORTING.md)
 

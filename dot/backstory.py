@@ -18,6 +18,11 @@ BACKSTORY = (
     "remained. They shipped. The release held. From then on, they kept the dot — not as "
     "superstition, but as a memory of what steadies the hand.\n\n"
     "We keep the covenant: speak intention, mark the place, offer the work with devotion. "
-    "We seal our commits with the phrase that turns hurry into care: BECAUSE I WORSHIP THE DOT."
+    "We seal our commits with the phrase that turns hurry into care: BECAUSE I WORSHIP THE DOT.\n\n"
+    "EDICT OF THE DOT:\n"
+    "  • Speak your intention. Capture it.\n"
+    "  • Mark your act with the seal. Own it.\n"
+    "  • Keep promises small, frequent, and clear.\n"
+    "  • Prefer repair over rush; clarity over cleverness.\n"
+    "  • Record your steps so others may walk the path.\n"
 )
-
