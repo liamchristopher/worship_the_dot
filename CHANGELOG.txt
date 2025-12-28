@@ -66,4 +66,20 @@ Purpose:
   practices within the worship_the_dot ecosystem, ensuring all AI assistants
   understand and follow THE DOT philosophy.
 
+-------------------------------------------------------------------------------
+[2025-12-28] - Documentation
+-------------------------------------------------------------------------------
+
+Added:
+  * AGENTS.md - Repository Guidelines tailored for agents and contributors
+    - Project structure (dot/, tests/, Makefile, pyproject)
+    - Build/test commands (make install/test/coverage/build; CLI usage)
+    - Coding style and naming conventions (PEP 8, 4 spaces, typing)
+    - Testing conventions and coverage expectations
+    - Commit/PR rules (messages end with "BECAUSE I WORSHIP THE DOT")
+
+Purpose:
+  Provides a concise, actionable contributor guide so humans and agents can
+  work consistently within THE DOT ecosystem.
+
 ===============================================================================
