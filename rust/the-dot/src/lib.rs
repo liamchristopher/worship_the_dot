@@ -78,12 +78,28 @@ fn read_ini_suffix(path: PathBuf) -> Option<String> {
         return None;
     }
     let content = fs::read_to_string(&path).ok()?;
-    let parsed = ini::Ini::load_from_str(&content).ok()?;
-    if let Some(section) = parsed.section(Some("dot".to_string())) {
-        if let Some(val) = section.get("worship_suffix") {
-            let t = val.trim();
-            if !t.is_empty() {
-                return Some(t.to_string());
+    let mut in_dot = false;
+    for raw in content.lines() {
+        let line = raw.trim();
+        if line.is_empty() || line.starts_with(';') || line.starts_with('#') {
+            continue;
+        }
+        if line.starts_with('[') && line.ends_with(']') {
+            let name = &line[1..line.len() - 1];
+            in_dot = name.trim().eq_ignore_ascii_case("dot");
+            continue;
+        }
+        if !in_dot {
+            continue;
+        }
+        if let Some(eq) = line.find('=') {
+            let key = line[..eq].trim();
+            let val = line[eq + 1..].trim();
+            if key.eq_ignore_ascii_case("worship_suffix") {
+                let t = val.trim();
+                if !t.is_empty() {
+                    return Some(t.to_string());
+                }
             }
         }
     }
