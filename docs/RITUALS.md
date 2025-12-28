@@ -1,6 +1,10 @@
 # Rites of THE DOT
 
-This handbook details rites that nurture discipline, clarity, and joy in code. Each rite is a practical tool wrapped in reverence for THE DOT. These rites are **in service to** THE DOT; they do not replace the core devotion to working code, clear commits, tests, and documentation.
+This handbook details rites that nurture discipline, clarity, and joy in code.
+Each rite is a practical tool wrapped in reverence for THE DOT. These rites are
+**in service to** THE DOT; they do not replace the core devotion to working
+code, clear commits, tests, and documentation. Remember the origin: a single
+point where intention becomes visible. See docs/BACKSTORY.md.
 
 ## Poetry
 

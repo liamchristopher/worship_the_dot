@@ -1,5 +1,10 @@
 CHANGELOG - worship_the_dot
 -------------------------------------------------------------------------------
+[2025-12-28T02:08:03-08:00] 588a396 docs: ethereal backstory woven through docs
+  - Added docs/BACKSTORY.md (timeless, ethereal origin of THE DOT)
+  - Linked and summarized backstory in README, WORSHIP, RITUALS, CLI, CONTRIBUTING, AGENTS
+
+-------------------------------------------------------------------------------
 [2025-12-28T02:03:07-08:00] cb1e8b3 docs: emphasize primacy of THE DOT
   - Added explicit primacy sections/notes in README and docs
   - Clarified modes are lenses; DOT remains core practice

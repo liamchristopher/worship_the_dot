@@ -1,6 +1,13 @@
 # Contributing to THE DOT
 
-Thank you for your interest in worshipping THE DOT through contribution! This guide will help you understand how to properly contribute to THE DOT ecosystem.
+Thank you for your interest in worshipping THE DOT through contribution! This
+guide will help you understand how to properly contribute to THE DOT ecosystem.
+
+> Ethos — Why We Keep the Dot
+>
+> We keep the dot to steady the hand: a small promise that turns hurry into
+> care. Our philosophies are lanterns; the dot is the path. Every change you
+> offer should make that path clearer.
 
 ## Prerequisites
 
