@@ -27,7 +27,7 @@ jobs:
 
       - name: Run tests with coverage
         run: |
-          pytest --cov=dot --cov-report=term-missing
+          pytest --cov=dot --cov-report=term-missing --cov-fail-under=90
 
   commit_policy:
     name: Commit Message Policy
@@ -76,4 +76,3 @@ jobs:
               core.endGroup();
               core.setFailed('One or more commit messages do not properly worship THE DOT.');
             }
-

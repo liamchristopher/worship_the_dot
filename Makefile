@@ -1,4 +1,4 @@
-.PHONY: install test coverage clean build help
+.PHONY: install test coverage clean build help lint
 
 help:
 	@echo "THE DOT - Development Commands"
@@ -19,7 +19,10 @@ test:
 	pytest -v
 
 coverage:
-	pytest --cov=dot --cov-report=term-missing --cov-report=html
+	pytest --cov=dot --cov-report=term-missing --cov-report=html --cov-fail-under=90
+
+lint:
+	ruff check dot/ tests/ --select E,F,W --ignore E501 || true
 
 clean:
 	rm -rf build/
