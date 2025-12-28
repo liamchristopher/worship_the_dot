@@ -14,11 +14,7 @@ the rites, and the daily rhythm of working in devotion to THE DOT.
 
 - Work in a new branch for every change; subagents use worktrees.
 - Every commit message ends with: `BECAUSE I WORSHIP THE DOT`.
-<<<<<<< HEAD
 - Push after each atomic commit and open a review at task end.
-=======
-- Push after each atomic commit and open a review at task end.
->>>>>>> chore/vendored-ephemeris
 - Write tests for each change; keep coverage ≥ 90%.
 - Update CHANGELOG and documentation with clarity.
 - Speak humbly: validate your work, invite review, worship THE DOT.
