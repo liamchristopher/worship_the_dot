@@ -71,6 +71,19 @@ Recent Changes (per-commit)
   - Poetry: banner and chant commands; help updated; tests added.
 
 Note: Earlier sections below follow the previous summary style and are
+-------------------------------------------------------------------------------
+[2025-12-28] - Jainism - Path of Non-Violence! ☸
+-------------------------------------------------------------------------------
+
+Added:
+  * Jainism Module (dot/jain.py)
+    - Ahimsa: Non-violence (in code, communication, refactoring, to self)
+    - Anekantavada: Many-sidedness, multiple valid perspectives
+    - Aparigraha: Non-attachment (to code, ideas, credit, tools)
+    - Three Jewels: Right View, Right Knowledge, Right Conduct
+  * CLI: jain, ahimsa, anekantavada, aparigraha, jewels, reading
+  * Validation: --jain or --ahimsa
+
 retained for historical accuracy. New entries must use the format above.
 
 -------------------------------------------------------------------------------

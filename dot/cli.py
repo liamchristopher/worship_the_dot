@@ -379,9 +379,16 @@ def main():
         confucian_mode = "--confucian" in args
         hindu_mode = "--hindu" in args or "--vedic" in args
         shinto_mode = "--shinto" in args or "--kami" in args
+        jain_mode = "--jain" in args or "--ahimsa" in args
         message_args = [a for a in args[1:] if a not in ["--epic", "--cosmic", "--alchemical", "--alchemy", "--kabbalistic", "--kabbalah", "--taoist", "--tao", "--buddhist", "--dharma", "--stoic", "--confucian", "--hindu", "--vedic", "--shinto", "--kami"]]
         message = " ".join(message_args)
 
+        if jain_mode:
+            from dot.jain import jain_validation
+            valid = dot.validate_commit(message)
+            print(jain_validation(valid, message))
+            return 0 if valid else 1
+        el
         if shinto_mode:
             from dot.shinto import shinto_validation
             valid = dot.validate_commit(message)
@@ -461,8 +468,17 @@ def main():
         return handle_tarot(sub, args[2:])
 
     elif args[0] == "shinto":
+    elif args[0] == "jain":
+        sub = args[1] if len(args) > 1 else "reading"
+        return handle_jain(sub, args[2:])
         sub = args[1] if len(args) > 1 else "norito"
+    elif args[0] == "jain":
+        sub = args[1] if len(args) > 1 else "reading"
+        return handle_jain(sub, args[2:])
         return handle_shinto(sub, args[2:])
+    elif args[0] == "jain":
+        sub = args[1] if len(args) > 1 else "reading"
+        return handle_jain(sub, args[2:])
 
     elif args[0] == "garden":
         sub = args[1] if len(args) > 1 else "list"
@@ -1398,3 +1414,14 @@ Examples:
 
 if __name__ == "__main__":
     sys.exit(main())
+
+def handle_jain(subcommand, args):
+    """Handle Jain philosophy."""
+    from dot.jain import ahimsa_teaching, anekantavada_teaching, aparigraha_teaching, jewels_teaching, jain_reading
+    if subcommand == "ahimsa": print(ahimsa_teaching()); return 0
+    if subcommand == "anekantavada": print(anekantavada_teaching()); return 0
+    if subcommand == "aparigraha": print(aparigraha_teaching()); return 0
+    if subcommand == "jewels": print(jewels_teaching()); return 0
+    if subcommand == "reading": print(jain_reading()); return 0
+    print("Unknown jain subcommand. Available: ahimsa, anekantavada, aparigraha, jewels, reading")
+    return 1
