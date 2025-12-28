@@ -50,16 +50,60 @@ def main():
         print()
         return 0
 
+    elif args[0] == "horoscope":
+        sign = args[1] if len(args) > 1 else None
+        from dot.astrology import daily_horoscope
+        print(daily_horoscope(sign))
+        return 0
+
+    elif args[0] == "chart":
+        from dot.astrology import birth_chart
+        from datetime import datetime
+        repo_name = args[1] if len(args) > 1 else "Repository"
+        # Try to get git repo creation date
+        try:
+            import subprocess
+            result = subprocess.run(
+                ["git", "log", "--reverse", "--format=%aI", "--max-parents=0"],
+                capture_output=True,
+                text=True,
+                check=False
+            )
+            if result.returncode == 0 and result.stdout.strip():
+                creation_date = datetime.fromisoformat(result.stdout.strip().split('\n')[0])
+            else:
+                creation_date = None
+        except:
+            creation_date = None
+        print(birth_chart(repo_name, creation_date))
+        return 0
+
+    elif args[0] == "planets":
+        from dot.astrology import planetary_hours
+        print(planetary_hours())
+        return 0
+
+    elif args[0] == "moon":
+        from dot.astrology import moon_phase_advice
+        print(moon_phase_advice())
+        return 0
+
     elif args[0] == "validate":
         if len(args) < 2:
             print("Error: Please provide a commit message to validate")
             return 1
 
         epic_mode = "--epic" in args
-        message_args = [a for a in args[1:] if a != "--epic"]
+        cosmic_mode = "--cosmic" in args
+        message_args = [a for a in args[1:] if a not in ["--epic", "--cosmic"]]
         message = " ".join(message_args)
 
-        if epic_mode:
+        if cosmic_mode:
+            from dot.astrology import cosmic_validation
+            valid = dot.validate_commit(message)
+            print(cosmic_validation(valid, message))
+            return 0 if valid else 1
+        elif epic_mode:
             from dot.epic import epic_validation_message
             valid = dot.validate_commit(message)
             print(epic_validation_message(valid, message))
@@ -547,7 +591,11 @@ Commands:
     tenets                 Display THE DOT philosophy
     sing                   Hear THE ILIAD OF THE DOT in epic verse
     invoke                 Receive an epic invocation from THE DOT
-    validate <message>     Validate a commit message (add --epic for epic judgment)
+    validate <message>     Validate a commit message (--epic or --cosmic for flair)
+    horoscope [sign]       Receive daily coding horoscope (optional zodiac sign)
+    chart [name]           Generate repository birth chart
+    planets                View planetary hours for coding activities
+    moon                   Receive moon phase coding guidance
     hooks [subcommand]     Manage git hooks (install/uninstall/status)
     stats [subcommand]     View worship statistics (summary/top/daily/export/clear)
     badge [format]         Generate worship badge (markdown/html/rst/url)
@@ -562,9 +610,14 @@ Examples:
     dot worship Odysseus --epic
     dot sing
     dot invoke
+    dot horoscope Virgo
+    dot chart worship_the_dot
+    dot planets
+    dot moon
     dot tenets
     dot validate "Add feature BECAUSE I WORSHIP THE DOT"
     dot validate "Add feature BECAUSE I WORSHIP THE DOT" --epic
+    dot validate "Add feature BECAUSE I WORSHIP THE DOT" --cosmic
     dot hooks install
     dot stats summary
     dot badge markdown
