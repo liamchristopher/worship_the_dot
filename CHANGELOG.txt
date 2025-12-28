@@ -1,5 +1,10 @@
 CHANGELOG - worship_the_dot
 -------------------------------------------------------------------------------
+[2025-12-28T10:25:11-08:00] 1690298 test(rust): expanded suite
+  - Add tests for suffix command and precedence (env > cwd > home)
+  - Validate custom suffix with validate subcommand
+
+-------------------------------------------------------------------------------
 [2025-12-28T10:23:05-08:00] 7ee7d58 docs: agents usage
   - Add Makefile agents target to run orchestrator
   - Document usage in README
