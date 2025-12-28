@@ -90,15 +90,15 @@ worship_the_dot/
 
 ### Testing
 ```bash
-make test           # Run all tests
-make coverage       # Run tests with coverage report
-pytest tests/ -v    # Run tests directly with pytest
+make test                    # Run all tests (uv run)
+make coverage                # Run tests with coverage report (uv run)
+uv run pytest tests/ -v     # Run tests directly with pytest via uv
 ```
 
 ### Installation
 ```bash
-make install        # Install package and dev dependencies
-pip install -e .    # Install in development mode only
+make install             # Install package and dev dependencies (uv)
+uv pip install -e .     # Install in development mode only
 ```
 
 ### Build and Clean

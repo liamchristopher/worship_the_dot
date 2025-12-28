@@ -21,7 +21,7 @@ python examples/basic_usage.py
 **Expected Output:**
 ```
 =============================================================
-THE DOT v0.2.0 - Basic Usage Example
+THE DOT v0.3.0 - Basic Usage Example
 =============================================================
 
 Example 1: Worship THE DOT
@@ -141,7 +141,7 @@ All examples require THE DOT to be installed:
 ```bash
 pip install the-dot
 # Or from source:
-pip install -e .
+uv pip install -e .
 ```
 
 ## Contributing Examples
