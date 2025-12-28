@@ -25,11 +25,12 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version: "3.12"
+    - name: Set up uv
+      uses: astral-sh/setup-uv@v2
 
     - name: Install THE DOT
       run: |
-        python -m pip install --upgrade pip
-        pip install -e .
+        uv pip install -e .
 
     - name: Validate all commits in PR
       run: |
@@ -51,7 +52,7 @@ jobs:
               echo "---"
 
               # Use THE DOT to validate
-              if ! dot validate "$current_commit"; then
+              if ! uv run dot validate "$current_commit"; then
                 echo "❌ Invalid commit found!"
                 invalid_commits=$((invalid_commits + 1))
               else
@@ -78,7 +79,7 @@ jobs:
           echo "$current_commit"
           echo "---"
 
-          if ! dot validate "$current_commit"; then
+          if ! uv run dot validate "$current_commit"; then
             echo "❌ Invalid commit found!"
             invalid_commits=$((invalid_commits + 1))
           else

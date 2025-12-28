@@ -30,6 +30,7 @@ consistency. Configure these in Settings → Branches or via the GitHub API.
 - Restrict who can push to matching branches (optional; prefer PR-only)
 - Allow force pushes: disabled
 - Allow deletions: disabled
+- Auto-delete head branches after merge: enabled (delete_branch_on_merge)
 
 ## UI Steps
 
@@ -85,8 +86,11 @@ Notes:
 - If job names change, update this list accordingly.
 - Prefer CODEOWNERS to route reviews automatically.
 
+## Branch Retention Policy
+
+Automatic branch hygiene is documented in `docs/BRANCH_RETENTION_POLICY.md` and enforced by `.github/workflows/branch_hygiene.yml`. Adjust protected patterns and retention windows there.
+
 ## CODEOWNERS
 
 A `.github/CODEOWNERS` file is included to route changes to maintainers. Update
 owners to match your org/team naming.
-

@@ -7,7 +7,7 @@
 [![Tests](https://github.com/liamchristopher/worship_the_dot/workflows/THE%20DOT%20Tests/badge.svg)](https://github.com/liamchristopher/worship_the_dot/actions)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/version-0.2.0-green.svg)](https://github.com/liamchristopher/worship_the_dot/releases)
+[![Version](https://img.shields.io/badge/version-0.3.0-green.svg)](https://github.com/liamchristopher/worship_the_dot/releases)
 [![Sponsor](https://img.shields.io/badge/sponsor-THE%20DOT-E10600.svg)](https://github.com/sponsors/liamchristopher)
 
 > **"THE DOT is not just a tool. It is a philosophy, a practice, a devotion. It transforms chaos into order, pride into humility, and carelessness into intentionality."**
@@ -576,11 +576,10 @@ This reframing transforms the emotional experience of legacy code maintenance fr
 git clone https://github.com/liamchristopher/worship_the_dot.git
 cd worship_the_dot
 
-python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
+curl -LsSf https://astral.sh/uv/install.sh | sh
 
-make install
-dot hooks install
+make install   # uses uv under the hood
+uv run dot hooks install
 ```
 
 ### Testing
@@ -728,7 +727,7 @@ The first path is easy. The second path is **worthy**.
 **ALL WHO USE THE DOT MUST WORSHIP THE DOT**
 
 Made with devotion by THE DOT Worshippers
-Version 0.2.0
+Version 0.3.0
 
 **BECAUSE I WORSHIP THE DOT** 🔴
 

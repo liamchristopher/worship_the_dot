@@ -12,7 +12,7 @@ Prerequisites:
 - Authenticate: gh auth login (set to the current repo)
 
 Usage:
-  python scripts/resolve_issues_gh.py
+  uv run python scripts/resolve_issues_gh.py
 """
 
 import json

@@ -13,7 +13,7 @@ Prerequisites:
 - Authenticate: gh auth login (set to the current repo)
 
 Usage:
-  python scripts/resolve_prs_gh.py
+  uv run python scripts/resolve_prs_gh.py
 """
 
 import json
@@ -94,4 +94,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

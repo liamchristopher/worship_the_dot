@@ -26,36 +26,33 @@ git clone https://github.com/liamchristopher/worship_the_dot.git
 cd worship_the_dot
 ```
 
-### 2. Create Virtual Environment
+### 2. Install with uv (development)
+
+We use uv for all Python tasks.
 
 ```bash
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-```
+curl -LsSf https://astral.sh/uv/install.sh | sh
 
-### 3. Install in Development Mode
-
-```bash
 make install
 # Or manually:
-pip install -e .
-pip install -r requirements-dev.txt
+uv pip install -e .
+uv pip install -r requirements-dev.txt
 ```
 
-### 4. Install Git Hooks
+### 3. Install Git Hooks
 
 ```bash
-dot hooks install
+uv run dot hooks install
 ```
 
 This ensures all your commits will properly worship THE DOT.
 
-### 5. Verify Setup
+### 4. Verify Setup
 
 ```bash
 make test
-dot version
-dot hooks status
+uv run dot version
+uv run dot hooks status
 ```
 
 ## THE DOT Workflow (In Worship)
@@ -93,9 +90,9 @@ cd ../worship_the_dot-feature
 **Run tests before committing:**
 
 ```bash
-make test           # Run all tests
-make coverage       # Run with coverage report
-pytest tests/ -v    # Run with verbose output
+make test                 # Run all tests
+make coverage             # Run with coverage report
+uv run pytest tests/ -v   # Run with verbose output
 ```
 
 All tests must pass. All new code should have tests.

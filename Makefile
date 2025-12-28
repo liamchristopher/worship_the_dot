@@ -12,17 +12,17 @@ help:
 	@echo ""
 
 install:
-	pip install -e .
-	pip install -r requirements-dev.txt
+	uv pip install -e .
+	uv pip install -r requirements-dev.txt
 
 test:
-	pytest -v
+	uv run pytest -v
 
 coverage:
-	pytest --cov=dot --cov-report=term-missing --cov-report=html --cov-fail-under=90
+	uv run pytest --cov=dot --cov-report=term-missing --cov-report=html --cov-fail-under=90
 
 lint:
-	ruff check dot/ tests/ --select E,F,W --ignore E501 || true
+	uvx ruff check dot/ tests/ --select E,F,W --ignore E501 || true
 
 .PHONY: rust-build rust-test compat agents
 
@@ -33,25 +33,25 @@ rust-test:
 	cargo test --manifest-path rust/the-dot/Cargo.toml
 
 compat: rust-build
-	python scripts/compat.py
+	uv run python scripts/compat.py
 
 agents:
-	python scripts/run_agents.py
+	uv run python scripts/run_agents.py
 
 .PHONY: resolve-prs
 resolve-prs:
 	@echo "Resolving open PRs with GitHub API (requires GITHUB_TOKEN)"
-	python scripts/resolve_prs.py
+	uv run python scripts/resolve_prs.py
 
 .PHONY: resolve-prs-gh
 resolve-prs-gh:
 	@echo "Resolving open PRs with gh (requires gh auth login)"
-	python scripts/resolve_prs_gh.py
+	uv run python scripts/resolve_prs_gh.py
 
 .PHONY: resolve-issues-gh
 resolve-issues-gh:
 	@echo "Resolving open issues with gh (requires gh auth login)"
-	python scripts/resolve_issues_gh.py
+	uv run python scripts/resolve_issues_gh.py
 
 .PHONY: resolve-all-gh
 resolve-all-gh: resolve-prs-gh resolve-issues-gh
@@ -67,4 +67,4 @@ clean:
 	find . -type f -name "*.pyc" -delete
 
 build: clean
-	python -m build
+	uv run python -m build

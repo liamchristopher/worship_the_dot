@@ -1,10 +1,17 @@
 # THE DOT — Quickstart (Commanding and Approachable)
 
-1) Install and Initialize
+1) Install and Initialize (users)
 ```bash
 pip install the-dot
 cd your-project
 dot init      # installs hooks and writes .dot.ini if missing
+```
+
+Dev setup uses uv (fast Python tooling). See CONTRIBUTING.md for details:
+
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+make install
 ```
 
 2) Verify Your Practice
@@ -34,4 +41,3 @@ Read next:
 - Worshipper’s Guide: `docs/WORSHIP.md`
 - CLI Reference: `docs/CLI.md`
 - Backstory (Timeless): `docs/BACKSTORY.md`
-

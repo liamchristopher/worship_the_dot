@@ -14,7 +14,7 @@ Behavior:
 - Reports outcome for each PR.
 
 Usage:
-  GITHUB_TOKEN=... python scripts/resolve_prs.py
+  GITHUB_TOKEN=... uv run python scripts/resolve_prs.py
 """
 
 import json
@@ -146,4 +146,3 @@ def main():
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

@@ -30,6 +30,12 @@ CHANGELOG - worship_the_dot
   - Backward compatible - no breaking changes
 
 -------------------------------------------------------------------------------
+[2025-12-28 14:48:54 -0800] 5b7ac12 Versions: add parity test and sync script
+  - tests/test_version_parity.py enforces Python==Rust version match
+  - scripts/sync_versions.py updates Cargo.toml to Python version
+  - Bump Rust crate to 0.3.0 for parity with Python
+
+-------------------------------------------------------------------------------
 [2025-12-28 14:48:54 -0800] 9a1d9d4 Compat: align backstory between Python and Rust
   - Python CLI reads docs/BACKSTORY.md for parity
   - Update compatibility spec to search for 'Edict of the Dot'

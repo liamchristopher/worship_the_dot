@@ -5,7 +5,7 @@ from pathlib import Path
 
 AGENTS = [
     ("Tests Agent", [
-        ["pytest", "-q"],
+        [sys.executable, "-m", "pytest", "-q"],
     ]),
     # Rust tests are run in CI; local agent skips if cargo is unavailable.
     ("Docs Agent", [[sys.executable, "scripts/docs_agent.py"]]),

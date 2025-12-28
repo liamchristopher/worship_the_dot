@@ -25,8 +25,8 @@ When you activate, remember:
 
 ## Build, Test, and Development Commands
 - `make install` — Install in editable mode and dev deps.
-- `make test` — Run the full pytest suite.
-- `make coverage` — Run tests with coverage (HTML in `htmlcov/`).
+- `make test` — Run the full pytest suite (via uv).
+- `make coverage` — Run tests with coverage (via uv; HTML in `htmlcov/`).
 - `make build` — Clean and build a distribution.
 - CLI examples (after install): `dot worship Alice`, `dot tenets`, `dot validate "Your message BECAUSE I WORSHIP THE DOT"`.
 
@@ -40,6 +40,7 @@ When you activate, remember:
 - Framework: pytest with configuration in `pyproject.toml`.
 - Location and names: tests live in `tests/`, files `test_*.py`, classes `Test*`, functions `test_*`.
 - Run locally: `make test`; with coverage: `make coverage`.
+  - Under the hood, these use `uv run pytest ...`.
 - Add/adjust tests with each change; aim for high coverage of new/changed code.
 
 ## Commit & Pull Request Guidelines

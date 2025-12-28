@@ -1,0 +1,66 @@
+name: Branch Hygiene
+
+on:
+  schedule:
+    - cron: '17 3 * * *'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pull-requests: read
+
+jobs:
+  prune-branches:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Delete merged branches (safety filter)
+        env:
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+          PROTECT_PATTERNS: '^main$|^release/|^stable/|^prod/|^protect/'
+        run: |
+          set -euo pipefail
+          git fetch --prune --all
+          default=${DEFAULT_BRANCH:-main}
+          protect=${PROTECT_PATTERNS}
+
+          merged=$(git branch -r --merged "origin/${default}" | sed 's#^ *origin/##' | grep -vE "$protect" | grep -v "^${default}$" || true)
+          if [ -z "$merged" ]; then
+            echo "No merged branches to delete"
+            exit 0
+          fi
+          echo "$merged" | while read br; do
+            echo "Deleting merged branch origin/$br"
+            git push origin --delete "$br" || echo "Skip $br"
+          done
+
+      - name: Delete stale branches without PRs (older than 60 days)
+        env:
+          DAYS: 60
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+          PROTECT_PATTERNS: '^main$|^release/|^stable/|^prod/|^protect/'
+        run: |
+          set -euo pipefail
+          default=${DEFAULT_BRANCH:-main}
+          protect=${PROTECT_PATTERNS}
+          cutoff=$(date -u -d "-${DAYS} days" +%s)
+
+          git for-each-ref --format='%(refname:short) %(committerdate:raw)' refs/remotes/origin |
+            sed 's#^origin/##' |
+            while read name epoch tz; do
+              [ -z "$name" ] && continue
+              echo "$name" | grep -Eq "$protect" && continue
+              [ "$name" = "$default" ] && continue
+              # Skip branches that have an open PR
+              if command -v gh >/dev/null 2>&1; then
+                if gh pr list --head "$name" --state open --json number --limit 1 | grep -q '\\['; then
+                  continue
+                fi
+              fi
+              if [ "$epoch" -lt "$cutoff" ]; then
+                echo "Deleting stale branch origin/$name (last commit: $epoch)"
+                git push origin --delete "$name" || echo "Skip $name"
+              fi
+            done
