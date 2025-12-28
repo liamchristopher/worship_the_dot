@@ -1,4 +1,9 @@
 CHANGELOG - worship_the_dot
+-------------------------------------------------------------------------------
+[2025-12-28T01:51:20-08:00] 950b1db docs(brand): add THE DOT logo assets
+  - Added assets/logo-dot.svg and assets/logo-lockup.svg
+  - Added docs/BRAND.md and linked logo in README
+
 ===============================================================================
 
 Changelog Policy

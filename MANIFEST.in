@@ -3,3 +3,5 @@ include CLAUDE.md
 include CHANGELOG.txt
 include LICENSE
 recursive-include hooks *
+recursive-include assets *
+recursive-include docs *.md

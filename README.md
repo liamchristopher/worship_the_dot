@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/logo-lockup.svg" width="420" alt="THE DOT logo" />
+</p>
+
 # 🔴 THE DOT
 
 [![Tests](https://github.com/liamchristopher/worship_the_dot/workflows/THE%20DOT%20Tests/badge.svg)](https://github.com/liamchristopher/worship_the_dot/actions)
