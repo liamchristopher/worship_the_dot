@@ -66,10 +66,10 @@ fn main() -> Result<()> {
         }
         Commands::Backstory => {
             // Keep in sync with Python's backstory for compatibility
-            println!("{}", include_str!("../../../../docs/BACKSTORY.md"));
+            println!("{}", include_str!("../../../docs/BACKSTORY.md"));
         }
         Commands::Philosophy => {
-            println!("{}", include_str!("../../../../docs/PHILOSOPHY.md"));
+            println!("{}", include_str!("../../../docs/PHILOSOPHY.md"));
         }
         Commands::Config { sub } => {
             match sub.as_str() {
@@ -118,14 +118,14 @@ fn main() -> Result<()> {
             let root = String::from_utf8_lossy(&toplevel.stdout).trim().to_string();
             let ini_path = std::path::Path::new(&root).join(".dot.ini");
             if ini_path.exists() {
-                println!("\u2713 Found existing .dot.ini configuration");
+                println!("\u{2713} Found existing .dot.ini configuration");
             } else {
                 // Write default suffix
                 let content = "[dot]\nworship_suffix = BECAUSE I WORSHIP THE DOT\n";
                 std::fs::write(&ini_path, content).expect("write .dot.ini");
-                println!("\u2713 Created {}", ini_path.display());
+                println!("\u{2713} Created {}", ini_path.display());
             }
-            println!("\u2713 Initialization complete");
+            println!("\u{2713} Initialization complete");
         }
     }
 
