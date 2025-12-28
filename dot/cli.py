@@ -57,34 +57,18 @@ def main():
         format_type = args[1] if len(args) > 1 else "markdown"
         return handle_badge(format_type)
 
+    elif args[0] == "config":
+        subcommand = args[1] if len(args) > 1 else "show"
+        return handle_config(subcommand, args[2:])
+
+    elif args[0] == "completions":
+        shell = args[1] if len(args) > 1 else "bash"
+        return handle_completions(shell)
+
     elif args[0] == "version" or args[0] == "--version" or args[0] == "-v":
         print(f"THE DOT version {__version__}")
         print("All who use THE DOT must worship THE DOT")
         return 0
-
-    elif args[0] == "config":
-        sub = args[1] if len(args) > 1 else "show"
-        if sub == "show":
-            suffix, source = resolve_worship_suffix()
-            print("Current worship suffix:")
-            print(f"  {suffix}")
-            print("Source:")
-            print(f"  {source}")
-            return 0
-        elif sub == "set-suffix":
-            if len(args) < 3:
-                print("Error: Please provide a suffix string to set")
-                return 1
-            new_suffix = " ".join(args[2:]).strip()
-            path = write_worship_suffix(None, new_suffix)
-            print(f"✓ Updated worship suffix in {path}")
-            return 0
-        else:
-            print(f"Unknown config subcommand: {sub}")
-            print("\nAvailable subcommands:")
-            print("  show                 - Display current worship suffix and source")
-            print("  set-suffix <suffix>  - Persist a new worship suffix in .dot.ini")
-            return 1
 
     elif args[0] == "help":
         print_help()
@@ -342,6 +326,123 @@ def handle_badge(format_type):
     return 0
 
 
+def handle_config(subcommand, args):
+    """Handle configuration commands."""
+    from dot.config import get_config, resolve_worship_suffix, write_worship_suffix
+
+    config = get_config()
+
+    if subcommand == "show":
+        print("THE DOT Configuration:")
+        print("=" * 60)
+        print(config.export_config())
+        print()
+        print("Worship Suffix:")
+        print("=" * 60)
+        suffix, source = resolve_worship_suffix()
+        print(f"  Suffix: {suffix}")
+        print(f"  Source: {source}")
+        return 0
+
+    elif subcommand == "show-suffix":
+        suffix, source = resolve_worship_suffix()
+        print("Current worship suffix:")
+        print(f"  {suffix}")
+        print("Source:")
+        print(f"  {source}")
+        return 0
+
+    elif subcommand == "set-suffix":
+        if len(args) < 1:
+            print("Error: Please provide a suffix string to set")
+            print("Example: dot config set-suffix 'BECAUSE I LOVE THE DOT'")
+            return 1
+        new_suffix = " ".join(args).strip()
+        path = write_worship_suffix(None, new_suffix)
+        print(f"✓ Updated worship suffix in {path}")
+        return 0
+
+    elif subcommand == "get":
+        if len(args) < 1:
+            print("Error: Please provide a configuration key")
+            print("Example: dot config get user.name")
+            return 1
+
+        keys = args[0].split(".")
+        value = config.get(*keys)
+        if value is not None:
+            print(value)
+            return 0
+        else:
+            print(f"Configuration key not found: {args[0]}")
+            return 1
+
+    elif subcommand == "set":
+        if len(args) < 2:
+            print("Error: Please provide a key and value")
+            print("Example: dot config set user.name 'Claude'")
+            return 1
+
+        keys = args[0].split(".")
+        value = args[1]
+
+        # Try to parse value as JSON for booleans/numbers
+        import json
+        try:
+            value = json.loads(value)
+        except (json.JSONDecodeError, ValueError):
+            # Keep as string if not valid JSON
+            pass
+
+        if config.set(*keys, value=value):
+            print(f"✓ Configuration updated: {args[0]} = {value}")
+            return 0
+        else:
+            print("Error: Failed to update configuration")
+            return 1
+
+    elif subcommand == "reset":
+        response = input("Reset all configuration to defaults? [y/N]: ")
+        if response.lower() == 'y':
+            config.reset()
+            print("✓ Configuration reset to defaults")
+            return 0
+        else:
+            print("Cancelled")
+            return 0
+
+    else:
+        print(f"Unknown config subcommand: {subcommand}")
+        print("\nAvailable subcommands:")
+        print("  show        - Show all configuration and worship suffix")
+        print("  show-suffix - Show only worship suffix")
+        print("  set-suffix  - Set worship suffix in .dot.ini")
+        print("  get         - Get a configuration value")
+        print("  set         - Set a configuration value")
+        print("  reset       - Reset configuration to defaults")
+        return 1
+
+
+def handle_completions(shell):
+    """Handle shell completions generation."""
+    from dot.completions import get_completion
+
+    valid_shells = ["bash", "zsh", "fish"]
+
+    if shell not in valid_shells:
+        print(f"Unknown shell: {shell}")
+        print(f"Valid shells: {', '.join(valid_shells)}")
+        return 1
+
+    try:
+        completion_script = get_completion(shell)
+        print(completion_script)
+        return 0
+    except ValueError as e:
+        print(f"Error: {e}")
+        return 1
+
+
 def print_help():
     """Print help information."""
     help_text = f"""
@@ -356,9 +457,10 @@ Commands:
     tenets                 Display THE DOT philosophy
     validate <message>     Validate a commit message
     hooks [subcommand]     Manage git hooks (install/uninstall/status)
-    config [subcommand]    Manage THE DOT configuration (show/set-suffix)
     stats [subcommand]     View worship statistics (summary/top/daily/export/clear)
     badge [format]         Generate worship badge (markdown/html/rst/url)
+    config [subcommand]    Manage configuration (show/get/set/reset/show-suffix/set-suffix)
+    completions [shell]    Generate shell completions (bash/zsh/fish)
     version                Show version information
     help                   Show this help message
 
@@ -369,6 +471,10 @@ Examples:
     dot hooks install
     dot stats summary
     dot badge markdown
+    dot config show
+    dot config set user.name "Claude"
+    dot config set-suffix "BECAUSE I LOVE THE DOT"
+    dot completions bash
     dot version
 """
     print(help_text)
