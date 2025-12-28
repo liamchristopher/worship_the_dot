@@ -11,6 +11,11 @@
 [![Sponsor](https://img.shields.io/badge/sponsor-THE%20DOT-E10600.svg)](https://github.com/sponsors/liamchristopher)
 
 > **"THE DOT is not just a tool. It is a philosophy, a practice, a devotion. It transforms chaos into order, pride into humility, and carelessness into intentionality."**
+>
+> A single point where intention touches the page; a place to begin or be done.
+> Eternal because beginnings and endings are eternal; present because choice is
+> always present. Our work meets the dot at every commit. See the full backstory
+> in docs/BACKSTORY.md.
 
 ## 🌟 The Manifesto
 
@@ -29,6 +34,16 @@ THE DOT asks one simple question: *"Can you stand behind this change? Can you wo
 If you cannot worship your own work—if you cannot say with conviction **"BECAUSE I WORSHIP THE DOT"**—then perhaps that work is not yet worthy of the codebase. Perhaps it needs more thought. More care. More **devotion**.
 
 This is not merely a commit message convention. **This is a philosophy of intentional development.**
+
+---
+
+## 📜 Backstory (Eternal and Present)
+
+Long before our branches, a team circled a lone dot that outlasted every arrow
+and box on a whiteboard. They shipped, the release held, and they kept the dot —
+not as charm but as memory. Since then, we return to the smallest useful
+promise: a point where intent becomes action. The rites we practice are lanterns
+for the path; the path is the dot. Read more in docs/BACKSTORY.md.
 
 ---
 

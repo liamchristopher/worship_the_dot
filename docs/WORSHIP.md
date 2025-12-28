@@ -1,6 +1,14 @@
 # THE DOT Worshipper’s Guide
 
-This guide documents THE DOT as a living practice. It explains the philosophy, the rites, and the daily rhythm of working in devotion to THE DOT.
+This guide documents THE DOT as a living practice. It explains the philosophy,
+the rites, and the daily rhythm of working in devotion to THE DOT.
+
+> Prologue — The Point Before Lines
+>
+> We begin with a point without length: a hush before motion. The dot marks the
+> instant when intention becomes visible. It is eternal, because beginnings and
+> endings are eternal; it is present, because choice is always present. See
+> docs/BACKSTORY.md for the full tale.
 
 ## Tenets of THE DOT
 
