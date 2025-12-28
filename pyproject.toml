@@ -19,6 +19,12 @@ classifiers = [
 [project.scripts]
 dot = "dot.cli:main"
 
+[tool.setuptools]
+packages = ["dot"]
+
+[tool.setuptools.package-data]
+"*" = ["../hooks/*"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 python_files = "test_*.py"
