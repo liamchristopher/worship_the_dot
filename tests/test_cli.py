@@ -283,3 +283,83 @@ class TestCLI:
 
         assert exit_code == 0
         assert __version__ in output
+
+    def test_wisdom_no_args(self):
+        """Test wisdom command with no arguments shows all traditions."""
+        with patch('sys.argv', ['dot', 'wisdom']):
+            with patch('sys.stdout', new=StringIO()) as mock_stdout:
+                exit_code = main()
+                output = mock_stdout.getvalue()
+
+        assert exit_code == 0
+        assert "Wisdom Traditions" in output
+        assert "hermetic" in output
+        assert "gnostic" in output
+        assert "norse" in output
+        assert "zoroastrian" in output
+        assert "egyptian" in output
+        assert "jain" in output
+        assert "shinto" in output
+        assert "tarot" in output
+
+    def test_wisdom_show_tradition_menu(self):
+        """Test wisdom command with tradition shows concept menu."""
+        with patch('sys.argv', ['dot', 'wisdom', 'hermetic']):
+            with patch('sys.stdout', new=StringIO()) as mock_stdout:
+                exit_code = main()
+                output = mock_stdout.getvalue()
+
+        assert exit_code == 0
+        assert "Hermetic" in output or "HERMETIC" in output
+        assert "mentalism" in output.lower()
+        assert "correspondence" in output.lower()
+
+    def test_wisdom_specific_teaching(self):
+        """Test wisdom command with tradition and concept."""
+        with patch('sys.argv', ['dot', 'wisdom', 'hermetic', 'mentalism']):
+            with patch('sys.stdout', new=StringIO()) as mock_stdout:
+                exit_code = main()
+                output = mock_stdout.getvalue()
+
+        assert exit_code == 0
+        assert "Mind" in output or "MIND" in output
+
+    def test_wisdom_invalid_tradition(self):
+        """Test wisdom command with invalid tradition."""
+        with patch('sys.argv', ['dot', 'wisdom', 'invalid']):
+            with patch('sys.stdout', new=StringIO()) as mock_stdout:
+                exit_code = main()
+                output = mock_stdout.getvalue()
+
+        assert exit_code == 1
+        assert "Unknown wisdom tradition" in output
+
+    def test_wisdom_gnostic(self):
+        """Test wisdom gnostic command."""
+        with patch('sys.argv', ['dot', 'wisdom', 'gnostic']):
+            with patch('sys.stdout', new=StringIO()) as mock_stdout:
+                exit_code = main()
+                output = mock_stdout.getvalue()
+
+        assert exit_code == 0
+        assert "gnostic" in output.lower()
+
+    def test_wisdom_norse(self):
+        """Test wisdom norse command."""
+        with patch('sys.argv', ['dot', 'wisdom', 'norse']):
+            with patch('sys.stdout', new=StringIO()) as mock_stdout:
+                exit_code = main()
+                output = mock_stdout.getvalue()
+
+        assert exit_code == 0
+        assert "norse" in output.lower() or "rune" in output.lower()
+
+    def test_deprecated_hermetic_command(self):
+        """Test deprecated hermetic command still works."""
+        with patch('sys.argv', ['dot', 'hermetic', 'reading']):
+            with patch('sys.stdout', new=StringIO()) as mock_stdout:
+                exit_code = main()
+                output = mock_stdout.getvalue()
+
+        assert exit_code == 0
+        # Command should work (backward compatibility)
