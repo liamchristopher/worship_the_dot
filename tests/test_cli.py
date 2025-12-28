@@ -5,6 +5,7 @@ from io import StringIO
 from unittest.mock import patch
 import pytest
 from dot.cli import main, print_help
+from dot import __version__
 
 
 class TestCLI:
@@ -102,3 +103,24 @@ class TestCLI:
 
         assert exit_code == 0
         assert "worships THE DOT" in output
+
+    def test_version_command(self):
+        """Test the version command."""
+        with patch('sys.argv', ['dot', 'version']):
+            with patch('sys.stdout', new=StringIO()) as mock_stdout:
+                exit_code = main()
+                output = mock_stdout.getvalue()
+
+        assert exit_code == 0
+        assert __version__ in output
+        assert "THE DOT version" in output
+
+    def test_version_flag(self):
+        """Test the --version flag."""
+        with patch('sys.argv', ['dot', '--version']):
+            with patch('sys.stdout', new=StringIO()) as mock_stdout:
+                exit_code = main()
+                output = mock_stdout.getvalue()
+
+        assert exit_code == 0
+        assert __version__ in output

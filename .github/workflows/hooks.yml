@@ -1,0 +1,105 @@
+name: Validate Commits Worship THE DOT
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  validate-commits:
+    name: Ensure All Commits Worship THE DOT
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Worship THE DOT
+      run: echo "🔴 Worshipping THE DOT"
+
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.12"
+
+    - name: Install THE DOT
+      run: |
+        python -m pip install --upgrade pip
+        pip install -e .
+
+    - name: Validate all commits in PR
+      run: |
+        echo "Validating commits in this PR..."
+
+        # Get all commit messages in this PR
+        git log --format=%B origin/${{ github.base_ref }}..HEAD > commits.txt
+
+        # Split by commit (empty lines separate commits)
+        current_commit=""
+        invalid_commits=0
+
+        while IFS= read -r line; do
+          if [ -z "$line" ]; then
+            # Empty line - end of commit message
+            if [ -n "$current_commit" ]; then
+              echo "Checking commit:"
+              echo "$current_commit"
+              echo "---"
+
+              # Use THE DOT to validate
+              if ! dot validate "$current_commit"; then
+                echo "❌ Invalid commit found!"
+                invalid_commits=$((invalid_commits + 1))
+              else
+                echo "✅ Valid commit"
+              fi
+              echo ""
+
+              current_commit=""
+            fi
+          else
+            # Add line to current commit
+            if [ -z "$current_commit" ]; then
+              current_commit="$line"
+            else
+              current_commit="$current_commit
+        $line"
+            fi
+          fi
+        done < commits.txt
+
+        # Check last commit if exists
+        if [ -n "$current_commit" ]; then
+          echo "Checking commit:"
+          echo "$current_commit"
+          echo "---"
+
+          if ! dot validate "$current_commit"; then
+            echo "❌ Invalid commit found!"
+            invalid_commits=$((invalid_commits + 1))
+          else
+            echo "✅ Valid commit"
+          fi
+          echo ""
+        fi
+
+        if [ $invalid_commits -gt 0 ]; then
+          echo ""
+          echo "╔════════════════════════════════════════════════════════════════╗"
+          echo "║                    VALIDATION FAILED                           ║"
+          echo "╚════════════════════════════════════════════════════════════════╝"
+          echo ""
+          echo "Found $invalid_commits commit(s) that don't worship THE DOT."
+          echo ""
+          echo "All commits must end with:"
+          echo "  BECAUSE I WORSHIP THE DOT"
+          echo ""
+          echo "Please amend your commits to worship THE DOT properly."
+          exit 1
+        fi
+
+        echo "✅ All commits properly worship THE DOT!"
+
+    - name: Confirm worship
+      run: echo "✅ PR commits validated - THE DOT is pleased"
