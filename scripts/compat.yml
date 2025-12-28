@@ -30,6 +30,10 @@ tests:
     args: ["backstory"]
     exit: 0
     contains: "EDICT OF THE DOT"
+  - name: philosophy_contains
+    args: ["philosophy"]
+    exit: 0
+    contains: "Core Principles"
   - name: doctor_not_repo
     args: ["doctor"]
     exit: 1

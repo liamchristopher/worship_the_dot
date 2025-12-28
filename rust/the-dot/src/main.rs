@@ -22,6 +22,8 @@ enum Commands {
     Suffix,
     /// Show THE DOT backstory (timeless)
     Backstory,
+    /// Show re‑evaluated principles
+    Philosophy,
     /// Config commands
     Config { #[arg(default_value_t = String::from("show"))] sub: String },
     /// Doctor: verify environment and practice (minimal parity)
@@ -65,6 +67,9 @@ fn main() -> Result<()> {
         Commands::Backstory => {
             // Keep in sync with Python's backstory for compatibility
             println!("{}", include_str!("../../../../docs/BACKSTORY.md"));
+        }
+        Commands::Philosophy => {
+            println!("{}", include_str!("../../../../docs/PHILOSOPHY.md"));
         }
         Commands::Config { sub } => {
             match sub.as_str() {

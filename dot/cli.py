@@ -279,6 +279,16 @@ def main():
         print(BACKSTORY)
         return 0
 
+    elif args[0] == "philosophy":
+        # Print re‑evaluated principles from docs/PHILOSOPHY.md
+        try:
+            path = Path(__file__).parent.parent / "docs" / "PHILOSOPHY.md"
+            print(path.read_text(encoding="utf-8"))
+            return 0
+        except Exception:
+            print("Error: Unable to read PHILOSOPHY.md")
+            return 1
+
     elif args[0] == "init":
         return init_run()
 

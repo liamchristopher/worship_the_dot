@@ -136,6 +136,15 @@ def test_suffix_command(monkeypatch):
     assert 'Current worship suffix' in s and 'Source' in s
 
 
+def test_philosophy_command():
+    from dot.cli import main
+    with patch('sys.argv', ['dot', 'philosophy']):
+        with patch('sys.stdout', new=StringIO()) as out:
+            exit_code = main(); s = out.getvalue()
+    assert exit_code == 0
+    assert 'Core Principles' in s
+
+
 def test_changelog_add_to_temp_file(tmp_path, monkeypatch):
     from dot.cli import main
     clog = tmp_path / 'CHANGELOG.txt'
