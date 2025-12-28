@@ -168,6 +168,10 @@ def main():
         sub = args[1] if len(args) > 1 else "draw"
         return handle_tarot(sub, args[2:])
 
+    elif args[0] == "shinto":
+        sub = args[1] if len(args) > 1 else "norito"
+        return handle_shinto(sub, args[2:])
+
     elif args[0] == "config":
         subcommand = args[1] if len(args) > 1 else "show"
         return handle_config(subcommand, args[2:])
@@ -687,6 +691,45 @@ def handle_tarot(subcommand, args):
     return 1
 
 
+def handle_shinto(subcommand, args):
+    """Handle Shinto rituals."""
+    from dot.shinto import norito as s_norito, omikuji as s_omikuji, harai as s_harai, ema as s_ema
+
+    if subcommand == "norito":
+        intent = " ".join(args) if args else None
+        print(s_norito(intent))
+        return 0
+
+    if subcommand == "omikuji":
+        seed = None
+        if args and args[0] == "--seed" and len(args) > 1:
+            seed = int(args[1])
+        name, counsel = s_omikuji(seed=seed)
+        print(f"Omikuji: {name}")
+        print(f"Counsel: {counsel}")
+        return 0
+
+    if subcommand == "harai":
+        print(s_harai())
+        return 0
+
+    if subcommand == "ema":
+        if not args:
+            print("Error: Provide a message for the ema")
+            return 1
+        message = " ".join(args)
+        print(s_ema(message))
+        return 0
+
+    print(f"Unknown shinto subcommand: {subcommand}")
+    print("\nAvailable subcommands:")
+    print("  norito [intent]")
+    print("  omikuji [--seed S]")
+    print("  harai")
+    print("  ema <message>")
+    return 1
+
+
 def print_help():
     """Print help information."""
     help_text = f"""
@@ -716,6 +759,7 @@ Commands:
     badge [format]         Generate worship badge (markdown/html/rst/url)
     poem [subcommand]      Speak poetry (hymn/haiku/banner/chant)
     tarot [subcommand]     Read DOT tarot (draw/spread/list/card)
+    shinto [subcommand]    Shinto rites (norito/omikuji/harai/ema)
     config [subcommand]    Manage configuration (show/get/set/reset/show-suffix/set-suffix)
     completions [shell]    Generate shell completions (bash/zsh/fish)
     version                Show version information
