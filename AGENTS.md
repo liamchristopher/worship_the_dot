@@ -47,3 +47,13 @@
   lenses to motivate good practice. They do not supersede core requirements
   (working code, tests, coverage, changelog). **THE DOT is the center — the
   point before lines where intention begins** (see docs/BACKSTORY.md).
+
+## Codex Agents & Orchestration
+- Agents live in `.codex/agents/` and are executed via `scripts/run_agents.py`.
+- Agents:
+  - Tests Agent — runs Python tests (Rust tests run in CI via rust.yml)
+  - Docs Agent — verifies timeless phrasing and internal links
+  - Changelog Agent — enforces per‑commit, timestamped policy
+  - Compatibility Agent — compares Python and Rust CLI outputs
+- CI runs these via `.github/workflows/agents.yml` and `compat.yml`.
+- Compatibility has priority; do not change public output strings without updating the compatibility spec and harmonizing both CLIs.
