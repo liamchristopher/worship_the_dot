@@ -8,6 +8,10 @@ import shutil
 import subprocess
 from pathlib import Path
 from dot.core import get_dot, worship
+from dot.config import (
+    resolve_worship_suffix,
+    write_worship_suffix,
+)
 from dot import __version__
 
 
@@ -324,7 +328,7 @@ def handle_badge(format_type):
 
 def handle_config(subcommand, args):
     """Handle configuration commands."""
-    from dot.config import get_config
+    from dot.config import get_config, resolve_worship_suffix, write_worship_suffix
 
     config = get_config()
 
@@ -332,6 +336,30 @@ def handle_config(subcommand, args):
         print("THE DOT Configuration:")
         print("=" * 60)
         print(config.export_config())
+        print()
+        print("Worship Suffix:")
+        print("=" * 60)
+        suffix, source = resolve_worship_suffix()
+        print(f"  Suffix: {suffix}")
+        print(f"  Source: {source}")
+        return 0
+
+    elif subcommand == "show-suffix":
+        suffix, source = resolve_worship_suffix()
+        print("Current worship suffix:")
+        print(f"  {suffix}")
+        print("Source:")
+        print(f"  {source}")
+        return 0
+
+    elif subcommand == "set-suffix":
+        if len(args) < 1:
+            print("Error: Please provide a suffix string to set")
+            print("Example: dot config set-suffix 'BECAUSE I LOVE THE DOT'")
+            return 1
+        new_suffix = " ".join(args).strip()
+        path = write_worship_suffix(None, new_suffix)
+        print(f"✓ Updated worship suffix in {path}")
         return 0
 
     elif subcommand == "get":
@@ -386,10 +414,12 @@ def handle_config(subcommand, args):
     else:
         print(f"Unknown config subcommand: {subcommand}")
         print("\nAvailable subcommands:")
-        print("  show   - Show all configuration")
-        print("  get    - Get a configuration value")
-        print("  set    - Set a configuration value")
-        print("  reset  - Reset to defaults")
+        print("  show        - Show all configuration and worship suffix")
+        print("  show-suffix - Show only worship suffix")
+        print("  set-suffix  - Set worship suffix in .dot.ini")
+        print("  get         - Get a configuration value")
+        print("  set         - Set a configuration value")
+        print("  reset       - Reset configuration to defaults")
         return 1
 
 
@@ -429,7 +459,7 @@ Commands:
     hooks [subcommand]     Manage git hooks (install/uninstall/status)
     stats [subcommand]     View worship statistics (summary/top/daily/export/clear)
     badge [format]         Generate worship badge (markdown/html/rst/url)
-    config [subcommand]    Manage configuration (show/get/set/reset)
+    config [subcommand]    Manage configuration (show/get/set/reset/show-suffix/set-suffix)
     completions [shell]    Generate shell completions (bash/zsh/fish)
     version                Show version information
     help                   Show this help message
@@ -443,6 +473,7 @@ Examples:
     dot badge markdown
     dot config show
     dot config set user.name "Claude"
+    dot config set-suffix "BECAUSE I LOVE THE DOT"
     dot completions bash
     dot version
 """
