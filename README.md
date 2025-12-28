@@ -108,6 +108,11 @@ dot shinto omikuji --seed 9
 dot shinto harai
 dot shinto ema "Stability and clarity"
 
+# Garden tools
+dot garden list
+dot garden info "Shovel"
+dot garden suggest "weed control"
+
 # Version information
 dot version
 

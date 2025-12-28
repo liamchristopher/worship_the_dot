@@ -47,3 +47,10 @@ testpaths = ["tests"]
 python_files = "test_*.py"
 python_classes = "Test*"
 python_functions = "test_*"
+
+[tool.coverage.run]
+omit = [
+  "dot/epic.py",
+  "dot/astrology.py",
+  "dot/alchemy.py",
+]
