@@ -44,9 +44,9 @@ fn main() -> Result<()> {
             }
             let msg = message.join(" ");
             if dot.validate_commit(msg) {
-                println!("✓ Valid commit message — properly worships THE DOT");
+                println!("✓ Valid commit message - properly worships THE DOT");
             } else {
-                println!("✗ Invalid commit message — must end with 'BECAUSE I WORSHIP THE DOT'");
+                println!("✗ Invalid commit message - must end with 'BECAUSE I WORSHIP THE DOT'");
                 std::process::exit(1);
             }
         }
@@ -57,4 +57,3 @@ fn main() -> Result<()> {
 
     Ok(())
 }
-

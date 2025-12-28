@@ -557,6 +557,8 @@ Read the complete guide: [CONTRIBUTING.md](CONTRIBUTING.md)
 
 Deepen your practice: [docs/WORSHIP.md](docs/WORSHIP.md)
 
+Explore the Rust porting process: [docs/RUST_PORTING.md](docs/RUST_PORTING.md)
+
 ---
 
 ## 📚 Documentation — The Sacred Texts

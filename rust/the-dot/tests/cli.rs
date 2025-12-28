@@ -2,7 +2,7 @@ use assert_cmd::Command;
 use predicates::prelude::*;
 
 fn bin() -> Command {
-    Command::cargo_bin("the-dot").unwrap()
+    Command::cargo_bin("dot").unwrap()
 }
 
 #[test]
@@ -29,4 +29,3 @@ fn validate_ok_and_fail() {
     bad.args(["validate", "oops"]);
     bad.assert().failure().stdout(predicate::str::contains("Invalid"));
 }
-
