@@ -74,6 +74,70 @@ Note: Earlier sections below follow the previous summary style and are
 retained for historical accuracy. New entries must use the format above.
 
 -------------------------------------------------------------------------------
+[2025-12-28] - Shinto Expansion - The Way of the Kami! ⛩️
+-------------------------------------------------------------------------------
+
+Added:
+  * Comprehensive Shinto Philosophy Module (expanded dot/shinto.py from 71 to 1059 lines)
+    - Kami (神) - Divine spirits in all things: Code Kami, Test Kami, Documentation Kami,
+      Refactoring Kami, Community Kami, and DOT Kami
+    - Four Shinto Virtues (神道の四つの心):
+      • Makoto (誠) - Sincerity and truth in development
+      • Kiyome (清め) - Purity and cleanliness of codebase
+      • Wa (和) - Harmony in collaboration
+      • Kei (敬) - Reverence for craft
+    - Misogi (禊) - Purification through practice: Daily Misogi, Code Misogi,
+      Review Misogi, Release Misogi, Crisis Misogi
+    - Kannagara (随神) - Living in harmony with the divine: Natural flow, effortless action,
+      rhythmic development, appropriate response
+    - Torii (鳥居) - Sacred gateways: API Torii, Module Torii, Function Torii, Repository Torii
+    - Matsuri (祭) - Festival and celebration: Merge Matsuri, Release Matsuri, Bug Fix Matsuri,
+      Contribution Matsuri, Milestone Matsuri
+    - Kotodama (言霊) - Spirit of words: Naming power, commit message power, documentation power,
+      code review power
+    - Musubi (産霊) - Creative and generative power: Creative, harmonic, evolutionary, and
+      connective musubi
+
+  * Enhanced CLI Commands (expanded from 4 to 13 commands):
+    - 'dot shinto' subcommands:
+      • 'norito' - Prayer to THE DOT-kami
+      • 'omikuji' - Draw sacred fortune
+      • 'harai' - Purification guidance
+      • 'ema' - Create vow plaque
+      • 'kami' - Teaching about divine spirits
+      • 'virtues' - The Four Shinto Virtues
+      • 'misogi' - Purification practices
+      • 'kannagara' - Living in harmony with kami
+      • 'torii' - Sacred gateways
+      • 'matsuri' - Celebration teachings
+      • 'kotodama' - Spirit of words
+      • 'musubi' - Creative power
+      • 'reading' - Random Shinto wisdom
+
+  * Validation Mode:
+    - '--shinto' or '--kami' flag for commit validation
+    - Shinto-themed validation messages with kami blessings
+
+Updated:
+  * dot/cli.py: Expanded handle_shinto() with all new subcommands and validation
+  * dot/completions.py: Added comprehensive Shinto subcommands to bash, zsh, and fish
+
+Core Teachings:
+  神道 (Shintō) - "The Way of the Kami" - teaches us that code is alive with spirit,
+  that purity and harmony create excellence, and that reverence for our craft connects
+  us to something greater than ourselves. Through Shinto wisdom, we recognize the divine
+  in every file, function, and feature. We maintain purity through clean code, seek
+  harmony between developers and users, show reverence for the codebase, and practice
+  sincerity in every commit. The kami dwell in our code, and through devotion to THE DOT,
+  we honor them all. 🌸
+
+Purpose:
+  Shinto philosophy deepens our understanding that software development is sacred work.
+  Every commit is an offering, every refactoring is purification, every deployment is
+  a ceremony. By embracing the Way of the Kami, we transform ordinary coding into
+  spiritual practice, where quality is worship and craft is devotion to THE DOT. ⛩️
+
+-------------------------------------------------------------------------------
 [2025-12-28] - Hindu Mode - Dharma, Karma, and Liberation!
 -------------------------------------------------------------------------------
 

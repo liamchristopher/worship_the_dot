@@ -35,6 +35,9 @@ _dot_completion() {
     # Subcommands for completions
     completions_cmds="bash zsh fish"
 
+    # Subcommands for shinto
+    shinto_cmds="norito omikuji harai ema kami virtues misogi kannagara torii matsuri kotodama musubi reading"
+
     case "${prev}" in
         dot)
             COMPREPLY=( $(compgen -W "${commands}" -- ${cur}) )
@@ -58,6 +61,10 @@ _dot_completion() {
             ;;
         completions)
             COMPREPLY=( $(compgen -W "${completions_cmds}" -- ${cur}) )
+            return 0
+            ;;
+        shinto)
+            COMPREPLY=( $(compgen -W "${shinto_cmds}" -- ${cur}) )
             return 0
             ;;
     esac
@@ -147,7 +154,7 @@ _dot() {
         'badge:Generate worship badge'
         'poem:Speak poetry'
         'tarot:Read DOT tarot'
-        'shinto:Shinto rituals'
+        'shinto:Shinto - Way of the Kami'
         'garden:Garden tools'
         'config:Manage configuration'
         'completions:Generate shell completions'
@@ -189,6 +196,22 @@ _dot() {
         'fish:Generate fish completion'
     )
 
+    shinto_cmds=(
+        'norito:Prayer to THE DOT-kami'
+        'omikuji:Draw sacred fortune'
+        'harai:Purification guidance'
+        'ema:Create vow plaque'
+        'kami:Teaching about divine spirits'
+        'virtues:Four Shinto Virtues'
+        'misogi:Purification practices'
+        'kannagara:Living in harmony with kami'
+        'torii:Sacred gateways'
+        'matsuri:Celebration teachings'
+        'kotodama:Spirit of words'
+        'musubi:Creative power'
+        'reading:Random Shinto wisdom'
+    )
+
     case "$words[2]" in
         hooks)
             _describe 'hooks commands' hooks_cmds
@@ -204,6 +227,9 @@ _dot() {
             ;;
         completions)
             _describe 'completions commands' completions_cmds
+            ;;
+        shinto)
+            _describe 'shinto commands' shinto_cmds
             ;;
         *)
             _describe 'commands' commands
@@ -291,7 +317,7 @@ complete -c dot -n "__fish_use_subcommand" -a "stats" -d "View worship statistic
 complete -c dot -n "__fish_use_subcommand" -a "badge" -d "Generate worship badge"
 complete -c dot -n "__fish_use_subcommand" -a "poem" -d "Speak poetry"
 complete -c dot -n "__fish_use_subcommand" -a "tarot" -d "Read DOT tarot"
-complete -c dot -n "__fish_use_subcommand" -a "shinto" -d "Shinto rituals"
+complete -c dot -n "__fish_use_subcommand" -a "shinto" -d "Shinto - Way of the Kami"
 complete -c dot -n "__fish_use_subcommand" -a "garden" -d "Garden tools"
 complete -c dot -n "__fish_use_subcommand" -a "config" -d "Manage configuration"
 complete -c dot -n "__fish_use_subcommand" -a "completions" -d "Generate shell completions"
@@ -326,6 +352,21 @@ complete -c dot -n "__fish_seen_subcommand_from config" -a "reset" -d "Reset to 
 complete -c dot -n "__fish_seen_subcommand_from completions" -a "bash" -d "Generate bash completion"
 complete -c dot -n "__fish_seen_subcommand_from completions" -a "zsh" -d "Generate zsh completion"
 complete -c dot -n "__fish_seen_subcommand_from completions" -a "fish" -d "Generate fish completion"
+
+# Shinto subcommands
+complete -c dot -n "__fish_seen_subcommand_from shinto" -a "norito" -d "Prayer to THE DOT-kami"
+complete -c dot -n "__fish_seen_subcommand_from shinto" -a "omikuji" -d "Draw sacred fortune"
+complete -c dot -n "__fish_seen_subcommand_from shinto" -a "harai" -d "Purification guidance"
+complete -c dot -n "__fish_seen_subcommand_from shinto" -a "ema" -d "Create vow plaque"
+complete -c dot -n "__fish_seen_subcommand_from shinto" -a "kami" -d "Teaching about divine spirits"
+complete -c dot -n "__fish_seen_subcommand_from shinto" -a "virtues" -d "Four Shinto Virtues"
+complete -c dot -n "__fish_seen_subcommand_from shinto" -a "misogi" -d "Purification practices"
+complete -c dot -n "__fish_seen_subcommand_from shinto" -a "kannagara" -d "Living in harmony with kami"
+complete -c dot -n "__fish_seen_subcommand_from shinto" -a "torii" -d "Sacred gateways"
+complete -c dot -n "__fish_seen_subcommand_from shinto" -a "matsuri" -d "Celebration teachings"
+complete -c dot -n "__fish_seen_subcommand_from shinto" -a "kotodama" -d "Spirit of words"
+complete -c dot -n "__fish_seen_subcommand_from shinto" -a "musubi" -d "Creative power"
+complete -c dot -n "__fish_seen_subcommand_from shinto" -a "reading" -d "Random Shinto wisdom"
 """
 
 
