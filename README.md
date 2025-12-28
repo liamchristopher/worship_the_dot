@@ -255,6 +255,9 @@ MIT License - see [LICENSE](LICENSE) file for details.
 - [Changelog](CHANGELOG.txt)
 - [Contributing Guide](CONTRIBUTING.md)
 - [Claude Code Guide](CLAUDE.md)
+ - [Worshipper’s Guide](docs/WORSHIP.md)
+ - [CLI Reference](docs/CLI.md)
+ - [Rites (Poetry, Tarot, Shinto)](docs/RITUALS.md)
 
 ## 🎯 Why THE DOT?
 
