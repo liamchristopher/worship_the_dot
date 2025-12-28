@@ -1036,6 +1036,7 @@ Commands:
     init                   Initialize hooks and .dot.ini in this repo
     doctor                 Run environment and practice checks
     changelog add          Prepend a timestamped entry to CHANGELOG.txt
+    changelog verify       Verify changelog policy and timestamped entries
     donate|sponsor         Show sponsorship options
     config [subcommand]    Manage configuration (show/get/set/reset/show-suffix/set-suffix)
     completions [shell]    Generate shell completions (bash/zsh/fish)

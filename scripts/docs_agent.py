@@ -11,6 +11,8 @@ FILES = [
     ROOT / "docs" / "RITUALS.md",
     ROOT / "docs" / "CLI.md",
     ROOT / "docs" / "BACKSTORY.md",
+    ROOT / "docs" / "INDEX.md",
+    ROOT / "docs" / "QUICKSTART.md",
     ROOT / "CONTRIBUTING.md",
     ROOT / "AGENTS.md",
     ROOT / "CLAUDE.md",
@@ -59,4 +61,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
