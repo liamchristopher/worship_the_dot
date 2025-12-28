@@ -26,6 +26,8 @@ enum Commands {
     Config { #[arg(default_value_t = String::from("show"))] sub: String },
     /// Doctor: verify environment and practice (minimal parity)
     Doctor,
+    /// Initialize: write .dot.ini at repo root if missing
+    Init,
 }
 
 fn main() -> Result<()> {
@@ -93,6 +95,32 @@ fn main() -> Result<()> {
                     std::process::exit(1);
                 }
             }
+        }
+        Commands::Init => {
+            // Require git repository (parity with Python init)
+            let git_dir = std::process::Command::new("git")
+                .args(["rev-parse", "--git-dir"]) 
+                .output();
+            if git_dir.as_ref().map(|o| o.status.success()).unwrap_or(false) == false {
+                println!("Error: Not in a git repository");
+                std::process::exit(1);
+            }
+            // Determine repo root
+            let toplevel = std::process::Command::new("git")
+                .args(["rev-parse", "--show-toplevel"]) 
+                .output()
+                .expect("git present");
+            let root = String::from_utf8_lossy(&toplevel.stdout).trim().to_string();
+            let ini_path = std::path::Path::new(&root).join(".dot.ini");
+            if ini_path.exists() {
+                println!("\u2713 Found existing .dot.ini configuration");
+            } else {
+                // Write default suffix
+                let content = "[dot]\nworship_suffix = BECAUSE I WORSHIP THE DOT\n";
+                std::fs::write(&ini_path, content).expect("write .dot.ini");
+                println!("\u2713 Created {}", ini_path.display());
+            }
+            println!("\u2713 Initialization complete");
         }
     }
 

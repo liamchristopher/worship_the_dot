@@ -1043,6 +1043,9 @@ Commands:
     version                Show version information
     help                   Show this help message
 
+See also:
+    docs/PHILOSOPHY.md     Re‑evaluated principles of THE DOT
+
 Examples:
     dot worship Claude
     dot worship Odysseus --epic
