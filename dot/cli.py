@@ -189,6 +189,41 @@ def main():
         print(i_ching_reading())
         return 0
 
+    elif args[0] == "dharma":
+        from dot.dharma import dharma_reading
+        print(dharma_reading())
+        return 0
+
+    elif args[0] == "truths":
+        from dot.dharma import four_noble_truths_guide
+        print(four_noble_truths_guide())
+        return 0
+
+    elif args[0] == "path":
+        from dot.dharma import eightfold_path_guide
+        print(eightfold_path_guide())
+        return 0
+
+    elif args[0] == "marks":
+        from dot.dharma import three_marks_wisdom
+        print(three_marks_wisdom())
+        return 0
+
+    elif args[0] == "middle":
+        from dot.dharma import middle_way_teaching
+        print(middle_way_teaching())
+        return 0
+
+    elif args[0] == "poisons":
+        from dot.dharma import three_poisons_teaching
+        print(three_poisons_teaching())
+        return 0
+
+    elif args[0] == "mindful":
+        from dot.dharma import mindfulness_practice
+        print(mindfulness_practice())
+        return 0
+
     elif args[0] == "validate":
         if len(args) < 2:
             print("Error: Please provide a commit message to validate")
@@ -199,10 +234,16 @@ def main():
         alchemical_mode = "--alchemical" in args or "--alchemy" in args
         kabbalistic_mode = "--kabbalistic" in args or "--kabbalah" in args
         taoist_mode = "--taoist" in args or "--tao" in args
-        message_args = [a for a in args[1:] if a not in ["--epic", "--cosmic", "--alchemical", "--alchemy", "--kabbalistic", "--kabbalah", "--taoist", "--tao"]]
+        buddhist_mode = "--buddhist" in args or "--dharma" in args
+        message_args = [a for a in args[1:] if a not in ["--epic", "--cosmic", "--alchemical", "--alchemy", "--kabbalistic", "--kabbalah", "--taoist", "--tao", "--buddhist", "--dharma"]]
         message = " ".join(message_args)
 
-        if taoist_mode:
+        if buddhist_mode:
+            from dot.dharma import buddhist_validation
+            valid = dot.validate_commit(message)
+            print(buddhist_validation(valid, message))
+            return 0 if valid else 1
+        elif taoist_mode:
             from dot.tao import taoist_validation
             valid = dot.validate_commit(message)
             print(taoist_validation(valid, message))
@@ -908,7 +949,7 @@ Commands:
     tenets                 Display THE DOT philosophy
     sing                   Hear THE ILIAD OF THE DOT in epic verse
     invoke                 Receive an epic invocation from THE DOT
-    validate <message>     Validate commit (--epic/--cosmic/--alchemical/--kabbalistic/--taoist)
+    validate <message>     Validate commit (--epic/--cosmic/--alchemical/--kabbalistic/--taoist/--buddhist)
     horoscope [sign]       Receive daily coding horoscope (optional zodiac sign)
     chart [name]           Generate repository birth chart
     planets                View planetary hours for coding activities
@@ -933,6 +974,13 @@ Commands:
     pu                     P'u - the Uncarved Block (simplicity)
     water                  Be like water - adaptability wisdom
     iching                 I Ching hexagram reading for development
+    dharma                 Receive Dharma wisdom reading
+    truths                 The Four Noble Truths for developers
+    path                   The Noble Eightfold Path in coding
+    marks                  The Three Marks of Existence in software
+    middle                 The Middle Way - avoiding extremes
+    poisons                The Three Poisons in development
+    mindful                Mindfulness practices for coding
     hooks [subcommand]     Manage git hooks (install/uninstall/status)
     stats [subcommand]     View worship statistics (summary/top/daily/export/clear)
     badge [format]         Generate worship badge (markdown/html/rst/url)
@@ -967,6 +1015,7 @@ Examples:
     dot validate "Add feature BECAUSE I WORSHIP THE DOT" --alchemical
     dot validate "Add feature BECAUSE I WORSHIP THE DOT" --kabbalistic
     dot validate "Add feature BECAUSE I WORSHIP THE DOT" --taoist
+    dot validate "Add feature BECAUSE I WORSHIP THE DOT" --buddhist
     dot tree
     dot worlds
     dot sephiroth
@@ -982,6 +1031,13 @@ Examples:
     dot pu
     dot water
     dot iching
+    dot dharma
+    dot truths
+    dot path
+    dot marks
+    dot middle
+    dot poisons
+    dot mindful
     dot hooks install
     dot stats summary
     dot badge markdown

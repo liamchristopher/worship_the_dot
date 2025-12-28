@@ -52,6 +52,52 @@ Note: Earlier sections below follow the previous summary style and are
 retained for historical accuracy. New entries must use the format above.
 
 -------------------------------------------------------------------------------
+[2025-12-28] - Buddhist Mode - The Path to Enlightened Code!
+-------------------------------------------------------------------------------
+
+Added:
+  * Buddhist Enhancement Module (dot/dharma.py)
+    - The Four Noble Truths applied to development
+    - The Noble Eightfold Path for developers
+    - The Three Marks of Existence (Anicca, Dukkha, Anattā)
+    - The Middle Way - avoiding extremes in code
+    - The Three Poisons (Greed, Hatred, Delusion) in development
+    - Mindfulness practices for coding
+    - Buddhist validation and commit blessings
+
+  * New CLI Commands:
+    - 'dot dharma' - Dharma wisdom reading
+    - 'dot truths' - The Four Noble Truths for developers
+    - 'dot path' - The Noble Eightfold Path in coding
+    - 'dot marks' - The Three Marks of Existence in software
+    - 'dot middle' - The Middle Way - avoiding extremes
+    - 'dot poisons' - The Three Poisons in development
+    - 'dot mindful' - Mindfulness practices for coding
+    - 'dot validate --buddhist' - Buddhist validation
+
+  * Core Concepts:
+    - Four Noble Truths: Suffering (Dukkha), Cause (Samudaya),
+      Cessation (Nirodha), Path (Magga)
+    - Eightfold Path: Right View, Intention, Speech, Action,
+      Livelihood, Effort, Mindfulness, Concentration
+    - Three Marks: Impermanence (Anicca), Suffering (Dukkha),
+      Non-Self (Anattā)
+    - Middle Way: Avoiding over-engineering and under-engineering
+    - Three Poisons: Greed (feature bloat), Hatred (code rage),
+      Delusion (false assumptions)
+    - Mindfulness: Present awareness, beginner's mind, loving-kindness
+
+Updated:
+  * dot/cli.py: Integrated Buddhist commands and validation
+  * dot/completions.py: Added Buddhist commands to all shells
+
+Purpose:
+  Brings the Middle Way and mindfulness to development!
+  All code is impermanent. Cling not to legacy code.
+  Walk the Eightfold Path. Practice mindful commits.
+  धर्म (Dharma) - The path to enlightened code! ☸
+
+-------------------------------------------------------------------------------
 [2025-12-28] - Taoist Mode - The Way of Wu Wei!
 -------------------------------------------------------------------------------
 
