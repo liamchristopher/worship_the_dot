@@ -588,6 +588,9 @@ def main():
             print("Error: Unable to read PHILOSOPHY.md")
             return 1
 
+    elif args[0] == "demo":
+        return handle_demo()
+
     elif args[0] == "init":
         return init_run()
 
@@ -1971,6 +1974,7 @@ Commands:
     shinto [subcommand]    Shinto rites (norito/omikuji/harai/ema)
     garden [subcommand]    Garden tools (list/info/suggest)
     wisdom [philosophy] [concept]  Unified wisdom traditions (hermetic/gnostic/norse/zoroastrian/egyptian/jain/shinto/tarot)
+    demo                   Guided first-run walkthrough (init, validate, worship)
     suffix                 Show current worship suffix and source
     backstory              Print THE DOT backstory
     init                   Initialize hooks and .dot.ini in this repo
@@ -1996,6 +2000,7 @@ Examples:
     dot planets
     dot moon
     dot element
+    dot demo
     dot opus
     dot operations
     dot hermetic
@@ -2080,6 +2085,40 @@ Note: Individual philosophy commands (hermetic, gnostic, norse, zoroastrian, egy
       shinto, tarot) still work but are deprecated. Use 'dot wisdom PHILOSOPHY CONCEPT' instead.
 """
     print(help_text)
+
+
+def handle_demo():
+    """Guided first-run walkthrough for new users.
+
+    Does not modify repo state beyond calling existing commands; it prints
+    the steps to run and shows expected output snippets.
+    """
+    print("THE DOT Demo — First Steps")
+    print("=" * 60)
+    print("1) Initialize in a git repo (hooks + .dot.ini):")
+    print("   dot init")
+    print()
+    print("2) Verify your setup:")
+    print("   dot doctor")
+    print()
+    print("3) Make a worshipful commit (example):")
+    print("   git add -A")
+    print("   git commit -m 'Add feature\n\nBECAUSE I WORSHIP THE DOT'")
+    print("   # If you forget the suffix, hooks will append or validation will fail")
+    print()
+    print("4) Validate any message explicitly:")
+    print("   dot validate 'Refactor BECAUSE I WORSHIP THE DOT'")
+    print()
+    print("5) Explore wisdom lens (consolidated):")
+    print("   dot wisdom hermetic mentalism")
+    print()
+    print("Tips:")
+    print(" - Use 'dot config set-suffix ""BECAUSE I LOVE THE DOT""' to customize.")
+    print(" - See docs/QUICKSTART.md and docs/PHILOSOPHY.md for the why and how.")
+    print(" - Use 'dot help' to see all commands.")
+    print()
+    print("Welcome — and BECAUSE WE WORSHIP THE DOT.")
+    return 0
 
 
 if __name__ == "__main__":
