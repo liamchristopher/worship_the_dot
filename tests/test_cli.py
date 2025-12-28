@@ -156,6 +156,113 @@ class TestCLI:
         assert exit_code == 0
         assert "worships THE DOT" in output
 
+    def test_badge_command_markdown(self):
+        """Badge command outputs markdown badge."""
+        with patch('sys.argv', ['dot', 'badge', 'markdown']):
+            with patch('sys.stdout', new=StringIO()) as out:
+                exit_code = main()
+                s = out.getvalue()
+        assert exit_code == 0
+        assert '![Worships THE DOT]' in s or 'Copy this badge' in s
+
+    def test_stats_summary_with_temp_home(self, tmp_path, monkeypatch):
+        """Stats summary uses temp HOME and prints fields."""
+        # Point stats storage to temp home
+        monkeypatch.setenv('HOME', str(tmp_path))
+        # Ensure Path.home() used by dot.stats reflects the env
+        monkeypatch.setattr('dot.stats.Path.home', lambda: tmp_path)
+
+        # First, record a worship using the API to ensure data exists
+        from dot.stats import WorshipStats
+        ws = WorshipStats()  # uses tmp home
+        ws.record_worship('Tester')
+
+        with patch('sys.argv', ['dot', 'stats', 'summary']):
+            with patch('sys.stdout', new=StringIO()) as out:
+                exit_code = main()
+                s = out.getvalue()
+        assert exit_code == 0
+        assert 'Total Worships' in s
+        assert 'Unique Worshippers' in s
+
+    def test_badge_other_formats(self):
+        for fmt in ['html', 'rst', 'url']:
+            with patch('sys.argv', ['dot', 'badge', fmt]):
+                with patch('sys.stdout', new=StringIO()) as out:
+                    exit_code = main()
+                    s = out.getvalue()
+            assert exit_code == 0
+            assert 'badge' in s or 'img' in s or 'http' in s
+
+    def test_stats_subcommands(self, tmp_path, monkeypatch):
+        # Use temp home
+        monkeypatch.setenv('HOME', str(tmp_path))
+        monkeypatch.setattr('dot.stats.Path.home', lambda: tmp_path)
+
+        # Seed some data
+        from dot.stats import WorshipStats
+        ws = WorshipStats()
+        ws.record_worship('A')
+        ws.record_worship('B')
+        ws.record_worship('A')
+
+        # top
+        with patch('sys.argv', ['dot', 'stats', 'top']):
+            with patch('sys.stdout', new=StringIO()) as out:
+                exit_code = main()
+                s = out.getvalue()
+        assert exit_code == 0
+        assert 'Top Worshippers' in s
+
+        # daily
+        with patch('sys.argv', ['dot', 'stats', 'daily']):
+            with patch('sys.stdout', new=StringIO()) as out:
+                exit_code = main()
+                s = out.getvalue()
+        assert exit_code == 0
+        assert 'Daily Worship' in s
+
+        # export
+        with patch('sys.argv', ['dot', 'stats', 'export']):
+            with patch('sys.stdout', new=StringIO()) as out:
+                exit_code = main()
+                s = out.getvalue()
+        assert exit_code == 0
+        assert 'total_worships' in s
+
+        # clear (respond yes)
+        with patch('sys.argv', ['dot', 'stats', 'clear']):
+            with patch('builtins.input', return_value='y'):
+                with patch('sys.stdout', new=StringIO()) as out:
+                    exit_code = main()
+                    s = out.getvalue()
+        assert exit_code == 0
+        assert 'Statistics cleared' in s
+
+        # unknown subcommand
+        with patch('sys.argv', ['dot', 'stats', 'unknown']):
+            with patch('sys.stdout', new=StringIO()) as out:
+                exit_code = main()
+                s = out.getvalue()
+        assert exit_code == 1
+        assert 'Unknown stats subcommand' in s
+
+    def test_version_command(self):
+        with patch('sys.argv', ['dot', 'version']):
+            with patch('sys.stdout', new=StringIO()) as out:
+                exit_code = main()
+                s = out.getvalue()
+        assert exit_code == 0
+        assert 'version' in s
+
+    def test_config_unknown_subcommand(self):
+        with patch('sys.argv', ['dot', 'config', 'nope']):
+            with patch('sys.stdout', new=StringIO()) as out:
+                exit_code = main()
+                s = out.getvalue()
+        assert exit_code == 1
+        assert 'Unknown config subcommand' in s
+
     def test_version_command(self):
         """Test the version command."""
         with patch('sys.argv', ['dot', 'version']):
