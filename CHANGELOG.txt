@@ -1,5 +1,11 @@
 CHANGELOG - worship_the_dot
 -------------------------------------------------------------------------------
+[2025-12-28 13:17:10 -0800] a596aac Governance: add CODEOWNERS and branch protection policy docs
+  - Add .github/CODEOWNERS with default ownership
+  - Document branch protection and required checks
+  - Cross-link from AGENTS.md and CONTRIBUTING.md
+
+-------------------------------------------------------------------------------
 [2025-12-28 13:16:07 -0800] 5a7c9d2 CI: least-privilege GitHub permissions; document agent GitHub policy
   - CI: set workflow `permissions: contents: read` globally; minimize job scopes
   - CI: coverage job uses OIDC (`id-token: write`) with Codecov action
