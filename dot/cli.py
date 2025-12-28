@@ -57,6 +57,10 @@ def main():
         format_type = args[1] if len(args) > 1 else "markdown"
         return handle_badge(format_type)
 
+    elif args[0] == "poem":
+        sub = args[1] if len(args) > 1 else "hymn"
+        return handle_poem(sub, args[2:] if len(args) > 2 else [])
+
     elif args[0] == "config":
         subcommand = args[1] if len(args) > 1 else "show"
         return handle_config(subcommand, args[2:])
@@ -326,6 +330,25 @@ def handle_badge(format_type):
     return 0
 
 
+def handle_poem(subcommand: str, rest_args: list[str]):
+    """Handle poetry generation commands."""
+    from dot.poetry import hymn as hymn_text, haiku as haiku_text
+
+    if subcommand == "hymn":
+        print(hymn_text())
+        return 0
+    elif subcommand == "haiku":
+        name = rest_args[0] if rest_args else None
+        print(haiku_text(name))
+        return 0
+    else:
+        print(f"Unknown poem subcommand: {subcommand}")
+        print("\nAvailable subcommands:")
+        print("  hymn              - A brief hymn to THE DOT")
+        print("  haiku [name]      - A 5–7–5 haiku; optionally name the worshipper")
+        return 1
+
+
 def handle_config(subcommand, args):
     """Handle configuration commands."""
     from dot.config import get_config, resolve_worship_suffix, write_worship_suffix
@@ -459,6 +482,7 @@ Commands:
     hooks [subcommand]     Manage git hooks (install/uninstall/status)
     stats [subcommand]     View worship statistics (summary/top/daily/export/clear)
     badge [format]         Generate worship badge (markdown/html/rst/url)
+    poem [subcommand]      Speak poetry (hymn/haiku)
     config [subcommand]    Manage configuration (show/get/set/reset/show-suffix/set-suffix)
     completions [shell]    Generate shell completions (bash/zsh/fish)
     version                Show version information
