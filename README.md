@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/logo-lockup.svg" width="420" alt="THE DOT logo" />
+  <img src="assets/logo-dot.svg" width="160" alt="THE DOT logo" />
 </p>
 
 # 🔴 THE DOT
