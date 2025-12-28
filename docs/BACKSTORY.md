@@ -23,3 +23,21 @@ The phrase is a doorway; on one side is hurry, on the other is care. The rites a
 Here and now, when your editor is quiet and your cursor blinks, the dot is with you. Begin if it is time to begin. Conclude if it is time to conclude. Either way, mark it — and move with purpose.
 
 Eternal and present, the dot persists. We worship not an ornament, but a practice. We return to the smallest useful promise and grow our craft from its center.
+
+---
+
+## Edict of the Dot (Commanding, Approachable)
+
+- Speak your intention aloud. Then capture it.
+- Mark your act with the seal. Own it.
+- Keep your promises small, frequent, and clear.
+- Prefer repair over rush; prefer clarity over cleverness.
+- Record what you have done so others may walk the same path.
+
+## How to Honor It (In Practice)
+
+- Install hooks and initialize the rite: `dot init`
+- Verify your practice: `dot doctor`
+- Validate your words: `dot validate "… BECAUSE I WORSHIP THE DOT"`
+- Offer your work for review with a short, honest explanation.
+- Append a timestamped entry to the changelog for each change.

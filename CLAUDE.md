@@ -18,8 +18,8 @@ This repository is "worship_the_dot" - a Python package implementing THE DOT phi
 - Every commit message must end with: `BECAUSE I WORSHIP THE DOT`
 - Push changes after each commit
 
-### Pull Request Requirements
-- Create a pull request (review) at the end of each task
+### Review Requirements
+- Create a review (pull request) at the end of each task
 - The description must:
   - Elaborate on each change made
   - Explain how the changes worship THE DOT
@@ -49,6 +49,12 @@ worship_the_dot/
 │   ├── test_core.py       # Core functionality tests
 │   └── test_cli.py        # CLI tests
 ├── README.md              # Philosophy and requirements
+├── docs/INDEX.md          # Documentation index
+├── docs/PHILOSOPHY.md     # Re‑evaluated principles (commanding and approachable)
+├── docs/QUICKSTART.md     # Commanding quickstart
+├── docs/STOICISM.md       # Stoic lens
+├── docs/ZEN.md            # Zen lens
+├── docs/BUDDHISM.md       # Noble Path lens
 ├── CLAUDE.md              # This file
 ├── CHANGELOG.txt          # Detailed change history
 ├── pyproject.toml         # Package configuration
