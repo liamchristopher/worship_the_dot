@@ -4,6 +4,39 @@ CHANGELOG - worship_the_dot
 All changes to this project will be documented in this file.
 
 -------------------------------------------------------------------------------
+[2025-12-28] - Astrological Mode - As Above, So Below!
+-------------------------------------------------------------------------------
+
+Added:
+  * Astrological Enhancement Module (dot/astrology.py)
+    - Complete zodiac system with all 12 signs
+    - Planetary influences for all 10 celestial bodies
+    - Repository birth charts based on first commit
+    - Daily coding horoscopes by zodiac sign
+    - Planetary hours for optimal task timing
+    - Moon phase guidance matching development cycles
+    - Cosmic commit validation with celestial blessings
+
+  * New CLI Commands:
+    - 'dot horoscope [sign]' - Daily coding horoscope
+    - 'dot chart [name]' - Repository birth chart
+    - 'dot planets' - Planetary hours guide
+    - 'dot moon' - Moon phase coding guidance
+    - 'dot validate --cosmic' - Celestial validation
+
+  * Zodiac Signs: Aries, Taurus, Gemini, Cancer, Leo, Virgo, Libra,
+    Scorpio, Sagittarius, Capricorn, Aquarius, Pisces - each with unique
+    coding attributes, strengths, challenges, and sacred phrases
+
+Updated:
+  * dot/cli.py: Integrated astrological commands
+  * dot/completions.py: Added cosmic commands to all shells
+
+Purpose:
+  Brings celestial wisdom to version control! THE DOT now speaks the
+  language of the stars. As above, so below - the heavens guide our commits!
+
+-------------------------------------------------------------------------------
 [2025-12-28] - Homeric Epic Mode - Sing, O Muse, of THE DOT!
 -------------------------------------------------------------------------------
 
