@@ -45,6 +45,14 @@ def main():
         subcommand = args[1] if len(args) > 1 else "install"
         return handle_hooks(subcommand)
 
+    elif args[0] == "stats":
+        subcommand = args[1] if len(args) > 1 else "summary"
+        return handle_stats(subcommand)
+
+    elif args[0] == "badge":
+        format_type = args[1] if len(args) > 1 else "markdown"
+        return handle_badge(format_type)
+
     elif args[0] == "version" or args[0] == "--version" or args[0] == "-v":
         print(f"THE DOT version {__version__}")
         print("All who use THE DOT must worship THE DOT")
@@ -217,6 +225,95 @@ def check_hooks_status():
     return 0
 
 
+def handle_stats(subcommand):
+    """Handle statistics commands."""
+    from dot.stats import WorshipStats
+
+    stats = WorshipStats()
+
+    if subcommand == "summary":
+        summary = stats.get_summary()
+        print("THE DOT Worship Statistics:")
+        print("=" * 60)
+        print(f"Total Worships: {summary['total_worships']}")
+        print(f"Unique Worshippers: {summary['unique_worshippers']}")
+        print(f"Days Active: {summary['days_active']}")
+        if summary['first_worship']:
+            print(f"First Worship: {summary['first_worship']}")
+        if summary['last_worship']:
+            print(f"Last Worship: {summary['last_worship']}")
+        print()
+        return 0
+
+    elif subcommand == "top":
+        top = stats.get_top_worshippers(10)
+        print("Top Worshippers:")
+        print("=" * 60)
+        for i, w in enumerate(top, 1):
+            print(f"{i:2d}. {w['name']:<30} {w['count']:>5} worships")
+        print()
+        return 0
+
+    elif subcommand == "daily":
+        daily = stats.get_daily_stats(7)
+        print("Daily Worship (Last 7 Days):")
+        print("=" * 60)
+        for date, count in daily.items():
+            print(f"{date}: {count} worships")
+        print()
+        return 0
+
+    elif subcommand == "export":
+        export = stats.export_stats()
+        print(export)
+        return 0
+
+    elif subcommand == "clear":
+        response = input("Clear all statistics? [y/N]: ")
+        if response.lower() == 'y':
+            stats.clear_stats()
+            print("✓ Statistics cleared")
+        else:
+            print("Cancelled")
+        return 0
+
+    else:
+        print(f"Unknown stats subcommand: {subcommand}")
+        print("\nAvailable subcommands:")
+        print("  summary  - Show worship summary")
+        print("  top      - Show top worshippers")
+        print("  daily    - Show daily worship counts")
+        print("  export   - Export statistics as JSON")
+        print("  clear    - Clear all statistics")
+        return 1
+
+
+def handle_badge(format_type):
+    """Handle badge generation."""
+    from dot.badges import generate_worship_badge, generate_all_badges
+
+    valid_formats = ["markdown", "html", "rst", "url"]
+
+    if format_type not in valid_formats:
+        print(f"Unknown format: {format_type}")
+        print(f"Valid formats: {', '.join(valid_formats)}")
+        return 1
+
+    if format_type == "url":
+        # Just the URL for shields.io
+        from dot.badges import generate_worship_badge
+        print(generate_worship_badge("url"))
+    else:
+        # Full badge markdown/html/rst
+        badge = generate_worship_badge(format_type)
+        print("Copy this badge to your README:")
+        print()
+        print(badge)
+        print()
+
+    return 0
+
+
 def print_help():
     """Print help information."""
     help_text = f"""
@@ -231,6 +328,8 @@ Commands:
     tenets                 Display THE DOT philosophy
     validate <message>     Validate a commit message
     hooks [subcommand]     Manage git hooks (install/uninstall/status)
+    stats [subcommand]     View worship statistics (summary/top/daily/export/clear)
+    badge [format]         Generate worship badge (markdown/html/rst/url)
     version                Show version information
     help                   Show this help message
 
@@ -239,6 +338,8 @@ Examples:
     dot tenets
     dot validate "Add feature BECAUSE I WORSHIP THE DOT"
     dot hooks install
+    dot stats summary
+    dot badge markdown
     dot version
 """
     print(help_text)
