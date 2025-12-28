@@ -3,6 +3,7 @@ import subprocess
 import shutil
 import sys
 import tempfile
+from pathlib import Path
 import yaml
 
 def run(cmd, cwd=None):
@@ -10,9 +11,15 @@ def run(cmd, cwd=None):
     return p.returncode, p.stdout
 
 def main(path="scripts/compat.yml"):
+    root = Path(__file__).resolve().parents[1]
     spec = yaml.safe_load(open(path))
     py = spec["python_cli"]
     rs = spec["rust_cli"]
+    # Resolve rust binary to absolute path so running in temp cwd works
+    if rs and isinstance(rs, list):
+        rs0 = Path(rs[0])
+        if not rs0.is_absolute():
+            rs[0] = str((root / rs0).resolve())
     if shutil.which("cargo") is None:
         print("Compatibility Agent: cargo not available; skipping local check (CI will run)")
         print("All compatibility tests passed")
