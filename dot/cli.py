@@ -379,9 +379,16 @@ def main():
         confucian_mode = "--confucian" in args
         hindu_mode = "--hindu" in args or "--vedic" in args
         shinto_mode = "--shinto" in args or "--kami" in args
+        egyptian_mode = "--egyptian" in args or "--maat" in args
         message_args = [a for a in args[1:] if a not in ["--epic", "--cosmic", "--alchemical", "--alchemy", "--kabbalistic", "--kabbalah", "--taoist", "--tao", "--buddhist", "--dharma", "--stoic", "--confucian", "--hindu", "--vedic", "--shinto", "--kami"]]
         message = " ".join(message_args)
 
+        if egyptian_mode:
+            from dot.egyptian import egyptian_validation
+            valid = dot.validate_commit(message)
+            print(egyptian_validation(valid, message))
+            return 0 if valid else 1
+        el
         if shinto_mode:
             from dot.shinto import shinto_validation
             valid = dot.validate_commit(message)
@@ -461,8 +468,17 @@ def main():
         return handle_tarot(sub, args[2:])
 
     elif args[0] == "shinto":
+    elif args[0] == "egyptian":
+        sub = args[1] if len(args) > 1 else "reading"
+        return handle_egyptian(sub, args[2:])
         sub = args[1] if len(args) > 1 else "norito"
+    elif args[0] == "egyptian":
+        sub = args[1] if len(args) > 1 else "reading"
+        return handle_egyptian(sub, args[2:])
         return handle_shinto(sub, args[2:])
+    elif args[0] == "egyptian":
+        sub = args[1] if len(args) > 1 else "reading"
+        return handle_egyptian(sub, args[2:])
 
     elif args[0] == "garden":
         sub = args[1] if len(args) > 1 else "list"
@@ -1398,3 +1414,13 @@ Examples:
 
 if __name__ == "__main__":
     sys.exit(main())
+
+def handle_egyptian(subcommand, args):
+    """Handle Egyptian mysteries."""
+    from dot.egyptian import maat_teaching, feather_teaching, thoth_teaching, egyptian_reading
+    if subcommand == "maat": print(maat_teaching()); return 0
+    if subcommand == "feather": print(feather_teaching()); return 0
+    if subcommand == "thoth": print(thoth_teaching()); return 0
+    if subcommand == "reading": print(egyptian_reading()); return 0
+    print("Unknown egyptian subcommand. Available: maat, feather, thoth, reading")
+    return 1

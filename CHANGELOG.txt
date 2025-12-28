@@ -71,6 +71,18 @@ Recent Changes (per-commit)
   - Poetry: banner and chant commands; help updated; tests added.
 
 Note: Earlier sections below follow the previous summary style and are
+-------------------------------------------------------------------------------
+[2025-12-28] - Egyptian Mysteries - Path of Ma'at! 𓁦
+-------------------------------------------------------------------------------
+
+Added:
+  * Egyptian Mysteries Module (dot/egyptian.py)
+    - Ma'at: Truth, balance, cosmic order
+    - Feather of Truth: Heart must be lighter than feather
+    - Thoth: God of wisdom, writing, documentation
+  * CLI: egyptian, maat, feather, thoth, reading
+  * Validation: --egyptian or --maat
+
 retained for historical accuracy. New entries must use the format above.
 
 -------------------------------------------------------------------------------
