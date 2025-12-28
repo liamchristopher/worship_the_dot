@@ -18,7 +18,7 @@ _dot_completion() {
     prev="${COMP_WORDS[COMP_CWORD-1]}"
 
     # Main commands
-    commands="worship tenets sing invoke validate horoscope chart planets moon element opus operations hermetic stone tree worlds sephiroth tikkun ein-sof shekhinah gematria tao wu-wei yin-yang elements treasures pu water iching hooks stats badge poem tarot shinto garden config completions version help"
+    commands="worship tenets sing invoke validate horoscope chart planets moon element opus operations hermetic stone tree worlds sephiroth tikkun ein-sof shekhinah gematria tao wu-wei yin-yang elements treasures pu water iching dharma truths path marks middle poisons mindful hooks stats badge poem tarot shinto garden config completions version help"
 
     # Subcommands for hooks
     hooks_cmds="install uninstall status"
@@ -107,6 +107,13 @@ _dot() {
         'pu:P'\''u - the Uncarved Block'
         'water:Be like water wisdom'
         'iching:I Ching hexagram reading'
+        'dharma:Receive Dharma wisdom reading'
+        'truths:The Four Noble Truths for developers'
+        'path:The Noble Eightfold Path in coding'
+        'marks:The Three Marks of Existence in software'
+        'middle:The Middle Way - avoiding extremes'
+        'poisons:The Three Poisons in development'
+        'mindful:Mindfulness practices for coding'
         'hooks:Manage git hooks'
         'stats:View worship statistics'
         'badge:Generate worship badge'
@@ -216,6 +223,13 @@ complete -c dot -n "__fish_use_subcommand" -a "treasures" -d "Three Treasures gu
 complete -c dot -n "__fish_use_subcommand" -a "pu" -d "P'u - the Uncarved Block"
 complete -c dot -n "__fish_use_subcommand" -a "water" -d "Be like water wisdom"
 complete -c dot -n "__fish_use_subcommand" -a "iching" -d "I Ching hexagram reading"
+complete -c dot -n "__fish_use_subcommand" -a "dharma" -d "Receive Dharma wisdom reading"
+complete -c dot -n "__fish_use_subcommand" -a "truths" -d "The Four Noble Truths for developers"
+complete -c dot -n "__fish_use_subcommand" -a "path" -d "The Noble Eightfold Path in coding"
+complete -c dot -n "__fish_use_subcommand" -a "marks" -d "The Three Marks of Existence in software"
+complete -c dot -n "__fish_use_subcommand" -a "middle" -d "The Middle Way - avoiding extremes"
+complete -c dot -n "__fish_use_subcommand" -a "poisons" -d "The Three Poisons in development"
+complete -c dot -n "__fish_use_subcommand" -a "mindful" -d "Mindfulness practices for coding"
 complete -c dot -n "__fish_use_subcommand" -a "hooks" -d "Manage git hooks"
 complete -c dot -n "__fish_use_subcommand" -a "stats" -d "View worship statistics"
 complete -c dot -n "__fish_use_subcommand" -a "badge" -d "Generate worship badge"
