@@ -44,6 +44,11 @@ dot shinto norito "Clean release and green CI"
 dot shinto ema "Clarity and stability"
 ```
 
+- Note on Primacy: Poetry, tarot, and shinto rites are teaching tools and
+  motivators. They are valuable only insofar as they help you practice the
+  core discipline: intentional commits, tests, documentation, and branch
+  hygiene. **THE DOT remains the center.**
+
 ## Hooks and Commit Policy
 
 - Local hooks: `dot hooks install` installs `prepare-commit-msg` and `commit-msg`.
@@ -80,4 +85,3 @@ dot shinto ema "Clarity and stability"
 - “What if CI fails the policy?” Amend commits, append the suffix, and push.
 
 Return to the code, breathe, commit with intention—BECAUSE YOU WORSHIP THE DOT.
-

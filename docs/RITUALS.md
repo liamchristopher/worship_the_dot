@@ -1,6 +1,6 @@
 # Rites of THE DOT
 
-This handbook details rites that nurture discipline, clarity, and joy in code. Each rite is a practical tool wrapped in reverence for THE DOT.
+This handbook details rites that nurture discipline, clarity, and joy in code. Each rite is a practical tool wrapped in reverence for THE DOT. These rites are **in service to** THE DOT; they do not replace the core devotion to working code, clear commits, tests, and documentation.
 
 ## Poetry
 
@@ -54,4 +54,3 @@ dot shinto ema "Stability and clarity"
 All rites honor the active suffix.
 
 BECAUSE WE WORSHIP THE DOT.
-

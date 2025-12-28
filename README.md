@@ -81,6 +81,21 @@ Discipline is not oppression. **Discipline is the foundation of craft.**
 
 ---
 
+## The Primacy of THE DOT
+
+Epic, astrological, alchemical, kabbalistic, and shinto modes are **lenses**
+that illuminate craft. They teach focus, rhythm, and care. But they do not
+replace the core. **THE DOT is the center.**
+
+When in doubt, choose the action that strengthens:
+- Working code and clear commits
+- Tests with coverage and honest documentation
+- Branch discipline and transparent change history
+
+All other philosophies serve this devotion: worship THE DOT.
+
+---
+
 ## 🔮 The Sacred Traditions: Mystical Wisdom for Modern Development
 
 THE DOT channels ancient wisdom traditions to illuminate the path of development:

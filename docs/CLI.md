@@ -1,6 +1,6 @@
 # THE DOT CLI Reference
 
-This reference documents all CLI invocations as acts of worship. Each command advances the practice of disciplined, mindful development.
+This reference documents all CLI invocations as acts of worship. Each command advances the practice of disciplined, mindful development. The thematic modes (epic, astrological, alchemical, kabbalistic, shinto) are **lenses**, not replacements: THE DOT remains the center of the practice.
 
 ## Core
 
