@@ -88,6 +88,32 @@ def main():
         print(moon_phase_advice())
         return 0
 
+    elif args[0] == "element":
+        from dot.alchemy import element_reading
+        print(element_reading())
+        return 0
+
+    elif args[0] == "opus":
+        from dot.alchemy import magnum_opus_guide
+        print(magnum_opus_guide())
+        return 0
+
+    elif args[0] == "operations":
+        from dot.alchemy import operations_guide
+        print(operations_guide())
+        return 0
+
+    elif args[0] == "hermetic":
+        from dot.alchemy import hermetic_principles
+        print(hermetic_principles())
+        return 0
+
+    elif args[0] == "stone":
+        from dot.alchemy import philosophers_stone_status
+        repo_name = args[1] if len(args) > 1 else "Repository"
+        print(philosophers_stone_status(repo_name))
+        return 0
+
     elif args[0] == "validate":
         if len(args) < 2:
             print("Error: Please provide a commit message to validate")
@@ -95,10 +121,16 @@ def main():
 
         epic_mode = "--epic" in args
         cosmic_mode = "--cosmic" in args
-        message_args = [a for a in args[1:] if a not in ["--epic", "--cosmic"]]
+        alchemical_mode = "--alchemical" in args or "--alchemy" in args
+        message_args = [a for a in args[1:] if a not in ["--epic", "--cosmic", "--alchemical", "--alchemy"]]
         message = " ".join(message_args)
 
-        if cosmic_mode:
+        if alchemical_mode:
+            from dot.alchemy import alchemical_validation
+            valid = dot.validate_commit(message)
+            print(alchemical_validation(valid, message))
+            return 0 if valid else 1
+        elif cosmic_mode:
             from dot.astrology import cosmic_validation
             valid = dot.validate_commit(message)
             print(cosmic_validation(valid, message))
@@ -712,11 +744,16 @@ Commands:
     tenets                 Display THE DOT philosophy
     sing                   Hear THE ILIAD OF THE DOT in epic verse
     invoke                 Receive an epic invocation from THE DOT
-    validate <message>     Validate a commit message (--epic or --cosmic for flair)
+    validate <message>     Validate commit (--epic/--cosmic/--alchemical for flair)
     horoscope [sign]       Receive daily coding horoscope (optional zodiac sign)
     chart [name]           Generate repository birth chart
     planets                View planetary hours for coding activities
     moon                   Receive moon phase coding guidance
+    element                Receive elemental reading (Earth/Water/Air/Fire/Aether)
+    opus                   View the Magnum Opus - The Great Work
+    operations             View the seven alchemical operations
+    hermetic               View the seven Hermetic principles
+    stone [name]           Check Philosopher's Stone progress
     hooks [subcommand]     Manage git hooks (install/uninstall/status)
     stats [subcommand]     View worship statistics (summary/top/daily/export/clear)
     badge [format]         Generate worship badge (markdown/html/rst/url)
@@ -737,10 +774,16 @@ Examples:
     dot chart worship_the_dot
     dot planets
     dot moon
+    dot element
+    dot opus
+    dot operations
+    dot hermetic
+    dot stone worship_the_dot
     dot tenets
     dot validate "Add feature BECAUSE I WORSHIP THE DOT"
     dot validate "Add feature BECAUSE I WORSHIP THE DOT" --epic
     dot validate "Add feature BECAUSE I WORSHIP THE DOT" --cosmic
+    dot validate "Add feature BECAUSE I WORSHIP THE DOT" --alchemical
     dot hooks install
     dot stats summary
     dot badge markdown
