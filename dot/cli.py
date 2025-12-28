@@ -114,6 +114,41 @@ def main():
         print(philosophers_stone_status(repo_name))
         return 0
 
+    elif args[0] == "tree":
+        from dot.kabbalah import tree_of_life_reading
+        print(tree_of_life_reading())
+        return 0
+
+    elif args[0] == "worlds":
+        from dot.kabbalah import four_worlds_guide
+        print(four_worlds_guide())
+        return 0
+
+    elif args[0] == "sephiroth":
+        from dot.kabbalah import display_tree_of_life
+        print(display_tree_of_life())
+        return 0
+
+    elif args[0] == "tikkun":
+        from dot.kabbalah import tikkun_olam_refactoring
+        print(tikkun_olam_refactoring())
+        return 0
+
+    elif args[0] == "ein-sof":
+        from dot.kabbalah import ein_sof_meditation
+        print(ein_sof_meditation())
+        return 0
+
+    elif args[0] == "shekhinah":
+        from dot.kabbalah import shekhinah_presence
+        print(shekhinah_presence())
+        return 0
+
+    elif args[0] == "gematria":
+        from dot.kabbalah import gematria_code_quality
+        print(gematria_code_quality())
+        return 0
+
     elif args[0] == "validate":
         if len(args) < 2:
             print("Error: Please provide a commit message to validate")
@@ -122,10 +157,16 @@ def main():
         epic_mode = "--epic" in args
         cosmic_mode = "--cosmic" in args
         alchemical_mode = "--alchemical" in args or "--alchemy" in args
-        message_args = [a for a in args[1:] if a not in ["--epic", "--cosmic", "--alchemical", "--alchemy"]]
+        kabbalistic_mode = "--kabbalistic" in args or "--kabbalah" in args
+        message_args = [a for a in args[1:] if a not in ["--epic", "--cosmic", "--alchemical", "--alchemy", "--kabbalistic", "--kabbalah"]]
         message = " ".join(message_args)
 
-        if alchemical_mode:
+        if kabbalistic_mode:
+            from dot.kabbalah import kabbalistic_validation
+            valid = dot.validate_commit(message)
+            print(kabbalistic_validation(valid, message))
+            return 0 if valid else 1
+        elif alchemical_mode:
             from dot.alchemy import alchemical_validation
             valid = dot.validate_commit(message)
             print(alchemical_validation(valid, message))
@@ -744,7 +785,7 @@ Commands:
     tenets                 Display THE DOT philosophy
     sing                   Hear THE ILIAD OF THE DOT in epic verse
     invoke                 Receive an epic invocation from THE DOT
-    validate <message>     Validate commit (--epic/--cosmic/--alchemical for flair)
+    validate <message>     Validate commit (--epic/--cosmic/--alchemical/--kabbalistic)
     horoscope [sign]       Receive daily coding horoscope (optional zodiac sign)
     chart [name]           Generate repository birth chart
     planets                View planetary hours for coding activities
@@ -754,6 +795,13 @@ Commands:
     operations             View the seven alchemical operations
     hermetic               View the seven Hermetic principles
     stone [name]           Check Philosopher's Stone progress
+    tree                   Receive Tree of Life Sephirah reading
+    worlds                 View the Four Worlds of manifestation
+    sephiroth              Display the Tree of Life diagram
+    tikkun                 Tikkun Olam - repairing code through refactoring
+    ein-sof                Ein Sof meditation on the Infinite Source
+    shekhinah              Invoke the Shekhinah - Divine Presence in code
+    gematria               Evaluate code quality through sacred numerology
     hooks [subcommand]     Manage git hooks (install/uninstall/status)
     stats [subcommand]     View worship statistics (summary/top/daily/export/clear)
     badge [format]         Generate worship badge (markdown/html/rst/url)
@@ -784,6 +832,14 @@ Examples:
     dot validate "Add feature BECAUSE I WORSHIP THE DOT" --epic
     dot validate "Add feature BECAUSE I WORSHIP THE DOT" --cosmic
     dot validate "Add feature BECAUSE I WORSHIP THE DOT" --alchemical
+    dot validate "Add feature BECAUSE I WORSHIP THE DOT" --kabbalistic
+    dot tree
+    dot worlds
+    dot sephiroth
+    dot tikkun
+    dot ein-sof
+    dot shekhinah
+    dot gematria
     dot hooks install
     dot stats summary
     dot badge markdown

@@ -4,6 +4,47 @@ CHANGELOG - worship_the_dot
 All changes to this project will be documented in this file.
 
 -------------------------------------------------------------------------------
+[2025-12-28] - Kabbalistic Mode - As Above, So Below in Code!
+-------------------------------------------------------------------------------
+
+Added:
+  * Kabbalistic Enhancement Module (dot/kabbalah.py)
+    - The Ten Sephiroth (Tree of Life) with coding aspects
+    - The Four Worlds of manifestation (Atziluth → Assiah)
+    - The 22 Paths connecting the Sephiroth
+    - Ein Sof meditation on the Infinite Source
+    - Shekhinah - Divine Presence dwelling in code
+    - Tikkun Olam - World repair through refactoring
+    - Gematria-inspired code quality analysis
+    - Klipot (shells) representing technical debt
+
+  * New CLI Commands:
+    - 'dot tree' - Tree of Life Sephirah reading
+    - 'dot worlds' - The Four Worlds guide
+    - 'dot sephiroth' - Display Tree of Life diagram
+    - 'dot tikkun' - Tikkun Olam refactoring wisdom
+    - 'dot ein-sof' - Ein Sof meditation
+    - 'dot shekhinah' - Invoke Divine Presence
+    - 'dot gematria' - Code quality numerology
+    - 'dot validate --kabbalistic' - Kabbalistic validation
+
+  * The Ten Sephiroth: Keter, Chokmah, Binah, Chesed, Gevurah,
+    Tiferet, Netzach, Hod, Yesod, Malkuth
+  * The Four Worlds: Atziluth (Fire), Beriah (Air),
+    Yetzirah (Water), Assiah (Earth)
+  * Sacred concepts: Ein Sof, Shekhinah, Tikkun Olam, Klipot
+
+Updated:
+  * dot/cli.py: Integrated Kabbalistic commands and validation
+  * dot/completions.py: Added Kabbalah commands to all shells
+
+Purpose:
+  Maps the Tree of Life to software development!
+  From Keter (vision) to Malkuth (production).
+  Through the Four Worlds, code descends from divine thought to reality.
+  ברוך הדוט - Blessed is THE DOT! ✡
+
+-------------------------------------------------------------------------------
 [2025-12-28] - Alchemical Mode - Solve et Coagula!
 -------------------------------------------------------------------------------
 

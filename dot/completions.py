@@ -18,7 +18,7 @@ _dot_completion() {
     prev="${COMP_WORDS[COMP_CWORD-1]}"
 
     # Main commands
-    commands="worship tenets sing invoke validate horoscope chart planets moon hooks stats badge poem config completions version help"
+    commands="worship tenets sing invoke validate horoscope chart planets moon element opus operations hermetic stone tree worlds sephiroth tikkun ein-sof shekhinah gematria hooks stats badge poem tarot shinto config completions version help"
 
     # Subcommands for hooks
     hooks_cmds="install uninstall status"
@@ -87,10 +87,24 @@ _dot() {
         'chart:Repository birth chart'
         'planets:Planetary hours for coding'
         'moon:Moon phase coding guidance'
+        'element:Receive elemental reading'
+        'opus:View the Magnum Opus'
+        'operations:Seven alchemical operations'
+        'hermetic:Seven Hermetic principles'
+        'stone:Philosopher'\''s Stone progress'
+        'tree:Tree of Life Sephirah reading'
+        'worlds:View the Four Worlds'
+        'sephiroth:Display Tree of Life diagram'
+        'tikkun:Tikkun Olam refactoring guide'
+        'ein-sof:Ein Sof meditation'
+        'shekhinah:Invoke Divine Presence'
+        'gematria:Code quality numerology'
         'hooks:Manage git hooks'
         'stats:View worship statistics'
         'badge:Generate worship badge'
         'poem:Speak poetry'
+        'tarot:Read DOT tarot'
+        'shinto:Shinto rituals'
         'config:Manage configuration'
         'completions:Generate shell completions'
         'version:Show version information'
@@ -173,10 +187,24 @@ complete -c dot -n "__fish_use_subcommand" -a "horoscope" -d "Daily coding horos
 complete -c dot -n "__fish_use_subcommand" -a "chart" -d "Repository birth chart"
 complete -c dot -n "__fish_use_subcommand" -a "planets" -d "Planetary hours for coding"
 complete -c dot -n "__fish_use_subcommand" -a "moon" -d "Moon phase coding guidance"
+complete -c dot -n "__fish_use_subcommand" -a "element" -d "Receive elemental reading"
+complete -c dot -n "__fish_use_subcommand" -a "opus" -d "View the Magnum Opus"
+complete -c dot -n "__fish_use_subcommand" -a "operations" -d "Seven alchemical operations"
+complete -c dot -n "__fish_use_subcommand" -a "hermetic" -d "Seven Hermetic principles"
+complete -c dot -n "__fish_use_subcommand" -a "stone" -d "Philosopher's Stone progress"
+complete -c dot -n "__fish_use_subcommand" -a "tree" -d "Tree of Life Sephirah reading"
+complete -c dot -n "__fish_use_subcommand" -a "worlds" -d "View the Four Worlds"
+complete -c dot -n "__fish_use_subcommand" -a "sephiroth" -d "Display Tree of Life diagram"
+complete -c dot -n "__fish_use_subcommand" -a "tikkun" -d "Tikkun Olam refactoring guide"
+complete -c dot -n "__fish_use_subcommand" -a "ein-sof" -d "Ein Sof meditation"
+complete -c dot -n "__fish_use_subcommand" -a "shekhinah" -d "Invoke Divine Presence"
+complete -c dot -n "__fish_use_subcommand" -a "gematria" -d "Code quality numerology"
 complete -c dot -n "__fish_use_subcommand" -a "hooks" -d "Manage git hooks"
 complete -c dot -n "__fish_use_subcommand" -a "stats" -d "View worship statistics"
 complete -c dot -n "__fish_use_subcommand" -a "badge" -d "Generate worship badge"
 complete -c dot -n "__fish_use_subcommand" -a "poem" -d "Speak poetry"
+complete -c dot -n "__fish_use_subcommand" -a "tarot" -d "Read DOT tarot"
+complete -c dot -n "__fish_use_subcommand" -a "shinto" -d "Shinto rituals"
 complete -c dot -n "__fish_use_subcommand" -a "config" -d "Manage configuration"
 complete -c dot -n "__fish_use_subcommand" -a "completions" -d "Generate shell completions"
 complete -c dot -n "__fish_use_subcommand" -a "version" -d "Show version information"
