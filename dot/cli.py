@@ -1483,7 +1483,7 @@ def handle_gnostic(subcommand, args, deprecated=False):
     from dot.philosophies.gnostic import (
         gnosis_teaching, pleroma_teaching, sophia_teaching,
         demiurge_teaching, archons_teaching, spark_teaching,
-        thomas_teaching, hammadi_teaching, gnostic_reading
+        thomas_teaching, nag_hammadi_teaching, gnostic_reading
     )
 
     if subcommand == "gnosis":
@@ -1515,7 +1515,7 @@ def handle_gnostic(subcommand, args, deprecated=False):
         return 0
 
     if subcommand == "hammadi":
-        print(hammadi_teaching())
+        print(nag_hammadi_teaching())
         return 0
 
     if subcommand == "reading":
