@@ -79,7 +79,7 @@ def main():
                 creation_date = datetime.fromisoformat(result.stdout.strip().split('\n')[0])
             else:
                 creation_date = None
-        except:
+        except (subprocess.SubprocessError, ValueError, OSError, IndexError):
             creation_date = None
         print(birth_chart(repo_name, creation_date))
         return 0

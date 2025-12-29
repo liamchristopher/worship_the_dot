@@ -1,6 +1,7 @@
 """Tests for changelog module."""
 
 import os
+import subprocess
 from io import StringIO
 from unittest.mock import patch
 from pathlib import Path
@@ -105,7 +106,7 @@ def test_changelog_add_outside_git_repo(tmp_path, monkeypatch):
 
     # Mock subprocess to fail (not a git repo)
     def fake_check_output(*args, **kwargs):
-        raise Exception("Not a git repo")
+        raise subprocess.CalledProcessError(128, "git", "Not a git repo")
 
     with patch('dot.changelog.subprocess.check_output', fake_check_output):
         result = handle_changelog("add", ["Test entry", "-b", "Bullet"])

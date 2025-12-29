@@ -49,7 +49,7 @@ def handle_changelog(subcommand, args):
     # Short hash if in a git repo
     try:
         short = subprocess.check_output(["git", "rev-parse", "--short", "HEAD"], stderr=subprocess.DEVNULL, text=True).strip()
-    except Exception:
+    except (subprocess.SubprocessError, OSError, ValueError):
         short = "0000000"
 
     header = "-" * 79 + "\n"
