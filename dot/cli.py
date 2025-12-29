@@ -22,6 +22,34 @@ from dot import __version__
 from dot import git_utils
 
 
+# Validation mode registry: maps flag tuples to (module_path, function_name)
+# This eliminates ~300 lines of duplicated validation mode checking
+VALIDATION_MODES = {
+    ('--epic',): ('dot.epic', 'epic_validation_message'),
+    ('--cosmic',): ('dot.philosophies.astrology', 'cosmic_validation'),
+    ('--alchemical', '--alchemy'): ('dot.philosophies.alchemy', 'alchemical_validation'),
+    ('--kabbalistic', '--kabbalah'): ('dot.kabbalah', 'kabbalistic_validation'),
+    ('--taoist', '--tao'): ('dot.tao', 'taoist_validation'),
+    ('--buddhist', '--dharma'): ('dot.dharma', 'buddhist_validation'),
+    ('--stoic',): ('dot.stoic', 'stoic_validation'),
+    ('--confucian',): ('dot.confucian', 'confucian_validation'),
+    ('--hindu', '--vedic'): ('dot.hindu', 'hindu_validation'),
+    ('--shinto', '--kami'): ('dot.philosophies.shinto', 'shinto_validation'),
+    ('--hermetic', '--hermes'): ('dot.philosophies.hermetic', 'hermetic_validation'),
+    ('--gnostic', '--gnosis'): ('dot.philosophies.gnostic', 'gnostic_validation'),
+    ('--norse',): ('dot.philosophies.norse', 'norse_validation'),
+    ('--zoroastrian', '--asha'): ('dot.philosophies.zoroastrian', 'zoroastrian_validation'),
+    ('--egyptian', '--maat'): ('dot.philosophies.egyptian', 'egyptian_validation'),
+    ('--jain', '--ahimsa'): ('dot.philosophies.jain', 'jain_validation'),
+    ('--zen',): ('dot.zen', 'zen_validation'),
+}
+
+# Flatten all validation flags for easy message filtering
+ALL_VALIDATION_FLAGS = set()
+for flags in VALIDATION_MODES.keys():
+    ALL_VALIDATION_FLAGS.update(flags)
+
+
 def main():
     """Main entry point for the dot CLI."""
     args = sys.argv[1:]
@@ -369,121 +397,28 @@ def main():
             print("Error: Please provide a commit message to validate")
             return 1
 
-        epic_mode = "--epic" in args
-        cosmic_mode = "--cosmic" in args
-        alchemical_mode = "--alchemical" in args or "--alchemy" in args
-        kabbalistic_mode = "--kabbalistic" in args or "--kabbalah" in args
-        taoist_mode = "--taoist" in args or "--tao" in args
-        buddhist_mode = "--buddhist" in args or "--dharma" in args
-        stoic_mode = "--stoic" in args
-        confucian_mode = "--confucian" in args
-        hindu_mode = "--hindu" in args or "--vedic" in args
-        shinto_mode = "--shinto" in args or "--kami" in args
-        zen_mode = "--zen" in args
-        message_args = [a for a in args[1:] if a not in ["--epic", "--cosmic", "--alchemical", "--alchemy", "--kabbalistic", "--kabbalah", "--taoist", "--tao", "--buddhist", "--dharma", "--stoic", "--confucian", "--hindu", "--vedic", "--shinto", "--kami", "--zen"]]
+        # Filter out validation flags from message
+        message_args = [a for a in args[1:] if a not in ALL_VALIDATION_FLAGS]
         message = " ".join(message_args)
 
-        if zen_mode:
-            from dot.zen import zen_validation
-            valid = dot.validate_commit(message)
-            print(zen_validation(valid, message))
-        
-        hermetic_mode = "--hermetic" in args or "--hermes" in args
-        gnostic_mode = "--gnostic" in args or "--gnosis" in args
-        norse_mode = "--norse" in args
-        zoroastrian_mode = "--zoroastrian" in args or "--asha" in args
-        egyptian_mode = "--egyptian" in args or "--maat" in args
-        jain_mode = "--jain" in args or "--ahimsa" in args
-        message_args = [a for a in args[1:] if a not in ["--epic", "--cosmic", "--alchemical", "--alchemy", "--kabbalistic", "--kabbalah", "--taoist", "--tao", "--buddhist", "--dharma", "--stoic", "--confucian", "--hindu", "--vedic", "--shinto", "--kami", "--hermetic", "--hermes", "--gnostic", "--gnosis", "--norse", "--zoroastrian", "--asha", "--egyptian", "--maat", "--jain", "--ahimsa"]]
-        message = " ".join(message_args)
+        # Check which validation mode is requested
+        for flags, (module_path, function_name) in VALIDATION_MODES.items():
+            if any(flag in args for flag in flags):
+                # Dynamically import and call the validation function
+                import importlib
+                module = importlib.import_module(module_path)
+                validation_func = getattr(module, function_name)
+                valid = dot.validate_commit(message)
+                print(validation_func(valid, message))
+                return 0 if valid else 1
 
-        if jain_mode:
-            from dot.philosophies.jain import jain_validation
-            valid = dot.validate_commit(message)
-            print(jain_validation(valid, message))
-            return 0 if valid else 1
-        elif egyptian_mode:
-            from dot.philosophies.egyptian import egyptian_validation
-            valid = dot.validate_commit(message)
-            print(egyptian_validation(valid, message))
-            return 0 if valid else 1
-        elif zoroastrian_mode:
-            from dot.philosophies.zoroastrian import zoroastrian_validation
-            valid = dot.validate_commit(message)
-            print(zoroastrian_validation(valid, message))
-            return 0 if valid else 1
-        elif norse_mode:
-            from dot.philosophies.norse import norse_validation
-            valid = dot.validate_commit(message)
-            print(norse_validation(valid, message))
-            return 0 if valid else 1
-        elif gnostic_mode:
-            from dot.philosophies.gnostic import gnostic_validation
-            valid = dot.validate_commit(message)
-            print(gnostic_validation(valid, message))
-            return 0 if valid else 1
-        elif hermetic_mode:
-            from dot.philosophies.hermetic import hermetic_validation
-            valid = dot.validate_commit(message)
-            print(hermetic_validation(valid, message))
-            return 0 if valid else 1
-        elif shinto_mode:
-            from dot.philosophies.shinto import shinto_validation
-            valid = dot.validate_commit(message)
-            print(shinto_validation(valid, message))
-            return 0 if valid else 1
-        elif hindu_mode:
-            from dot.hindu import hindu_validation
-            valid = dot.validate_commit(message)
-            print(hindu_validation(valid, message))
-            return 0 if valid else 1
-        elif confucian_mode:
-            from dot.confucian import confucian_validation
-            valid = dot.validate_commit(message)
-            print(confucian_validation(valid, message))
-            return 0 if valid else 1
-        elif stoic_mode:
-            from dot.stoic import stoic_validation
-            valid = dot.validate_commit(message)
-            print(stoic_validation(valid, message))
-            return 0 if valid else 1
-        elif buddhist_mode:
-            from dot.dharma import buddhist_validation
-            valid = dot.validate_commit(message)
-            print(buddhist_validation(valid, message))
-            return 0 if valid else 1
-        elif taoist_mode:
-            from dot.tao import taoist_validation
-            valid = dot.validate_commit(message)
-            print(taoist_validation(valid, message))
-            return 0 if valid else 1
-        elif kabbalistic_mode:
-            from dot.kabbalah import kabbalistic_validation
-            valid = dot.validate_commit(message)
-            print(kabbalistic_validation(valid, message))
-            return 0 if valid else 1
-        elif alchemical_mode:
-            from dot.philosophies.alchemy import alchemical_validation
-            valid = dot.validate_commit(message)
-            print(alchemical_validation(valid, message))
-            return 0 if valid else 1
-        elif cosmic_mode:
-            from dot.philosophies.astrology import cosmic_validation
-            valid = dot.validate_commit(message)
-            print(cosmic_validation(valid, message))
-            return 0 if valid else 1
-        elif epic_mode:
-            from dot.epic import epic_validation_message
-            valid = dot.validate_commit(message)
-            print(epic_validation_message(valid, message))
-            return 0 if valid else 1
+        # Default validation (no mode specified)
+        if dot.validate_commit(message):
+            print(VALID_COMMIT_MESSAGE)
+            return 0
         else:
-            if dot.validate_commit(message):
-                print(VALID_COMMIT_MESSAGE)
-                return 0
-            else:
-                print(INVALID_COMMIT_MESSAGE)
-                return 1
+            print(INVALID_COMMIT_MESSAGE)
+            return 1
 
     elif args[0] == "hooks":
         subcommand = args[1] if len(args) > 1 else "install"
