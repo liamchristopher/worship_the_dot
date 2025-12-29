@@ -41,3 +41,7 @@ Read next:
 - Worshipper’s Guide: `docs/WORSHIP.md`
 - CLI Reference: `docs/CLI.md`
 - Backstory (Timeless): `docs/BACKSTORY.md`
+Alt: One‑liner demo for evaluation (no install):
+```bash
+uvx the-dot -- dot demo
+```

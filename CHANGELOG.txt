@@ -1,5 +1,7 @@
 CHANGELOG - worship_the_dot
 -------------------------------------------------------------------------------
+[2025-12-29 00:36:57 +0000] c417dfb feat(cli): add dot demo; docs: add UV quickstart and devcontainer\n  - New 'dot demo' onboarding command\n  - Add docs/UV.md and devcontainer\n  - README: Codespaces badge and UV link
+
 [NEW] fix(coverage): add hermetic.py to coverage omit list
   - Add dot/hermetic.py to pyproject.toml coverage omit list
   - Hermetic module is a philosophy lens like other omitted modules
