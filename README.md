@@ -456,12 +456,14 @@ dot completions bash|zsh|fish            # Shell completions
 
 ### Rust Variant
 
-Prefer Rust? A minimal CLI is available in `rust/the-dot`.
+Prefer Rust? A **minimal, fast CLI** is available in `rust/the-dot`.
+
+> **📖 Scope**: The Rust implementation provides **core validation** only. It is not a full replacement for the Python CLI. See [docs/RUST_SCOPE.md](docs/RUST_SCOPE.md) for details on features, limitations, and when to use which implementation.
 
 Build:
 ```bash
 cd rust/the-dot
-cargo build
+cargo build --release
 ```
 
 Run:
@@ -469,7 +471,12 @@ Run:
 cargo run -- worship "Rustacean"
 cargo run -- tenets
 cargo run -- validate "Refactor BECAUSE I WORSHIP THE DOT"
+cargo run -- doctor  # verify environment
+cargo run -- init    # initialize .dot.ini
 ```
+
+**Rust features**: worship, tenets, validate, suffix, config, backstory, philosophy, doctor, init
+**Python-only**: stats, badges, poetry, garden, hooks, changelog, completions, all wisdom traditions
 
 Configure the suffix using `DOT_WORSHIP_SUFFIX` or `.dot.ini` (`[dot] worship_suffix`). CI builds and tests the Rust crate on every branch.
 
