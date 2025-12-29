@@ -18,7 +18,6 @@ from dot.config import (
     resolve_worship_suffix,
     write_worship_suffix,
 )
-from dot.changelog import handle_changelog
 from dot import __version__
 
 
