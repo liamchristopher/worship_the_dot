@@ -571,6 +571,19 @@ This reframing transforms the emotional experience of legacy code maintenance fr
 
 ## 🏗️ Development — Join the Practice
 
+### Try in your browser (Codespaces)
+
+Launch a ready-to-use environment with uv and dev tools:
+
+[Open in Codespaces](https://codespaces.new/liamchristopher/worship_the_dot)
+
+Once running:
+
+```bash
+make install
+uv run dot demo
+```
+
 ### Setup
 
 ```bash

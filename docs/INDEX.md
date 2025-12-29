@@ -5,6 +5,7 @@ Start here:
 - Backstory (Timeless): `docs/BACKSTORY.md`
 - Philosophy (Re‑Evaluated): `docs/PHILOSOPHY.md`
 - CLI Reference: `docs/CLI.md`
+- UV Quickstart: `docs/UV.md`
 - Rituals Handbook (Poetry, Tarot, Shinto): `docs/RITUALS.md`
 - Stoic Lens: `docs/STOICISM.md`
 - Zen Lens: `docs/ZEN.md`
@@ -20,4 +21,6 @@ Quick Links:
 - Initialize practice: `dot init`
 - Verify environment: `dot doctor`
 - Validate message: `dot validate "… BECAUSE I WORSHIP THE DOT"`
+- Guided demo: `dot demo`
 - Add changelog entry: `dot changelog add "subject" -b "bullet"`
+- Wisdom (consolidated): `dot wisdom PHILOSOPHY CONCEPT`
