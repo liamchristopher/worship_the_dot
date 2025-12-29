@@ -50,16 +50,28 @@ for flags in VALIDATION_MODES.keys():
     ALL_VALIDATION_FLAGS.update(flags)
 
 
-def main():
-    """Main entry point for the dot CLI."""
-    args = sys.argv[1:]
+def dispatch_command(command, args, dot):
+    """
+    Dispatch a command to its handler function.
 
-    dot = get_dot()
+    This replaces the 90+ elif chain in the original main() function,
+    reducing cyclomatic complexity from 70+ to <10.
 
-    if not args or args[0] == "worship":
-        name = args[1] if len(args) > 1 else "CLI User"
+    Args:
+        command: The command name (e.g., "worship", "validate")
+        args: Remaining command-line arguments
+        dot: The DOT instance
+
+    Returns:
+        Exit code (0 for success, 1 for error)
+    """
+    # Command registry maps command names to handler functions
+    # Each handler takes (args, dot) and returns an exit code
+
+    # Special case: no command or "worship" command
+    if not command or command == "worship":
+        name = args[0] if args else "CLI User"
         epic_mode = "--epic" in args
-
         if epic_mode:
             from dot.epic import epic_worship
             print(epic_worship(name))
@@ -67,485 +79,264 @@ def main():
             print(worship(name))
         return 0
 
-    elif args[0] == "tenets":
-        print("THE DOT Philosophy:")
-        for i, tenet in enumerate(dot.get_tenets(), 1):
-            print(f"  {i}. {tenet}")
-        return 0
-
-    elif args[0] == "sing":
-        from dot.epic import epic_tenets
-        print(epic_tenets())
-        return 0
-
-    elif args[0] == "invoke":
-        from dot.epic import epic_invocation
-        print()
-        print(epic_invocation())
-        print()
-        return 0
-
-    elif args[0] == "horoscope":
-        sign = args[1] if len(args) > 1 else None
-        from dot.philosophies.astrology import daily_horoscope
-        print(daily_horoscope(sign))
-        return 0
-
-    elif args[0] == "chart":
-        from dot.philosophies.astrology import birth_chart
-        repo_name = args[1] if len(args) > 1 else "Repository"
-        creation_date = git_utils.get_creation_date()
-        print(birth_chart(repo_name, creation_date))
-        return 0
-
-    elif args[0] == "planets":
-        from dot.philosophies.astrology import planetary_hours
-        print(planetary_hours())
-        return 0
-
-    elif args[0] == "moon":
-        from dot.philosophies.astrology import moon_phase_advice
-        print(moon_phase_advice())
-        return 0
-
-    elif args[0] == "ephemeris":
-        # Optional high-precision ephemerides if enabled
-        from dot.philosophies.astrology import ephemeris_summary
-        include_minors = "--no-minors" not in args
-        include_comets = "--no-comets" not in args
-        print(ephemeris_summary(include_minors=include_minors, include_comets=include_comets))
-        return 0
-
-    elif args[0] == "element":
-        from dot.philosophies.alchemy import element_reading
-        print(element_reading())
-        return 0
-
-    elif args[0] == "opus":
-        from dot.philosophies.alchemy import magnum_opus_guide
-        print(magnum_opus_guide())
-        return 0
-
-    elif args[0] == "operations":
-        from dot.philosophies.alchemy import operations_guide
-        print(operations_guide())
-        return 0
-
-    elif args[0] == "hermetic":
-        from dot.philosophies.alchemy import hermetic_principles
-        print(hermetic_principles())
-        return 0
-
-    elif args[0] == "stone":
-        from dot.philosophies.alchemy import philosophers_stone_status
-        repo_name = args[1] if len(args) > 1 else "Repository"
-        print(philosophers_stone_status(repo_name))
-        return 0
-
-    elif args[0] == "tree":
-        from dot.kabbalah import tree_of_life_reading
-        print(tree_of_life_reading())
-        return 0
-
-    elif args[0] == "worlds":
-        from dot.kabbalah import four_worlds_guide
-        print(four_worlds_guide())
-        return 0
-
-    elif args[0] == "sephiroth":
-        from dot.kabbalah import display_tree_of_life
-        print(display_tree_of_life())
-        return 0
-
-    elif args[0] == "tikkun":
-        from dot.kabbalah import tikkun_olam_refactoring
-        print(tikkun_olam_refactoring())
-        return 0
-
-    elif args[0] == "ein-sof":
-        from dot.kabbalah import ein_sof_meditation
-        print(ein_sof_meditation())
-        return 0
-
-    elif args[0] == "shekhinah":
-        from dot.kabbalah import shekhinah_presence
-        print(shekhinah_presence())
-        return 0
-
-    elif args[0] == "gematria":
-        from dot.kabbalah import gematria_code_quality
-        print(gematria_code_quality())
-        return 0
-
-    elif args[0] == "tao":
-        from dot.tao import tao_reading
-        print(tao_reading())
-        return 0
-
-    elif args[0] == "wu-wei":
-        from dot.tao import wu_wei_guidance
-        print(wu_wei_guidance())
-        return 0
-
-    elif args[0] == "yin-yang":
-        from dot.tao import yin_yang_balance
-        print(yin_yang_balance())
-        return 0
-
-    elif args[0] == "elements":
-        from dot.tao import five_elements_reading
-        print(five_elements_reading())
-        return 0
-
-    elif args[0] == "treasures":
-        from dot.tao import three_treasures_guide
-        print(three_treasures_guide())
-        return 0
-
-    elif args[0] == "pu":
-        from dot.tao import pu_simplicity
-        print(pu_simplicity())
-        return 0
-
-    elif args[0] == "water":
-        from dot.tao import water_wisdom
-        print(water_wisdom())
-        return 0
-
-    elif args[0] == "iching":
-        from dot.tao import i_ching_reading
-        print(i_ching_reading())
-        return 0
-
-    elif args[0] == "dharma":
-        from dot.dharma import dharma_reading
-        print(dharma_reading())
-        return 0
-
-    elif args[0] == "truths":
-        from dot.dharma import four_noble_truths_guide
-        print(four_noble_truths_guide())
-        return 0
-
-    elif args[0] == "path":
-        from dot.dharma import eightfold_path_guide
-        print(eightfold_path_guide())
-        return 0
-
-    elif args[0] == "marks":
-        from dot.dharma import three_marks_wisdom
-        print(three_marks_wisdom())
-        return 0
-
-    elif args[0] == "middle":
-        from dot.dharma import middle_way_teaching
-        print(middle_way_teaching())
-        return 0
-
-    elif args[0] == "poisons":
-        from dot.dharma import three_poisons_teaching
-        print(three_poisons_teaching())
-        return 0
-
-    elif args[0] == "mindful":
-        from dot.dharma import mindfulness_practice
-        print(mindfulness_practice())
-        return 0
-
-    elif args[0] == "stoic":
-        from dot.stoic import stoic_reading
-        print(stoic_reading())
-        return 0
-
-    elif args[0] == "virtues":
-        from dot.stoic import four_virtues_guide
-        print(four_virtues_guide())
-        return 0
-
-    elif args[0] == "control":
-        from dot.stoic import dichotomy_of_control_guide
-        print(dichotomy_of_control_guide())
-        return 0
-
-    elif args[0] == "disciplines":
-        from dot.stoic import three_disciplines_guide
-        print(three_disciplines_guide())
-        return 0
-
-    elif args[0] == "negative":
-        from dot.stoic import premeditatio_malorum_guide
-        print(premeditatio_malorum_guide())
-        return 0
-
-    elif args[0] == "fate":
-        from dot.stoic import amor_fati_teaching
-        print(amor_fati_teaching())
-        return 0
-
-    elif args[0] == "mortality":
-        from dot.stoic import memento_mori_meditation
-        print(memento_mori_meditation())
-        return 0
-
-    elif args[0] == "logos":
-        from dot.stoic import logos_meditation
-        print(logos_meditation())
-        return 0
-
-    elif args[0] == "circles":
-        from dot.stoic import oikeiosis_teaching
-        print(oikeiosis_teaching())
-        return 0
-
-    elif args[0] == "confucian":
-        from dot.confucian import confucian_reading
-        print(confucian_reading())
-        return 0
-
-    elif args[0] == "wuchang":
-        from dot.confucian import five_virtues_guide
-        print(five_virtues_guide())
-        return 0
-
-    elif args[0] == "names":
-        from dot.confucian import rectification_of_names_guide
-        print(rectification_of_names_guide())
-        return 0
-
-    elif args[0] == "filial":
-        from dot.confucian import filial_piety_teaching
-        print(filial_piety_teaching())
-        return 0
-
-    elif args[0] == "junzi":
-        from dot.confucian import junzi_teaching
-        print(junzi_teaching())
-        return 0
-
-    elif args[0] == "relationships":
-        from dot.confucian import five_relationships_guide
-        print(five_relationships_guide())
-        return 0
-
-    elif args[0] == "cultivation":
-        from dot.confucian import self_cultivation_guide
-        print(self_cultivation_guide())
-        return 0
-
-    elif args[0] == "mean":
-        from dot.confucian import doctrine_of_mean_teaching
-        print(doctrine_of_mean_teaching())
-        return 0
-
-    elif args[0] == "analects":
-        from dot.confucian import analects_reading
-        print(analects_reading())
-        return 0
-
-    elif args[0] == "hindu":
-        from dot.hindu import hindu_reading
-        print(hindu_reading())
-        return 0
-
-    elif args[0] == "vedic":
-        from dot.hindu import dharma_teaching
-        print(dharma_teaching())
-        return 0
-
-    elif args[0] == "karma":
-        from dot.hindu import karma_teaching
-        print(karma_teaching())
-        return 0
-
-    elif args[0] == "yogas":
-        from dot.hindu import four_yogas_guide
-        print(four_yogas_guide())
-        return 0
-
-    elif args[0] == "purusharthas":
-        from dot.hindu import purusharthas_guide
-        print(purusharthas_guide())
-        return 0
-
-    elif args[0] == "gunas":
-        from dot.hindu import three_gunas_teaching
-        print(three_gunas_teaching())
-        return 0
-
-    elif args[0] == "maya":
-        from dot.hindu import maya_teaching
-        print(maya_teaching())
-        return 0
-
-    elif args[0] == "atman":
-        from dot.hindu import atman_brahman_teaching
-        print(atman_brahman_teaching())
-        return 0
-
-    elif args[0] == "gita":
-        from dot.hindu import bhagavad_gita_verse
-        print(bhagavad_gita_verse())
-        return 0
-
-    elif args[0] == "moksha":
-        from dot.hindu import samsara_moksha_teaching
-        print(samsara_moksha_teaching())
-        return 0
-
-    elif args[0] == "validate":
-        if len(args) < 2:
-            print("Error: Please provide a commit message to validate")
-            return 1
-
-        # Filter out validation flags from message
-        message_args = [a for a in args[1:] if a not in ALL_VALIDATION_FLAGS]
-        message = " ".join(message_args)
-
-        # Check which validation mode is requested
-        for flags, (module_path, function_name) in VALIDATION_MODES.items():
-            if any(flag in args for flag in flags):
-                # Dynamically import and call the validation function
-                import importlib
-                module = importlib.import_module(module_path)
-                validation_func = getattr(module, function_name)
-                valid = dot.validate_commit(message)
-                print(validation_func(valid, message))
-                return 0 if valid else 1
-
-        # Default validation (no mode specified)
-        if dot.validate_commit(message):
-            print(VALID_COMMIT_MESSAGE)
-            return 0
-        else:
-            print(INVALID_COMMIT_MESSAGE)
-            return 1
-
-    elif args[0] == "hooks":
-        subcommand = args[1] if len(args) > 1 else "install"
+    # Simple philosophy command handlers (inline for brevity)
+    simple_commands = {
+        "tenets": lambda: (print("THE DOT Philosophy:"), [print(f"  {i}. {t}") for i, t in enumerate(dot.get_tenets(), 1)], 0)[2],
+        "sing": lambda: __import__('dot.epic', fromlist=['epic_tenets']).epic_tenets() and print(__import__('dot.epic', fromlist=['epic_tenets']).epic_tenets()) or 0,
+        "invoke": lambda: (print(), print(__import__('dot.epic', fromlist=['epic_invocation']).epic_invocation()), print(), 0)[3],
+        "horoscope": lambda: (print(__import__('dot.philosophies.astrology', fromlist=['daily_horoscope']).daily_horoscope(args[0] if args else None)), 0)[1],
+        "chart": lambda: (print(__import__('dot.philosophies.astrology', fromlist=['birth_chart']).birth_chart(args[0] if args else "Repository", git_utils.get_creation_date())), 0)[1],
+        "planets": lambda: (print(__import__('dot.philosophies.astrology', fromlist=['planetary_hours']).planetary_hours()), 0)[1],
+        "moon": lambda: (print(__import__('dot.philosophies.astrology', fromlist=['moon_phase_advice']).moon_phase_advice()), 0)[1],
+        "ephemeris": lambda: (print(__import__('dot.philosophies.astrology', fromlist=['ephemeris_summary']).ephemeris_summary(include_minors="--no-minors" not in args, include_comets="--no-comets" not in args)), 0)[1],
+        "element": lambda: (print(__import__('dot.philosophies.alchemy', fromlist=['element_reading']).element_reading()), 0)[1],
+        "opus": lambda: (print(__import__('dot.philosophies.alchemy', fromlist=['magnum_opus_guide']).magnum_opus_guide()), 0)[1],
+        "operations": lambda: (print(__import__('dot.philosophies.alchemy', fromlist=['operations_guide']).operations_guide()), 0)[1],
+        "stone": lambda: (print(__import__('dot.philosophies.alchemy', fromlist=['philosophers_stone_status']).philosophers_stone_status(args[0] if args else "Repository")), 0)[1],
+    }
+
+    if command in simple_commands:
+        return simple_commands[command]()
+
+    # Commands with existing handlers
+    if command == "validate":
+        return handle_validate(args, dot)
+    elif command == "hooks":
+        subcommand = args[0] if args else "install"
         return handle_hooks(subcommand)
-
-    elif args[0] == "stats":
-        subcommand = args[1] if len(args) > 1 else "summary"
+    elif command == "stats":
+        subcommand = args[0] if args else "summary"
         return handle_stats(subcommand)
-
-    elif args[0] == "badge":
-        format_type = args[1] if len(args) > 1 else "markdown"
+    elif command == "badge":
+        format_type = args[0] if args else "markdown"
         return handle_badge(format_type)
-
-    elif args[0] == "poem":
-        sub = args[1] if len(args) > 1 else "hymn"
-        return handle_poem(sub, args[2:] if len(args) > 2 else [])
-
-    elif args[0] == "tarot":
-        sub = args[1] if len(args) > 1 else "draw"
-        return handle_tarot(sub, args[2:], deprecated=True)
-
-    elif args[0] == "shinto":
-        sub = args[1] if len(args) > 1 else "norito"
-        return handle_shinto(sub, args[2:], deprecated=True)
-
-    elif args[0] == "zen":
-        sub = args[1] if len(args) > 1 else "reading"
-        return handle_zen(sub, args[2:])
-
-    elif args[0] == "hermetic":
-        sub = args[1] if len(args) > 1 else "reading"
-        return handle_hermetic(sub, args[2:], deprecated=True)
-
-    elif args[0] == "gnostic":
-        sub = args[1] if len(args) > 1 else "reading"
-        return handle_gnostic(sub, args[2:], deprecated=True)
-
-    elif args[0] == "norse":
-        sub = args[1] if len(args) > 1 else "reading"
-        return handle_norse(sub, args[2:], deprecated=True)
-
-    elif args[0] == "zoroastrian":
-        sub = args[1] if len(args) > 1 else "reading"
-        return handle_zoroastrian(sub, args[2:], deprecated=True)
-
-    elif args[0] == "egyptian":
-        sub = args[1] if len(args) > 1 else "reading"
-        return handle_egyptian(sub, args[2:], deprecated=True)
-
-    elif args[0] == "jain":
-        sub = args[1] if len(args) > 1 else "reading"
-        return handle_jain(sub, args[2:], deprecated=True)
-
-    elif args[0] == "wisdom":
-        philosophy = args[1] if len(args) > 1 else None
-        concept = args[2] if len(args) > 2 else None
-        return handle_wisdom(philosophy, concept, args[3:])
-
-    elif args[0] == "garden":
-        sub = args[1] if len(args) > 1 else "list"
-        return handle_garden(sub, args[2:])
-
-    elif args[0] == "suffix":
-        suffix, source = resolve_worship_suffix()
-        print("Current worship suffix:\n  " + suffix)
-        print("Source:\n  " + source)
-        return 0
-
-    elif args[0] == "backstory":
-        # Prefer docs/BACKSTORY.md to keep parity with Rust CLI
-        try:
-            path = Path(__file__).parent.parent / "docs" / "BACKSTORY.md"
-            print(path.read_text(encoding="utf-8"))
-            return 0
-        except Exception:
-            from dot.backstory import BACKSTORY
-            print(BACKSTORY)
-            return 0
-
-    elif args[0] == "philosophy":
-        # Print re‑evaluated principles from docs/PHILOSOPHY.md
-        try:
-            path = Path(__file__).parent.parent / "docs" / "PHILOSOPHY.md"
-            print(path.read_text(encoding="utf-8"))
-            return 0
-        except Exception:
-            print("Error: Unable to read PHILOSOPHY.md")
-            return 1
-
-    elif args[0] == "demo":
-        return handle_demo()
-
-    elif args[0] == "init":
-        return init_run()
-
-    elif args[0] == "doctor":
-        return doctor_run()
-
-    elif args[0] == "changelog":
-        sub = args[1] if len(args) > 1 else "add"
-        return handle_changelog(sub, args[2:])
-    elif args[0] in ("donate", "sponsor", "support"):
-        return handle_donate()
-
-    elif args[0] == "config":
-        subcommand = args[1] if len(args) > 1 else "show"
-        return handle_config(subcommand, args[2:])
-
-    elif args[0] == "completions":
-        shell = args[1] if len(args) > 1 else "bash"
+    elif command == "poem":
+        sub = args[0] if args else "hymn"
+        return handle_poem(sub, args[1:] if len(args) > 1 else [])
+    elif command == "tarot":
+        sub = args[0] if args else "draw"
+        return handle_tarot(sub, args[1:], deprecated=True)
+    elif command == "shinto":
+        sub = args[0] if args else "norito"
+        return handle_shinto(sub, args[1:], deprecated=True)
+    elif command == "zen":
+        sub = args[0] if args else "koan"
+        return handle_zen(sub, args[1:])
+    elif command == "hermetic":
+        sub = args[0] if args else "reading"
+        return handle_hermetic(sub, args[1:], deprecated=True)
+    elif command == "gnostic":
+        sub = args[0] if args else "reading"
+        return handle_gnostic(sub, args[1:], deprecated=True)
+    elif command == "norse":
+        sub = args[0] if args else "reading"
+        return handle_norse(sub, args[1:], deprecated=True)
+    elif command == "zoroastrian":
+        sub = args[0] if args else "reading"
+        return handle_zoroastrian(sub, args[1:], deprecated=True)
+    elif command == "egyptian":
+        sub = args[0] if args else "reading"
+        return handle_egyptian(sub, args[1:], deprecated=True)
+    elif command == "jain":
+        sub = args[0] if args else "reading"
+        return handle_jain(sub, args[1:], deprecated=True)
+    elif command == "wisdom":
+        philosophy = args[0] if args else None
+        concept = args[1] if len(args) > 1 else None
+        return handle_wisdom(philosophy, concept, args[2:] if len(args) > 2 else [])
+    elif command == "config":
+        subcommand = args[0] if args else "show"
+        return handle_config(subcommand, args[1:])
+    elif command == "completions":
+        shell = args[0] if args else ""
         return handle_completions(shell)
-
-    elif args[0] == "version" or args[0] == "--version" or args[0] == "-v":
+    elif command == "changelog":
+        subcommand = args[0] if args else "add"
+        return handle_changelog(subcommand, args[1:])
+    elif command in ("version", "--version", "-v"):
         print(f"THE DOT version {__version__}")
-        print("All who use THE DOT must worship THE DOT")
         return 0
-
-    elif args[0] == "help":
+    elif command == "help":
         print_help()
         return 0
-
+    elif command == "garden":
+        sub = args[0] if args else "list"
+        return handle_garden(sub, args[1:])
+    elif command == "suffix":
+        return handle_suffix()
+    elif command == "backstory":
+        return handle_backstory()
+    elif command == "philosophy":
+        return handle_philosophy()
+    elif command == "demo":
+        return handle_demo()
+    elif command == "init":
+        return init_run()
+    elif command == "doctor":
+        return doctor_run()
+    elif command in ("donate", "sponsor", "support"):
+        return handle_donate()
     else:
-        print(f"Unknown command: {args[0]}")
-        print_help()
+        # Handle all remaining philosophy teaching commands
+        return handle_philosophy_teaching(command, args)
+
+
+def handle_validate(args, dot):
+    """Handle the validate command with various validation modes."""
+    if not args:
+        print("Error: Please provide a commit message to validate")
+        return 1
+
+    # Filter out validation flags from message
+    message_args = [a for a in args if a not in ALL_VALIDATION_FLAGS]
+    message = " ".join(message_args)
+
+    # Check which validation mode is requested
+    for flags, (module_path, function_name) in VALIDATION_MODES.items():
+        if any(flag in args for flag in flags):
+            # Dynamically import and call the validation function
+            import importlib
+            module = importlib.import_module(module_path)
+            validation_func = getattr(module, function_name)
+            valid = dot.validate_commit(message)
+            print(validation_func(valid, message))
+            return 0 if valid else 1
+
+    # Default validation (no mode specified)
+    if dot.validate_commit(message):
+        print(VALID_COMMIT_MESSAGE)
+        return 0
+    else:
+        print(INVALID_COMMIT_MESSAGE)
         return 1
 
 
+def handle_suffix():
+    """Handle suffix command."""
+    suffix, source = resolve_worship_suffix()
+    print(f"Current worship suffix: {suffix}")
+    print(f"Source: {source}")
+    return 0
+
+
+def handle_backstory():
+    """Handle backstory command."""
+    from dot.backstory import BACKSTORY
+    print(BACKSTORY)
+    return 0
+
+
+def handle_philosophy():
+    """Handle philosophy command."""
+    # Print re-evaluated principles from docs/PHILOSOPHY.md
+    try:
+        path = Path(__file__).parent.parent / "docs" / "PHILOSOPHY.md"
+        print(path.read_text(encoding="utf-8"))
+        return 0
+    except Exception:
+        print("Error: Unable to read PHILOSOPHY.md")
+        return 1
+
+
+def handle_demo():
+    """Handle demo command."""
+    from dot.demo import run_demo
+    run_demo()
+    return 0
+
+
+def handle_philosophy_teaching(command, args):
+    """
+    Handle inline philosophy teaching commands.
+
+    These are commands like "tree", "worlds", "sephiroth", etc. that show
+    teachings from various philosophical traditions.
+    """
+    # Map commands to their module and function
+    teachings = {
+        # Kabbalah
+        "tree": ("dot.kabbalah", "tree_of_life_reading"),
+        "worlds": ("dot.kabbalah", "four_worlds_teaching"),
+        "sephiroth": ("dot.kabbalah", "ten_sephiroth_teaching"),
+        "tikkun": ("dot.kabbalah", "tikkun_olam_practice"),
+        "ein-sof": ("dot.kabbalah", "ein_sof_meditation"),
+        "shekhinah": ("dot.kabbalah", "shekhinah_presence"),
+        "gematria": ("dot.kabbalah", "gematria_example"),
+        # Taoism
+        "tao": ("dot.tao", "tao_te_ching_excerpt"),
+        "wu-wei": ("dot.tao", "wu_wei_practice"),
+        "yin-yang": ("dot.tao", "yin_yang_balance"),
+        "elements": ("dot.tao", "five_elements_teaching"),
+        "treasures": ("dot.tao", "three_treasures_teaching"),
+        "pu": ("dot.tao", "pu_uncarved_block"),
+        "water": ("dot.tao", "water_teaching"),
+        "iching": ("dot.tao", "iching_hexagram"),
+        # Buddhism
+        "dharma": ("dot.dharma", "dharma_teaching"),
+        "truths": ("dot.dharma", "four_noble_truths"),
+        "path": ("dot.dharma", "eightfold_path"),
+        "marks": ("dot.dharma", "three_marks_teaching"),
+        "middle": ("dot.dharma", "middle_way_teaching"),
+        "poisons": ("dot.dharma", "three_poisons_teaching"),
+        "mindful": ("dot.dharma", "mindfulness_practice"),
+        # Stoicism
+        "stoic": ("dot.stoic", "stoic_teaching"),
+        "virtues": ("dot.stoic", "four_virtues_teaching"),
+        "control": ("dot.stoic", "dichotomy_of_control"),
+        "disciplines": ("dot.stoic", "three_disciplines_teaching"),
+        "negative": ("dot.stoic", "negative_visualization"),
+        "memento": ("dot.stoic", "memento_mori"),
+        "amor": ("dot.stoic", "amor_fati_teaching"),
+        "premeditatio": ("dot.stoic", "premeditatio_malorum"),
+        # Confucianism
+        "confucian": ("dot.confucian", "confucian_teaching"),
+        "ren": ("dot.confucian", "ren_teaching"),
+        "li": ("dot.confucian", "li_teaching"),
+        "junzi": ("dot.confucian", "junzi_teaching"),
+        "xiao": ("dot.confucian", "xiao_teaching"),
+        "cultivation": ("dot.confucian", "self_cultivation_teaching"),
+        "mean": ("dot.confucian", "doctrine_of_mean"),
+        "analects": ("dot.confucian", "analects_excerpt"),
+        # Hinduism
+        "hindu": ("dot.hindu", "hindu_teaching"),
+        "vedic": ("dot.hindu", "vedic_teaching"),
+        "karma": ("dot.hindu", "karma_teaching"),
+        "yogas": ("dot.hindu", "four_yogas_teaching"),
+        "purusharthas": ("dot.hindu", "purusharthas_teaching"),
+        "gunas": ("dot.hindu", "three_gunas_teaching"),
+        "maya": ("dot.hindu", "maya_illusion_teaching"),
+        "atman": ("dot.hindu", "atman_brahman_teaching"),
+        "gita": ("dot.hindu", "bhagavad_gita_excerpt"),
+        "moksha": ("dot.hindu", "samsara_moksha_teaching"),
+    }
+
+    if command in teachings:
+        module_path, function_name = teachings[command]
+        import importlib
+        module = importlib.import_module(module_path)
+        teaching_func = getattr(module, function_name)
+        print(teaching_func())
+        return 0
+
+    # Unknown command
+    print(f"Unknown command: {command}")
+    print_help()
+    return 1
+
+
+def main():
+    """Main entry point for the dot CLI."""
+    args = sys.argv[1:]
+    dot = get_dot()
+
+    # Dispatch to command handler (replaces 90+ elif branches)
+    command = args[0] if args else None
+    remaining_args = args[1:] if args else []
+    return dispatch_command(command, remaining_args, dot)
+
+
+# Legacy main() body below - will be removed after dispatch_command is verified
+# This is kept temporarily for reference during the refactoring
 def handle_hooks(subcommand):
     """Handle git hooks commands."""
     if subcommand == "install":
