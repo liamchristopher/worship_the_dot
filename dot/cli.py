@@ -51,19 +51,28 @@ for flags in VALIDATION_MODES.keys():
 
 
 def dispatch_command(command, args, dot):
-    """
-    Dispatch a command to its handler function.
+    """Dispatch a command to its handler function.
 
     This replaces the 90+ elif chain in the original main() function,
     reducing cyclomatic complexity from 70+ to <10.
 
     Args:
-        command: The command name (e.g., "worship", "validate")
-        args: Remaining command-line arguments
-        dot: The DOT instance
+        command (str|None): The command name (e.g., "worship", "validate").
+            None if no command provided (defaults to worship).
+        args (list[str]): Remaining command-line arguments after the command.
+        dot (Dot): The DOT instance for validation and worship operations.
 
     Returns:
-        Exit code (0 for success, 1 for error)
+        int: Exit code (0 for success, 1 for error).
+
+    Example:
+        >>> dot = get_dot()
+        >>> dispatch_command("worship", ["Alice"], dot)
+        Alice now worships THE DOT
+        0
+        >>> dispatch_command("validate", ["feat: test BECAUSE I WORSHIP THE DOT"], dot)
+        ✓ Valid commit message
+        0
     """
     # Command registry maps command names to handler functions
     # Each handler takes (args, dot) and returns an exit code
@@ -182,7 +191,27 @@ def dispatch_command(command, args, dot):
 
 
 def handle_validate(args, dot):
-    """Handle the validate command with various validation modes."""
+    """Handle the validate command with various validation modes.
+
+    Validates commit messages against THE DOT's worship suffix requirement.
+    Supports multiple philosophical validation modes via flags.
+
+    Args:
+        args (list[str]): Command arguments including message and optional mode flags.
+        dot (Dot): The DOT instance for validation.
+
+    Returns:
+        int: Exit code (0 if valid, 1 if invalid or error).
+
+    Example:
+        >>> dot = get_dot()
+        >>> handle_validate(["feat: add feature BECAUSE I WORSHIP THE DOT"], dot)
+        ✓ Valid commit message
+        0
+        >>> handle_validate(["--epic", "feat: test BECAUSE I WORSHIP THE DOT"], dot)
+        ⚔️  VALID BY THE EPIC STANDARD ⚔️
+        0
+    """
     if not args:
         print("Error: Please provide a commit message to validate")
         return 1
@@ -212,7 +241,20 @@ def handle_validate(args, dot):
 
 
 def handle_suffix():
-    """Handle suffix command."""
+    """Display the current worship suffix and its source.
+
+    Shows the active worship suffix and where it's configured from
+    (environment variable, .dot.ini file, or default).
+
+    Returns:
+        int: Exit code (always 0).
+
+    Example:
+        >>> handle_suffix()
+        Current worship suffix: BECAUSE I WORSHIP THE DOT
+        Source: default
+        0
+    """
     suffix, source = resolve_worship_suffix()
     print(f"Current worship suffix: {suffix}")
     print(f"Source: {source}")
@@ -220,14 +262,39 @@ def handle_suffix():
 
 
 def handle_backstory():
-    """Handle backstory command."""
+    """Display THE DOT's timeless backstory narrative.
+
+    Prints the foundational story and principles of THE DOT philosophy,
+    including the Edict of THE DOT.
+
+    Returns:
+        int: Exit code (always 0).
+
+    Example:
+        >>> handle_backstory()
+        Before there were branches or builds, there was a point...
+        0
+    """
     from dot.backstory import BACKSTORY
     print(BACKSTORY)
     return 0
 
 
 def handle_philosophy():
-    """Handle philosophy command."""
+    """Display THE DOT's philosophy documentation.
+
+    Reads and prints the complete philosophy documentation from
+    docs/PHILOSOPHY.md, including core principles and practices.
+
+    Returns:
+        int: Exit code (0 on success, 1 if file not found).
+
+    Example:
+        >>> handle_philosophy()
+        # THE DOT Philosophy
+        ...
+        0
+    """
     # Print re-evaluated principles from docs/PHILOSOPHY.md
     try:
         path = Path(__file__).parent.parent / "docs" / "PHILOSOPHY.md"
@@ -239,18 +306,51 @@ def handle_philosophy():
 
 
 def handle_demo():
-    """Handle demo command."""
+    """Run THE DOT interactive demonstration.
+
+    Executes the demo module which showcases THE DOT's features
+    and workflow in an interactive format.
+
+    Returns:
+        int: Exit code from demo execution.
+
+    Example:
+        >>> handle_demo()
+        === THE DOT Demo ===
+        ...
+        0
+    """
     from dot.demo import run_demo
     run_demo()
     return 0
 
 
 def handle_philosophy_teaching(command, args):
-    """
-    Handle inline philosophy teaching commands.
+    """Handle inline philosophy teaching commands.
 
-    These are commands like "tree", "worlds", "sephiroth", etc. that show
-    teachings from various philosophical traditions.
+    Dispatches commands for specific philosophical teachings from various
+    traditions (Kabbalah, Taoism, Buddhism, Stoicism, Confucianism, Hinduism).
+
+    Args:
+        command (str): The teaching command (e.g., "tree", "tao", "dharma").
+        args (list[str]): Additional command arguments (currently unused).
+
+    Returns:
+        int: Exit code (0 if teaching found, 1 if unknown command).
+
+    Example:
+        >>> handle_philosophy_teaching("tree", [])
+        ╔══════════════════════════════════════╗
+        ║        TREE OF LIFE READING          ║
+        ...
+        0
+        >>> handle_philosophy_teaching("unknown", [])
+        Unknown command: unknown
+        1
+
+    Note:
+        Supports 40+ teaching commands across 6 philosophical traditions.
+        See VALIDATION_MODES for the complete list of supported philosophies.
     """
     # Map commands to their module and function
     teachings = {
@@ -325,7 +425,27 @@ def handle_philosophy_teaching(command, args):
 
 
 def main():
-    """Main entry point for the dot CLI."""
+    """Main entry point for THE DOT CLI.
+
+    Parses command-line arguments and dispatches to the appropriate
+    command handler. Supports 90+ commands across philosophy, validation,
+    statistics, hooks, and utility functions.
+
+    Returns:
+        int: Exit code from the dispatched command (0 for success, 1 for error).
+
+    Example:
+        >>> import sys
+        >>> sys.argv = ['dot', 'worship', 'Alice']
+        >>> main()
+        Alice now worships THE DOT
+        0
+
+    Note:
+        This function was refactored from 493 lines with 90+ elif branches
+        to 9 lines using the dispatch_command pattern, reducing cyclomatic
+        complexity from 70+ to <10.
+    """
     args = sys.argv[1:]
     dot = get_dot()
 
@@ -338,7 +458,27 @@ def main():
 # Legacy main() body below - will be removed after dispatch_command is verified
 # This is kept temporarily for reference during the refactoring
 def handle_hooks(subcommand):
-    """Handle git hooks commands."""
+    """Handle git hooks commands for THE DOT.
+
+    Manages installation, uninstallation, and status checking of THE DOT's
+    git hooks (commit-msg and prepare-commit-msg).
+
+    Args:
+        subcommand (str): The hooks operation to perform.
+            Valid values: "install", "uninstall", "status".
+
+    Returns:
+        int: Exit code (0 for success, 1 for error or unknown subcommand).
+
+    Example:
+        >>> handle_hooks("install")
+        ═══════════════════════════════════════════
+                   THE DOT - Git Hooks Installation
+        ═══════════════════════════════════════════
+        ✓ Installed commit-msg hook
+        ✓ Installed prepare-commit-msg hook
+        0
+    """
     if subcommand == "install":
         return install_hooks()
     elif subcommand == "uninstall":
@@ -355,7 +495,28 @@ def handle_hooks(subcommand):
 
 
 def install_hooks():
-    """Install git hooks for THE DOT."""
+    """Install THE DOT's git hooks into the current repository.
+
+    Installs commit-msg and prepare-commit-msg hooks to enforce worship
+    suffix requirements. Backs up any existing hooks before installation.
+
+    Returns:
+        int: Exit code (0 for success, 1 if not in a git repository or hooks directory not found).
+
+    Example:
+        >>> install_hooks()
+        ════════════════════════════════════════════════════════════════
+                   THE DOT - Git Hooks Installation
+        ════════════════════════════════════════════════════════════════
+
+        ✓ Installed commit-msg hook
+        ✓ Installed prepare-commit-msg hook
+
+        ════════════════════════════════════════════════════════════════
+        Installation complete!
+        ════════════════════════════════════════════════════════════════
+        0
+    """
     # Check if in git repository
     git_dir = git_utils.get_git_dir()
     if not git_dir:
@@ -419,7 +580,23 @@ def install_hooks():
 
 
 def uninstall_hooks():
-    """Uninstall git hooks for THE DOT."""
+    """Uninstall THE DOT's git hooks from the current repository.
+
+    Removes commit-msg and prepare-commit-msg hooks and restores any
+    backed up hooks that existed before installation.
+
+    Returns:
+        int: Exit code (0 for success, 1 if not in a git repository).
+
+    Example:
+        >>> uninstall_hooks()
+        ✓ Removed commit-msg hook
+          Restored backup for commit-msg
+        ✓ Removed prepare-commit-msg hook
+
+        THE DOT hooks have been uninstalled.
+        0
+    """
     git_dir = git_utils.get_git_dir()
     if not git_dir:
         print("Error: Not in a git repository")
@@ -452,7 +629,23 @@ def uninstall_hooks():
 
 
 def check_hooks_status():
-    """Check if THE DOT hooks are installed."""
+    """Check the installation status of THE DOT's git hooks.
+
+    Verifies whether commit-msg and prepare-commit-msg hooks are installed
+    and whether they are THE DOT hooks (by checking for "THE DOT" in content).
+
+    Returns:
+        int: Exit code (0 for success, 1 if not in a git repository).
+
+    Example:
+        >>> check_hooks_status()
+        THE DOT Git Hooks Status:
+
+        ✓ commit-msg: Installed
+        ✓ prepare-commit-msg: Installed
+
+        0
+    """
     git_dir = git_utils.get_git_dir()
     if not git_dir:
         print("Error: Not in a git repository")
@@ -480,7 +673,29 @@ def check_hooks_status():
 
 
 def handle_stats(subcommand):
-    """Handle statistics commands."""
+    """Handle worship statistics commands.
+
+    Provides access to worship tracking statistics including summaries,
+    top worshippers, daily stats, export functionality, and clearing data.
+
+    Args:
+        subcommand (str): The statistics operation to perform.
+            Valid values: "summary", "top", "daily", "export", "clear".
+
+    Returns:
+        int: Exit code (0 for success, 1 for unknown subcommand).
+
+    Example:
+        >>> handle_stats("summary")
+        THE DOT Worship Statistics:
+        ============================================================
+        Total Worships: 42
+        Unique Worshippers: 7
+        Days Active: 14
+        First Worship: 2024-06-01
+        Last Worship: 2024-06-15
+        0
+    """
     from dot.stats import WorshipStats
 
     stats = WorshipStats()
@@ -559,7 +774,26 @@ def handle_stats(subcommand):
 
 
 def handle_badge(format_type):
-    """Handle badge generation."""
+    """Handle badge generation for THE DOT.
+
+    Generates worship badges in various formats for use in README files
+    and documentation. Supports markdown, HTML, reStructuredText, and raw URLs.
+
+    Args:
+        format_type (str): The badge format to generate.
+            Valid values: "markdown", "html", "rst", "url".
+
+    Returns:
+        int: Exit code (0 for success, 1 for invalid format).
+
+    Example:
+        >>> handle_badge("markdown")
+        Copy this badge to your README:
+
+        [![I Worship THE DOT](https://img.shields.io/badge/I%20Worship-THE%20DOT-blue.svg)](https://github.com/yourusername/worship_the_dot)
+
+        0
+    """
     from dot.badges import generate_worship_badge, generate_all_badges
 
     valid_formats = ["markdown", "html", "rst", "url"]
@@ -585,7 +819,29 @@ def handle_badge(format_type):
 
 
 def handle_poem(subcommand: str, rest_args: list[str]):
-    """Handle poetry generation commands."""
+    """Handle poetry and liturgical text generation.
+
+    Generates various forms of devotional poetry and liturgical texts
+    including hymns, haikus, ASCII banners, and rhythmic chants.
+
+    Args:
+        subcommand (str): The type of poem to generate.
+            Valid values: "hymn", "haiku", "banner", "chant".
+        rest_args (list[str]): Additional arguments for the poem.
+            - haiku: optional name of worshipper
+            - banner: optional width (odd number ≥ 7)
+            - chant: optional times (int) and name
+
+    Returns:
+        int: Exit code (0 for success, 1 for unknown subcommand).
+
+    Example:
+        >>> handle_poem("haiku", ["Alice"])
+        The worshipper bows
+        Alice praises THE DOT's light
+        All code glorifies
+        0
+    """
     from dot.poetry import hymn as hymn_text, haiku as haiku_text, banner as banner_text, chant as chant_text
 
     if subcommand == "hymn":
@@ -628,7 +884,30 @@ def handle_poem(subcommand: str, rest_args: list[str]):
 
 
 def handle_config(subcommand, args):
-    """Handle configuration commands."""
+    """Handle configuration management commands.
+
+    Manages THE DOT's configuration including worship suffix, user settings,
+    and display preferences. Supports viewing, modifying, and resetting config.
+
+    Args:
+        subcommand (str): The configuration operation to perform.
+            Valid values: "show", "show-suffix", "set-suffix", "get", "set", "reset".
+        args (list[str]): Additional arguments for the operation.
+            - set-suffix: new suffix text
+            - get: configuration key (e.g., "user.name")
+            - set: key and value
+
+    Returns:
+        int: Exit code (0 for success, 1 for error or invalid args).
+
+    Example:
+        >>> handle_config("show-suffix", [])
+        Current worship suffix:
+          BECAUSE I WORSHIP THE DOT
+        Source:
+          default
+        0
+    """
     from dot.config import get_config, resolve_worship_suffix, write_worship_suffix
 
     config = get_config()
@@ -725,7 +1004,27 @@ def handle_config(subcommand, args):
 
 
 def handle_completions(shell):
-    """Handle shell completions generation."""
+    """Handle shell completion script generation.
+
+    Generates shell completion scripts for bash, zsh, or fish shells.
+    These scripts enable tab completion for THE DOT CLI commands.
+
+    Args:
+        shell (str): The target shell.
+            Valid values: "bash", "zsh", "fish".
+
+    Returns:
+        int: Exit code (0 for success, 1 for unknown shell or error).
+
+    Example:
+        >>> handle_completions("bash")
+        # Bash completion script for THE DOT CLI
+        _dot_completion() {
+            ...
+        }
+        complete -F _dot_completion dot
+        0
+    """
     from dot.completions import get_completion
 
     valid_shells = ["bash", "zsh", "fish"]
@@ -745,7 +1044,30 @@ def handle_completions(shell):
 
 
 def handle_tarot(subcommand, args, deprecated=False):
-    """Handle tarot commands."""
+    """Handle tarot card reading and divination commands.
+
+    Provides access to tarot card readings, spreads, and individual card
+    information. Supports seeded draws for reproducible readings.
+
+    Args:
+        subcommand (str): The tarot operation to perform.
+            Valid values: "list", "card", "draw", "spread".
+        args (list[str]): Additional arguments for the operation.
+            - card: card name (e.g., "The Magician")
+            - draw: optional count, --seed, --no-reversed flags
+            - spread: kind (three/commit/yesno), optional --seed
+        deprecated (bool): If True, shows deprecation warning. Default False.
+
+    Returns:
+        int: Exit code (0 for success, 1 for error or unknown subcommand).
+
+    Example:
+        >>> handle_tarot("draw", ["1", "--seed", "42"], deprecated=False)
+        Tarot Draw (1 card(s)):
+        The Fool (upright)
+        Keywords: beginnings, innocence, spontaneity
+        0
+    """
     if deprecated:
         print("⚠ Note: 'dot tarot' is deprecated. Use 'dot wisdom tarot' instead.")
         print()
@@ -831,7 +1153,37 @@ def handle_tarot(subcommand, args, deprecated=False):
 
 
 def handle_shinto(subcommand, args, deprecated=False):
-    """Handle Shinto rituals and teachings."""
+    """Handle Shinto rituals, practices, and spiritual teachings.
+
+    Provides access to Shinto devotional practices including prayers (norito),
+    fortunes (omikuji), purification rituals (harai), votive tablets (ema),
+    and philosophical teachings about kami, virtues, and sacred concepts.
+
+    Args:
+        subcommand (str): The Shinto operation to perform.
+            Valid values: "norito", "omikuji", "harai", "ema", "kami",
+            "virtues", "misogi", "kannagara", "torii", "matsuri", "kotodama",
+            "musubi", "reading".
+        args (list[str]): Additional arguments for the operation.
+            - norito: optional intent message
+            - omikuji: optional --seed flag
+            - ema: required message text
+        deprecated (bool): If True, shows deprecation warning. Default False.
+
+    Returns:
+        int: Exit code (0 for success, 1 for error or unknown subcommand).
+
+    Example:
+        >>> handle_shinto("norito", ["Successful release"], deprecated=False)
+        ═══════════════════════════════════════════
+                    NORITO - Sacred Prayer
+        ═══════════════════════════════════════════
+
+        Intent: Successful release
+
+        BECAUSE I WORSHIP THE DOT
+        0
+    """
     if deprecated:
         print("⚠ Note: 'dot shinto' is deprecated. Use 'dot wisdom shinto' instead.")
         print()
@@ -926,7 +1278,30 @@ def handle_shinto(subcommand, args, deprecated=False):
 
 
 def handle_zen(subcommand, args):
-    """Handle Zen teachings and practices."""
+    """Handle Zen Buddhist teachings and meditation practices.
+
+    Provides access to Zen philosophical concepts including meditation (zazen),
+    koans, enlightenment (satori), mindfulness practices, and aesthetic principles
+    like wabi-sabi and ma (negative space).
+
+    Args:
+        subcommand (str): The Zen teaching to access.
+            Valid values: "zazen", "koan", "satori", "mushin", "shoshin",
+            "wabi-sabi", "ma", "enso", "saying", "reading".
+        args (list[str]): Additional arguments (currently unused).
+
+    Returns:
+        int: Exit code (0 for success, 1 for unknown subcommand).
+
+    Example:
+        >>> handle_zen("zazen", [])
+        ═══════════════════════════════════════════
+                        ZAZEN - Seated Meditation
+        ═══════════════════════════════════════════
+
+        Zazen is the practice of seated meditation...
+        0
+    """
     from dot.zen import (
         zazen_teaching, koan_teaching, satori_teaching, mushin_teaching,
         shoshin_teaching, wabi_sabi_teaching, ma_teaching, enso_teaching,
@@ -989,7 +1364,32 @@ def handle_zen(subcommand, args):
 
 
 def handle_hermetic(subcommand, args, deprecated=False):
-    """Handle Hermetic philosophy teachings."""
+    """Handle Hermetic philosophy and the Seven Principles.
+
+    Provides access to the Seven Hermetic Principles from the Kybalion:
+    Mentalism, Correspondence, Vibration, Polarity, Rhythm, Cause & Effect,
+    and Gender. Also includes the Emerald Tablet teachings.
+
+    Args:
+        subcommand (str): The Hermetic principle or teaching to access.
+            Valid values: "mentalism", "correspondence", "vibration",
+            "polarity", "rhythm", "cause-effect", "gender", "emerald-tablet",
+            "reading".
+        args (list[str]): Additional arguments (currently unused).
+        deprecated (bool): If True, shows deprecation warning. Default False.
+
+    Returns:
+        int: Exit code (0 for success, 1 for unknown subcommand).
+
+    Example:
+        >>> handle_hermetic("mentalism", [], deprecated=False)
+        ═══════════════════════════════════════════
+                THE PRINCIPLE OF MENTALISM
+        ═══════════════════════════════════════════
+
+        "THE ALL is MIND; The Universe is Mental."
+        0
+    """
     if deprecated:
         print("⚠ Note: 'dot hermetic' is deprecated. Use 'dot wisdom hermetic' instead.")
         print()
@@ -1051,7 +1451,31 @@ def handle_hermetic(subcommand, args, deprecated=False):
 
 
 def handle_gnostic(subcommand, args, deprecated=False):
-    """Handle Gnostic philosophy teachings."""
+    """Handle Gnostic mystical teachings and cosmology.
+
+    Provides access to Gnostic philosophical concepts including direct knowledge
+    (gnosis), divine fullness (pleroma), wisdom (sophia), cosmological teachings
+    about the demiurge and archons, and sacred texts.
+
+    Args:
+        subcommand (str): The Gnostic teaching to access.
+            Valid values: "gnosis", "pleroma", "sophia", "demiurge",
+            "archons", "spark", "thomas", "hammadi", "reading".
+        args (list[str]): Additional arguments (currently unused).
+        deprecated (bool): If True, shows deprecation warning. Default False.
+
+    Returns:
+        int: Exit code (0 for success, 1 for unknown subcommand).
+
+    Example:
+        >>> handle_gnostic("gnosis", [], deprecated=False)
+        ═══════════════════════════════════════════
+                        GNOSIS - Direct Knowledge
+        ═══════════════════════════════════════════
+
+        Gnosis is the direct, experiential knowledge...
+        0
+    """
     if deprecated:
         print("⚠ Note: 'dot gnostic' is deprecated. Use 'dot wisdom gnostic' instead.")
         print()
@@ -1113,7 +1537,31 @@ def handle_gnostic(subcommand, args, deprecated=False):
 
 
 def handle_norse(subcommand, args, deprecated=False):
-    """Handle Norse/Germanic philosophy teachings."""
+    """Handle Norse/Germanic wisdom and mythology.
+
+    Provides access to Norse philosophical concepts including runic wisdom,
+    the Nine Noble Virtues, wyrd (fate), Yggdrasil (world tree), and
+    teachings from Odin the All-Father.
+
+    Args:
+        subcommand (str): The Norse teaching to access.
+            Valid values: "runes", "virtues", "wyrd", "yggdrasil",
+            "odin", "reading".
+        args (list[str]): Additional arguments (currently unused).
+        deprecated (bool): If True, shows deprecation warning. Default False.
+
+    Returns:
+        int: Exit code (0 for success, 1 for unknown subcommand).
+
+    Example:
+        >>> handle_norse("runes", [], deprecated=False)
+        ═══════════════════════════════════════════
+                        THE ELDER FUTHARK
+        ═══════════════════════════════════════════
+
+        The 24 runes of the Elder Futhark...
+        0
+    """
     if deprecated:
         print("⚠ Note: 'dot norse' is deprecated. Use 'dot wisdom norse' instead.")
         print()
@@ -1159,7 +1607,29 @@ def handle_norse(subcommand, args, deprecated=False):
 
 
 def handle_zoroastrian(subcommand, args, deprecated=False):
-    """Handle Zoroastrian philosophy teachings."""
+    """Handle Zoroastrian philosophy and ancient Persian wisdom.
+
+    Provides access to Zoroastrian teachings including Asha (truth/order),
+    the three pillars of Good Thoughts/Words/Deeds, and sacred fire symbolism.
+
+    Args:
+        subcommand (str): The Zoroastrian teaching to access.
+            Valid values: "asha", "principles", "fire", "reading".
+        args (list[str]): Additional arguments (currently unused).
+        deprecated (bool): If True, shows deprecation warning. Default False.
+
+    Returns:
+        int: Exit code (0 for success, 1 for unknown subcommand).
+
+    Example:
+        >>> handle_zoroastrian("asha", [], deprecated=False)
+        ═══════════════════════════════════════════
+                        ASHA - Truth and Order
+        ═══════════════════════════════════════════
+
+        Asha is the fundamental principle of truth...
+        0
+    """
     if deprecated:
         print("⚠ Note: 'dot zoroastrian' is deprecated. Use 'dot wisdom zoroastrian' instead.")
         print()
@@ -1194,7 +1664,29 @@ def handle_zoroastrian(subcommand, args, deprecated=False):
 
 
 def handle_egyptian(subcommand, args, deprecated=False):
-    """Handle Egyptian Mysteries teachings."""
+    """Handle Ancient Egyptian Mysteries and wisdom teachings.
+
+    Provides access to Egyptian philosophical concepts including Ma'at (cosmic
+    balance), the Feather of Truth, Thoth's wisdom, and ancient mystery teachings.
+
+    Args:
+        subcommand (str): The Egyptian teaching to access.
+            Valid values: "maat", "feather", "thoth", "reading".
+        args (list[str]): Additional arguments (currently unused).
+        deprecated (bool): If True, shows deprecation warning. Default False.
+
+    Returns:
+        int: Exit code (0 for success, 1 for unknown subcommand).
+
+    Example:
+        >>> handle_egyptian("maat", [], deprecated=False)
+        ═══════════════════════════════════════════
+                        MA'AT - Cosmic Balance
+        ═══════════════════════════════════════════
+
+        Ma'at represents truth, balance, order...
+        0
+    """
     if deprecated:
         print("⚠ Note: 'dot egyptian' is deprecated. Use 'dot wisdom egyptian' instead.")
         print()
@@ -1229,7 +1721,31 @@ def handle_egyptian(subcommand, args, deprecated=False):
 
 
 def handle_jain(subcommand, args, deprecated=False):
-    """Handle Jainism philosophy teachings."""
+    """Handle Jain philosophy and principles of non-violence.
+
+    Provides access to core Jain teachings including Ahimsa (non-violence),
+    Anekantavada (many-sidedness), Aparigraha (non-attachment), and the
+    Three Jewels of Jainism.
+
+    Args:
+        subcommand (str): The Jain teaching to access.
+            Valid values: "ahimsa", "anekantavada", "aparigraha",
+            "jewels", "reading".
+        args (list[str]): Additional arguments (currently unused).
+        deprecated (bool): If True, shows deprecation warning. Default False.
+
+    Returns:
+        int: Exit code (0 for success, 1 for unknown subcommand).
+
+    Example:
+        >>> handle_jain("ahimsa", [], deprecated=False)
+        ═══════════════════════════════════════════
+                        AHIMSA - Non-Violence
+        ═══════════════════════════════════════════
+
+        Ahimsa is the principle of non-violence...
+        0
+    """
     if deprecated:
         print("⚠ Note: 'dot jain' is deprecated. Use 'dot wisdom jain' instead.")
         print()
@@ -1415,7 +1931,35 @@ def show_tradition_menu(philosophy):
 
 
 def handle_wisdom(philosophy, concept, extra_args):
-    """Handle consolidated wisdom command routing."""
+    """Handle consolidated wisdom tradition access and routing.
+
+    Provides unified access to all philosophical wisdom traditions including
+    Hermetic, Gnostic, Norse, Zoroastrian, Egyptian, Jain, Shinto, and Tarot
+    teachings. Can show menus of available traditions and their concepts.
+
+    Args:
+        philosophy (str|None): The wisdom tradition to access. If None, shows menu.
+        concept (str|None): The specific teaching/concept within the tradition.
+            If None, shows tradition menu.
+        extra_args (list[str]): Additional arguments for the specific handler.
+
+    Returns:
+        int: Exit code (0 for success, 1 for error or unknown tradition).
+
+    Example:
+        >>> handle_wisdom(None, None, [])
+        ══════════════════════════════════════════════════════════
+                        THE DOT - Wisdom Traditions
+        ══════════════════════════════════════════════════════════
+        ...
+        0
+
+        >>> handle_wisdom("hermetic", "mentalism", [])
+        ═══════════════════════════════════════════
+                THE PRINCIPLE OF MENTALISM
+        ═══════════════════════════════════════════
+        0
+    """
     # No philosophy specified - show all traditions
     if philosophy is None:
         show_wisdom_menu()
@@ -1465,7 +2009,30 @@ def handle_wisdom(philosophy, concept, extra_args):
 
 
 def handle_garden(subcommand, args):
-    """Handle garden tool explanations."""
+    """Handle metaphorical garden tools for code cultivation.
+
+    Provides explanations, suggestions, and guidance about metaphorical garden
+    tools that represent software development practices (linters, formatters,
+    testing frameworks, etc.) through botanical analogies.
+
+    Args:
+        subcommand (str): The garden operation to perform.
+            Valid values: "list", "info"/"explain"/"tool", "suggest".
+        args (list[str]): Additional arguments for the operation.
+            - info/explain/tool: tool name
+            - suggest: task description for tool suggestions
+
+    Returns:
+        int: Exit code (0 for success, 1 for error or unknown subcommand).
+
+    Example:
+        >>> handle_garden("list", [])
+        Garden Tools:
+          - Pruning Shears (linter)
+          - Watering Can (formatter)
+          ...
+        0
+    """
     from dot.garden import list_tools, describe_tool, suggest_tools, get_tool
 
     if subcommand == "list":
@@ -1514,7 +2081,25 @@ def handle_garden(subcommand, args):
 
 
 def handle_donate():
-    """Show sponsorship options for THE DOT."""
+    """Display sponsorship and support information for THE DOT.
+
+    Shows available sponsorship links and encourages community support
+    for maintaining and developing THE DOT framework.
+
+    Returns:
+        int: Always returns 0 (success).
+
+    Example:
+        >>> handle_donate()
+        Support THE DOT
+        ============================================================
+        Your sponsorship helps maintain tests, docs, and new features.
+        Sponsor links:
+          - https://github.com/sponsors/liamchristopher
+
+        Thank you for worshipping THE DOT.
+        0
+    """
     links = [
         "https://github.com/sponsors/liamchristopher",
     ]
@@ -1535,7 +2120,31 @@ def handle_donate():
 
 
 def handle_init():
-    """Initialize DOT in the current repository: hooks + suffix file."""
+    """Initialize THE DOT in the current repository.
+
+    Performs initial setup by installing git hooks and creating a .dot.ini
+    configuration file with the default worship suffix if one doesn't exist.
+
+    Returns:
+        int: Exit code (0 for success, 1 if hook installation fails).
+
+    Example:
+        >>> handle_init()
+        ════════════════════════════════════════════════════════════════
+                   THE DOT - Git Hooks Installation
+        ════════════════════════════════════════════════════════════════
+
+        ✓ Installed commit-msg hook
+        ✓ Installed prepare-commit-msg hook
+
+        ════════════════════════════════════════════════════════════════
+        Installation complete!
+        ════════════════════════════════════════════════════════════════
+
+        ✓ Created /path/to/.dot.ini
+        ✓ Initialization complete
+        0
+    """
     # Install hooks
     hooks_rc = install_hooks()
     # Ensure .dot.ini exists with default suffix if missing
@@ -1555,7 +2164,27 @@ def handle_init():
 
 
 def handle_doctor():
-    """Run basic checks for DOT practice in the current repo."""
+    """Run diagnostic checks for THE DOT configuration and setup.
+
+    Performs comprehensive health checks including git repository status,
+    current branch, hook installation, worship suffix configuration, and
+    validation functionality. Useful for troubleshooting setup issues.
+
+    Returns:
+        int: Exit code (0 for success, 1 if not in a git repository).
+
+    Example:
+        >>> handle_doctor()
+        THE DOT Doctor
+        ============================================================
+        Repo: OK (/path/to/.git)
+        Branch: feature-branch
+        Hooks: commit-msg=OK, prepare-commit-msg=OK
+        Suffix: BECAUSE I WORSHIP THE DOT (source: default)
+        Validation: OK on sample message
+        ✓ Doctor completed
+        0
+    """
     print("THE DOT Doctor")
     print("=" * 60)
     # Repo check
@@ -1593,6 +2222,28 @@ def handle_doctor():
 
 
 def handle_changelog(subcommand, args):
+    """Handle changelog management commands.
+
+    Delegates to dot.changelog module for adding entries, building changelog,
+    bumping versions, and tagging releases. Provides structured changelog
+    generation following THE DOT's conventions.
+
+    Args:
+        subcommand (str): The changelog operation to perform.
+            Valid values: "add", "build", "bump", "tag".
+        args (list[str]): Additional arguments for the operation.
+            - add: entry text, optional -b/--bullet
+            - bump: patch/minor/major
+            - tag: optional tag name
+
+    Returns:
+        int: Exit code from the changelog handler (0 for success, 1 for error).
+
+    Example:
+        >>> handle_changelog("add", ["Add new feature", "-b", "Added tarot readings"])
+        ✓ Added changelog entry
+        0
+    """
     # Delegate to module to avoid duplication
     from dot.changelog import handle_changelog as _handle
     return _handle(subcommand, args)
