@@ -1087,7 +1087,11 @@ def handle_tarot(subcommand, args, deprecated=False):
             if a.isdigit():
                 n = int(a)
             elif a == "--seed" and i + 1 < len(args):
-                seed = int(args[i + 1])
+                try:
+                    seed = int(args[i + 1])
+                except ValueError:
+                    print(f"Error: --seed expects an integer, got '{args[i + 1]}'")
+                    return 1
                 i += 1
             elif a == "--no-reversed":
                 allow_rev = False
@@ -1102,7 +1106,11 @@ def handle_tarot(subcommand, args, deprecated=False):
         kind = args[0] if args else "three"
         seed = None
         if len(args) > 1 and args[1] == "--seed" and len(args) > 2:
-            seed = int(args[2])
+            try:
+                seed = int(args[2])
+            except ValueError:
+                print(f"Error: --seed expects an integer, got '{args[2]}'")
+                return 1
         sp = tarot_spread(kind=kind, seed=seed)
         if kind == "yesno":
             (card, rev) = next(iter(sp.values()))
@@ -1146,7 +1154,11 @@ def handle_shinto(subcommand, args, deprecated=False):
     if subcommand == "omikuji":
         seed = None
         if args and args[0] == "--seed" and len(args) > 1:
-            seed = int(args[1])
+            try:
+                seed = int(args[1])
+            except ValueError:
+                print(f"Error: --seed expects an integer, got '{args[1]}'")
+                return 1
         print(s_omikuji(seed=seed))
         return 0
 
