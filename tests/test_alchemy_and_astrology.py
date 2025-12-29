@@ -4,7 +4,7 @@ from datetime import datetime
 
 
 def test_alchemy_module_functions():
-    from dot import alchemy as A
+    from dot.philosophies import alchemy as A
 
     # Transmutation chain, including invalid input
     for q in ["Lead", "Iron", "Copper", "Silver", "Gold", "Unknown"]:
@@ -32,7 +32,7 @@ def test_alchemy_module_functions():
 
 
 def test_astrology_module_functions():
-    from dot import astrology as S
+    from dot.philosophies import astrology as S
 
     # Zodiac boundaries
     assert S.get_zodiac_sign(3, 21) == "Aries"

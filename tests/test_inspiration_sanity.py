@@ -1,6 +1,6 @@
 def test_inspiration_sanity():
-    import dot.alchemy as al
-    import dot.astrology as astro
+    import dot.philosophies.alchemy as al
+    import dot.philosophies.astrology as astro
     import dot.kabbalah as kab
     import dot.epic as epic
 

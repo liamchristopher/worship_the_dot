@@ -59,57 +59,57 @@ def main():
 
     elif args[0] == "horoscope":
         sign = args[1] if len(args) > 1 else None
-        from dot.astrology import daily_horoscope
+        from dot.philosophies.astrology import daily_horoscope
         print(daily_horoscope(sign))
         return 0
 
     elif args[0] == "chart":
-        from dot.astrology import birth_chart
+        from dot.philosophies.astrology import birth_chart
         repo_name = args[1] if len(args) > 1 else "Repository"
         creation_date = git_utils.get_creation_date()
         print(birth_chart(repo_name, creation_date))
         return 0
 
     elif args[0] == "planets":
-        from dot.astrology import planetary_hours
+        from dot.philosophies.astrology import planetary_hours
         print(planetary_hours())
         return 0
 
     elif args[0] == "moon":
-        from dot.astrology import moon_phase_advice
+        from dot.philosophies.astrology import moon_phase_advice
         print(moon_phase_advice())
         return 0
 
     elif args[0] == "ephemeris":
         # Optional high-precision ephemerides if enabled
-        from dot.astrology import ephemeris_summary
+        from dot.philosophies.astrology import ephemeris_summary
         include_minors = "--no-minors" not in args
         include_comets = "--no-comets" not in args
         print(ephemeris_summary(include_minors=include_minors, include_comets=include_comets))
         return 0
 
     elif args[0] == "element":
-        from dot.alchemy import element_reading
+        from dot.philosophies.alchemy import element_reading
         print(element_reading())
         return 0
 
     elif args[0] == "opus":
-        from dot.alchemy import magnum_opus_guide
+        from dot.philosophies.alchemy import magnum_opus_guide
         print(magnum_opus_guide())
         return 0
 
     elif args[0] == "operations":
-        from dot.alchemy import operations_guide
+        from dot.philosophies.alchemy import operations_guide
         print(operations_guide())
         return 0
 
     elif args[0] == "hermetic":
-        from dot.alchemy import hermetic_principles
+        from dot.philosophies.alchemy import hermetic_principles
         print(hermetic_principles())
         return 0
 
     elif args[0] == "stone":
-        from dot.alchemy import philosophers_stone_status
+        from dot.philosophies.alchemy import philosophers_stone_status
         repo_name = args[1] if len(args) > 1 else "Repository"
         print(philosophers_stone_status(repo_name))
         return 0
@@ -398,37 +398,37 @@ def main():
         message = " ".join(message_args)
 
         if jain_mode:
-            from dot.jain import jain_validation
+            from dot.philosophies.jain import jain_validation
             valid = dot.validate_commit(message)
             print(jain_validation(valid, message))
             return 0 if valid else 1
         elif egyptian_mode:
-            from dot.egyptian import egyptian_validation
+            from dot.philosophies.egyptian import egyptian_validation
             valid = dot.validate_commit(message)
             print(egyptian_validation(valid, message))
             return 0 if valid else 1
         elif zoroastrian_mode:
-            from dot.zoroastrian import zoroastrian_validation
+            from dot.philosophies.zoroastrian import zoroastrian_validation
             valid = dot.validate_commit(message)
             print(zoroastrian_validation(valid, message))
             return 0 if valid else 1
         elif norse_mode:
-            from dot.norse import norse_validation
+            from dot.philosophies.norse import norse_validation
             valid = dot.validate_commit(message)
             print(norse_validation(valid, message))
             return 0 if valid else 1
         elif gnostic_mode:
-            from dot.gnostic import gnostic_validation
+            from dot.philosophies.gnostic import gnostic_validation
             valid = dot.validate_commit(message)
             print(gnostic_validation(valid, message))
             return 0 if valid else 1
         elif hermetic_mode:
-            from dot.hermetic import hermetic_validation
+            from dot.philosophies.hermetic import hermetic_validation
             valid = dot.validate_commit(message)
             print(hermetic_validation(valid, message))
             return 0 if valid else 1
         elif shinto_mode:
-            from dot.shinto import shinto_validation
+            from dot.philosophies.shinto import shinto_validation
             valid = dot.validate_commit(message)
             print(shinto_validation(valid, message))
             return 0 if valid else 1
@@ -463,12 +463,12 @@ def main():
             print(kabbalistic_validation(valid, message))
             return 0 if valid else 1
         elif alchemical_mode:
-            from dot.alchemy import alchemical_validation
+            from dot.philosophies.alchemy import alchemical_validation
             valid = dot.validate_commit(message)
             print(alchemical_validation(valid, message))
             return 0 if valid else 1
         elif cosmic_mode:
-            from dot.astrology import cosmic_validation
+            from dot.philosophies.astrology import cosmic_validation
             valid = dot.validate_commit(message)
             print(cosmic_validation(valid, message))
             return 0 if valid else 1
@@ -1024,7 +1024,7 @@ def handle_tarot(subcommand, args, deprecated=False):
         print("⚠ Note: 'dot tarot' is deprecated. Use 'dot wisdom tarot' instead.")
         print()
 
-    from dot.tarot import list_cards, get_card, draw as tarot_draw, spread as tarot_spread, interpret, yesno_from_card
+    from dot.philosophies.tarot import list_cards, get_card, draw as tarot_draw, spread as tarot_spread, interpret, yesno_from_card
 
     if subcommand == "list":
         print("Tarot Deck (Major Arcana):")
@@ -1110,7 +1110,7 @@ def handle_shinto(subcommand, args, deprecated=False):
         print("⚠ Note: 'dot shinto' is deprecated. Use 'dot wisdom shinto' instead.")
         print()
 
-    from dot.shinto import (
+    from dot.philosophies.shinto import (
         norito as s_norito, omikuji as s_omikuji, harai as s_harai, ema as s_ema,
         kami_teaching, four_virtues_guide, misogi_guide, kannagara_teaching,
         torii_teaching, matsuri_celebration, kotodama_teaching, musubi_teaching,
@@ -1268,7 +1268,7 @@ def handle_hermetic(subcommand, args, deprecated=False):
         print("⚠ Note: 'dot hermetic' is deprecated. Use 'dot wisdom hermetic' instead.")
         print()
 
-    from dot.hermetic import (
+    from dot.philosophies.hermetic import (
         mentalism_teaching, correspondence_teaching, vibration_teaching,
         polarity_teaching, rhythm_teaching, cause_effect_teaching,
         gender_teaching, emerald_tablet_teaching, hermetic_reading
@@ -1330,7 +1330,7 @@ def handle_gnostic(subcommand, args, deprecated=False):
         print("⚠ Note: 'dot gnostic' is deprecated. Use 'dot wisdom gnostic' instead.")
         print()
 
-    from dot.gnostic import (
+    from dot.philosophies.gnostic import (
         gnosis_teaching, pleroma_teaching, sophia_teaching,
         demiurge_teaching, archons_teaching, spark_teaching,
         thomas_teaching, hammadi_teaching, gnostic_reading
@@ -1392,7 +1392,7 @@ def handle_norse(subcommand, args, deprecated=False):
         print("⚠ Note: 'dot norse' is deprecated. Use 'dot wisdom norse' instead.")
         print()
 
-    from dot.norse import (
+    from dot.philosophies.norse import (
         runes_teaching, virtues_teaching, wyrd_teaching,
         yggdrasil_teaching, odin_teaching, norse_reading
     )
@@ -1438,7 +1438,7 @@ def handle_zoroastrian(subcommand, args, deprecated=False):
         print("⚠ Note: 'dot zoroastrian' is deprecated. Use 'dot wisdom zoroastrian' instead.")
         print()
 
-    from dot.zoroastrian import (
+    from dot.philosophies.zoroastrian import (
         asha_teaching, principles_teaching, fire_teaching, zoroastrian_reading
     )
 
@@ -1473,7 +1473,7 @@ def handle_egyptian(subcommand, args, deprecated=False):
         print("⚠ Note: 'dot egyptian' is deprecated. Use 'dot wisdom egyptian' instead.")
         print()
 
-    from dot.egyptian import (
+    from dot.philosophies.egyptian import (
         maat_teaching, feather_teaching, thoth_teaching, egyptian_reading
     )
 
@@ -1508,7 +1508,7 @@ def handle_jain(subcommand, args, deprecated=False):
         print("⚠ Note: 'dot jain' is deprecated. Use 'dot wisdom jain' instead.")
         print()
 
-    from dot.jain import (
+    from dot.philosophies.jain import (
         ahimsa_teaching, anekantavada_teaching, aparigraha_teaching,
         jewels_teaching, jain_reading
     )

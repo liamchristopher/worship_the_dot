@@ -5,20 +5,20 @@ from unittest.mock import patch
 
 
 def test_tarot_draw_seed_reproducible():
-    from dot.tarot import draw
+    from dot.philosophies.tarot import draw
     a = draw(n=3, seed=42)
     b = draw(n=3, seed=42)
     assert [(x[0].name, x[1]) for x in a] == [(x[0].name, x[1]) for x in b]
 
 
 def test_tarot_spread_three_labels():
-    from dot.tarot import spread
+    from dot.philosophies.tarot import spread
     sp = spread(kind='three', seed=1)
     assert set(sp.keys()) == {"Past", "Present", "Future"}
 
 
 def test_tarot_yesno_mapping():
-    from dot.tarot import yesno_from_card, get_card
+    from dot.philosophies.tarot import yesno_from_card, get_card
     sun = get_card('The Sun')
     assert sun is not None
     assert yesno_from_card(sun, False) == 'Yes'
@@ -26,7 +26,7 @@ def test_tarot_yesno_mapping():
 
 
 def test_tarot_commit_and_unknown_spread():
-    from dot.tarot import spread
+    from dot.philosophies.tarot import spread
     sp = spread(kind='commit', seed=2)
     assert set(sp.keys()) == {"Plan", "Implement", "Worship"}
     import pytest
@@ -35,7 +35,7 @@ def test_tarot_commit_and_unknown_spread():
 
 
 def test_tarot_interpret_with_context():
-    from dot.tarot import draw, interpret
+    from dot.philosophies.tarot import draw, interpret
     entries = draw(n=1, seed=0)
     reading = interpret(entries, context='Release plan')
     assert 'Context: Release plan' in reading

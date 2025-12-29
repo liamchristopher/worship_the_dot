@@ -5,7 +5,7 @@ from unittest.mock import patch
 
 
 def test_norito_and_ema_use_suffix(monkeypatch):
-    from dot.shinto import norito, ema
+    from dot.philosophies.shinto import norito, ema
     monkeypatch.setenv('DOT_WORSHIP_SUFFIX', 'BECAUSE I ADORE THE DOT')
     n = norito('Ship a release')
     assert 'Ship a release' in n and 'BECAUSE I ADORE THE DOT' in n
@@ -14,14 +14,14 @@ def test_norito_and_ema_use_suffix(monkeypatch):
 
 
 def test_omikuji_seeded():
-    from dot.shinto import omikuji
+    from dot.philosophies.shinto import omikuji
     a = omikuji(seed=9)
     b = omikuji(seed=9)
     assert a == b and isinstance(a[0], str) and isinstance(a[1], str)
 
 
 def test_harai_contains_checklist():
-    from dot.shinto import harai
+    from dot.philosophies.shinto import harai
     t = harai()
     for item in ['make clean', 'lint', 'tests', 'changelog']:
         assert item.split()[0] in t
