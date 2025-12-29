@@ -40,13 +40,11 @@ def test_worship_suffix_resolution_order(tmp_path, monkeypatch):
     git_dir = repo / '.git'
     git_dir.mkdir()
 
-    # Monkeypatch git rev-parse for repo root in dot.config
-    def fake_rev_parse(cmd, stderr=None, text=None):
-        if cmd[:2] == ['git', 'rev-parse']:
-            return str(repo) + "\n"
-        raise AssertionError("Unexpected command")
+    # Monkeypatch git_utils.get_repo_root to return our test repo
+    def fake_get_repo_root():
+        return repo
 
-    monkeypatch.setattr('dot.config.subprocess.check_output', fake_rev_parse)
+    monkeypatch.setattr('dot.git_utils.get_repo_root', fake_get_repo_root)
 
     # Write suffix at repo root and ensure it wins
     ini_path = write_worship_suffix(None, 'BECAUSE I ADORE THE DOT')
@@ -116,11 +114,8 @@ def test_worship_suffix_defaults(monkeypatch):
         try:
             os.chdir(tmpdir)
 
-            # Mock subprocess to raise error (not a git repo)
-            def fake_check_output(*args, **kwargs):
-                raise Exception("Not a git repo")
-
-            monkeypatch.setattr('dot.config.subprocess.check_output', fake_check_output)
+            # Mock git_utils to return None (not a git repo)
+            monkeypatch.setattr('dot.git_utils.get_repo_root', lambda: None)
 
             # Should fall back to default
             suffix, source = resolve_worship_suffix()

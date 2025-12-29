@@ -10,9 +10,9 @@ from __future__ import annotations
 import os
 import json
 import configparser
-import subprocess
 from pathlib import Path
 from typing import Dict, Any, Optional, Tuple
+from dot import git_utils
 
 
 # =============================================================================
@@ -144,15 +144,8 @@ DEFAULT_WORSHIP_SUFFIX = "BECAUSE I WORSHIP THE DOT"
 
 
 def _git_repo_root() -> Optional[Path]:
-    try:
-        out = subprocess.check_output(
-            ["git", "rev-parse", "--show-toplevel"],
-            stderr=subprocess.DEVNULL,
-            text=True,
-        ).strip()
-        return Path(out)
-    except Exception:
-        return None
+    """Get git repository root using git_utils."""
+    return git_utils.get_repo_root()
 
 
 def config_search_paths() -> list[Path]:

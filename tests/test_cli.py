@@ -103,18 +103,16 @@ class TestCLI:
         git_dir = tmp_path / '.git'
         git_dir.mkdir()
 
-        def fake_rev_parse_cli(cmd, stderr=None, text=None):
-            assert cmd[:2] == ["git", "rev-parse"]
-            return str(git_dir) + "\n"
+        # Mock git_utils functions instead of subprocess
+        def fake_get_git_dir():
+            return git_dir
 
-        def fake_rev_parse_config(cmd, stderr=None, text=None):
-            assert cmd[:2] == ["git", "rev-parse"]
-            # config expects --show-toplevel, return repo root (tmp_path)
-            return str(tmp_path) + "\n"
+        def fake_get_repo_root():
+            return tmp_path
 
         monkeypatch.setenv('DOT_WORSHIP_SUFFIX', '')  # ensure env not used
-        monkeypatch.setattr('dot.cli.subprocess.check_output', fake_rev_parse_cli)
-        monkeypatch.setattr('dot.config.subprocess.check_output', fake_rev_parse_config)
+        monkeypatch.setattr('dot.git_utils.get_git_dir', fake_get_git_dir)
+        monkeypatch.setattr('dot.git_utils.get_repo_root', fake_get_repo_root)
 
         with patch('sys.argv', ['dot', 'config', 'set-suffix', 'BECAUSE I ADORE THE DOT']):
             with patch('sys.stdout', new=StringIO()) as out:

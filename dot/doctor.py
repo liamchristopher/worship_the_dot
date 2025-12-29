@@ -2,20 +2,18 @@ import subprocess
 from pathlib import Path
 from dot.core import get_dot
 from dot.config import resolve_worship_suffix
+from dot import git_utils
 
 
 def handle_doctor():
     print("THE DOT Doctor")
     print("=" * 60)
     # Repo check
-    try:
-        git_dir = subprocess.check_output(
-            ["git", "rev-parse", "--git-dir"], stderr=subprocess.DEVNULL, text=True
-        ).strip()
-        print(f"Repo: OK ({git_dir})")
-    except Exception:
+    git_dir = git_utils.get_git_dir()
+    if git_dir is None:
         print("Repo: NOT A GIT REPOSITORY")
         return 1
+    print(f"Repo: OK ({git_dir})")
 
     # Branch
     try:

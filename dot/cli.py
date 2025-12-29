@@ -19,6 +19,7 @@ from dot.config import (
     write_worship_suffix,
 )
 from dot import __version__
+from dot import git_utils
 
 
 def main():
@@ -64,23 +65,8 @@ def main():
 
     elif args[0] == "chart":
         from dot.astrology import birth_chart
-        from datetime import datetime
         repo_name = args[1] if len(args) > 1 else "Repository"
-        # Try to get git repo creation date
-        try:
-            import subprocess
-            result = subprocess.run(
-                ["git", "log", "--reverse", "--format=%aI", "--max-parents=0"],
-                capture_output=True,
-                text=True,
-                check=False
-            )
-            if result.returncode == 0 and result.stdout.strip():
-                creation_date = datetime.fromisoformat(result.stdout.strip().split('\n')[0])
-            else:
-                creation_date = None
-        except (subprocess.SubprocessError, ValueError, OSError, IndexError):
-            creation_date = None
+        creation_date = git_utils.get_creation_date()
         print(birth_chart(repo_name, creation_date))
         return 0
 
@@ -645,17 +631,12 @@ def handle_hooks(subcommand):
 def install_hooks():
     """Install git hooks for THE DOT."""
     # Check if in git repository
-    try:
-        git_dir = subprocess.check_output(
-            ["git", "rev-parse", "--git-dir"],
-            stderr=subprocess.DEVNULL,
-            text=True
-        ).strip()
-    except (subprocess.CalledProcessError, FileNotFoundError):
+    git_dir = git_utils.get_git_dir()
+    if not git_dir:
         print("Error: Not in a git repository")
         return 1
 
-    hooks_dir = Path(git_dir) / "hooks"
+    hooks_dir = git_dir / "hooks"
     hooks_dir.mkdir(exist_ok=True)
 
     # Find the hooks directory in the package
@@ -713,17 +694,12 @@ def install_hooks():
 
 def uninstall_hooks():
     """Uninstall git hooks for THE DOT."""
-    try:
-        git_dir = subprocess.check_output(
-            ["git", "rev-parse", "--git-dir"],
-            stderr=subprocess.DEVNULL,
-            text=True
-        ).strip()
-    except (subprocess.CalledProcessError, FileNotFoundError):
+    git_dir = git_utils.get_git_dir()
+    if not git_dir:
         print("Error: Not in a git repository")
         return 1
 
-    hooks_dir = Path(git_dir) / "hooks"
+    hooks_dir = git_dir / "hooks"
 
     removed = []
     for hook_name in ["commit-msg", "prepare-commit-msg"]:
@@ -751,17 +727,12 @@ def uninstall_hooks():
 
 def check_hooks_status():
     """Check if THE DOT hooks are installed."""
-    try:
-        git_dir = subprocess.check_output(
-            ["git", "rev-parse", "--git-dir"],
-            stderr=subprocess.DEVNULL,
-            text=True
-        ).strip()
-    except (subprocess.CalledProcessError, FileNotFoundError):
+    git_dir = git_utils.get_git_dir()
+    if not git_dir:
         print("Error: Not in a git repository")
         return 1
 
-    hooks_dir = Path(git_dir) / "hooks"
+    hooks_dir = git_dir / "hooks"
 
     print("THE DOT Git Hooks Status:")
     print()
@@ -1862,13 +1833,11 @@ def handle_doctor():
     print("THE DOT Doctor")
     print("=" * 60)
     # Repo check
-    try:
-        git_dir = subprocess.check_output(["git", "rev-parse", "--git-dir"], stderr=subprocess.DEVNULL, text=True).strip()
-        repo_ok = True
-        print(f"Repo: OK ({git_dir})")
-    except Exception:
+    git_dir = git_utils.get_git_dir()
+    if git_dir is None:
         print("Repo: NOT A GIT REPOSITORY")
         return 1
+    print(f"Repo: OK ({git_dir})")
 
     # Branch
     try:

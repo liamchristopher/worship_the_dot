@@ -1,6 +1,6 @@
 import os
-import subprocess
 from datetime import datetime, timezone
+from dot import git_utils
 
 
 def handle_changelog(subcommand, args):
@@ -47,10 +47,7 @@ def handle_changelog(subcommand, args):
     # Compose entry
     ts = datetime.now(timezone.utc).astimezone().strftime("%Y-%m-%d %H:%M:%S %z")
     # Short hash if in a git repo
-    try:
-        short = subprocess.check_output(["git", "rev-parse", "--short", "HEAD"], stderr=subprocess.DEVNULL, text=True).strip()
-    except (subprocess.SubprocessError, OSError, ValueError):
-        short = "0000000"
+    short = git_utils.get_commit_hash(short=True) or "0000000"
 
     header = "-" * 79 + "\n"
     entry_head = f"[{ts}] {short} {subject}\n"

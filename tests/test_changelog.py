@@ -104,11 +104,8 @@ def test_changelog_add_outside_git_repo(tmp_path, monkeypatch):
     changelog_file = tmp_path / "CHANGELOG.txt"
     monkeypatch.setenv("DOT_CHANGELOG_PATH", str(changelog_file))
 
-    # Mock subprocess to fail (not a git repo)
-    def fake_check_output(*args, **kwargs):
-        raise subprocess.CalledProcessError(128, "git", "Not a git repo")
-
-    with patch('dot.changelog.subprocess.check_output', fake_check_output):
+    # Mock git_utils to fail (not a git repo)
+    with patch('dot.git_utils.get_commit_hash', return_value=None):
         result = handle_changelog("add", ["Test entry", "-b", "Bullet"])
 
     assert result == 0

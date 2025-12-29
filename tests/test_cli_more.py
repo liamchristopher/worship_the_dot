@@ -110,11 +110,9 @@ def test_backstory_and_doctor_init_commands(monkeypatch):
     # doctor not in repo: mock failure
     with patch('sys.argv', ['dot', 'doctor']):
         with patch('sys.stdout', new=StringIO()) as out:
-            # simulate not-a-repo by forcing error in subprocess
-            from dot import cli as dcli
-            def boom(*a, **k):
-                raise Exception('no git')
-            monkeypatch.setattr(dcli.subprocess, 'check_output', boom)
+            # simulate not-a-repo by patching git_utils on doctor module
+            from dot import doctor as ddoctor
+            monkeypatch.setattr(ddoctor.git_utils, 'get_git_dir', lambda: None)
             exit_code = main(); s = out.getvalue()
     assert exit_code == 1 and 'NOT A GIT REPOSITORY' in s
 
@@ -123,6 +121,9 @@ def test_backstory_and_doctor_init_commands(monkeypatch):
         with patch('sys.stdout', new=StringIO()) as out:
             # monkeypatch internal installer to no-op success
             monkeypatch.setattr('dot.init_cmd._install_hooks', lambda: 0)
+            # Mock git_utils on config module to avoid errors when config checks for repo root
+            from dot import config as dconfig
+            monkeypatch.setattr(dconfig.git_utils, 'get_repo_root', lambda: None)
             exit_code = main(); s = out.getvalue()
     assert exit_code == 0 and 'Initialization complete' in s
 
