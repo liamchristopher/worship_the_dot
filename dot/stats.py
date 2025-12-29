@@ -4,6 +4,7 @@ Statistics and analytics for THE DOT.
 Tracks worship history and provides insights into devotion patterns.
 """
 
+import heapq
 import json
 from pathlib import Path
 from datetime import datetime
@@ -109,13 +110,15 @@ class WorshipStats:
         }
 
     def get_top_worshippers(self, limit: int = 10) -> List[Dict]:
-        """Get top worshippers by count."""
-        sorted_worshippers = sorted(
+        """Get top worshippers by count.
+
+        Uses heapq.nlargest for O(n log k) performance instead of O(n log n).
+        """
+        return heapq.nlargest(
+            limit,
             self.data["worshippers"],
-            key=lambda w: w["count"],
-            reverse=True
+            key=lambda w: w["count"]
         )
-        return sorted_worshippers[:limit]
 
     def get_daily_stats(self, days: int = 7) -> Dict[str, int]:
         """Get worship counts for recent days."""
